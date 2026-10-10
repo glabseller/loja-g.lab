@@ -3,95 +3,52 @@
     "hero": {
       "type": "hero-banner",
       "settings": {
-        "heading": "Os achados que estão bombando.",
-        "button_1_label": "Ver mais vendidos",
+        "pill": "Nova coleção",
+        "heading": "Peças bonitas para o dia a dia.",
+        "text": "Uma seleção cuidadosa de objetos para casa, presentes e organização.",
+        "button_1_label": "Ver coleção",
         "button_1_url": "shopify://collections/all",
-        "button_2_label": "",
-        "button_2_url": "shopify://collections/all",
-        "pill": "",
-        "text": "Produtos práticos e bonitos para o seu dia a dia.",
-        "card_tag": ""
+        "button_2_label": ""
       }
+    },
+    "trust": {
+      "type": "trust-bar",
+      "blocks": {
+        "t1": { "type": "item", "settings": { "icon": "truck", "title": "Envio para todo o Brasil", "subtitle": "" } },
+        "t2": { "type": "item", "settings": { "icon": "shield", "title": "Compra segura", "subtitle": "" } },
+        "t3": { "type": "item", "settings": { "icon": "refresh", "title": "7 dias para devolver", "subtitle": "" } }
+      },
+      "block_order": ["t1", "t2", "t3"],
+      "settings": {}
     },
     "categories": {
       "type": "category-tiles",
       "blocks": {
-        "c1": {
-          "type": "category",
-          "settings": {
-            "title": "Casa"
-          }
-        },
-        "c2": {
-          "type": "category",
-          "settings": {
-            "title": "Decoração"
-          }
-        },
-        "c3": {
-          "type": "category",
-          "settings": {
-            "title": "Presentes"
-          }
-        },
-        "c4": {
-          "type": "category",
-          "settings": {
-            "title": "Organização"
-          }
-        },
-        "c5": {
-          "type": "category",
-          "settings": {
-            "title": "Escritório"
-          }
-        },
-        "c6": {
-          "type": "category",
-          "settings": {
-            "title": "Pets"
-          }
-        }
+        "c1": { "type": "category", "settings": { "title": "Casa" } },
+        "c2": { "type": "category", "settings": { "title": "Decoração" } },
+        "c3": { "type": "category", "settings": { "title": "Presentes" } },
+        "c4": { "type": "category", "settings": { "title": "Organização" } }
       },
-      "block_order": [
-        "c1",
-        "c2",
-        "c3",
-        "c4",
-        "c5",
-        "c6"
-      ],
-      "settings": {
-        "heading": "Compre por categoria"
-      }
+      "block_order": ["c1", "c2", "c3", "c4"],
+      "settings": { "heading": "Categorias" }
     },
     "bestsellers": {
       "type": "featured-collection",
-      "settings": {
-        "heading": "Mais vendidos",
-        "link_label": "Ver tudo",
-        "count": 8
-      }
+      "settings": { "heading": "Mais vendidos", "link_label": "Ver tudo", "count": 8 }
+    },
+    "promos": {
+      "type": "promo-banners",
+      "blocks": {
+        "b1": { "type": "banner", "settings": { "style": "green", "eyebrow": "Kits", "heading": "Leve mais, gaste menos", "text": "Monte seu kit com as peças que você mais gostou.", "button_label": "Ver kits", "button_url": "shopify://collections/all" } }
+      },
+      "block_order": ["b1"],
+      "settings": {}
     },
     "arrivals": {
       "type": "featured-collection",
-      "settings": {
-        "heading": "Acabou de chegar",
-        "link_label": "Ver novidades",
-        "count": 4,
-        "new_badge": true
-      }
+      "settings": { "heading": "Novidades", "link_label": "Ver novidades", "count": 4, "new_badge": true }
     },
-    "newsletter": {
-      "type": "newsletter",
-      "settings": {}
-    }
+    "newsletter": { "type": "newsletter", "settings": {} }
   },
-  "order": [
-    "hero",
-    "categories",
-    "bestsellers",
-    "arrivals",
-    "newsletter"
-  ]
+  "order": ["hero", "trust", "categories", "bestsellers", "promos", "arrivals", "newsletter"]
 }
