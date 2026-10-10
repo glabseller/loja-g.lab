@@ -1,9 +1,9 @@
 {
   "current": {
-    "color_accent": "#D93D04",
-    "color_ink": "#14161A",
-    "color_positive": "#12805C",
-    "color_soft": "#F5F5F3",
+    "color_accent": "#C6FF00",
+    "color_ink": "#0B0B0F",
+    "color_positive": "#3DDC84",
+    "color_soft": "#17171F",
     "pix_discount": 5,
     "installments": 3,
     "free_shipping_threshold": 150

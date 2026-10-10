@@ -13,26 +13,26 @@
       {
         "type": "color",
         "id": "color_accent",
-        "label": "Cor principal (botões de compra, preços e selos)",
-        "default": "#D93D04"
+        "label": "Cor de destaque (botões, preços e selos)",
+        "default": "#C6FF00"
       },
       {
         "type": "color",
         "id": "color_ink",
-        "label": "Cor do texto e dos botões escuros",
-        "default": "#14161A"
+        "label": "Cor de fundo do site (escura)",
+        "default": "#0B0B0F"
       },
       {
         "type": "color",
         "id": "color_positive",
         "label": "Cor de Pix, frete e confirmações (verde)",
-        "default": "#12805C"
+        "default": "#3DDC84"
       },
       {
         "type": "color",
         "id": "color_soft",
-        "label": "Cor de fundo suave (seções cinza)",
-        "default": "#F5F5F3"
+        "label": "Cor dos cartões e blocos",
+        "default": "#17171F"
       }
     ]
   },

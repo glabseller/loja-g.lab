@@ -84,6 +84,12 @@
     {%- endunless -%}
 
     {%- form 'product', product, class: 'product-form' -%}
+      {%- if product.tags contains 'personalizado' and current.available -%}
+        <div class="field personalize">
+          <label for="pers-{{ section.id }}">{{ section.settings.personalize_label }}</label>
+          <input id="pers-{{ section.id }}" type="text" name="properties[{{ section.settings.personalize_label | escape }}]" maxlength="{{ section.settings.personalize_max }}" placeholder="{{ section.settings.personalize_hint | escape }}" required>
+        </div>
+      {%- endif -%}
       {%- if section.settings.show_tiers and current.available -%}
         <fieldset class="tiers">
           <legend>Quantidade</legend>
@@ -163,6 +169,10 @@
     { "type": "text", "id": "benefit_1", "label": "Benefício 1" },
     { "type": "text", "id": "benefit_2", "label": "Benefício 2" },
     { "type": "text", "id": "benefit_3", "label": "Benefício 3" },
+    { "type": "header", "content": "Personalização (produtos com a etiqueta personalizado)" },
+    { "type": "text", "id": "personalize_label", "label": "Título do campo", "default": "Nome ou texto para personalizar" },
+    { "type": "text", "id": "personalize_hint", "label": "Dica dentro do campo", "default": "Ex.: Lucas" },
+    { "type": "range", "id": "personalize_max", "label": "Máximo de caracteres", "min": 5, "max": 40, "step": 1, "default": 15 },
     { "type": "header", "content": "Urgência" },
     { "type": "text", "id": "countdown_end", "label": "Fim da oferta", "info": "Formato: 2026-12-31T23:59:00-03:00. Vazio = sem cronômetro." },
     { "type": "range", "id": "stock_threshold", "label": "Avisar \"Restam X unidades\" quando o estoque for até", "min": 1, "max": 20, "step": 1, "default": 5, "info": "Só funciona se o estoque for controlado pelo Shopify." },

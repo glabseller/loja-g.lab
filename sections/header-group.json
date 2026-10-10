@@ -8,12 +8,26 @@
         "m1": {
           "type": "message",
           "settings": {
-            "text": "Frete grátis em compras acima de R$ 150"
+            "text": "Frete grátis acima de R$ 150"
+          }
+        },
+        "m2": {
+          "type": "message",
+          "settings": {
+            "text": "5% off no Pix"
+          }
+        },
+        "m3": {
+          "type": "message",
+          "settings": {
+            "text": "Chaveiros personalizados"
           }
         }
       },
       "block_order": [
-        "m1"
+        "m1",
+        "m2",
+        "m3"
       ],
       "settings": {}
     },

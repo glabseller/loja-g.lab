@@ -1,8 +1,14 @@
 {%- if section.blocks.size > 0 -%}
   <div class="announcement" {{ section.shopify_attributes }}>
-    {%- for block in section.blocks -%}
-      <span {{ block.shopify_attributes }}>{{ block.settings.text }}</span>
-    {%- endfor -%}
+    <div class="announcement__track">
+      {%- for i in (1..2) -%}
+        <div class="announcement__group"{% if i == 2 %} aria-hidden="true"{% endif %}>
+          {%- for block in section.blocks -%}
+            <span class="announcement__item" {% if i == 1 %}{{ block.shopify_attributes }}{% endif %}>{{ block.settings.text }}</span>
+          {%- endfor -%}
+        </div>
+      {%- endfor -%}
+    </div>
   </div>
 {%- endif -%}
 
@@ -15,24 +21,12 @@
       "type": "message",
       "name": "Mensagem",
       "settings": [
-        {
-          "type": "text",
-          "id": "text",
-          "label": "Texto",
-          "default": "Frete grátis em compras acima de R$ 150"
-        }
+        { "type": "text", "id": "text", "label": "Texto", "default": "Frete grátis em compras acima de R$ 150" }
       ]
     }
   ],
   "presets": [
-    {
-      "name": "Barra de anúncio",
-      "blocks": [
-        { "type": "message" },
-        { "type": "message" },
-        { "type": "message" }
-      ]
-    }
+    { "name": "Barra de anúncio", "blocks": [{ "type": "message" }, { "type": "message" }, { "type": "message" }] }
   ]
 }
 {% endschema %}

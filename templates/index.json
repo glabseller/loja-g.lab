@@ -3,15 +3,59 @@
     "hero": {
       "type": "hero-banner",
       "settings": {
-        "heading": "Os achados que estão bombando.",
-        "button_1_label": "Ver mais vendidos",
+        "pill": "Em alta agora",
+        "heading": "Itens que viralizam. Do seu jeito.",
+        "text": "Chaveiros personalizados, porta-latas e achados que estão bombando.",
+        "button_1_label": "Ver novidades",
         "button_1_url": "shopify://collections/all",
-        "button_2_label": "",
+        "button_2_label": "Personalizar o meu",
         "button_2_url": "shopify://collections/all",
-        "pill": "",
-        "text": "Produtos práticos e bonitos para o seu dia a dia.",
-        "card_tag": ""
+        "card_tag": "MAIS VENDIDO"
       }
+    },
+    "trust": {
+      "type": "trust-bar",
+      "blocks": {
+        "t1": {
+          "type": "item",
+          "settings": {
+            "icon": "truck",
+            "title": "Envio para todo o Brasil",
+            "subtitle": "com rastreio"
+          }
+        },
+        "t2": {
+          "type": "item",
+          "settings": {
+            "icon": "pix",
+            "title": "5% off no Pix",
+            "subtitle": "aprovação na hora"
+          }
+        },
+        "t3": {
+          "type": "item",
+          "settings": {
+            "icon": "shield",
+            "title": "Compra segura",
+            "subtitle": "pagamento protegido"
+          }
+        },
+        "t4": {
+          "type": "item",
+          "settings": {
+            "icon": "refresh",
+            "title": "7 dias para devolver",
+            "subtitle": "sem burocracia"
+          }
+        }
+      },
+      "block_order": [
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ],
+      "settings": {}
     },
     "categories": {
       "type": "category-tiles",
@@ -19,37 +63,37 @@
         "c1": {
           "type": "category",
           "settings": {
-            "title": "Casa"
+            "title": "Chaveiros"
           }
         },
         "c2": {
           "type": "category",
           "settings": {
-            "title": "Decoração"
+            "title": "Porta-latas"
           }
         },
         "c3": {
           "type": "category",
           "settings": {
-            "title": "Presentes"
+            "title": "Setup"
           }
         },
         "c4": {
           "type": "category",
           "settings": {
-            "title": "Organização"
+            "title": "Presentes"
           }
         },
         "c5": {
           "type": "category",
           "settings": {
-            "title": "Escritório"
+            "title": "Decoração"
           }
         },
         "c6": {
           "type": "category",
           "settings": {
-            "title": "Pets"
+            "title": "Organização"
           }
         }
       },
@@ -62,16 +106,48 @@
         "c6"
       ],
       "settings": {
-        "heading": "Compre por categoria"
+        "heading": "Escolha sua vibe"
       }
     },
     "bestsellers": {
       "type": "featured-collection",
       "settings": {
-        "heading": "Mais vendidos",
+        "heading": "Os mais pedidos",
         "link_label": "Ver tudo",
         "count": 8
       }
+    },
+    "promos": {
+      "type": "promo-banners",
+      "blocks": {
+        "b1": {
+          "type": "banner",
+          "settings": {
+            "style": "green",
+            "eyebrow": "Personalizados",
+            "heading": "Coloque seu nome",
+            "text": "Escolha o produto, escreva o texto e a gente faz o seu.",
+            "button_label": "Personalizar",
+            "button_url": "shopify://collections/all"
+          }
+        },
+        "b2": {
+          "type": "banner",
+          "settings": {
+            "style": "blue",
+            "eyebrow": "Kits",
+            "heading": "Leve mais, pague menos",
+            "text": "Combine seus favoritos e economize.",
+            "button_label": "Ver kits",
+            "button_url": "shopify://collections/all"
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2"
+      ],
+      "settings": {}
     },
     "arrivals": {
       "type": "featured-collection",
@@ -82,16 +158,54 @@
         "new_badge": true
       }
     },
+    "reviews": {
+      "type": "reviews",
+      "blocks": {
+        "r1": {
+          "type": "review",
+          "settings": {
+            "stars": 5
+          }
+        },
+        "r2": {
+          "type": "review",
+          "settings": {
+            "stars": 5
+          }
+        },
+        "r3": {
+          "type": "review",
+          "settings": {
+            "stars": 5
+          }
+        }
+      },
+      "block_order": [
+        "r1",
+        "r2",
+        "r3"
+      ],
+      "settings": {
+        "heading": "Quem comprou, curtiu"
+      }
+    },
     "newsletter": {
       "type": "newsletter",
-      "settings": {}
+      "settings": {
+        "heading": "Entre pra lista",
+        "text": "Receba lançamentos e ofertas antes de todo mundo.",
+        "button_label": "Quero receber"
+      }
     }
   },
   "order": [
     "hero",
+    "trust",
     "categories",
     "bestsellers",
+    "promos",
     "arrivals",
+    "reviews",
     "newsletter"
   ]
 }
