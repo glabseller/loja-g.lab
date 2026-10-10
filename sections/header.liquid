@@ -25,64 +25,106 @@
 
   <div class="nav-bar">
     <div class="container nav-row">
-    {%- assign menu = linklists[section.settings.menu] -%}
-    <details class="cat-menu">
-      <summary class="cat-menu__btn"><span class="cat-menu__icon" aria-hidden="true"></span>Categorias</summary>
-      <div class="cat-panel">
-        <div class="cat-panel__grid">
-          {%- if menu.links.size > 0 -%}
-            {%- for link in menu.links -%}
-              <div class="cat-panel__col">
-                <a class="cat-panel__title" href="{{ link.url }}">{{ link.title }}</a>
-                {%- for child in link.links -%}
-                  <a href="{{ child.url }}">{{ child.title }}</a>
-                {%- endfor -%}
-              </div>
-            {%- endfor -%}
-          {%- else -%}
-            {%- for c in collections limit: 40 -%}
-              {%- if c.handle != 'frontpage' and c.handle != 'all' and c.products_count > 0 -%}
-                <div class="cat-panel__col"><a class="cat-panel__title" href="{{ c.url }}">{{ c.title }}</a></div>
-              {%- endif -%}
-            {%- endfor -%}
-          {%- endif -%}
-        </div>
-      </div>
-    </details>
-    <nav class="nav" aria-label="Categorias">
       {%- assign menu = linklists[section.settings.menu] -%}
-      {%- if menu.links.size > 0 -%}
-      {%- for link in menu.links -%}
-        <div class="nav__item{% if link.links.size > 0 %} nav__item--parent{% endif %}">
-          <a href="{{ link.url }}"{% if section.settings.highlight_title != blank and link.title == section.settings.highlight_title %} class="nav__highlight"{% endif %}{% if link.current %} aria-current="page"{% endif %}>{{ link.title }}</a>
-          {%- if link.links.size > 0 -%}
-            <div class="nav__sub">
-              {%- for child in link.links -%}
-                <div class="nav__item{% if child.links.size > 0 %} nav__item--parent{% endif %}">
-                  <a href="{{ child.url }}"{% if child.current %} aria-current="page"{% endif %}>{{ child.title }}</a>
-                  {%- if child.links.size > 0 -%}
-                    <div class="nav__sub">
-                      {%- for grandchild in child.links -%}
-                        <div class="nav__item"><a href="{{ grandchild.url }}"{% if grandchild.current %} aria-current="page"{% endif %}>{{ grandchild.title }}</a></div>
-                      {%- endfor -%}
-                    </div>
-                  {%- endif -%}
+
+      {%- comment -%} 1) Painel "Categorias" {%- endcomment -%}
+      <details class="cat-menu">
+        <summary class="cat-menu__btn"><span class="cat-menu__icon" aria-hidden="true"></span>Categorias</summary>
+        <div class="cat-panel">
+          <div class="cat-panel__grid">
+            {%- if section.blocks.size > 0 -%}
+              {%- assign open_col = false -%}
+              {%- assign prev_type = '' -%}
+              {%- for block in section.blocks -%}
+                {%- assign btype = block.type -%}
+                {%- if btype == 'subcategory' and prev_type == '' -%}{%- assign btype = 'category' -%}{%- endif -%}
+                {%- assign b_url = block.settings.collection.url | default: block.settings.link | default: routes.all_products_collection_url -%}
+                {%- assign b_title = block.settings.title | default: block.settings.collection.title -%}
+                {%- if btype == 'category' -%}
+                  {%- if open_col -%}</div>{%- endif -%}
+                  <div class="cat-panel__col" {{ block.shopify_attributes }}>
+                    <a class="cat-panel__title" href="{{ b_url }}">{{ b_title }}</a>
+                  {%- assign open_col = true -%}
+                {%- else -%}
+                  <a href="{{ b_url }}" {{ block.shopify_attributes }}>{{ b_title }}</a>
+                {%- endif -%}
+                {%- assign prev_type = btype -%}
+              {%- endfor -%}
+              {%- if open_col -%}</div>{%- endif -%}
+            {%- elsif menu.links.size > 0 -%}
+              {%- for link in menu.links -%}
+                <div class="cat-panel__col">
+                  <a class="cat-panel__title" href="{{ link.url }}">{{ link.title }}</a>
+                  {%- for child in link.links -%}<a href="{{ child.url }}">{{ child.title }}</a>{%- endfor -%}
                 </div>
               {%- endfor -%}
-            </div>
-          {%- endif -%}
+            {%- else -%}
+              {%- assign shown_any = false -%}
+              {%- for c in collections limit: 40 -%}
+                {%- if c.handle != 'frontpage' and c.handle != 'all' and c.products_count > 0 -%}
+                  {%- assign shown_any = true -%}
+                  <div class="cat-panel__col"><a class="cat-panel__title" href="{{ c.url }}">{{ c.title }}</a></div>
+                {%- endif -%}
+              {%- endfor -%}
+              {%- if shown_any == false -%}
+                <p class="note">Nenhuma categoria ainda. No Personalizar, abra Cabeçalho e clique em Adicionar Categoria.</p>
+              {%- endif -%}
+            {%- endif -%}
+          </div>
         </div>
-      {%- endfor -%}
-      {%- else -%}
-        {%- for c in collections limit: 12 -%}
-          {%- if c.handle != 'frontpage' and c.handle != 'all' and c.products_count > 0 -%}
-            <div class="nav__item"><a href="{{ c.url }}"{% if section.settings.highlight_title != blank and c.title == section.settings.highlight_title %} class="nav__highlight"{% endif %}>{{ c.title }}</a></div>
-          {%- endif -%}
-        {%- endfor -%}
-      {%- endif -%}
-    </nav>
+      </details>
 
-
+      {%- comment -%} 2) Categorias em linha {%- endcomment -%}
+      <nav class="nav" aria-label="Categorias">
+        {%- if section.blocks.size > 0 -%}
+          {%- assign prev_type = '' -%}
+          {%- for block in section.blocks -%}
+            {%- assign next_block = section.blocks[forloop.index] -%}
+            {%- assign btype = block.type -%}
+            {%- if btype == 'subcategory' and prev_type == '' -%}{%- assign btype = 'category' -%}{%- endif -%}
+            {%- assign b_url = block.settings.collection.url | default: block.settings.link | default: routes.all_products_collection_url -%}
+            {%- assign b_title = block.settings.title | default: block.settings.collection.title -%}
+            {%- if btype == 'category' -%}
+              <div class="nav__item{% if next_block.type == 'subcategory' %} nav__item--parent{% endif %}" {{ block.shopify_attributes }}>
+                <a href="{{ b_url }}">{{ b_title }}</a>
+              {%- if next_block.type != 'subcategory' -%}</div>{%- endif -%}
+            {%- else -%}
+              {%- if prev_type == 'category' -%}<div class="nav__sub">{%- endif -%}
+              <div class="nav__item" {{ block.shopify_attributes }}><a href="{{ b_url }}">{{ b_title }}</a></div>
+              {%- if next_block.type != 'subcategory' -%}</div></div>{%- endif -%}
+            {%- endif -%}
+            {%- assign prev_type = btype -%}
+          {%- endfor -%}
+        {%- elsif menu.links.size > 0 -%}
+          {%- for link in menu.links -%}
+            <div class="nav__item{% if link.links.size > 0 %} nav__item--parent{% endif %}">
+              <a href="{{ link.url }}"{% if section.settings.highlight_title != blank and link.title == section.settings.highlight_title %} class="nav__highlight"{% endif %}{% if link.current %} aria-current="page"{% endif %}>{{ link.title }}</a>
+              {%- if link.links.size > 0 -%}
+                <div class="nav__sub">
+                  {%- for child in link.links -%}
+                    <div class="nav__item{% if child.links.size > 0 %} nav__item--parent{% endif %}">
+                      <a href="{{ child.url }}"{% if child.current %} aria-current="page"{% endif %}>{{ child.title }}</a>
+                      {%- if child.links.size > 0 -%}
+                        <div class="nav__sub">
+                          {%- for grandchild in child.links -%}
+                            <div class="nav__item"><a href="{{ grandchild.url }}"{% if grandchild.current %} aria-current="page"{% endif %}>{{ grandchild.title }}</a></div>
+                          {%- endfor -%}
+                        </div>
+                      {%- endif -%}
+                    </div>
+                  {%- endfor -%}
+                </div>
+              {%- endif -%}
+            </div>
+          {%- endfor -%}
+        {%- else -%}
+          {%- for c in collections limit: 12 -%}
+            {%- if c.handle != 'frontpage' and c.handle != 'all' and c.products_count > 0 -%}
+              <div class="nav__item"><a href="{{ c.url }}">{{ c.title }}</a></div>
+            {%- endif -%}
+          {%- endfor -%}
+        {%- endif -%}
+      </nav>
     </div>
   </div>
 </header>
@@ -91,8 +133,28 @@
 {
   "name": "Cabeçalho",
   "settings": [
-    { "type": "link_list", "id": "menu", "label": "Menu de categorias", "info": "Crie em Conteúdo > Menus um menu chamado Categorias (com subcategorias). Se não existir, as coleções com produtos aparecem sozinhas.", "default": "categorias" },
+    { "type": "link_list", "id": "menu", "label": "Menu de categorias (opcional)", "info": "Só é usado se você não adicionar categorias abaixo. Se ficar vazio, as coleções com produtos aparecem sozinhas.", "default": "categorias" },
     { "type": "text", "id": "highlight_title", "label": "Item do menu em destaque (nome igual ao do menu)" }
+  ],
+  "blocks": [
+    {
+      "type": "category",
+      "name": "Categoria",
+      "settings": [
+        { "type": "collection", "id": "collection", "label": "Coleção" },
+        { "type": "text", "id": "title", "label": "Nome (se vazio, usa o nome da coleção)" },
+        { "type": "url", "id": "link", "label": "Ou um link qualquer" }
+      ]
+    },
+    {
+      "type": "subcategory",
+      "name": "Subcategoria",
+      "settings": [
+        { "type": "collection", "id": "collection", "label": "Coleção" },
+        { "type": "text", "id": "title", "label": "Nome (se vazio, usa o nome da coleção)" },
+        { "type": "url", "id": "link", "label": "Ou um link qualquer" }
+      ]
+    }
   ]
 }
 {% endschema %}
