@@ -27,53 +27,7 @@
     <div class="container nav-row">
       {%- assign menu = linklists[section.settings.menu] -%}
 
-      {%- comment -%} 1) Painel "Categorias" {%- endcomment -%}
-      <details class="cat-menu">
-        <summary class="cat-menu__btn"><span class="cat-menu__icon" aria-hidden="true"></span>Categorias</summary>
-        <div class="cat-panel">
-          <div class="cat-panel__grid">
-            {%- if section.blocks.size > 0 -%}
-              {%- for block in section.blocks -%}
-                {%- assign b_url = block.settings.collection.url | default: block.settings.link | default: routes.all_products_collection_url -%}
-                {%- assign b_title = block.settings.title | default: block.settings.collection.title -%}
-                <div class="cat-panel__col" {{ block.shopify_attributes }}>
-                  <a class="cat-panel__title" href="{{ b_url }}">{{ b_title }}</a>
-                  {%- for i in (1..6) -%}
-                    {%- assign k_col = 'sub_' | append: i | append: '_collection' -%}
-                    {%- assign k_title = 'sub_' | append: i | append: '_title' -%}
-                    {%- assign s_col = block.settings[k_col] -%}
-                    {%- assign s_title = block.settings[k_title] | default: s_col.title -%}
-                    {%- if s_title != blank -%}
-                      <a href="{{ s_col.url | default: routes.all_products_collection_url }}">{{ s_title }}</a>
-                    {%- endif -%}
-                  {%- endfor -%}
-                </div>
-              {%- endfor -%}
-            {%- elsif menu.links.size > 0 -%}
-              {%- for link in menu.links -%}
-                <div class="cat-panel__col">
-                  <a class="cat-panel__title" href="{{ link.url }}">{{ link.title }}</a>
-                  {%- for child in link.links -%}<a href="{{ child.url }}">{{ child.title }}</a>{%- endfor -%}
-                </div>
-              {%- endfor -%}
-            {%- else -%}
-              {%- assign shown_any = false -%}
-              {%- for c in collections limit: 40 -%}
-                {%- if c.handle != 'frontpage' and c.handle != 'all' and c.products_count > 0 -%}
-                  {%- assign shown_any = true -%}
-                  <div class="cat-panel__col"><a class="cat-panel__title" href="{{ c.url }}">{{ c.title }}</a></div>
-                {%- endif -%}
-              {%- endfor -%}
-              {%- if shown_any == false -%}
-                <p class="note">Nenhuma categoria ainda. No Personalizar, abra Cabeçalho e clique em Adicionar Categoria.</p>
-              {%- endif -%}
-            {%- endif -%}
-          </div>
-        </div>
-      </details>
-
-      {%- comment -%} 2) Categorias em linha {%- endcomment -%}
-      <nav class="nav" aria-label="Categorias">
+            <nav class="nav" aria-label="Categorias">
         {%- if section.blocks.size > 0 -%}
           {%- for block in section.blocks -%}
             {%- assign b_url = block.settings.collection.url | default: block.settings.link | default: routes.all_products_collection_url -%}
