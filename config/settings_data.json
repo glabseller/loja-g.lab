@@ -19,6 +19,31 @@
     "sections": {
       "announcement-bar": {
         "type": "announcement-bar",
+        "blocks": {
+          "message_zkMfja": {
+            "type": "message",
+            "settings": {
+              "text": "Frete grátis em compras acima de R$ 150"
+            }
+          },
+          "message_38EXD4": {
+            "type": "message",
+            "settings": {
+              "text": "Frete grátis em compras acima de R$ 150"
+            }
+          },
+          "message_Gih9AX": {
+            "type": "message",
+            "settings": {
+              "text": "Frete grátis em compras acima de R$ 150"
+            }
+          }
+        },
+        "block_order": [
+          "message_zkMfja",
+          "message_38EXD4",
+          "message_Gih9AX"
+        ],
         "settings": {}
       },
       "header": {
@@ -95,7 +120,13 @@
               "sub_2_collection": "",
               "sub_2_title": "Organizadores",
               "sub_3_collection": "",
-              "sub_3_title": "Kits"
+              "sub_3_title": "Kits",
+              "sub_4_collection": "",
+              "sub_4_title": "",
+              "sub_5_collection": "",
+              "sub_5_title": "",
+              "sub_6_collection": "",
+              "sub_6_title": ""
             }
           },
           "category_setup_e_gamer": {
@@ -113,7 +144,9 @@
               "sub_4_collection": "",
               "sub_4_title": "Suporte de celular",
               "sub_5_collection": "",
-              "sub_5_title": "Decoração de setup"
+              "sub_5_title": "Decoração de setup",
+              "sub_6_collection": "",
+              "sub_6_title": ""
             }
           },
           "category_casa_e_decoracao": {
@@ -129,7 +162,11 @@
               "sub_3_collection": "",
               "sub_3_title": "Decoração de mesa",
               "sub_4_collection": "",
-              "sub_4_title": "Suportes"
+              "sub_4_title": "Suportes",
+              "sub_5_collection": "",
+              "sub_5_title": "",
+              "sub_6_collection": "",
+              "sub_6_title": ""
             }
           },
           "category_presentes": {
@@ -147,7 +184,9 @@
               "sub_4_collection": "",
               "sub_4_title": "Aniversário",
               "sub_5_collection": "",
-              "sub_5_title": "Kits"
+              "sub_5_title": "Kits",
+              "sub_6_collection": "",
+              "sub_6_title": ""
             }
           },
           "category_pets": {
@@ -161,7 +200,13 @@
               "sub_2_collection": "",
               "sub_2_title": "Plaquinhas",
               "sub_3_collection": "",
-              "sub_3_title": "Acessórios"
+              "sub_3_title": "Acessórios",
+              "sub_4_collection": "",
+              "sub_4_title": "",
+              "sub_5_collection": "",
+              "sub_5_title": "",
+              "sub_6_collection": "",
+              "sub_6_title": ""
             }
           }
         },

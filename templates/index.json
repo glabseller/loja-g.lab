@@ -1,17 +1,103 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
-    "hero": {
-      "type": "hero-banner",
+    "categories": {
+      "type": "category-tiles",
+      "blocks": {
+        "c1": {
+          "type": "category",
+          "settings": {
+            "collection": "",
+            "title": "Chaveiros"
+          }
+        },
+        "c2": {
+          "type": "category",
+          "settings": {
+            "collection": "",
+            "title": "Porta-latas"
+          }
+        },
+        "c3": {
+          "type": "category",
+          "settings": {
+            "collection": "",
+            "title": "Setup"
+          }
+        },
+        "c4": {
+          "type": "category",
+          "settings": {
+            "collection": "",
+            "title": "Presentes"
+          }
+        },
+        "c5": {
+          "type": "category",
+          "settings": {
+            "collection": "",
+            "title": "Decoração"
+          }
+        },
+        "c6": {
+          "type": "category",
+          "settings": {
+            "collection": "",
+            "title": "Organização"
+          }
+        }
+      },
+      "block_order": [
+        "c1",
+        "c2",
+        "c3",
+        "c4",
+        "c5",
+        "c6"
+      ],
       "settings": {
-        "pill": "Em alta agora",
-        "heading": "Itens que viralizam. Do seu jeito.",
-        "text": "Chaveiros, porta-latas e achados que estão bombando.",
-        "button_1_label": "Ver novidades",
-        "button_1_url": "shopify://collections/all",
-        "button_2_label": "",
-        "button_2_url": "",
-        "card_tag": "MAIS VENDIDO"
+        "heading": "Escolha sua vibe"
       }
+    },
+    "promos": {
+      "type": "promo-banners",
+      "blocks": {
+        "b2": {
+          "type": "banner",
+          "settings": {
+            "style": "blue",
+            "eyebrow": "Kits",
+            "heading": "Leve mais, pague menos",
+            "text": "Combine seus favoritos e economize.",
+            "button_label": "Ver kits",
+            "button_url": "shopify://collections/all"
+          }
+        },
+        "banner_YBCpmi": {
+          "type": "banner",
+          "settings": {
+            "style": "green",
+            "eyebrow": "KITS",
+            "heading": "Leve mais, gaste menos",
+            "text": "Monte seu kit com os produtos que você mais gostou.",
+            "button_label": "Ver kits",
+            "button_url": ""
+          }
+        }
+      },
+      "block_order": [
+        "b2",
+        "banner_YBCpmi"
+      ],
+      "settings": {}
     },
     "trust": {
       "type": "trust-bar",
@@ -57,85 +143,43 @@
       ],
       "settings": {}
     },
-    "categories": {
-      "type": "category-tiles",
-      "blocks": {
-        "c1": {
-          "type": "category",
-          "settings": {
-            "title": "Chaveiros"
-          }
-        },
-        "c2": {
-          "type": "category",
-          "settings": {
-            "title": "Porta-latas"
-          }
-        },
-        "c3": {
-          "type": "category",
-          "settings": {
-            "title": "Setup"
-          }
-        },
-        "c4": {
-          "type": "category",
-          "settings": {
-            "title": "Presentes"
-          }
-        },
-        "c5": {
-          "type": "category",
-          "settings": {
-            "title": "Decoração"
-          }
-        },
-        "c6": {
-          "type": "category",
-          "settings": {
-            "title": "Organização"
-          }
-        }
-      },
-      "block_order": [
-        "c1",
-        "c2",
-        "c3",
-        "c4",
-        "c5",
-        "c6"
-      ],
-      "settings": {
-        "heading": "Escolha sua vibe"
-      }
-    },
     "bestsellers": {
       "type": "featured-collection",
       "settings": {
         "heading": "Os mais pedidos",
         "link_label": "Ver tudo",
-        "count": 8
+        "collection": "",
+        "count": 8,
+        "new_badge": false,
+        "show_button": true
       }
     },
-    "promos": {
-      "type": "promo-banners",
-      "blocks": {
-        "b2": {
-          "type": "banner",
-          "settings": {
-            "style": "blue",
-            "eyebrow": "Kits",
-            "heading": "Leve mais, pague menos",
-            "text": "Combine seus favoritos e economize.",
-            "button_label": "Ver kits",
-            "button_url": "shopify://collections/all"
-          }
-        }
-      },
-      "block_order": [
-        "b2"
-      ],
-      "settings": {}
+    "allproducts": {
+      "type": "featured-collection",
+      "settings": {
+        "heading": "Todos os produtos",
+        "link_label": "Ver tudo",
+        "collection": "",
+        "count": 12,
+        "new_badge": false,
+        "show_button": true
+      }
+    },
+    "hero": {
+      "type": "hero-banner",
+      "settings": {
+        "layout": "right",
+        "pill": "Em alta agora",
+        "heading": "Itens que viralizam. Do seu jeito.",
+        "text": "Chaveiros, porta-latas e achados que estão bombando.",
+        "button_1_label": "Ver novidades",
+        "button_1_url": "shopify://collections/all",
+        "button_2_label": "",
+        "button_2_url": "",
+        "rating_text": "",
+        "product": "",
+        "card_tag": "MAIS VENDIDO"
+      }
     },
     "reviews": {
       "type": "reviews",
@@ -143,19 +187,28 @@
         "r1": {
           "type": "review",
           "settings": {
-            "stars": 5
+            "stars": 5,
+            "text": "",
+            "author": "",
+            "verified": false
           }
         },
         "r2": {
           "type": "review",
           "settings": {
-            "stars": 5
+            "stars": 5,
+            "text": "",
+            "author": "",
+            "verified": false
           }
         },
         "r3": {
           "type": "review",
           "settings": {
-            "stars": 5
+            "stars": 5,
+            "text": "",
+            "author": "",
+            "verified": false
           }
         }
       },
@@ -165,7 +218,8 @@
         "r3"
       ],
       "settings": {
-        "heading": "Quem comprou, curtiu"
+        "heading": "Quem comprou, curtiu",
+        "summary": ""
       }
     },
     "newsletter": {
@@ -175,23 +229,15 @@
         "text": "Receba lançamentos e ofertas antes de todo mundo.",
         "button_label": "Quero receber"
       }
-    },
-    "allproducts": {
-      "type": "featured-collection",
-      "settings": {
-        "heading": "Todos os produtos",
-        "link_label": "Ver tudo",
-        "count": 12
-      }
     }
   },
   "order": [
-    "categories",
-    "hero",
+    "promos",
     "trust",
+    "categories",
     "bestsellers",
     "allproducts",
-    "promos",
+    "hero",
     "reviews",
     "newsletter"
   ]
