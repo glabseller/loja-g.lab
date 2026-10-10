@@ -9,70 +9,15 @@
  */
 {
   "sections": {
-    "categories": {
-      "type": "category-tiles",
-      "blocks": {
-        "c1": {
-          "type": "category",
-          "settings": {
-            "collection": "",
-            "title": "Chaveiros"
-          }
-        },
-        "c2": {
-          "type": "category",
-          "settings": {
-            "collection": "",
-            "title": "Porta-latas"
-          }
-        },
-        "c3": {
-          "type": "category",
-          "settings": {
-            "collection": "",
-            "title": "Setup"
-          }
-        },
-        "c4": {
-          "type": "category",
-          "settings": {
-            "collection": "",
-            "title": "Presentes"
-          }
-        },
-        "c5": {
-          "type": "category",
-          "settings": {
-            "collection": "",
-            "title": "Decoração"
-          }
-        },
-        "c6": {
-          "type": "category",
-          "settings": {
-            "collection": "",
-            "title": "Organização"
-          }
-        }
-      },
-      "block_order": [
-        "c1",
-        "c2",
-        "c3",
-        "c4",
-        "c5",
-        "c6"
-      ],
-      "settings": {
-        "heading": "Escolha sua vibe"
-      }
-    },
     "promos": {
       "type": "promo-banners",
       "blocks": {
         "b2": {
           "type": "banner",
-          "settings": {}
+          "settings": {
+            "link": "",
+            "alt": ""
+          }
         }
       },
       "block_order": [
@@ -129,6 +74,64 @@
         "t4"
       ],
       "settings": {}
+    },
+    "categories": {
+      "type": "category-tiles",
+      "blocks": {
+        "c1": {
+          "type": "category",
+          "settings": {
+            "collection": "",
+            "title": "Chaveiros"
+          }
+        },
+        "c2": {
+          "type": "category",
+          "settings": {
+            "collection": "",
+            "title": "Porta-latas"
+          }
+        },
+        "c3": {
+          "type": "category",
+          "settings": {
+            "collection": "",
+            "title": "Setup"
+          }
+        },
+        "c4": {
+          "type": "category",
+          "settings": {
+            "collection": "",
+            "title": "Presentes"
+          }
+        },
+        "c5": {
+          "type": "category",
+          "settings": {
+            "collection": "",
+            "title": "Decoração"
+          }
+        },
+        "c6": {
+          "type": "category",
+          "settings": {
+            "collection": "",
+            "title": "Organização"
+          }
+        }
+      },
+      "block_order": [
+        "c1",
+        "c2",
+        "c3",
+        "c4",
+        "c5",
+        "c6"
+      ],
+      "settings": {
+        "heading": "Produtos"
+      }
     },
     "bestsellers": {
       "type": "featured-collection",
