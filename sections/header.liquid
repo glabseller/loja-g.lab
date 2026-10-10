@@ -1,8 +1,9 @@
 <header class="site-header">
   <div class="container header__row">
     <a class="logo" href="{{ routes.root_url }}">
-      {%- if settings.logo != blank -%}
-        {{ settings.logo | image_url: width: 320 | image_tag: alt: shop.name, loading: 'eager' }}
+      {%- assign logo_img = section.settings.logo | default: settings.logo -%}
+      {%- if logo_img != blank -%}
+        {{ logo_img | image_url: width: 320 | image_tag: alt: shop.name, loading: 'eager' }}
       {%- else -%}
         {{ shop.name }}
       {%- endif -%}
@@ -86,6 +87,7 @@
 {
   "name": "Cabeçalho",
   "settings": [
+    { "type": "image_picker", "id": "logo", "label": "Logo da loja", "info": "PNG com fundo transparente. Se vazio, usa o logo das configurações do tema ou o nome da loja." },
     { "type": "link_list", "id": "menu", "label": "Menu de categorias (opcional)", "info": "Só é usado se você não adicionar categorias abaixo. Se ficar vazio, as coleções com produtos aparecem sozinhas." },
     { "type": "text", "id": "highlight_title", "label": "Item do menu em destaque (nome igual ao do menu)" }
   ],
