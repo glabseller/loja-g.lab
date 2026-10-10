@@ -1,0 +1,42 @@
+{%- if section.blocks.size > 0 -%}
+<section class="section container" {{ section.shopify_attributes }}>
+  <div class="banners">
+    {%- for block in section.blocks -%}
+      <div class="banner banner--{{ block.settings.style }}" {{ block.shopify_attributes }}>
+        {%- if block.settings.eyebrow != blank -%}<span class="banner__eyebrow">{{ block.settings.eyebrow }}</span>{%- endif -%}
+        <h2 class="banner__title">{{ block.settings.heading }}</h2>
+        {%- if block.settings.text != blank -%}<p class="banner__text">{{ block.settings.text }}</p>{%- endif -%}
+        {%- if block.settings.button_label != blank and block.settings.button_url != blank -%}
+          <a class="btn btn--ink" href="{{ block.settings.button_url }}">{{ block.settings.button_label }}</a>
+        {%- endif -%}
+      </div>
+    {%- endfor -%}
+  </div>
+</section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Banners promocionais",
+  "max_blocks": 3,
+  "blocks": [
+    {
+      "type": "banner",
+      "name": "Banner",
+      "settings": [
+        { "type": "select", "id": "style", "label": "Cor", "default": "green", "options": [
+          { "value": "green", "label": "Verde" },
+          { "value": "blue", "label": "Azul" },
+          { "value": "orange", "label": "Laranja" }
+        ] },
+        { "type": "text", "id": "eyebrow", "label": "Texto pequeno", "default": "KITS" },
+        { "type": "text", "id": "heading", "label": "Título", "default": "Leve mais, gaste menos" },
+        { "type": "textarea", "id": "text", "label": "Texto", "default": "Monte seu kit com os produtos que você mais gostou." },
+        { "type": "text", "id": "button_label", "label": "Texto do botão", "default": "Ver kits" },
+        { "type": "url", "id": "button_url", "label": "Link do botão" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Banners promocionais", "blocks": [{ "type": "banner" }, { "type": "banner", "settings": { "style": "blue", "eyebrow": "ENVIO", "heading": "Frete grátis em compras acima de R$ 150", "button_label": "Aproveitar" } }] }]
+}
+{% endschema %}

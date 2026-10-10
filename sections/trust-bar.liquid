@@ -1,0 +1,39 @@
+{%- if section.blocks.size > 0 -%}
+<section class="section container" {{ section.shopify_attributes }}>
+  <div class="trust__row">
+    {%- for block in section.blocks -%}
+      <div class="trust__item" {{ block.shopify_attributes }}>
+        <span class="trust__icon">{% render 'icon', name: block.settings.icon, size: 26 %}</span>
+        <span class="trust__text">
+          <span class="trust__title">{{ block.settings.title }}</span>
+          {%- if block.settings.subtitle != blank -%}<span class="trust__sub">{{ block.settings.subtitle }}</span>{%- endif -%}
+        </span>
+      </div>
+    {%- endfor -%}
+  </div>
+</section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Faixa de confiança",
+  "max_blocks": 4,
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Item",
+      "settings": [
+        { "type": "select", "id": "icon", "label": "Ícone", "default": "truck", "options": [
+          { "value": "truck", "label": "Caminhão" },
+          { "value": "pix", "label": "Pix" },
+          { "value": "shield", "label": "Escudo" },
+          { "value": "refresh", "label": "Troca" }
+        ] },
+        { "type": "text", "id": "title", "label": "Título", "default": "Frete grátis" },
+        { "type": "text", "id": "subtitle", "label": "Subtítulo", "default": "em compras acima de R$ 150" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Faixa de confiança", "blocks": [{ "type": "item" }] }]
+}
+{% endschema %}

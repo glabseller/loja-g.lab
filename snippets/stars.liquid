@@ -1,0 +1,17 @@
+{%- comment -%}
+  Estrelas de avaliação. Só aparecem se um app de avaliações preencher a nota do produto
+  (metacampos padrão reviews.rating e reviews.rating_count). Nada é inventado.
+  Parâmetro: product
+{%- endcomment -%}
+{%- assign rating_value = product.metafields.reviews.rating.value -%}
+{%- if rating_value != blank -%}
+  {%- assign stars_full = rating_value.rating | round -%}
+  <div class="stars">
+    <span class="stars__icons" role="img" aria-label="Nota {{ rating_value.rating | round: 1 }} de 5">
+      {%- for i in (1..5) -%}{%- if i <= stars_full -%}★{%- else -%}☆{%- endif -%}{%- endfor -%}
+    </span>
+    {%- if product.metafields.reviews.rating_count != blank -%}
+      <span class="stars__count">({{ product.metafields.reviews.rating_count }})</span>
+    {%- endif -%}
+  </div>
+{%- endif -%}

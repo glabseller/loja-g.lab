@@ -1,0 +1,84 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero-banner",
+      "settings": {
+        "heading": "Os achados que estão bombando.",
+        "button_1_label": "Ver mais vendidos",
+        "button_1_url": "shopify://collections/all",
+        "button_2_label": "Ver ofertas",
+        "button_2_url": "shopify://collections/all"
+      }
+    },
+    "trust": {
+      "type": "trust-bar",
+      "blocks": {
+        "t1": { "type": "item", "settings": { "icon": "truck", "title": "Frete grátis", "subtitle": "em compras acima de R$ 150" } },
+        "t2": { "type": "item", "settings": { "icon": "pix", "title": "5% off no Pix", "subtitle": "pagamento aprovado na hora" } },
+        "t3": { "type": "item", "settings": { "icon": "shield", "title": "Compra segura", "subtitle": "pagamento protegido" } },
+        "t4": { "type": "item", "settings": { "icon": "refresh", "title": "7 dias para devolver", "subtitle": "troca ou devolução" } }
+      },
+      "block_order": ["t1", "t2", "t3", "t4"],
+      "settings": {}
+    },
+    "categories": {
+      "type": "category-tiles",
+      "blocks": {
+        "c1": { "type": "category", "settings": { "title": "Casa" } },
+        "c2": { "type": "category", "settings": { "title": "Decoração" } },
+        "c3": { "type": "category", "settings": { "title": "Presentes" } },
+        "c4": { "type": "category", "settings": { "title": "Organização" } },
+        "c5": { "type": "category", "settings": { "title": "Escritório" } },
+        "c6": { "type": "category", "settings": { "title": "Pets" } }
+      },
+      "block_order": ["c1", "c2", "c3", "c4", "c5", "c6"],
+      "settings": { "heading": "Compre por categoria" }
+    },
+    "bestsellers": {
+      "type": "featured-collection",
+      "settings": { "heading": "Mais vendidos", "link_label": "Ver tudo", "count": 8 }
+    },
+    "deal": {
+      "type": "deal-of-day",
+      "settings": {}
+    },
+    "promos": {
+      "type": "promo-banners",
+      "blocks": {
+        "b1": { "type": "banner", "settings": { "style": "green", "eyebrow": "KITS", "heading": "Leve mais, gaste menos", "text": "Monte seu kit com os produtos que você mais gostou.", "button_label": "Ver kits", "button_url": "shopify://collections/all" } },
+        "b2": { "type": "banner", "settings": { "style": "blue", "eyebrow": "ENVIO", "heading": "Frete grátis em compras acima de R$ 150", "text": "Confira as condições no carrinho.", "button_label": "Aproveitar", "button_url": "shopify://collections/all" } }
+      },
+      "block_order": ["b1", "b2"],
+      "settings": {}
+    },
+    "arrivals": {
+      "type": "featured-collection",
+      "settings": { "heading": "Acabou de chegar", "link_label": "Ver novidades", "count": 4, "new_badge": true }
+    },
+    "reviews": {
+      "type": "reviews",
+      "blocks": {
+        "r1": { "type": "review", "settings": { "stars": 5 } },
+        "r2": { "type": "review", "settings": { "stars": 5 } },
+        "r3": { "type": "review", "settings": { "stars": 5 } }
+      },
+      "block_order": ["r1", "r2", "r3"],
+      "settings": { "heading": "Quem comprou, aprovou" }
+    },
+    "faq": {
+      "type": "faq",
+      "blocks": {
+        "q1": { "type": "question", "settings": { "question": "Quanto tempo leva para chegar?", "answer": "<p>O prazo é calculado no checkout, de acordo com o seu CEP.</p>" } },
+        "q2": { "type": "question", "settings": { "question": "Posso trocar ou devolver?", "answer": "<p>Sim. Você tem 7 dias após o recebimento para solicitar a troca ou devolução.</p>" } },
+        "q3": { "type": "question", "settings": { "question": "Quais formas de pagamento?", "answer": "<p>As formas disponíveis aparecem na hora de finalizar a compra.</p>" } }
+      },
+      "block_order": ["q1", "q2", "q3"],
+      "settings": {}
+    },
+    "newsletter": {
+      "type": "newsletter",
+      "settings": {}
+    }
+  },
+  "order": ["hero", "trust", "categories", "bestsellers", "deal", "promos", "arrivals", "reviews", "faq", "newsletter"]
+}

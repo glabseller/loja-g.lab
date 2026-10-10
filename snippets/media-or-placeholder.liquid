@@ -1,0 +1,12 @@
+{%- comment -%}
+  Mostra uma imagem escolhida pelo lojista ou, se não houver, uma imagem de exemplo.
+  Parâmetros:
+    - image: imagem (objeto de image_picker)
+    - placeholder: nome da imagem de exemplo (ex.: 'product-1')
+    - width: largura base em pixels
+{%- endcomment -%}
+{%- if image != blank -%}
+  {{ image | image_url: width: width | image_tag: loading: 'lazy', widths: '300, 500, 700, 900' }}
+{%- else -%}
+  {{ placeholder | placeholder_svg_tag: 'placeholder' }}
+{%- endif -%}

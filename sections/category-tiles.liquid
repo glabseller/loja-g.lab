@@ -1,0 +1,46 @@
+{%- if section.blocks.size > 0 -%}
+<section class="section container" {{ section.shopify_attributes }}>
+  {%- if section.settings.heading != blank -%}
+    <div class="section-head"><h2 class="section-title">{{ section.settings.heading }}</h2></div>
+  {%- endif -%}
+  <div class="circles">
+    {%- for block in section.blocks -%}
+      {%- assign col = block.settings.collection -%}
+      {%- assign name = block.settings.title | default: col.title -%}
+      {%- assign pic = block.settings.image | default: col.featured_image -%}
+      <a class="circle" href="{{ col.url | default: routes.all_products_collection_url }}" {{ block.shopify_attributes }}>
+        <span class="circle__media">
+          {%- if pic != blank -%}
+            {{ pic | image_url: width: 320 | image_tag: loading: 'lazy', alt: name }}
+          {%- else -%}
+            {{ 'collection-1' | placeholder_svg_tag: 'placeholder' }}
+          {%- endif -%}
+        </span>
+        <span class="circle__name">{{ name }}</span>
+      </a>
+    {%- endfor -%}
+  </div>
+</section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Categorias (círculos)",
+  "max_blocks": 12,
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Título", "default": "Compre por categoria" }
+  ],
+  "blocks": [
+    {
+      "type": "category",
+      "name": "Categoria",
+      "settings": [
+        { "type": "collection", "id": "collection", "label": "Coleção" },
+        { "type": "text", "id": "title", "label": "Nome (opcional)" },
+        { "type": "image_picker", "id": "image", "label": "Imagem (opcional)" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Categorias (círculos)", "blocks": [{ "type": "category" }, { "type": "category" }, { "type": "category" }, { "type": "category" }] }]
+}
+{% endschema %}

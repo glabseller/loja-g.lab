@@ -1,0 +1,31 @@
+{%- if section.blocks.size > 0 -%}
+<section class="faq" {{ section.shopify_attributes }}>
+  <h2 class="section-title">{{ section.settings.heading }}</h2>
+  {%- for block in section.blocks -%}
+    <details {{ block.shopify_attributes }}>
+      <summary>{{ block.settings.question }}</summary>
+      <div class="rte">{{ block.settings.answer }}</div>
+    </details>
+  {%- endfor -%}
+</section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Perguntas frequentes",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Título", "default": "Perguntas frequentes" }
+  ],
+  "blocks": [
+    {
+      "type": "question",
+      "name": "Pergunta",
+      "settings": [
+        { "type": "text", "id": "question", "label": "Pergunta", "default": "Quanto tempo leva para chegar?" },
+        { "type": "richtext", "id": "answer", "label": "Resposta", "default": "<p>O prazo é calculado no checkout, de acordo com o seu CEP.</p>" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Perguntas frequentes", "blocks": [{ "type": "question" }] }]
+}
+{% endschema %}

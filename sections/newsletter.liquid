@@ -1,0 +1,35 @@
+<section class="section container" {{ section.shopify_attributes }}>
+  <div class="newsletter__panel">
+    <div class="newsletter__text">
+      <h2 class="newsletter__title">{{ section.settings.heading }}</h2>
+      {%- if section.settings.text != blank -%}<p class="newsletter__lead">{{ section.settings.text }}</p>{%- endif -%}
+    </div>
+    <div class="newsletter__form">
+      {%- form 'customer', id: 'newsletter' -%}
+        <input type="hidden" name="contact[tags]" value="newsletter">
+        {%- if form.posted_successfully? -%}
+          <p class="newsletter__msg">Pronto! Você está na lista.</p>
+        {%- else -%}
+          <div class="newsletter__fields">
+            <label class="visually-hidden" for="nl-email-{{ section.id }}">E-mail</label>
+            <input id="nl-email-{{ section.id }}" type="email" name="contact[email]" placeholder="Seu melhor e-mail" required>
+            <button class="btn btn--accent btn--lg" type="submit">{{ section.settings.button_label }}</button>
+          </div>
+          {%- if form.errors -%}<p class="newsletter__msg">Confira o e-mail e tente de novo.</p>{%- endif -%}
+        {%- endif -%}
+      {%- endform -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Newsletter / cupom",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Título", "default": "Receba ofertas em primeira mão" },
+    { "type": "textarea", "id": "text", "label": "Texto", "default": "Cadastre seu e-mail e fique por dentro das novidades e promoções." },
+    { "type": "text", "id": "button_label", "label": "Texto do botão", "default": "Quero receber" }
+  ],
+  "presets": [{ "name": "Newsletter / cupom" }]
+}
+{% endschema %}

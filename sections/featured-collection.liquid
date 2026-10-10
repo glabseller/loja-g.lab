@@ -1,0 +1,33 @@
+{%- assign coll = section.settings.collection | default: collections['all'] -%}
+<section class="section container" {{ section.shopify_attributes }}>
+  <div class="section-head">
+    <h2 class="section-title">{{ section.settings.heading }}</h2>
+    {%- if section.settings.link_label != blank -%}
+      <a class="link-strong" href="{{ coll.url }}">{{ section.settings.link_label }}</a>
+    {%- endif -%}
+  </div>
+  {%- if coll.products.size > 0 -%}
+    <div class="grid">
+      {%- for product in coll.products limit: section.settings.count -%}
+        {% render 'product-card', product: product, show_button: section.settings.show_button, new_badge: section.settings.new_badge %}
+      {%- endfor -%}
+    </div>
+  {%- else -%}
+    <p class="note">Adicione produtos a esta coleção para eles aparecerem aqui.</p>
+  {%- endif -%}
+</section>
+
+{% schema %}
+{
+  "name": "Coleção em destaque",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Título", "default": "Mais vendidos" },
+    { "type": "text", "id": "link_label", "label": "Texto do link", "default": "Ver tudo" },
+    { "type": "collection", "id": "collection", "label": "Coleção", "info": "Se vazio, mostra todos os produtos." },
+    { "type": "range", "id": "count", "label": "Quantidade de produtos", "min": 2, "max": 12, "step": 1, "default": 8 },
+    { "type": "checkbox", "id": "new_badge", "label": "Marcar todos como NOVO", "default": false },
+    { "type": "checkbox", "id": "show_button", "label": "Mostrar botão Adicionar ao carrinho", "default": true }
+  ],
+  "presets": [{ "name": "Coleção em destaque" }]
+}
+{% endschema %}

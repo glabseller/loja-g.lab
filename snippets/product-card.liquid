@@ -1,0 +1,77 @@
+{%- comment -%}
+  Cartão de produto.
+  Parâmetros:
+    - product: o produto
+    - show_button: false para esconder o botão (padrão: mostra)
+    - new_badge: true para marcar todos como NOVO
+  Etiquetas (tags) do produto que ativam selos: mais-vendido, popular, novo
+{%- endcomment -%}
+{%- liquid
+  assign card_variant = product.selected_or_first_available_variant
+  assign on_sale = false
+  if product.compare_at_price > product.price
+    assign on_sale = true
+    assign off = product.compare_at_price | minus: product.price | times: 100 | divided_by: product.compare_at_price
+  endif
+  assign pix_factor = 100 | minus: settings.pix_discount
+  assign tag_text = ''
+  if product.tags contains 'mais-vendido'
+    assign tag_text = 'MAIS VENDIDO'
+  elsif product.tags contains 'popular'
+    assign tag_text = 'POPULAR'
+  elsif product.tags contains 'novo' or new_badge
+    assign tag_text = 'NOVO'
+  endif
+-%}
+<div class="card">
+  <a class="card__media" href="{{ product.url }}" aria-label="{{ product.title | escape }}">
+    {%- if product.featured_image != blank -%}
+      {{ product.featured_image | image_url: width: 600 | image_tag: loading: 'lazy', widths: '300, 450, 600', sizes: '(min-width: 1280px) 290px, (min-width: 700px) 25vw, 50vw' }}
+    {%- else -%}
+      {{ 'product-1' | placeholder_svg_tag: 'placeholder' }}
+    {%- endif -%}
+
+    {%- if on_sale -%}
+      <span class="badge badge--accent badge--left">-{{ off }}%</span>
+    {%- endif -%}
+    {%- if product.available == false -%}
+      <span class="badge badge--ink badge--right">Esgotado</span>
+    {%- elsif tag_text != blank -%}
+      <span class="badge badge--ink badge--right">{{ tag_text }}</span>
+    {%- endif -%}
+  </a>
+
+  <div class="card__body">
+    {% render 'stars', product: product %}
+    <a class="card__title" href="{{ product.url }}">{{ product.title }}</a>
+    <div class="card__prices">
+      {%- if product.price_varies -%}<span class="card__from">a partir de</span>{%- endif -%}
+      <span class="card__price">{{ product.price | money }}</span>
+      {%- if on_sale -%}
+        <s class="card__compare">{{ product.compare_at_price | money }}</s>
+      {%- endif -%}
+    </div>
+    {%- if settings.pix_discount > 0 -%}
+      <span class="card__pix">no Pix {{ product.price | times: pix_factor | divided_by: 100 | money }}
+        {%- if settings.installments > 1 %} · {{ settings.installments }}x sem juros{% endif -%}
+      </span>
+    {%- elsif settings.installments > 1 -%}
+      <span class="card__pix">{{ settings.installments }}x de {{ product.price | divided_by: settings.installments | money }} sem juros</span>
+    {%- endif -%}
+  </div>
+
+  {%- if show_button != false -%}
+    {%- if product.available -%}
+      {%- if product.variants.size == 1 -%}
+        {%- form 'product', product, class: 'card__form' -%}
+          <input type="hidden" name="id" value="{{ card_variant.id }}">
+          <button type="submit" name="add" class="btn btn--outline btn--block">Adicionar ao carrinho</button>
+        {%- endform -%}
+      {%- else -%}
+        <a class="btn btn--outline btn--block" href="{{ product.url }}">Ver opções</a>
+      {%- endif -%}
+    {%- else -%}
+      <span class="btn btn--outline btn--block btn--disabled">Esgotado</span>
+    {%- endif -%}
+  {%- endif -%}
+</div>

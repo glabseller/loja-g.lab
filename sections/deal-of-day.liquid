@@ -1,0 +1,55 @@
+{%- assign p = section.settings.product -%}
+{%- if p != blank -%}
+  {%- assign v = p.selected_or_first_available_variant -%}
+  <section class="section container" {{ section.shopify_attributes }}>
+    <div class="deal__panel">
+      <a class="deal__media" href="{{ p.url }}" aria-label="{{ p.title | escape }}">
+        {%- if p.featured_image != blank -%}
+          {{ p.featured_image | image_url: width: 900 | image_tag: loading: 'lazy', widths: '450, 700, 900', sizes: '(min-width: 1280px) 600px, 100vw' }}
+        {%- else -%}
+          {{ 'product-1' | placeholder_svg_tag: 'placeholder' }}
+        {%- endif -%}
+      </a>
+      <div class="deal__body">
+        {%- if section.settings.eyebrow != blank -%}<span class="pill pill--accent">{{ section.settings.eyebrow }}</span>{%- endif -%}
+        <h2 class="deal__title">{{ p.title }}</h2>
+        <div class="deal__price-row">
+          <span class="deal__price">{{ p.price | money }}</span>
+          {%- if p.compare_at_price > p.price -%}<s class="deal__compare">{{ p.compare_at_price | money }}</s>{%- endif -%}
+        </div>
+        {%- if section.settings.countdown_end != blank -%}
+          <div class="countdown" data-countdown="{{ section.settings.countdown_end }}" hidden>
+            <span>Termina em</span>
+            <span class="countdown__box" data-cd-h>00</span><span class="countdown__box" data-cd-m>00</span><span class="countdown__box" data-cd-s>00</span>
+          </div>
+        {%- endif -%}
+        {%- if v.inventory_management == 'shopify' and v.inventory_quantity > 0 -%}
+          <div class="stockbar">
+            <div class="stockbar__row"><span>Restam {{ v.inventory_quantity }} unidades</span></div>
+            {%- if section.settings.stock_total > 0 -%}
+              {%- assign pct = section.settings.stock_total | minus: v.inventory_quantity | times: 100 | divided_by: section.settings.stock_total -%}
+              {%- if pct < 5 -%}{%- assign pct = 5 -%}{%- endif -%}
+              {%- if pct > 100 -%}{%- assign pct = 100 -%}{%- endif -%}
+              <div class="stockbar__track"><div class="stockbar__fill" style="width: {{ pct }}%"></div></div>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+        <a class="btn btn--accent btn--lg" href="{{ p.url }}">{{ section.settings.button_label }}</a>
+      </div>
+    </div>
+  </section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Oferta do dia",
+  "settings": [
+    { "type": "product", "id": "product", "label": "Produto" },
+    { "type": "text", "id": "eyebrow", "label": "Selo", "default": "OFERTA DO DIA" },
+    { "type": "text", "id": "countdown_end", "label": "Fim da oferta", "info": "Formato: 2026-12-31T23:59:00-03:00. Vazio = sem cronômetro. Use só se a oferta realmente acabar nessa hora." },
+    { "type": "range", "id": "stock_total", "label": "Estoque inicial (para a barra)", "min": 0, "max": 100, "step": 1, "default": 0, "info": "0 = sem barra. O número de unidades só aparece se o estoque for controlado pelo Shopify." },
+    { "type": "text", "id": "button_label", "label": "Texto do botão", "default": "Aproveitar agora" }
+  ],
+  "presets": [{ "name": "Oferta do dia" }]
+}
+{% endschema %}

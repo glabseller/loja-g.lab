@@ -1,0 +1,93 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Loja Clean",
+    "theme_version": "2.0.0",
+    "theme_author": "Loja Clean",
+    "theme_documentation_url": "https://help.shopify.com/pt-BR",
+    "theme_support_url": "https://help.shopify.com/pt-BR"
+  },
+  {
+    "name": "Cores",
+    "settings": [
+      {
+        "type": "color",
+        "id": "color_accent",
+        "label": "Cor principal (botões de compra, preços e selos)",
+        "default": "#D93D04"
+      },
+      {
+        "type": "color",
+        "id": "color_ink",
+        "label": "Cor do texto e dos botões escuros",
+        "default": "#14161A"
+      },
+      {
+        "type": "color",
+        "id": "color_positive",
+        "label": "Cor de Pix, frete e confirmações (verde)",
+        "default": "#12805C"
+      },
+      {
+        "type": "color",
+        "id": "color_soft",
+        "label": "Cor de fundo suave (seções cinza)",
+        "default": "#F5F5F3"
+      }
+    ]
+  },
+  {
+    "name": "Logo e ícone",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "logo",
+        "label": "Logo (se vazio, usa o nome da loja em texto)"
+      },
+      {
+        "type": "image_picker",
+        "id": "favicon",
+        "label": "Ícone da aba do navegador (32 x 32 px)"
+      }
+    ]
+  },
+  {
+    "name": "Pagamento e frete",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Estes valores só mudam o que aparece nos textos da loja. Os descontos e o frete reais são configurados no painel do Shopify (Descontos, Envio e entrega, Pagamentos)."
+      },
+      {
+        "type": "range",
+        "id": "pix_discount",
+        "label": "Desconto no Pix (%)",
+        "min": 0,
+        "max": 30,
+        "step": 1,
+        "default": 5,
+        "info": "Use 0 para não mostrar o preço no Pix."
+      },
+      {
+        "type": "range",
+        "id": "installments",
+        "label": "Parcelas sem juros",
+        "min": 1,
+        "max": 12,
+        "step": 1,
+        "default": 3,
+        "info": "Use 1 para não mostrar o parcelamento."
+      },
+      {
+        "type": "range",
+        "id": "free_shipping_threshold",
+        "label": "Frete grátis acima de (R$)",
+        "min": 0,
+        "max": 1000,
+        "step": 10,
+        "default": 150,
+        "info": "Use 0 para não mostrar a barra de frete grátis."
+      }
+    ]
+  }
+]

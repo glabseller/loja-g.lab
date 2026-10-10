@@ -1,0 +1,28 @@
+{% layout none %}
+<!doctype html>
+<html lang="{{ request.locale.iso_code }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Vale-presente &ndash; {{ shop.name }}</title>
+  {{ content_for_header }}
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&display=swap" rel="stylesheet">
+  {{ 'theme.css' | asset_url | stylesheet_tag }}
+  <style>
+    :root { --accent: {{ settings.color_accent }}; --ink: {{ settings.color_ink }}; --soft: {{ settings.color_soft }}; }
+  </style>
+</head>
+<body class="template-gift-card">
+  <main class="password" role="main">
+    <h1 class="section-title">{{ shop.name }}</h1>
+    <p>Seu vale-presente</p>
+    <p class="price-block__current">{{ gift_card.initial_value | money }}</p>
+    {%- if gift_card.enabled == false or gift_card.expired -%}
+      <p class="errors">Este vale-presente não está mais ativo.</p>
+    {%- endif -%}
+    <p>Saldo: <strong>{{ gift_card.balance | money }}</strong></p>
+    <p class="section-title" style="font-size: 28px;">{{ gift_card.code | format_code }}</p>
+    <a class="btn btn--accent btn--lg btn--block" href="{{ shop.url }}">Usar na loja</a>
+  </main>
+</body>
+</html>

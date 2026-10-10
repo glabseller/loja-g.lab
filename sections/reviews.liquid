@@ -1,0 +1,55 @@
+{%- capture items -%}
+  {%- for block in section.blocks -%}
+    {%- if block.settings.text != blank -%}
+      <article class="review" {{ block.shopify_attributes }}>
+        {%- if block.settings.image != blank -%}
+          <div class="review__photo">{{ block.settings.image | image_url: width: 600 | image_tag: loading: 'lazy' }}</div>
+        {%- endif -%}
+        <div class="review__top">
+          <span class="review__stars" role="img" aria-label="{{ block.settings.stars }} de 5 estrelas">
+            {%- for i in (1..5) -%}{%- if i <= block.settings.stars -%}★{%- else -%}☆{%- endif -%}{%- endfor -%}
+          </span>
+          {%- if block.settings.verified -%}<span class="review__verified">{% render 'icon', name: 'check', size: 12 %} Compra verificada</span>{%- endif -%}
+        </div>
+        <p>{{ block.settings.text }}</p>
+        {%- if block.settings.author != blank -%}<span class="review__author">{{ block.settings.author }}</span>{%- endif -%}
+      </article>
+    {%- endif -%}
+  {%- endfor -%}
+{%- endcapture -%}
+{%- if items != blank -%}
+<section class="reviews" {{ section.shopify_attributes }}>
+  <div class="container">
+    <div class="section-head">
+      <h2 class="section-title">{{ section.settings.heading }}</h2>
+      {%- if section.settings.summary != blank -%}<span class="reviews__summary">{{ section.settings.summary }}</span>{%- endif -%}
+    </div>
+    <div class="grid">{{ items }}</div>
+  </div>
+</section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Avaliações de clientes",
+  "max_blocks": 8,
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Título", "default": "Quem comprou, aprovou" },
+    { "type": "text", "id": "summary", "label": "Resumo (só se for verdadeiro)", "info": "Ex.: 4,9 de 5 com base em 120 avaliações." }
+  ],
+  "blocks": [
+    {
+      "type": "review",
+      "name": "Avaliação",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Foto do cliente (opcional)" },
+        { "type": "range", "id": "stars", "label": "Estrelas", "min": 1, "max": 5, "step": 1, "default": 5 },
+        { "type": "textarea", "id": "text", "label": "Texto", "info": "Use apenas avaliações reais de clientes. Sem texto, o bloco não aparece." },
+        { "type": "text", "id": "author", "label": "Nome do cliente" },
+        { "type": "checkbox", "id": "verified", "label": "Mostrar \"Compra verificada\"", "default": false }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Avaliações de clientes", "blocks": [{ "type": "review" }, { "type": "review" }, { "type": "review" }] }]
+}
+{% endschema %}

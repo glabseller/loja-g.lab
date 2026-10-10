@@ -1,0 +1,178 @@
+{%- liquid
+  assign current = product.selected_or_first_available_variant
+  assign pix_factor = 100 | minus: settings.pix_discount
+-%}
+<section class="container product" data-product data-section-id="{{ section.id }}" data-product-url="{{ product.url }}" {{ section.shopify_attributes }}>
+  <script type="application/json" data-variants>[{% for v in product.variants %}{"id":{{ v.id }},"options":{{ v.options | json }}}{% unless forloop.last %},{% endunless %}{% endfor %}]</script>
+
+  <div class="gallery">
+    {%- if product.images.size > 1 -%}
+      <div class="gallery__thumbs">
+        {%- for image in product.images limit: 8 -%}
+          <button type="button" class="thumb" data-large="{{ image | image_url: width: 1200 }}" data-alt="{{ image.alt | escape }}"{% if image == current.featured_image or forloop.first and current.featured_image == blank %} aria-current="true"{% endif %} aria-label="Ver imagem {{ forloop.index }}">
+            {{ image | image_url: width: 160 | image_tag: loading: 'lazy', alt: '' }}
+          </button>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+    <div class="gallery__stage">
+      <div class="product__image" data-gallery-main>
+        {%- assign main_image = current.featured_image | default: product.featured_image -%}
+        {%- if main_image != blank -%}
+          {{ main_image | image_url: width: 1200 | image_tag: loading: 'eager', widths: '600, 900, 1200', sizes: '(min-width: 1280px) 600px, 100vw', alt: product.title }}
+        {%- else -%}
+          {{ 'product-1' | placeholder_svg_tag: 'placeholder' }}
+        {%- endif -%}
+      </div>
+      <div data-gallery-badge>
+        {%- if current.compare_at_price > current.price -%}
+          {%- assign off = current.compare_at_price | minus: current.price | times: 100 | divided_by: current.compare_at_price -%}
+          <span class="badge badge--accent badge--left">-{{ off }}%</span>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+
+  <div class="product__info">
+    {% render 'stars', product: product %}
+    <h1 class="product__title">{{ product.title }}</h1>
+
+    {%- capture benefits -%}
+      {%- for i in (1..3) -%}
+        {%- assign key = 'benefit_' | append: i -%}
+        {%- if section.settings[key] != blank -%}
+          <li class="benefits__item">{% render 'icon', name: 'check', size: 18 %}<span>{{ section.settings[key] }}</span></li>
+        {%- endif -%}
+      {%- endfor -%}
+    {%- endcapture -%}
+    {%- if benefits != blank -%}<ul class="benefits" style="list-style:none;padding:0;margin:0">{{ benefits }}</ul>{%- endif -%}
+
+    <div class="price-block" data-price-block>
+      <div class="price-block__row">
+        <span class="price-block__current" data-price-cents="{{ current.price }}">{{ current.price | money }}</span>
+        {%- if current.compare_at_price > current.price -%}<s class="price-block__compare">{{ current.compare_at_price | money }}</s>{%- endif -%}
+      </div>
+      {%- if settings.pix_discount > 0 -%}
+        <span class="price-block__pix">{{ current.price | times: pix_factor | divided_by: 100 | money }} no Pix ({{ settings.pix_discount }}% de desconto)</span>
+      {%- endif -%}
+      {%- if settings.installments > 1 -%}
+        <span class="price-block__sub">ou {{ settings.installments }}x de {{ current.price | divided_by: settings.installments | money }} sem juros</span>
+      {%- endif -%}
+    </div>
+
+    {%- if section.settings.countdown_end != blank -%}
+      <div class="urgency">
+        <div class="countdown" data-countdown="{{ section.settings.countdown_end }}" hidden>
+          <span>Oferta termina em</span>
+          <span class="countdown__box" data-cd-h>00</span><span class="countdown__box" data-cd-m>00</span><span class="countdown__box" data-cd-s>00</span>
+        </div>
+      </div>
+    {%- endif -%}
+
+    {%- unless product.has_only_default_variant -%}
+      {%- for option in product.options_with_values -%}
+        <fieldset class="option" data-option>
+          <legend>{{ option.name }}: <span data-option-selected>{{ option.selected_value }}</span></legend>
+          <div class="option__values">
+            {%- for value in option.values -%}
+              <input type="radio" id="opt-{{ section.id }}-{{ option.position }}-{{ forloop.index }}" name="option-{{ option.position }}" value="{{ value | escape }}"{% if option.selected_value == value %} checked{% endif %}>
+              <label for="opt-{{ section.id }}-{{ option.position }}-{{ forloop.index }}">{{ value }}</label>
+            {%- endfor -%}
+          </div>
+        </fieldset>
+      {%- endfor -%}
+    {%- endunless -%}
+
+    {%- form 'product', product, class: 'product-form' -%}
+      {%- if section.settings.show_tiers and current.available -%}
+        <fieldset class="tiers">
+          <legend>Quantidade</legend>
+          {%- for n in (1..3) -%}
+            {%- assign note_key = 'tier_' | append: n | append: '_note' -%}
+            <div class="tier">
+              <input type="radio" id="tier-{{ section.id }}-{{ n }}" name="quantity" value="{{ n }}"{% if n == 1 %} checked{% endif %}>
+              <label for="tier-{{ section.id }}-{{ n }}">
+                <span class="tier__dot"></span>
+                <span class="tier__text">
+                  <span class="tier__label">Leve {{ n }}</span>
+                  {%- if n > 1 and section.settings[note_key] != blank -%}<span class="tier__note">{{ section.settings[note_key] }}</span>{%- endif -%}
+                </span>
+              </label>
+            </div>
+          {%- endfor -%}
+        </fieldset>
+      {%- elsif current.available -%}
+        <div class="qty"><label for="qty-{{ section.id }}">Quantidade</label><input id="qty-{{ section.id }}" type="number" name="quantity" value="1" min="1"></div>
+      {%- endif -%}
+
+      <div class="buy-block" data-buy-block>
+        <input type="hidden" name="id" value="{{ current.id }}">
+        {%- if current.available -%}
+          {%- if current.inventory_management == 'shopify' and current.inventory_quantity > 0 and current.inventory_quantity <= section.settings.stock_threshold -%}
+            <div class="urgency__stock">Restam apenas {{ current.inventory_quantity }} unidades</div>
+          {%- endif -%}
+          <button type="submit" name="add" class="btn btn--accent btn--lg btn--block">Adicionar ao carrinho</button>
+          <button type="submit" name="checkout" class="btn btn--ink btn--lg btn--block">Comprar agora</button>
+        {%- else -%}
+          <button type="button" class="btn btn--lg btn--block" disabled>Esgotado</button>
+        {%- endif -%}
+      </div>
+    {%- endform -%}
+
+    <div class="delivery">
+      {% render 'icon', name: 'truck', size: 28 %}
+      <div class="delivery__text">
+        <strong>Envio para todo o Brasil</strong>
+        <span class="delivery__sub">
+          {%- if settings.free_shipping_threshold > 0 -%}Frete grátis acima de {{ settings.free_shipping_threshold | times: 100 | money_without_trailing_zeros }}. {% endif -%}
+          O prazo aparece no checkout.
+        </span>
+      </div>
+    </div>
+
+    <div class="badges-row">
+      <span>{% render 'icon', name: 'shield', size: 18 %} Compra segura</span>
+      <span>{% render 'icon', name: 'refresh', size: 18 %} 7 dias para devolver</span>
+      <span>{% render 'icon', name: 'truck', size: 18 %} Envio rastreado</span>
+    </div>
+
+    {%- for block in section.blocks -%}
+      {%- if block.type == '@app' -%}{% render block %}{%- endif -%}
+    {%- endfor -%}
+
+    <div class="accordion">
+      {%- if product.description != blank -%}
+        <details open><summary>Descrição</summary><div class="rte">{{ product.description }}</div></details>
+      {%- endif -%}
+      {%- if section.settings.shipping_text != blank -%}
+        <details><summary>Envio e entrega</summary><div class="rte">{{ section.settings.shipping_text }}</div></details>
+      {%- endif -%}
+      {%- if section.settings.returns_text != blank -%}
+        <details><summary>Trocas e devoluções</summary><div class="rte">{{ section.settings.returns_text }}</div></details>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Produto",
+  "blocks": [{ "type": "@app" }],
+  "settings": [
+    { "type": "header", "content": "Benefícios (lista com ✓)" },
+    { "type": "text", "id": "benefit_1", "label": "Benefício 1" },
+    { "type": "text", "id": "benefit_2", "label": "Benefício 2" },
+    { "type": "text", "id": "benefit_3", "label": "Benefício 3" },
+    { "type": "header", "content": "Urgência" },
+    { "type": "text", "id": "countdown_end", "label": "Fim da oferta", "info": "Formato: 2026-12-31T23:59:00-03:00. Vazio = sem cronômetro." },
+    { "type": "range", "id": "stock_threshold", "label": "Avisar \"Restam X unidades\" quando o estoque for até", "min": 1, "max": 20, "step": 1, "default": 5, "info": "Só funciona se o estoque for controlado pelo Shopify." },
+    { "type": "header", "content": "Leve 1, 2 ou 3" },
+    { "type": "checkbox", "id": "show_tiers", "label": "Mostrar opções de quantidade", "default": true, "info": "Para o desconto valer, crie um desconto automático em Descontos." },
+    { "type": "text", "id": "tier_2_note", "label": "Nota do Leve 2", "info": "Ex.: 10% de desconto" },
+    { "type": "text", "id": "tier_3_note", "label": "Nota do Leve 3", "info": "Ex.: 15% de desconto" },
+    { "type": "header", "content": "Textos" },
+    { "type": "richtext", "id": "shipping_text", "label": "Envio e entrega", "default": "<p>Enviamos para todo o Brasil. O prazo e o valor aparecem no checkout.</p>" },
+    { "type": "richtext", "id": "returns_text", "label": "Trocas e devoluções", "default": "<p>Você tem 7 dias após o recebimento para solicitar a devolução.</p>" }
+  ]
+}
+{% endschema %}

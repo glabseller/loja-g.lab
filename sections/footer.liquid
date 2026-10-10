@@ -1,0 +1,39 @@
+<footer class="footer">
+  <div class="container footer__row">
+    <div class="footer__col footer__col--wide">
+      <span class="footer__brand">{{ shop.name }}</span>
+      {%- if section.settings.about != blank -%}<p class="footer__muted">{{ section.settings.about }}</p>{%- endif -%}
+    </div>
+    {%- assign menu = linklists[section.settings.menu] -%}
+    {%- if menu.links.size > 0 -%}
+      <div class="footer__col">
+        <span class="footer__heading">{{ section.settings.menu_heading }}</span>
+        {%- for link in menu.links -%}<a href="{{ link.url }}">{{ link.title }}</a>{%- endfor -%}
+      </div>
+    {%- endif -%}
+    {%- if section.settings.contact != blank -%}
+      <div class="footer__col">
+        <span class="footer__heading">{{ section.settings.contact_heading }}</span>
+        <div class="rte">{{ section.settings.contact }}</div>
+      </div>
+    {%- endif -%}
+  </div>
+  <div class="container footer__bottom">
+    <span>© {{ 'now' | date: '%Y' }} {{ shop.name }}. Todos os direitos reservados.</span>
+    <span>{{ section.settings.bottom_text }}</span>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Rodapé",
+  "settings": [
+    { "type": "textarea", "id": "about", "label": "Sobre a loja", "default": "Achados práticos e bonitos para casa, presentes e dia a dia." },
+    { "type": "link_list", "id": "menu", "label": "Menu do rodapé", "default": "footer" },
+    { "type": "text", "id": "menu_heading", "label": "Título do menu", "default": "Ajuda" },
+    { "type": "text", "id": "contact_heading", "label": "Título do atendimento", "default": "Atendimento" },
+    { "type": "richtext", "id": "contact", "label": "Atendimento (e-mail, horário)" },
+    { "type": "text", "id": "bottom_text", "label": "Texto da base (ex.: CNPJ)" }
+  ]
+}
+{% endschema %}

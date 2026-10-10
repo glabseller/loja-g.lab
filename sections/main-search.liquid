@@ -1,0 +1,42 @@
+{%- paginate search.results by 24 -%}
+  <section class="page-pad container" {{ section.shopify_attributes }}>
+    <h1 class="section-title" style="margin-bottom: 24px;">Busca</h1>
+
+    <form class="search search-page__form" action="{{ routes.search_url }}" method="get" role="search">
+      <label class="visually-hidden" for="PageSearch">Buscar produtos</label>
+      <input id="PageSearch" type="search" name="q" value="{{ search.terms | escape }}" placeholder="O que você está procurando?">
+      <button type="submit" aria-label="Buscar">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>
+      </button>
+    </form>
+
+    {%- if search.performed -%}
+      {%- if search.results_count > 0 -%}
+        <p class="note" style="margin-bottom: 24px;">{{ search.results_count }} resultado(s) para "{{ search.terms | escape }}"</p>
+        <div class="grid">
+          {%- for item in search.results -%}
+            {%- if item.object_type == 'product' -%}
+              {% render 'product-card', product: item, style: 'sale' %}
+            {%- else -%}
+              <a class="card" href="{{ item.url }}"><span class="card__title">{{ item.title }}</span></a>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+        {%- if paginate.pages > 1 -%}
+          <div class="pagination">{{ paginate | default_pagination }}</div>
+        {%- endif -%}
+      {%- else -%}
+        <div class="empty">
+          <p>Não encontramos nada para "{{ search.terms | escape }}". Tente outra palavra.</p>
+          <a class="btn btn--ink" href="{{ routes.all_products_collection_url }}">Ver todos os produtos</a>
+        </div>
+      {%- endif -%}
+    {%- endif -%}
+  </section>
+{%- endpaginate -%}
+
+{% schema %}
+{
+  "name": "Página de busca"
+}
+{% endschema %}

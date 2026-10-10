@@ -1,0 +1,21 @@
+{
+  "name": "Grupo do cabeçalho",
+  "type": "header",
+  "sections": {
+    "announcement": {
+      "type": "announcement-bar",
+      "blocks": {
+        "m1": { "type": "message", "settings": { "text": "Frete grátis em compras acima de R$ 150" } },
+        "m2": { "type": "message", "settings": { "text": "5% de desconto no Pix" } },
+        "m3": { "type": "message", "settings": { "text": "7 dias para devolver" } }
+      },
+      "block_order": ["m1", "m2", "m3"],
+      "settings": {}
+    },
+    "header": {
+      "type": "header",
+      "settings": { "menu": "main-menu", "highlight_title": "Ofertas" }
+    }
+  },
+  "order": ["announcement", "header"]
+}

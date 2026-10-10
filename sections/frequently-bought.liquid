@@ -1,0 +1,58 @@
+<div data-recommendations data-url="{{ routes.product_recommendations_url }}?product_id={{ product.id }}&section_id={{ section.id }}&limit=8&intent=related" {{ section.shopify_attributes }}>
+  {%- if recommendations.performed and recommendations.products_count > 0 -%}
+    {%- assign shown = 0 -%}
+    {%- capture items -%}
+      {%- for rec in recommendations.products -%}
+        {%- if rec.variants.size == 1 and rec.available and shown < 2 -%}
+          <span class="bundle__plus" aria-hidden="true">+</span>
+          <div class="bundle__item">
+            <a class="bundle__img" href="{{ rec.url }}">
+              {%- if rec.featured_image != blank -%}{{ rec.featured_image | image_url: width: 300 | image_tag: loading: 'lazy' }}{%- else -%}{{ 'product-1' | placeholder_svg_tag: 'placeholder' }}{%- endif -%}
+            </a>
+            <span class="bundle__name">{{ rec.title }}</span>
+            <div class="bundle__foot">
+              <span class="bundle__price">{{ rec.price | money }}</span>
+              <label class="bundle__check">
+                <input type="checkbox" data-bundle-item data-price="{{ rec.price }}" data-variant="{{ rec.selected_or_first_available_variant.id }}"{% if shown == 0 %} checked{% endif %}>
+                Levar
+              </label>
+            </div>
+          </div>
+          {%- assign shown = shown | plus: 1 -%}
+        {%- endif -%}
+      {%- endfor -%}
+    {%- endcapture -%}
+    {%- if items != blank -%}
+      <div class="container section">
+        <div class="bundle" data-bundle data-main-price="{{ product.price }}">
+          <h2 class="bundle__title">{{ section.settings.heading }}</h2>
+          <div class="bundle__row">
+            <div class="bundle__item bundle__item--main">
+              <div class="bundle__img">
+                {%- if product.featured_image != blank -%}{{ product.featured_image | image_url: width: 300 | image_tag: loading: 'lazy' }}{%- else -%}{{ 'product-1' | placeholder_svg_tag: 'placeholder' }}{%- endif -%}
+              </div>
+              <span class="bundle__name">{{ product.title }}</span>
+              <div class="bundle__foot"><span class="bundle__price">{{ product.price | money }}</span><span class="note">Este item</span></div>
+            </div>
+            {{ items }}
+            <div class="bundle__summary">
+              <span class="note">Total (<span data-bundle-count>1</span> itens)</span>
+              <span class="bundle__total" data-bundle-total>{{ product.price | money }}</span>
+              <button type="button" class="btn btn--accent btn--lg" data-bundle-add>Adicionar todos ao carrinho</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    {%- endif -%}
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "Compre junto",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Título", "default": "Compre junto" }
+  ],
+  "presets": [{ "name": "Compre junto" }]
+}
+{% endschema %}

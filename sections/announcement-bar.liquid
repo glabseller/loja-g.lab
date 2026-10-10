@@ -1,0 +1,38 @@
+{%- if section.blocks.size > 0 -%}
+  <div class="announcement" {{ section.shopify_attributes }}>
+    {%- for block in section.blocks -%}
+      <span {{ block.shopify_attributes }}>{{ block.settings.text }}</span>
+    {%- endfor -%}
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Barra de anúncio",
+  "max_blocks": 4,
+  "blocks": [
+    {
+      "type": "message",
+      "name": "Mensagem",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Texto",
+          "default": "Frete grátis em compras acima de R$ 150"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Barra de anúncio",
+      "blocks": [
+        { "type": "message" },
+        { "type": "message" },
+        { "type": "message" }
+      ]
+    }
+  ]
+}
+{% endschema %}
