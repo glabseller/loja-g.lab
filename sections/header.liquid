@@ -24,7 +24,31 @@
   </div>
 
   <div class="nav-bar">
-    <div class="container">
+    <div class="container nav-row">
+    {%- assign menu = linklists[section.settings.menu] -%}
+    <details class="cat-menu">
+      <summary class="cat-menu__btn"><span class="cat-menu__icon" aria-hidden="true"></span>Categorias</summary>
+      <div class="cat-panel">
+        <div class="cat-panel__grid">
+          {%- if menu.links.size > 0 -%}
+            {%- for link in menu.links -%}
+              <div class="cat-panel__col">
+                <a class="cat-panel__title" href="{{ link.url }}">{{ link.title }}</a>
+                {%- for child in link.links -%}
+                  <a href="{{ child.url }}">{{ child.title }}</a>
+                {%- endfor -%}
+              </div>
+            {%- endfor -%}
+          {%- else -%}
+            {%- for c in collections limit: 40 -%}
+              {%- if c.handle != 'frontpage' and c.handle != 'all' and c.products_count > 0 -%}
+                <div class="cat-panel__col"><a class="cat-panel__title" href="{{ c.url }}">{{ c.title }}</a></div>
+              {%- endif -%}
+            {%- endfor -%}
+          {%- endif -%}
+        </div>
+      </div>
+    </details>
     <nav class="nav" aria-label="Categorias">
       {%- assign menu = linklists[section.settings.menu] -%}
       {%- if menu.links.size > 0 -%}

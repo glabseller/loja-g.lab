@@ -242,3 +242,10 @@
     });
   });
 })();
+
+/* Fecha o menu de categorias ao clicar fora */
+document.addEventListener('click', function (e) {
+  document.querySelectorAll('details.cat-menu[open]').forEach(function (d) {
+    if (!d.contains(e.target)) { d.removeAttribute('open'); }
+  });
+});
