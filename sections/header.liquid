@@ -8,8 +8,26 @@
       {%- endif -%}
     </a>
 
-    <nav class="nav" aria-label="Menu principal">
+    <div class="header__icons">
+      <details class="search-toggle">
+        <summary class="icon-btn" aria-label="Buscar">{% render 'icon', name: 'search' %}</summary>
+        <form class="search-panel" action="{{ routes.search_url }}" method="get" role="search">
+          <input type="search" name="q" placeholder="O que você procura?" aria-label="Buscar">
+          <button class="btn btn--ink" type="submit">Buscar</button>
+        </form>
+      </details>
+      <a class="icon-btn" href="{{ routes.cart_url }}" aria-label="Carrinho">
+        {% render 'icon', name: 'cart' %}
+        {%- if cart.item_count > 0 -%}<span class="cart-badge">{{ cart.item_count }}</span>{%- endif -%}
+      </a>
+    </div>
+  </div>
+
+  <div class="nav-bar">
+    <div class="container">
+    <nav class="nav" aria-label="Categorias">
       {%- assign menu = linklists[section.settings.menu] -%}
+      {%- if menu.links.size > 0 -%}
       {%- for link in menu.links -%}
         <div class="nav__item{% if link.links.size > 0 %} nav__item--parent{% endif %}">
           <a href="{{ link.url }}"{% if section.settings.highlight_title != blank and link.title == section.settings.highlight_title %} class="nav__highlight"{% endif %}{% if link.current %} aria-current="page"{% endif %}>{{ link.title }}</a>
@@ -31,20 +49,16 @@
           {%- endif -%}
         </div>
       {%- endfor -%}
+      {%- else -%}
+        {%- for c in collections limit: 12 -%}
+          {%- if c.handle != 'frontpage' and c.handle != 'all' and c.products_count > 0 -%}
+            <div class="nav__item"><a href="{{ c.url }}"{% if section.settings.highlight_title != blank and c.title == section.settings.highlight_title %} class="nav__highlight"{% endif %}>{{ c.title }}</a></div>
+          {%- endif -%}
+        {%- endfor -%}
+      {%- endif -%}
     </nav>
 
-    <div class="header__icons">
-      <details class="search-toggle">
-        <summary class="icon-btn" aria-label="Buscar">{% render 'icon', name: 'search' %}</summary>
-        <form class="search-panel" action="{{ routes.search_url }}" method="get" role="search">
-          <input type="search" name="q" placeholder="O que você procura?" aria-label="Buscar">
-          <button class="btn btn--ink" type="submit">Buscar</button>
-        </form>
-      </details>
-      <a class="icon-btn" href="{{ routes.cart_url }}" aria-label="Carrinho">
-        {% render 'icon', name: 'cart' %}
-        {%- if cart.item_count > 0 -%}<span class="cart-badge">{{ cart.item_count }}</span>{%- endif -%}
-      </a>
+
     </div>
   </div>
 </header>
@@ -53,7 +67,7 @@
 {
   "name": "Cabeçalho",
   "settings": [
-    { "type": "link_list", "id": "menu", "label": "Menu", "default": "main-menu" },
+    { "type": "link_list", "id": "menu", "label": "Menu de categorias", "info": "Crie em Conteúdo > Menus um menu chamado Categorias (com subcategorias). Se não existir, as coleções com produtos aparecem sozinhas.", "default": "categorias" },
     { "type": "text", "id": "highlight_title", "label": "Item do menu em destaque (nome igual ao do menu)", "default": "Ofertas" }
   ]
 }

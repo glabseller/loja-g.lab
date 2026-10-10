@@ -403,3 +403,16 @@ svg.placeholder { width: 100%; height: 100%; background: #EDEDEA; fill: #A9ABB0;
   .nav__sub { position: static; box-shadow: none; border: 0; padding: 0 0 0 14px; min-width: 0; }
   .nav__sub .nav__sub { left: auto; top: auto; }
 }
+
+/* Barra de categorias no cabeçalho */
+.nav-bar { border-top: 1px solid var(--line); }
+.nav-bar .nav { padding-top: 4px; padding-bottom: 4px; gap: 0 8px; }
+.nav-bar .nav > .nav__item > a { display: block; padding: 12px 14px; border-radius: 999px; }
+.nav-bar .nav > .nav__item > a:hover { background: var(--soft); opacity: 1; }
+.header__row { padding-top: 14px; padding-bottom: 14px; }
+@media (max-width: 700px) {
+  .nav-bar .nav { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; }
+  .nav-bar .nav::-webkit-scrollbar { display: none; }
+  .nav-bar .nav > .nav__item { flex: 0 0 auto; }
+  .nav-bar .nav__sub { display: none !important; }
+}
