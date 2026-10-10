@@ -178,9 +178,9 @@
     }
   },
   "order": [
+    "categories",
     "hero",
     "trust",
-    "categories",
     "bestsellers",
     "promos",
     "reviews",

@@ -370,3 +370,6 @@ svg.placeholder { width: 100%; height: 100%; background: #EDEDE8; fill: #B8B8B0;
   .grid > * { flex-basis: 150px; }
   .circle { flex-basis: 40%; }
 }
+
+/* Primeira seção da página, quando não é a capa */
+main > .shopify-section:first-child > .section { padding-top: 32px; }
