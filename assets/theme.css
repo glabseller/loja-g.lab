@@ -372,3 +372,13 @@ svg.placeholder { width: 100%; height: 100%; background: #EDEDE8; fill: #B8B8B0;
 
 /* Primeira seção da página, quando não é a capa */
 main > .shopify-section:first-child > .section { padding-top: 32px; }
+
+/* Barra de busca no topo */
+.header-search { flex: 1 1 auto; max-width: 640px; display: flex; align-items: center; background: var(--soft); border: 2px solid var(--line); border-radius: 14px; padding: 3px 3px 3px 18px; margin: 0 16px; }
+.header-search:focus-within { border-color: var(--accent); }
+.header-search input { flex: 1 1 auto; min-width: 0; border: 0; background: transparent; min-height: 42px; color: var(--text); outline: none; }
+.header-search button { flex: 0 0 auto; width: 44px; height: 44px; border: 0; border-radius: 10px; background: var(--accent); color: var(--ink); display: flex; align-items: center; justify-content: center; cursor: pointer; }
+@media (max-width: 700px) {
+  .header__row { flex-wrap: wrap; }
+  .header-search { order: 3; flex: 1 0 100%; max-width: none; margin: 0; }
+}

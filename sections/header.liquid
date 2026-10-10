@@ -8,14 +8,14 @@
       {%- endif -%}
     </a>
 
+    <form class="header-search" action="{{ routes.search_url }}" method="get" role="search">
+      <label class="visually-hidden" for="header-search-input">Buscar</label>
+      <input id="header-search-input" type="search" name="q" placeholder="Buscar produtos" value="{{ search.terms | escape }}">
+      <button type="submit" aria-label="Buscar">{% render 'icon', name: 'search', size: 20 %}</button>
+    </form>
+
     <div class="header__icons">
-      <details class="search-toggle">
-        <summary class="icon-btn" aria-label="Buscar">{% render 'icon', name: 'search' %}</summary>
-        <form class="search-panel" action="{{ routes.search_url }}" method="get" role="search">
-          <input type="search" name="q" placeholder="O que você procura?" aria-label="Buscar">
-          <button class="btn btn--ink" type="submit">Buscar</button>
-        </form>
-      </details>
+      <a class="icon-btn" href="{{ routes.account_url }}" aria-label="Minha conta">{% render 'icon', name: 'user' %}</a>
       <a class="icon-btn" href="{{ routes.cart_url }}" aria-label="Carrinho">
         {% render 'icon', name: 'cart' %}
         {%- if cart.item_count > 0 -%}<span class="cart-badge">{{ cart.item_count }}</span>{%- endif -%}
