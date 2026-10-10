@@ -24,29 +24,156 @@
       "header": {
         "type": "header",
         "blocks": {
-          "category_izA4b6": {
+          "category_chaveiros": {
             "type": "category",
             "settings": {
               "collection": "",
-              "title": "testetetstetetstetets",
+              "title": "Chaveiros",
               "link": "",
               "sub_1_collection": "",
-              "sub_1_title": "fdfsdfdfsf",
+              "sub_1_title": "Personalizados",
               "sub_2_collection": "",
-              "sub_2_title": "sfsfsf",
+              "sub_2_title": "Nomes",
               "sub_3_collection": "",
-              "sub_3_title": "sfsf",
+              "sub_3_title": "Times de futebol",
               "sub_4_collection": "",
-              "sub_4_title": "sfsf",
+              "sub_4_title": "Anime e games",
               "sub_5_collection": "",
-              "sub_5_title": "sfsf",
+              "sub_5_title": "Infantis",
               "sub_6_collection": "",
-              "sub_6_title": "sfsfsfsf"
+              "sub_6_title": "Casais"
+            }
+          },
+          "category_porta_latas": {
+            "type": "category",
+            "settings": {
+              "collection": "",
+              "title": "Porta-latas",
+              "link": "",
+              "sub_1_collection": "",
+              "sub_1_title": "Monster",
+              "sub_2_collection": "",
+              "sub_2_title": "Energéticos",
+              "sub_3_collection": "",
+              "sub_3_title": "Refrigerantes",
+              "sub_4_collection": "",
+              "sub_4_title": "Cervejas",
+              "sub_5_collection": "",
+              "sub_5_title": "Personalizados",
+              "sub_6_collection": "",
+              "sub_6_title": "Kits"
+            }
+          },
+          "category_porta_retratos": {
+            "type": "category",
+            "settings": {
+              "collection": "",
+              "title": "Porta-retratos",
+              "link": "",
+              "sub_1_collection": "",
+              "sub_1_title": "Polaroid",
+              "sub_2_collection": "",
+              "sub_2_title": "Instax",
+              "sub_3_collection": "",
+              "sub_3_title": "Mini fotos",
+              "sub_4_collection": "",
+              "sub_4_title": "Casal",
+              "sub_5_collection": "",
+              "sub_5_title": "Família",
+              "sub_6_collection": "",
+              "sub_6_title": "Presentes"
+            }
+          },
+          "category_porta_ampolas": {
+            "type": "category",
+            "settings": {
+              "collection": "",
+              "title": "Porta-ampolas",
+              "link": "",
+              "sub_1_collection": "",
+              "sub_1_title": "Suportes",
+              "sub_2_collection": "",
+              "sub_2_title": "Organizadores",
+              "sub_3_collection": "",
+              "sub_3_title": "Kits"
+            }
+          },
+          "category_setup_e_gamer": {
+            "type": "category",
+            "settings": {
+              "collection": "",
+              "title": "Setup e Gamer",
+              "link": "",
+              "sub_1_collection": "",
+              "sub_1_title": "Suporte de fone",
+              "sub_2_collection": "",
+              "sub_2_title": "Suporte de controle",
+              "sub_3_collection": "",
+              "sub_3_title": "Organizador de cabos",
+              "sub_4_collection": "",
+              "sub_4_title": "Suporte de celular",
+              "sub_5_collection": "",
+              "sub_5_title": "Decoração de setup"
+            }
+          },
+          "category_casa_e_decoracao": {
+            "type": "category",
+            "settings": {
+              "collection": "",
+              "title": "Casa e Decoração",
+              "link": "",
+              "sub_1_collection": "",
+              "sub_1_title": "Vasos e plantas",
+              "sub_2_collection": "",
+              "sub_2_title": "Organizadores",
+              "sub_3_collection": "",
+              "sub_3_title": "Decoração de mesa",
+              "sub_4_collection": "",
+              "sub_4_title": "Suportes"
+            }
+          },
+          "category_presentes": {
+            "type": "category",
+            "settings": {
+              "collection": "",
+              "title": "Presentes",
+              "link": "",
+              "sub_1_collection": "",
+              "sub_1_title": "Para ele",
+              "sub_2_collection": "",
+              "sub_2_title": "Para ela",
+              "sub_3_collection": "",
+              "sub_3_title": "Casais",
+              "sub_4_collection": "",
+              "sub_4_title": "Aniversário",
+              "sub_5_collection": "",
+              "sub_5_title": "Kits"
+            }
+          },
+          "category_pets": {
+            "type": "category",
+            "settings": {
+              "collection": "",
+              "title": "Pets",
+              "link": "",
+              "sub_1_collection": "",
+              "sub_1_title": "Comedouros",
+              "sub_2_collection": "",
+              "sub_2_title": "Plaquinhas",
+              "sub_3_collection": "",
+              "sub_3_title": "Acessórios"
             }
           }
         },
         "block_order": [
-          "category_izA4b6"
+          "category_chaveiros",
+          "category_porta_latas",
+          "category_porta_retratos",
+          "category_porta_ampolas",
+          "category_setup_e_gamer",
+          "category_casa_e_decoracao",
+          "category_presentes",
+          "category_pets"
         ],
         "settings": {
           "menu": "",
