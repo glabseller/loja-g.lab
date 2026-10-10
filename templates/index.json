@@ -14,18 +14,30 @@
       "blocks": {
         "b2": {
           "type": "banner",
-          "settings": {}
+          "settings": {
+            "link": "",
+            "alt": ""
+          }
         },
         "banner_YBCpmi": {
           "type": "banner",
-          "settings": {}
+          "settings": {
+            "link": "",
+            "alt": ""
+          }
         }
       },
       "block_order": [
         "b2",
         "banner_YBCpmi"
       ],
-      "settings": {}
+      "settings": {
+        "ratio": "3 / 1",
+        "autoplay": true,
+        "interval": 5,
+        "show_arrows": true,
+        "show_dots": true
+      }
     },
     "trust": {
       "type": "trust-bar",
@@ -70,6 +82,17 @@
         "t4"
       ],
       "settings": {}
+    },
+    "bestsellers": {
+      "type": "featured-collection",
+      "settings": {
+        "heading": "Os mais pedidos",
+        "link_label": "Ver tudo",
+        "collection": "",
+        "count": 8,
+        "new_badge": false,
+        "show_button": true
+      }
     },
     "categories": {
       "type": "category-tiles",
@@ -127,17 +150,6 @@
       ],
       "settings": {
         "heading": "Produtos"
-      }
-    },
-    "bestsellers": {
-      "type": "featured-collection",
-      "settings": {
-        "heading": "Os mais pedidos",
-        "link_label": "Ver tudo",
-        "collection": "",
-        "count": 8,
-        "new_badge": false,
-        "show_button": true
       }
     },
     "allproducts": {
@@ -220,8 +232,8 @@
   "order": [
     "promos",
     "trust",
-    "categories",
     "bestsellers",
+    "categories",
     "allproducts",
     "hero",
     "reviews",
