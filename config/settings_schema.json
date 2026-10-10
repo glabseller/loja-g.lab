@@ -1,8 +1,8 @@
 [
   {
     "name": "theme_info",
-    "theme_name": "Loja Clean",
-    "theme_version": "2.0.0",
+    "theme_name": "Loja Pro",
+    "theme_version": "3.0.0",
     "theme_author": "Loja Clean",
     "theme_documentation_url": "https://help.shopify.com/pt-BR",
     "theme_support_url": "https://help.shopify.com/pt-BR"
@@ -33,6 +33,77 @@
         "id": "color_soft",
         "label": "Cor dos cartões e blocos",
         "default": "#F5F5F2"
+      },
+      {
+        "type": "color",
+        "id": "color_text",
+        "label": "Cor do texto, rodapé e faixas escuras",
+        "default": "#14161A"
+      }
+    ]
+  },
+  {
+    "name": "Estilo e layout",
+    "settings": [
+      {
+        "type": "select",
+        "id": "font_choice",
+        "label": "Fonte do site",
+        "options": [
+          { "value": "inter", "label": "Inter (neutra e moderna)" },
+          { "value": "poppins", "label": "Poppins (arredondada e jovem)" },
+          { "value": "dm_sans", "label": "DM Sans (limpa e suave)" },
+          { "value": "manrope", "label": "Manrope (elegante)" }
+        ],
+        "default": "inter"
+      },
+      {
+        "type": "range",
+        "id": "corner_radius",
+        "label": "Arredondamento dos cantos (px)",
+        "min": 0,
+        "max": 24,
+        "step": 2,
+        "default": 10,
+        "info": "0 deixa tudo reto; 24 deixa bem arredondado."
+      },
+      {
+        "type": "select",
+        "id": "grid_columns",
+        "label": "Produtos por linha (computador)",
+        "options": [
+          { "value": "3", "label": "3 produtos" },
+          { "value": "4", "label": "4 produtos" },
+          { "value": "5", "label": "5 produtos" }
+        ],
+        "default": "4"
+      },
+      {
+        "type": "range",
+        "id": "container_width",
+        "label": "Largura máxima do site (px)",
+        "min": 1100,
+        "max": 1600,
+        "step": 50,
+        "default": 1300
+      },
+      {
+        "type": "checkbox",
+        "id": "header_sticky",
+        "label": "Cabeçalho fixo ao rolar a página",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "heading_uppercase",
+        "label": "Títulos em letras maiúsculas",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "gallery_sticky",
+        "label": "Fotos do produto fixas ao rolar (computador)",
+        "default": true
       }
     ]
   },

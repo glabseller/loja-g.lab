@@ -29,7 +29,13 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  {%- case settings.font_choice -%}
+    {%- when 'poppins' -%}{%- assign font_family = 'Poppins' -%}{%- assign font_query = 'Poppins:wght@400;500;600;700;800' -%}
+    {%- when 'dm_sans' -%}{%- assign font_family = 'DM Sans' -%}{%- assign font_query = 'DM+Sans:wght@400;500;600;700' -%}
+    {%- when 'manrope' -%}{%- assign font_family = 'Manrope' -%}{%- assign font_query = 'Manrope:wght@400;500;600;700;800' -%}
+    {%- else -%}{%- assign font_family = 'Inter' -%}{%- assign font_query = 'Inter:wght@400;500;600;700;800' -%}
+  {%- endcase -%}
+  <link href="https://fonts.googleapis.com/css2?family={{ font_query }}&display=swap" rel="stylesheet">
 
   {{ 'theme.css' | asset_url | stylesheet_tag }}
   <style>
@@ -38,6 +44,11 @@
       --ink: {{ settings.color_ink }};
       --positive: {{ settings.color_positive }};
       --soft: {{ settings.color_soft }};
+      --text: {{ settings.color_text }};
+      --radius: {{ settings.corner_radius }}px;
+      --container: {{ settings.container_width }}px;
+      --cols: {{ settings.grid_columns }};
+      --font: '{{ font_family }}', system-ui, -apple-system, 'Segoe UI', sans-serif;
     }
   </style>
 
@@ -50,7 +61,7 @@
   </script>
 </head>
 
-<body class="template-{{ request.page_type | handleize }}">
+<body class="template-{{ request.page_type | handleize }}{% if settings.header_sticky %} has-sticky-header{% endif %}{% if settings.heading_uppercase %} heading-upper{% endif %}{% if settings.gallery_sticky %} sticky-gallery{% endif %}">
   <a class="skip-link" href="#MainContent">{{ 'general.skip_to_content' | t }}</a>
 
   {% section 'announcement-bar' %}

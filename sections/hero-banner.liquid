@@ -1,5 +1,5 @@
 {%- assign card = section.settings.product -%}
-<section class="hero container" {{ section.shopify_attributes }}>
+<section class="hero container hero--{{ section.settings.layout }}" {{ section.shopify_attributes }}>
   <div class="hero__panel">
     <div class="hero__text">
       {%- if section.settings.pill != blank -%}
@@ -46,6 +46,7 @@
 {
   "name": "Capa (banner principal)",
   "settings": [
+    { "type": "select", "id": "layout", "label": "Posição da imagem", "options": [{ "value": "right", "label": "Imagem à direita" }, { "value": "left", "label": "Imagem à esquerda" }], "default": "right" },
     { "type": "text", "id": "pill", "label": "Selo acima do título", "default": "Novidades toda semana" },
     { "type": "text", "id": "heading", "label": "Título", "default": "Os achados que estão bombando." },
     { "type": "textarea", "id": "text", "label": "Texto", "default": "Produtos práticos e bonitos para o seu dia a dia, com envio para todo o Brasil." },
