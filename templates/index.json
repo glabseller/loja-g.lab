@@ -5,11 +5,11 @@
       "settings": {
         "pill": "Em alta agora",
         "heading": "Itens que viralizam. Do seu jeito.",
-        "text": "Chaveiros personalizados, porta-latas e achados que estão bombando.",
+        "text": "Chaveiros, porta-latas e achados que estão bombando.",
         "button_1_label": "Ver novidades",
         "button_1_url": "shopify://collections/all",
-        "button_2_label": "Personalizar o meu",
-        "button_2_url": "shopify://collections/all",
+        "button_2_label": "",
+        "button_2_url": "",
         "card_tag": "MAIS VENDIDO"
       }
     },
@@ -120,17 +120,6 @@
     "promos": {
       "type": "promo-banners",
       "blocks": {
-        "b1": {
-          "type": "banner",
-          "settings": {
-            "style": "green",
-            "eyebrow": "Personalizados",
-            "heading": "Coloque seu nome",
-            "text": "Escolha o produto, escreva o texto e a gente faz o seu.",
-            "button_label": "Personalizar",
-            "button_url": "shopify://collections/all"
-          }
-        },
         "b2": {
           "type": "banner",
           "settings": {
@@ -144,19 +133,9 @@
         }
       },
       "block_order": [
-        "b1",
         "b2"
       ],
       "settings": {}
-    },
-    "arrivals": {
-      "type": "featured-collection",
-      "settings": {
-        "heading": "Acabou de chegar",
-        "link_label": "Ver novidades",
-        "count": 4,
-        "new_badge": true
-      }
     },
     "reviews": {
       "type": "reviews",
@@ -204,7 +183,6 @@
     "categories",
     "bestsellers",
     "promos",
-    "arrivals",
     "reviews",
     "newsletter"
   ]

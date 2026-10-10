@@ -16,18 +16,11 @@
           "settings": {
             "text": "5% off no Pix"
           }
-        },
-        "m3": {
-          "type": "message",
-          "settings": {
-            "text": "Chaveiros personalizados"
-          }
         }
       },
       "block_order": [
         "m1",
-        "m2",
-        "m3"
+        "m2"
       ],
       "settings": {}
     },
