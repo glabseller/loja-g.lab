@@ -12,6 +12,22 @@
     "promos": {
       "type": "promo-banners",
       "blocks": {
+        "banner_DCcRWQ": {
+          "type": "banner",
+          "settings": {
+            "image": "shopify://shop_images/Gemini_Generated_Image_lxnh2ulxnh2ulxnh.jpg",
+            "image_mobile": "shopify://shop_images/Gemini_Generated_Image_gn8y95gn8y95gn8y.jpg",
+            "link": "",
+            "alt": ""
+          }
+        },
+        "banner_KaPLGw": {
+          "type": "banner",
+          "settings": {
+            "link": "",
+            "alt": ""
+          }
+        },
         "b2": {
           "type": "banner",
           "settings": {
@@ -21,6 +37,8 @@
         }
       },
       "block_order": [
+        "banner_DCcRWQ",
+        "banner_KaPLGw",
         "b2"
       ],
       "settings": {
