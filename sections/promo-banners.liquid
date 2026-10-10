@@ -1,42 +1,83 @@
-{%- if section.blocks.size > 0 -%}
-<section class="section container" {{ section.shopify_attributes }}>
-  <div class="banners">
-    {%- for block in section.blocks -%}
-      <div class="banner banner--{{ block.settings.style }}" {{ block.shopify_attributes }}>
-        {%- if block.settings.eyebrow != blank -%}<span class="banner__eyebrow">{{ block.settings.eyebrow }}</span>{%- endif -%}
-        <h2 class="banner__title">{{ block.settings.heading }}</h2>
-        {%- if block.settings.text != blank -%}<p class="banner__text">{{ block.settings.text }}</p>{%- endif -%}
-        {%- if block.settings.button_label != blank and block.settings.button_url != blank -%}
-          <a class="btn btn--ink" href="{{ block.settings.button_url }}">{{ block.settings.button_label }}</a>
+{%- liquid
+  assign ratio = section.settings.ratio
+  assign has_slide = false
+  for block in section.blocks
+    if block.settings.image != blank or request.design_mode
+      assign has_slide = true
+    endif
+  endfor
+-%}
+{%- if has_slide -%}
+<section class="section container promo" {{ section.shopify_attributes }}
+  data-carousel
+  data-autoplay="{% if section.settings.autoplay %}{{ section.settings.interval }}{% else %}0{% endif %}"
+  style="--ar: {{ ratio }};">
+  <div class="promo__viewport">
+    <div class="promo__track" data-carousel-track tabindex="0" aria-label="Promoções">
+      {%- for block in section.blocks -%}
+        {%- if block.settings.image != blank or request.design_mode -%}
+          {%- capture slide -%}
+            {%- if block.settings.image != blank -%}
+              <picture>
+                {%- if block.settings.image_mobile != blank -%}
+                  <source media="(max-width: 700px)" srcset="{{ block.settings.image_mobile | image_url: width: 800 }}">
+                {%- endif -%}
+                {{ block.settings.image | image_url: width: 1800 | image_tag: alt: block.settings.alt, loading: 'lazy', widths: '800, 1200, 1800', sizes: '(min-width: 1300px) 1252px, 100vw' }}
+              </picture>
+            {%- else -%}
+              {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder' }}
+            {%- endif -%}
+          {%- endcapture -%}
+          <div class="promo__slide{% if block.settings.image_mobile != blank %} promo__slide--m{% endif %}" data-carousel-slide {{ block.shopify_attributes }}>
+            {%- if block.settings.link != blank -%}
+              <a class="promo__link" href="{{ block.settings.link }}"{% if block.settings.alt != blank %} aria-label="{{ block.settings.alt | escape }}"{% endif %}>{{ slide }}</a>
+            {%- else -%}
+              <div class="promo__link">{{ slide }}</div>
+            {%- endif -%}
+          </div>
         {%- endif -%}
-      </div>
-    {%- endfor -%}
+      {%- endfor -%}
+    </div>
+    {%- if section.settings.show_arrows -%}
+      <button type="button" class="promo__arrow promo__arrow--prev" data-carousel-prev aria-label="Anterior">‹</button>
+      <button type="button" class="promo__arrow promo__arrow--next" data-carousel-next aria-label="Próximo">›</button>
+    {%- endif -%}
   </div>
+  {%- if section.settings.show_dots -%}
+    <div class="promo__dots" data-carousel-dots></div>
+  {%- endif -%}
 </section>
 {%- endif -%}
 
 {% schema %}
 {
-  "name": "Banners promocionais",
-  "max_blocks": 3,
+  "name": "Carrossel de banners",
+  "max_blocks": 8,
+  "settings": [
+    { "type": "paragraph", "content": "Clique em \"Adicionar banner\", envie a imagem e cole o link da página de destino. O cliente clica no banner e vai direto para ela." },
+    { "type": "select", "id": "ratio", "label": "Formato do banner (computador)", "default": "3 / 1", "options": [
+      { "value": "3 / 1", "label": "Largo 3:1 (imagem 1800 x 600 px)" },
+      { "value": "21 / 9", "label": "Panorâmico 21:9 (imagem 2100 x 900 px)" },
+      { "value": "16 / 9", "label": "Padrão 16:9 (imagem 1600 x 900 px)" },
+      { "value": "2 / 1", "label": "Médio 2:1 (imagem 1600 x 800 px)" }
+    ] },
+    { "type": "checkbox", "id": "autoplay", "label": "Passar sozinho", "default": true },
+    { "type": "range", "id": "interval", "label": "Segundos entre banners", "min": 3, "max": 12, "step": 1, "default": 5 },
+    { "type": "checkbox", "id": "show_arrows", "label": "Mostrar setas", "default": true },
+    { "type": "checkbox", "id": "show_dots", "label": "Mostrar bolinhas", "default": true }
+  ],
   "blocks": [
     {
       "type": "banner",
       "name": "Banner",
       "settings": [
-        { "type": "select", "id": "style", "label": "Cor", "default": "green", "options": [
-          { "value": "green", "label": "Verde" },
-          { "value": "blue", "label": "Azul" },
-          { "value": "orange", "label": "Laranja" }
-        ] },
-        { "type": "text", "id": "eyebrow", "label": "Texto pequeno", "default": "KITS" },
-        { "type": "text", "id": "heading", "label": "Título", "default": "Leve mais, gaste menos" },
-        { "type": "textarea", "id": "text", "label": "Texto", "default": "Monte seu kit com os produtos que você mais gostou." },
-        { "type": "text", "id": "button_label", "label": "Texto do botão", "default": "Ver kits" },
-        { "type": "url", "id": "button_url", "label": "Link do botão" }
+        { "type": "image_picker", "id": "image", "label": "Imagem do banner" },
+        { "type": "image_picker", "id": "image_mobile", "label": "Imagem para celular (opcional)", "info": "Quadrada, 800 x 800 px. Se vazio, usa a imagem principal." },
+        { "type": "url", "id": "link", "label": "Link ao clicar", "info": "Coleção, produto ou página para onde o cliente vai." },
+        { "type": "text", "id": "alt", "label": "Descrição da imagem (acessibilidade)" }
       ]
     }
   ],
-  "presets": [{ "name": "Banners promocionais", "blocks": [{ "type": "banner" }, { "type": "banner", "settings": { "style": "blue", "eyebrow": "ENVIO", "heading": "Frete grátis em compras acima de R$ 150", "button_label": "Aproveitar" } }] }]
+  "presets": [{ "name": "Carrossel de banners", "blocks": [{ "type": "banner" }, { "type": "banner" }] }]
 }
 {% endschema %}

@@ -241,4 +241,55 @@
       });
     });
   });
+  /* ---------- Carrossel de banners ---------- */
+  document.querySelectorAll('[data-carousel]').forEach(function (root) {
+    var track = root.querySelector('[data-carousel-track]');
+    var slides = root.querySelectorAll('[data-carousel-slide]');
+    var dotsBox = root.querySelector('[data-carousel-dots]');
+    var prev = root.querySelector('[data-carousel-prev]');
+    var next = root.querySelector('[data-carousel-next]');
+    var delay = parseInt(root.getAttribute('data-autoplay'), 10) || 0;
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var dots = [];
+    var paused = false;
+    if (!track || slides.length < 2) {
+      if (prev) { prev.hidden = true; }
+      if (next) { next.hidden = true; }
+      return;
+    }
+
+    function index() { return Math.round(track.scrollLeft / track.clientWidth); }
+    function go(i) {
+      var n = (i + slides.length) % slides.length;
+      track.scrollTo({ left: n * track.clientWidth, behavior: reduce ? 'auto' : 'smooth' });
+    }
+    function mark() {
+      var cur = index();
+      dots.forEach(function (d, i) { d.setAttribute('aria-current', i === cur ? 'true' : 'false'); });
+    }
+
+    if (dotsBox) {
+      slides.forEach(function (_, i) {
+        var b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'promo__dot';
+        b.setAttribute('aria-label', 'Banner ' + (i + 1));
+        b.addEventListener('click', function () { go(i); });
+        dotsBox.appendChild(b);
+        dots.push(b);
+      });
+    }
+    if (prev) { prev.addEventListener('click', function () { go(index() - 1); }); }
+    if (next) { next.addEventListener('click', function () { go(index() + 1); }); }
+    track.addEventListener('scroll', function () { window.requestAnimationFrame(mark); }, { passive: true });
+    mark();
+
+    if (delay > 0 && !reduce) {
+      root.addEventListener('mouseenter', function () { paused = true; });
+      root.addEventListener('mouseleave', function () { paused = false; });
+      root.addEventListener('focusin', function () { paused = true; });
+      root.addEventListener('focusout', function () { paused = false; });
+      setInterval(function () { if (!paused && !document.hidden) { go(index() + 1); } }, delay * 1000);
+    }
+  });
 })();

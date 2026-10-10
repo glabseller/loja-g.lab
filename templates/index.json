@@ -72,32 +72,19 @@
       "blocks": {
         "b2": {
           "type": "banner",
-          "settings": {
-            "style": "blue",
-            "eyebrow": "Kits",
-            "heading": "Leve mais, pague menos",
-            "text": "Combine seus favoritos e economize.",
-            "button_label": "Ver kits",
-            "button_url": "shopify://collections/all"
-          }
-        },
-        "banner_YBCpmi": {
-          "type": "banner",
-          "settings": {
-            "style": "green",
-            "eyebrow": "KITS",
-            "heading": "Leve mais, gaste menos",
-            "text": "Monte seu kit com os produtos que você mais gostou.",
-            "button_label": "Ver kits",
-            "button_url": ""
-          }
+          "settings": {}
         }
       },
       "block_order": [
-        "b2",
-        "banner_YBCpmi"
+        "b2"
       ],
-      "settings": {}
+      "settings": {
+        "ratio": "3 / 1",
+        "autoplay": true,
+        "interval": 5,
+        "show_arrows": true,
+        "show_dots": true
+      }
     },
     "trust": {
       "type": "trust-bar",
