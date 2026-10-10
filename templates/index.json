@@ -175,6 +175,14 @@
         "text": "Receba lançamentos e ofertas antes de todo mundo.",
         "button_label": "Quero receber"
       }
+    },
+    "allproducts": {
+      "type": "featured-collection",
+      "settings": {
+        "heading": "Todos os produtos",
+        "link_label": "Ver tudo",
+        "count": 12
+      }
     }
   },
   "order": [
@@ -182,6 +190,7 @@
     "hero",
     "trust",
     "bestsellers",
+    "allproducts",
     "promos",
     "reviews",
     "newsletter"
