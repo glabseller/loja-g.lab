@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "current": {
     "color_accent": "#5B2EFF",
@@ -6,6 +15,45 @@
     "color_soft": "#F5F5F2",
     "pix_discount": 5,
     "installments": 3,
-    "free_shipping_threshold": 150
+    "free_shipping_threshold": 150,
+    "sections": {
+      "announcement-bar": {
+        "type": "announcement-bar",
+        "settings": {}
+      },
+      "header": {
+        "type": "header",
+        "blocks": {
+          "category_izA4b6": {
+            "type": "category",
+            "settings": {
+              "collection": "",
+              "title": "testetetstetetstetets",
+              "link": "",
+              "sub_1_collection": "",
+              "sub_1_title": "fdfsdfdfsf",
+              "sub_2_collection": "",
+              "sub_2_title": "sfsfsf",
+              "sub_3_collection": "",
+              "sub_3_title": "sfsf",
+              "sub_4_collection": "",
+              "sub_4_title": "sfsf",
+              "sub_5_collection": "",
+              "sub_5_title": "sfsf",
+              "sub_6_collection": "",
+              "sub_6_title": "sfsfsfsf"
+            }
+          }
+        },
+        "block_order": [
+          "category_izA4b6"
+        ],
+        "settings": {
+          "menu": "",
+          "highlight_title": ""
+        }
+      }
+    },
+    "content_for_index": []
   }
 }
