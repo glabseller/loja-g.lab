@@ -84,24 +84,7 @@
     {%- endunless -%}
 
     {%- form 'product', product, class: 'product-form' -%}
-      {%- if section.settings.show_tiers and current.available -%}
-        <fieldset class="tiers">
-          <legend>Quantidade</legend>
-          {%- for n in (1..3) -%}
-            {%- assign note_key = 'tier_' | append: n | append: '_note' -%}
-            <div class="tier">
-              <input type="radio" id="tier-{{ section.id }}-{{ n }}" name="quantity" value="{{ n }}"{% if n == 1 %} checked{% endif %}>
-              <label for="tier-{{ section.id }}-{{ n }}">
-                <span class="tier__dot"></span>
-                <span class="tier__text">
-                  <span class="tier__label">Leve {{ n }}</span>
-                  {%- if n > 1 and section.settings[note_key] != blank -%}<span class="tier__note">{{ section.settings[note_key] }}</span>{%- endif -%}
-                </span>
-              </label>
-            </div>
-          {%- endfor -%}
-        </fieldset>
-      {%- elsif current.available -%}
+      {%- if current.available -%}
         <div class="qty"><label for="qty-{{ section.id }}">Quantidade</label><input id="qty-{{ section.id }}" type="number" name="quantity" value="1" min="1"></div>
       {%- endif -%}
 
@@ -166,10 +149,6 @@
     { "type": "header", "content": "Urgência" },
     { "type": "text", "id": "countdown_end", "label": "Fim da oferta", "info": "Formato: 2026-12-31T23:59:00-03:00. Vazio = sem cronômetro." },
     { "type": "range", "id": "stock_threshold", "label": "Avisar \"Restam X unidades\" quando o estoque for até", "min": 1, "max": 20, "step": 1, "default": 5, "info": "Só funciona se o estoque for controlado pelo Shopify." },
-    { "type": "header", "content": "Leve 1, 2 ou 3" },
-    { "type": "checkbox", "id": "show_tiers", "label": "Mostrar opções de quantidade", "default": true, "info": "Para o desconto valer, crie um desconto automático em Descontos." },
-    { "type": "text", "id": "tier_2_note", "label": "Nota do Leve 2", "info": "Ex.: 10% de desconto" },
-    { "type": "text", "id": "tier_3_note", "label": "Nota do Leve 3", "info": "Ex.: 15% de desconto" },
     { "type": "header", "content": "Textos" },
     { "type": "richtext", "id": "shipping_text", "label": "Envio e entrega", "default": "<p>Enviamos para todo o Brasil. O prazo e o valor aparecem no checkout.</p>" },
     { "type": "richtext", "id": "returns_text", "label": "Trocas e devoluções", "default": "<p>Você tem 7 dias após o recebimento para solicitar a devolução.</p>" }
