@@ -53,7 +53,8 @@
 <body class="template-{{ request.page_type | handleize }}">
   <a class="skip-link" href="#MainContent">{{ 'general.skip_to_content' | t }}</a>
 
-  {% sections 'header-group' %}
+  {% section 'announcement-bar' %}
+  {% section 'header' %}
 
   <main id="MainContent" role="main" tabindex="-1">
     {{ content_for_layout }}
