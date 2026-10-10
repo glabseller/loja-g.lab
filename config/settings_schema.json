@@ -83,9 +83,10 @@
         "id": "container_width",
         "label": "Largura máxima do site (px)",
         "min": 1100,
-        "max": 1600,
+        "max": 1900,
         "step": 50,
-        "default": 1300
+        "default": 1700,
+        "info": "Em telas grandes, aumente para o site ocupar mais a largura."
       },
       {
         "type": "checkbox",
