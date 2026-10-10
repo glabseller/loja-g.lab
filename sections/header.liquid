@@ -33,24 +33,22 @@
         <div class="cat-panel">
           <div class="cat-panel__grid">
             {%- if section.blocks.size > 0 -%}
-              {%- assign open_col = false -%}
-              {%- assign prev_type = '' -%}
               {%- for block in section.blocks -%}
-                {%- assign btype = block.type -%}
-                {%- if btype == 'subcategory' and prev_type == '' -%}{%- assign btype = 'category' -%}{%- endif -%}
                 {%- assign b_url = block.settings.collection.url | default: block.settings.link | default: routes.all_products_collection_url -%}
                 {%- assign b_title = block.settings.title | default: block.settings.collection.title -%}
-                {%- if btype == 'category' -%}
-                  {%- if open_col -%}</div>{%- endif -%}
-                  <div class="cat-panel__col" {{ block.shopify_attributes }}>
-                    <a class="cat-panel__title" href="{{ b_url }}">{{ b_title }}</a>
-                  {%- assign open_col = true -%}
-                {%- else -%}
-                  <a href="{{ b_url }}" {{ block.shopify_attributes }}>{{ b_title }}</a>
-                {%- endif -%}
-                {%- assign prev_type = btype -%}
+                <div class="cat-panel__col" {{ block.shopify_attributes }}>
+                  <a class="cat-panel__title" href="{{ b_url }}">{{ b_title }}</a>
+                  {%- for i in (1..6) -%}
+                    {%- assign k_col = 'sub_' | append: i | append: '_collection' -%}
+                    {%- assign k_title = 'sub_' | append: i | append: '_title' -%}
+                    {%- assign s_col = block.settings[k_col] -%}
+                    {%- assign s_title = block.settings[k_title] | default: s_col.title -%}
+                    {%- if s_title != blank -%}
+                      <a href="{{ s_col.url | default: routes.all_products_collection_url }}">{{ s_title }}</a>
+                    {%- endif -%}
+                  {%- endfor -%}
+                </div>
               {%- endfor -%}
-              {%- if open_col -%}</div>{%- endif -%}
             {%- elsif menu.links.size > 0 -%}
               {%- for link in menu.links -%}
                 <div class="cat-panel__col">
@@ -77,23 +75,24 @@
       {%- comment -%} 2) Categorias em linha {%- endcomment -%}
       <nav class="nav" aria-label="Categorias">
         {%- if section.blocks.size > 0 -%}
-          {%- assign prev_type = '' -%}
           {%- for block in section.blocks -%}
-            {%- assign next_block = section.blocks[forloop.index] -%}
-            {%- assign btype = block.type -%}
-            {%- if btype == 'subcategory' and prev_type == '' -%}{%- assign btype = 'category' -%}{%- endif -%}
             {%- assign b_url = block.settings.collection.url | default: block.settings.link | default: routes.all_products_collection_url -%}
             {%- assign b_title = block.settings.title | default: block.settings.collection.title -%}
-            {%- if btype == 'category' -%}
-              <div class="nav__item{% if next_block.type == 'subcategory' %} nav__item--parent{% endif %}" {{ block.shopify_attributes }}>
-                <a href="{{ b_url }}">{{ b_title }}</a>
-              {%- if next_block.type != 'subcategory' -%}</div>{%- endif -%}
-            {%- else -%}
-              {%- if prev_type == 'category' -%}<div class="nav__sub">{%- endif -%}
-              <div class="nav__item" {{ block.shopify_attributes }}><a href="{{ b_url }}">{{ b_title }}</a></div>
-              {%- if next_block.type != 'subcategory' -%}</div></div>{%- endif -%}
-            {%- endif -%}
-            {%- assign prev_type = btype -%}
+            {%- capture subs -%}
+              {%- for i in (1..6) -%}
+                {%- assign k_col = 'sub_' | append: i | append: '_collection' -%}
+                {%- assign k_title = 'sub_' | append: i | append: '_title' -%}
+                {%- assign s_col = block.settings[k_col] -%}
+                {%- assign s_title = block.settings[k_title] | default: s_col.title -%}
+                {%- if s_title != blank -%}
+                  <div class="nav__item"><a href="{{ s_col.url | default: routes.all_products_collection_url }}">{{ s_title }}</a></div>
+                {%- endif -%}
+              {%- endfor -%}
+            {%- endcapture -%}
+            <div class="nav__item{% if subs != blank %} nav__item--parent{% endif %}" {{ block.shopify_attributes }}>
+              <a href="{{ b_url }}">{{ b_title }}</a>
+              {%- if subs != blank -%}<div class="nav__sub">{{ subs }}</div>{%- endif -%}
+            </div>
           {%- endfor -%}
         {%- elsif menu.links.size > 0 -%}
           {%- for link in menu.links -%}
@@ -141,18 +140,105 @@
       "type": "category",
       "name": "Categoria",
       "settings": [
-        { "type": "collection", "id": "collection", "label": "Coleção" },
-        { "type": "text", "id": "title", "label": "Nome (se vazio, usa o nome da coleção)" },
-        { "type": "url", "id": "link", "label": "Ou um link qualquer" }
-      ]
-    },
-    {
-      "type": "subcategory",
-      "name": "Subcategoria",
-      "settings": [
-        { "type": "collection", "id": "collection", "label": "Coleção" },
-        { "type": "text", "id": "title", "label": "Nome (se vazio, usa o nome da coleção)" },
-        { "type": "url", "id": "link", "label": "Ou um link qualquer" }
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Coleção"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Nome da categoria (se vazio, usa o nome da coleção)"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Ou um link qualquer"
+        },
+        {
+          "type": "header",
+          "content": "Subcategoria 1 (opcional)"
+        },
+        {
+          "type": "collection",
+          "id": "sub_1_collection",
+          "label": "Coleção"
+        },
+        {
+          "type": "text",
+          "id": "sub_1_title",
+          "label": "Nome (se vazio, usa o nome da coleção)"
+        },
+        {
+          "type": "header",
+          "content": "Subcategoria 2 (opcional)"
+        },
+        {
+          "type": "collection",
+          "id": "sub_2_collection",
+          "label": "Coleção"
+        },
+        {
+          "type": "text",
+          "id": "sub_2_title",
+          "label": "Nome (se vazio, usa o nome da coleção)"
+        },
+        {
+          "type": "header",
+          "content": "Subcategoria 3 (opcional)"
+        },
+        {
+          "type": "collection",
+          "id": "sub_3_collection",
+          "label": "Coleção"
+        },
+        {
+          "type": "text",
+          "id": "sub_3_title",
+          "label": "Nome (se vazio, usa o nome da coleção)"
+        },
+        {
+          "type": "header",
+          "content": "Subcategoria 4 (opcional)"
+        },
+        {
+          "type": "collection",
+          "id": "sub_4_collection",
+          "label": "Coleção"
+        },
+        {
+          "type": "text",
+          "id": "sub_4_title",
+          "label": "Nome (se vazio, usa o nome da coleção)"
+        },
+        {
+          "type": "header",
+          "content": "Subcategoria 5 (opcional)"
+        },
+        {
+          "type": "collection",
+          "id": "sub_5_collection",
+          "label": "Coleção"
+        },
+        {
+          "type": "text",
+          "id": "sub_5_title",
+          "label": "Nome (se vazio, usa o nome da coleção)"
+        },
+        {
+          "type": "header",
+          "content": "Subcategoria 6 (opcional)"
+        },
+        {
+          "type": "collection",
+          "id": "sub_6_collection",
+          "label": "Coleção"
+        },
+        {
+          "type": "text",
+          "id": "sub_6_title",
+          "label": "Nome (se vazio, usa o nome da coleção)"
+        }
       ]
     }
   ]
