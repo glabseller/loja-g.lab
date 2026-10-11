@@ -44,6 +44,7 @@
       --ink: {{ settings.color_ink }};
       --positive: {{ settings.color_positive }};
       --soft: {{ settings.color_soft }};
+      --accent-2: {{ settings.color_accent_2 | default: '#FF5A3C' }};
       --text: {{ settings.color_text | default: '#14161A' }};
       --radius: {{ settings.corner_radius | default: 10 }}px;
       --container: {{ settings.container_width | default: 1700 }}px;
@@ -54,7 +55,7 @@
 
   <style>
     /* Barra de anúncio: estilo base (as opções da seção podem sobrescrever) */
-    .announcement { background: #14161A; color: #FFFFFF; overflow: hidden; font-size: 13px; font-weight: 500; letter-spacing: .02em; }
+    .announcement { background: var(--accent, #5B2EFF); color: #FFFFFF; overflow: hidden; font-size: 13px; font-weight: 500; letter-spacing: .02em; }
     .announcement__track { display: flex; width: max-content; animation: announcement-marquee 28s linear infinite; }
     .announcement__group { display: flex; flex: 0 0 auto; min-width: 100vw; justify-content: space-around; }
     .announcement__item { display: block; padding: 14px 40px; white-space: nowrap; line-height: 1.2; }
@@ -71,7 +72,7 @@
   </script>
 </head>
 
-<body class="template-{{ request.page_type | handleize }}{% if settings.header_sticky %} has-sticky-header{% endif %}{% if settings.heading_uppercase %} heading-upper{% endif %}{% if settings.gallery_sticky %} sticky-gallery{% endif %}">
+<body class="template-{{ request.page_type | handleize }}{% if settings.colorful != false %} is-colorful{% endif %}{% if settings.header_sticky %} has-sticky-header{% endif %}{% if settings.heading_uppercase %} heading-upper{% endif %}{% if settings.gallery_sticky %} sticky-gallery{% endif %}">
   <a class="skip-link" href="#MainContent">{{ 'general.skip_to_content' | t }}</a>
 
   {% section 'announcement-bar' %}

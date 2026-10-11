@@ -1,5 +1,5 @@
 {%- liquid
-  assign bar_bg = section.settings.bg_color | default: '#14161A'
+  assign bar_bg = section.settings.bg_color | default: 'var(--accent, #5B2EFF)'
   assign bar_fg = section.settings.text_color | default: '#FFFFFF'
   assign bar_speed = section.settings.speed | default: 28
   assign animate = true
@@ -47,7 +47,7 @@
     { "type": "checkbox", "id": "animate", "label": "Mensagens correndo (efeito de rolagem)", "default": true },
     { "type": "checkbox", "id": "respect_reduced_motion", "label": "Parar o efeito em aparelhos com \"reduzir movimento\" ligado", "default": false, "info": "Desligado: a barra corre em todos os aparelhos." },
     { "type": "range", "id": "speed", "label": "Tempo de uma volta (segundos)", "min": 10, "max": 60, "step": 2, "default": 28, "info": "Maior = mais devagar." },
-    { "type": "color", "id": "bg_color", "label": "Cor de fundo da barra", "default": "#14161A" },
+    { "type": "color", "id": "bg_color", "label": "Cor de fundo da barra", "info": "Se vazio, usa a cor de destaque do site." },
     { "type": "color", "id": "text_color", "label": "Cor do texto da barra", "default": "#FFFFFF" }
   ],
   "blocks": [
