@@ -482,3 +482,59 @@ svg.placeholder { width: 100%; height: 100%; background: #EEF0F3; fill: #B6BCC6;
 .is-colorful .delivery, .is-colorful .cart__summary { background: var(--tint); }
 .is-colorful .shipbar__fill { background: linear-gradient(90deg, var(--positive), var(--accent)); }
 .is-colorful .link-strong { color: var(--accent); }
+
+/* ===== Efeito vidro / liquid glass (Configurações do tema → Estilo e layout) ===== */
+.is-glass {
+  --glass: rgba(255, 255, 255, .56);
+  --glass-strong: rgba(255, 255, 255, .74);
+  --glass-line: rgba(255, 255, 255, .7);
+  --glass-edge: rgba(255, 255, 255, .9);
+  --glass-shadow: 0 8px 32px rgba(31, 24, 90, .10), inset 0 1px 0 var(--glass-edge), inset 0 -1px 0 rgba(255, 255, 255, .25);
+  --blur: blur(18px) saturate(170%);
+}
+/* Fundo com manchas de cor, para o vidro ter o que desfocar */
+.is-glass::before { content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none;
+  background:
+    radial-gradient(50vmax 50vmax at 8% 6%, color-mix(in srgb, var(--accent) 26%, transparent), transparent 62%),
+    radial-gradient(46vmax 46vmax at 94% 18%, color-mix(in srgb, var(--accent-2) 24%, transparent), transparent 62%),
+    radial-gradient(52vmax 52vmax at 70% 96%, color-mix(in srgb, var(--positive) 20%, transparent), transparent 62%),
+    radial-gradient(40vmax 40vmax at 4% 80%, rgba(80, 170, 255, .18), transparent 62%); }
+
+.is-glass .announcement { background: color-mix(in srgb, var(--accent) 82%, transparent) !important; -webkit-backdrop-filter: var(--blur); backdrop-filter: var(--blur); }
+
+/* Cabeçalho e menu */
+.is-glass .site-header { background: var(--glass); -webkit-backdrop-filter: var(--blur); backdrop-filter: var(--blur); border-bottom: 1px solid var(--glass-line); box-shadow: var(--glass-shadow); }
+.is-glass .nav-bar { background: transparent; border-top: 1px solid rgba(255, 255, 255, .5); }
+.is-glass .header-search { background: rgba(255, 255, 255, .55); border: 1px solid var(--glass-line); box-shadow: inset 0 1px 0 var(--glass-edge); }
+.is-glass .header-search:focus-within { background: var(--glass-strong); border-color: var(--accent); }
+.is-glass .icon-btn:hover { background: rgba(255, 255, 255, .6); }
+.is-glass .nav__sub { background: var(--glass-strong); -webkit-backdrop-filter: var(--blur); backdrop-filter: var(--blur); border: 1px solid var(--glass-line); box-shadow: var(--glass-shadow), var(--shadow-md); }
+.is-glass .nav__sub .nav__item > a:hover { background: rgba(255, 255, 255, .7); }
+
+/* Painéis grandes */
+.is-glass .hero__panel, .is-glass .newsletter__panel { background: var(--glass); -webkit-backdrop-filter: var(--blur); backdrop-filter: var(--blur); border: 1px solid var(--glass-line); box-shadow: var(--glass-shadow); }
+.is-glass .hero__media { background: transparent; }
+.is-glass .hero__card, .is-glass .pill { background: var(--glass-strong); -webkit-backdrop-filter: var(--blur); backdrop-filter: var(--blur); border: 1px solid var(--glass-line); box-shadow: var(--glass-shadow); }
+.is-glass .trust__row { background: var(--glass); -webkit-backdrop-filter: var(--blur); backdrop-filter: var(--blur); border: 1px solid var(--glass-line); box-shadow: var(--glass-shadow); }
+.is-glass .trust__item { border-color: rgba(255, 255, 255, .55); }
+.is-glass .reviews { background: transparent; }
+.is-glass .review, .is-glass .bundle, .is-glass .cart__summary, .is-glass .delivery, .is-glass .urgency { background: var(--glass); -webkit-backdrop-filter: var(--blur); backdrop-filter: var(--blur); border: 1px solid var(--glass-line); box-shadow: var(--glass-shadow); }
+.is-glass .bundle__item { background: var(--glass-strong); }
+.is-glass .banner { background: var(--glass); -webkit-backdrop-filter: var(--blur); backdrop-filter: var(--blur); border: 1px solid var(--glass-line); box-shadow: var(--glass-shadow); }
+
+/* Oferta do dia: vidro escuro colorido */
+.is-glass .deal__panel { background: linear-gradient(135deg, color-mix(in srgb, var(--accent-dark, #1a1050) 88%, transparent), color-mix(in srgb, var(--accent) 78%, transparent)); -webkit-backdrop-filter: var(--blur); backdrop-filter: var(--blur); border: 1px solid rgba(255, 255, 255, .28); box-shadow: 0 12px 40px rgba(31, 24, 90, .25), inset 0 1px 0 rgba(255, 255, 255, .35); }
+
+/* Categorias, cartões de produto e setas */
+.is-glass .circle__media, .is-glass .tile__media { border: 1px solid var(--glass-line); box-shadow: var(--glass-shadow); }
+.is-glass .card__media { border: 1px solid var(--glass-line); box-shadow: var(--glass-shadow); background: var(--glass-strong); }
+.is-glass .promo__arrow { background: var(--glass-strong); -webkit-backdrop-filter: var(--blur); backdrop-filter: var(--blur); border: 1px solid var(--glass-line); }
+.is-glass .btn:not(.btn--accent):not(.btn--ink) { background: rgba(255, 255, 255, .55); -webkit-backdrop-filter: var(--blur); backdrop-filter: var(--blur); border-color: var(--glass-line); box-shadow: inset 0 1px 0 var(--glass-edge); }
+.is-glass .btn--accent { box-shadow: 0 6px 20px color-mix(in srgb, var(--accent) 38%, transparent), inset 0 1px 0 rgba(255, 255, 255, .35); }
+.is-glass .newsletter__fields input[type="email"], .is-glass .qty input, .is-glass .sort select, .is-glass .field input, .is-glass .option__values label { background: rgba(255, 255, 255, .6); border-color: var(--glass-line); }
+.is-glass .footer { background: linear-gradient(135deg, color-mix(in srgb, var(--accent-dark, #1a1050) 94%, transparent), color-mix(in srgb, var(--accent) 70%, #0B0820)); }
+
+/* Navegadores sem desfoque: deixa o vidro mais opaco para manter a leitura */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .is-glass { --glass: rgba(255, 255, 255, .9); --glass-strong: rgba(255, 255, 255, .96); }
+}

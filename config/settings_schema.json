@@ -108,6 +108,12 @@
       },
       {
         "type": "checkbox",
+        "id": "glass",
+        "label": "Efeito vidro (liquid glass: transparência e desfoque)",
+        "default": true
+      },
+      {
+        "type": "checkbox",
         "id": "heading_uppercase",
         "label": "Títulos em letras maiúsculas",
         "default": false
