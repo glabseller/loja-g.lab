@@ -44,10 +44,10 @@
       --ink: {{ settings.color_ink }};
       --positive: {{ settings.color_positive }};
       --soft: {{ settings.color_soft }};
-      --text: {{ settings.color_text }};
-      --radius: {{ settings.corner_radius }}px;
-      --container: {{ settings.container_width }}px;
-      --cols: {{ settings.grid_columns }};
+      --text: {{ settings.color_text | default: '#14161A' }};
+      --radius: {{ settings.corner_radius | default: 10 }}px;
+      --container: {{ settings.container_width | default: 1700 }}px;
+      --cols: {{ settings.grid_columns | default: 4 }};
       --font: '{{ font_family }}', system-ui, -apple-system, 'Segoe UI', sans-serif;
     }
   </style>
