@@ -17,35 +17,6 @@
     "installments": 3,
     "free_shipping_threshold": 150,
     "sections": {
-      "top-bar": {
-        "type": "top-bar",
-        "blocks": {
-          "message_zkMfja": {
-            "type": "message",
-            "settings": {
-              "text": "Frete grátis em compras acima de R$ 150"
-            }
-          },
-          "message_38EXD4": {
-            "type": "message",
-            "settings": {
-              "text": "Frete grátis em compras acima de R$ 150"
-            }
-          },
-          "message_Gih9AX": {
-            "type": "message",
-            "settings": {
-              "text": "Frete grátis em compras acima de R$ 150"
-            }
-          }
-        },
-        "block_order": [
-          "message_zkMfja",
-          "message_38EXD4",
-          "message_Gih9AX"
-        ],
-        "settings": {}
-      },
       "header": {
         "type": "header",
         "blocks": {
@@ -223,6 +194,27 @@
         "settings": {
           "menu": "",
           "highlight_title": ""
+        }
+      },
+      "top-bar": {
+        "type": "top-bar",
+        "blocks": {
+          "message_dzhdHD": {
+            "type": "message",
+            "settings": {
+              "text": "Frete grátis em compras acima de R$ 150"
+            }
+          }
+        },
+        "block_order": [
+          "message_dzhdHD"
+        ],
+        "settings": {
+          "animate": true,
+          "respect_reduced_motion": false,
+          "speed": 28,
+          "bg_color": "#14161a",
+          "text_color": "#ffffff"
         }
       }
     },
