@@ -537,3 +537,14 @@ svg.placeholder { width: 100%; height: 100%; background: #EEF0F3; fill: #B6BCC6;
 }
 
 .is-colorful .trust__icon { background: linear-gradient(135deg, var(--accent), color-mix(in srgb, var(--accent) 70%, var(--accent-2))); box-shadow: 0 4px 12px color-mix(in srgb, var(--accent) 30%, transparent); }
+
+/* Celular: faixa de confiança e categorias viram carrossel (deslizar para o lado) */
+@media (max-width: 700px) {
+  .trust__row { flex-wrap: nowrap; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+  .trust__row::-webkit-scrollbar { display: none; }
+  .trust__item { flex: 0 0 78%; scroll-snap-align: start; border-right: 1px solid var(--line); border-bottom: 0; }
+  .trust__item:last-child { border-right: 0; }
+  .circles { display: grid; grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: 44%; gap: 14px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; margin-right: -16px; padding-right: 16px; -webkit-overflow-scrolling: touch; }
+  .circles::-webkit-scrollbar { display: none; }
+  .circle { scroll-snap-align: start; }
+}
