@@ -175,22 +175,6 @@
         "show_button": true
       }
     },
-    "hero": {
-      "type": "hero-banner",
-      "settings": {
-        "layout": "right",
-        "pill": "Em alta agora",
-        "heading": "Itens que viralizam. Do seu jeito.",
-        "text": "Chaveiros, porta-latas e achados que estão bombando.",
-        "button_1_label": "Ver novidades",
-        "button_1_url": "shopify://collections/all",
-        "button_2_label": "",
-        "button_2_url": "",
-        "rating_text": "",
-        "product": "",
-        "card_tag": "MAIS VENDIDO"
-      }
-    },
     "reviews": {
       "type": "reviews",
       "blocks": {
@@ -247,7 +231,6 @@
     "bestsellers",
     "categories",
     "allproducts",
-    "hero",
     "reviews",
     "newsletter"
   ]
