@@ -36,6 +36,12 @@
       },
       {
         "type": "color",
+        "id": "color_accent_2",
+        "label": "Segunda cor de destaque (selos de oferta, detalhes)",
+        "default": "#FF5A3C"
+      },
+      {
+        "type": "color",
         "id": "color_text",
         "label": "Cor do texto, rodapé e faixas escuras",
         "default": "#14161A"
@@ -92,6 +98,18 @@
         "type": "checkbox",
         "id": "header_sticky",
         "label": "Cabeçalho fixo ao rolar a página",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "colorful",
+        "label": "Visual colorido (fundos coloridos nas seções, categorias e rodapé)",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "glass",
+        "label": "Efeito vidro (liquid glass: transparência e desfoque)",
         "default": true
       },
       {

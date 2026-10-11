@@ -44,6 +44,7 @@
       --ink: {{ settings.color_ink }};
       --positive: {{ settings.color_positive }};
       --soft: {{ settings.color_soft }};
+      --accent-2: {{ settings.color_accent_2 | default: '#FF5A3C' }};
       --text: {{ settings.color_text | default: '#14161A' }};
       --radius: {{ settings.corner_radius | default: 10 }}px;
       --container: {{ settings.container_width | default: 1700 }}px;
@@ -71,7 +72,7 @@
   </script>
 </head>
 
-<body class="template-{{ request.page_type | handleize }}{% if settings.header_sticky %} has-sticky-header{% endif %}{% if settings.heading_uppercase %} heading-upper{% endif %}{% if settings.gallery_sticky %} sticky-gallery{% endif %}">
+<body class="template-{{ request.page_type | handleize }}{% if settings.colorful != false %} is-colorful{% endif %}{% if settings.glass != false %} is-glass{% endif %}{% if settings.header_sticky %} has-sticky-header{% endif %}{% if settings.heading_uppercase %} heading-upper{% endif %}{% if settings.gallery_sticky %} sticky-gallery{% endif %}">
   <a class="skip-link" href="#MainContent">{{ 'general.skip_to_content' | t }}</a>
 
   {% section 'announcement-bar' %}
