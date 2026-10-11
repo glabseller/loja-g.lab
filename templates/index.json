@@ -51,6 +51,50 @@
         "show_dots": true
       }
     },
+    "trust": {
+      "type": "trust-bar",
+      "blocks": {
+        "t1": {
+          "type": "item",
+          "settings": {
+            "icon": "truck",
+            "title": "Envio para todo o Brasil",
+            "subtitle": "com rastreio"
+          }
+        },
+        "t2": {
+          "type": "item",
+          "settings": {
+            "icon": "pix",
+            "title": "5% off no Pix",
+            "subtitle": "aprovação na hora"
+          }
+        },
+        "t3": {
+          "type": "item",
+          "settings": {
+            "icon": "shield",
+            "title": "Compra segura",
+            "subtitle": "pagamento protegido"
+          }
+        },
+        "t4": {
+          "type": "item",
+          "settings": {
+            "icon": "refresh",
+            "title": "7 dias para devolver",
+            "subtitle": "sem burocracia"
+          }
+        }
+      },
+      "block_order": [
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ],
+      "settings": {}
+    },
     "bestsellers": {
       "type": "featured-collection",
       "settings": {
@@ -131,50 +175,6 @@
         "show_button": true
       }
     },
-    "trust": {
-      "type": "trust-bar",
-      "blocks": {
-        "t1": {
-          "type": "item",
-          "settings": {
-            "icon": "truck",
-            "title": "Envio para todo o Brasil",
-            "subtitle": "com rastreio"
-          }
-        },
-        "t2": {
-          "type": "item",
-          "settings": {
-            "icon": "pix",
-            "title": "5% off no Pix",
-            "subtitle": "aprovação na hora"
-          }
-        },
-        "t3": {
-          "type": "item",
-          "settings": {
-            "icon": "shield",
-            "title": "Compra segura",
-            "subtitle": "pagamento protegido"
-          }
-        },
-        "t4": {
-          "type": "item",
-          "settings": {
-            "icon": "refresh",
-            "title": "7 dias para devolver",
-            "subtitle": "sem burocracia"
-          }
-        }
-      },
-      "block_order": [
-        "t1",
-        "t2",
-        "t3",
-        "t4"
-      ],
-      "settings": {}
-    },
     "hero": {
       "type": "hero-banner",
       "settings": {
@@ -242,8 +242,8 @@
     }
   },
   "order": [
-    "trust",
     "promos",
+    "trust",
     "bestsellers",
     "categories",
     "allproducts",
