@@ -52,6 +52,16 @@
     }
   </style>
 
+  <style>
+    /* Barra de anúncio: estilo base (as opções da seção podem sobrescrever) */
+    .announcement { background: #14161A; color: #FFFFFF; overflow: hidden; font-size: 13px; font-weight: 500; letter-spacing: .02em; }
+    .announcement__track { display: flex; width: max-content; animation: announcement-marquee 28s linear infinite; }
+    .announcement__group { display: flex; flex: 0 0 auto; min-width: 100vw; justify-content: space-around; }
+    .announcement__item { display: block; padding: 14px 40px; white-space: nowrap; line-height: 1.2; }
+    .announcement__item::after { content: "•"; margin-left: 72px; opacity: .5; }
+    @keyframes announcement-marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  </style>
+
   <script>
     window.themeConfig = {
       moneyFormat: {{ shop.money_format | json }},
