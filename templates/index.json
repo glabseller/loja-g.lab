@@ -51,6 +51,17 @@
         "show_dots": true
       }
     },
+    "bestsellers": {
+      "type": "featured-collection",
+      "settings": {
+        "heading": "Os mais pedidos",
+        "link_label": "Ver tudo",
+        "collection": "",
+        "count": 8,
+        "new_badge": false,
+        "show_button": true
+      }
+    },
     "categories": {
       "type": "category-tiles",
       "blocks": {
@@ -107,17 +118,6 @@
       ],
       "settings": {
         "heading": "Produtos"
-      }
-    },
-    "bestsellers": {
-      "type": "featured-collection",
-      "settings": {
-        "heading": "Os mais pedidos",
-        "link_label": "Ver tudo",
-        "collection": "",
-        "count": 8,
-        "new_badge": false,
-        "show_button": true
       }
     },
     "allproducts": {
@@ -242,11 +242,11 @@
     }
   },
   "order": [
-    "promos",
-    "categories",
-    "bestsellers",
-    "allproducts",
     "trust",
+    "promos",
+    "bestsellers",
+    "categories",
+    "allproducts",
     "hero",
     "reviews",
     "newsletter"
