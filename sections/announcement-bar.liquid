@@ -1,19 +1,32 @@
+{%- liquid
+  assign bar_bg = section.settings.bg_color | default: '#14161A'
+  assign bar_fg = section.settings.text_color | default: '#FFFFFF'
+  assign bar_speed = section.settings.speed | default: 28
+  assign animate = true
+  if section.settings.animate == false
+    assign animate = false
+  endif
+-%}
 {%- style -%}
-  .announcement { background: #14161A; color: #FFFFFF; overflow: hidden; font-size: 13px; font-weight: 500; letter-spacing: .02em; }
-  .announcement__track { display: flex; width: max-content; animation: announcement-marquee 28s linear infinite; }
+  .announcement { background: {{ bar_bg }}; color: {{ bar_fg }}; overflow: hidden; font-size: 13px; font-weight: 500; letter-spacing: .02em; }
+  .announcement__track { display: flex; width: max-content; }
+  .announcement--move .announcement__track { animation: announcement-marquee {{ bar_speed }}s linear infinite; }
+  .announcement--move:hover .announcement__track { animation-play-state: paused; }
   .announcement__group { display: flex; flex: 0 0 auto; min-width: 100vw; justify-content: space-around; }
+  .announcement:not(.announcement--move) .announcement__track { width: 100%; justify-content: center; }
+  .announcement:not(.announcement--move) .announcement__group[aria-hidden="true"] { display: none; }
   .announcement__item { display: block; padding: 14px 40px; white-space: nowrap; line-height: 1.2; }
   .announcement__item::after { content: "•"; margin-left: 72px; opacity: .5; }
+  .announcement:not(.announcement--move) .announcement__item::after { display: none; }
   @keyframes announcement-marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
   @media (prefers-reduced-motion: reduce) {
-    .announcement__track { animation: none; justify-content: center; width: auto; }
-    .announcement__group[aria-hidden="true"] { display: none; }
-    .announcement__group { min-width: 0; width: 100vw; }
-    .announcement__item::after { display: none; }
+    .announcement--respect .announcement__track { animation: none; width: 100%; justify-content: center; }
+    .announcement--respect .announcement__group[aria-hidden="true"] { display: none; }
+    .announcement--respect .announcement__item::after { display: none; }
   }
 {%- endstyle -%}
 {%- if section.blocks.size > 0 -%}
-  <div class="announcement" {{ section.shopify_attributes }}>
+  <div class="announcement{% if animate %} announcement--move{% endif %}{% if section.settings.respect_reduced_motion %} announcement--respect{% endif %}" {{ section.shopify_attributes }}>
     <div class="announcement__track">
       {%- for i in (1..2) -%}
         <div class="announcement__group"{% if i == 2 %} aria-hidden="true"{% endif %}>
@@ -30,6 +43,13 @@
 {
   "name": "Barra de anúncio",
   "max_blocks": 4,
+  "settings": [
+    { "type": "checkbox", "id": "animate", "label": "Mensagens correndo (efeito de rolagem)", "default": true },
+    { "type": "checkbox", "id": "respect_reduced_motion", "label": "Parar o efeito em aparelhos com \"reduzir movimento\" ligado", "default": false, "info": "Desligado: a barra corre em todos os aparelhos." },
+    { "type": "range", "id": "speed", "label": "Tempo de uma volta (segundos)", "min": 10, "max": 60, "step": 2, "default": 28, "info": "Maior = mais devagar." },
+    { "type": "color", "id": "bg_color", "label": "Cor de fundo da barra", "default": "#14161A" },
+    { "type": "color", "id": "text_color", "label": "Cor do texto da barra", "default": "#FFFFFF" }
+  ],
   "blocks": [
     {
       "type": "message",
