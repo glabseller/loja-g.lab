@@ -263,8 +263,14 @@
       var n = (i + slides.length) % slides.length;
       track.scrollTo({ left: n * track.clientWidth, behavior: reduce ? 'auto' : 'smooth' });
     }
+    function fit() {
+      var cur = Math.min(index(), slides.length - 1);
+      var h = slides[cur] ? slides[cur].offsetHeight : 0;
+      track.style.height = h ? h + 'px' : '';
+    }
     function mark() {
       var cur = index();
+      fit();
       dots.forEach(function (d, i) { d.setAttribute('aria-current', i === cur ? 'true' : 'false'); });
     }
 
@@ -283,6 +289,8 @@
     if (next) { next.addEventListener('click', function () { go(index() + 1); }); }
     track.addEventListener('scroll', function () { window.requestAnimationFrame(mark); }, { passive: true });
     mark();
+    window.addEventListener('resize', fit);
+    window.addEventListener('load', fit);
 
     if (delay > 0 && !reduce) {
       root.addEventListener('mouseenter', function () { paused = true; });
