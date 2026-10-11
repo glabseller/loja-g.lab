@@ -17,8 +17,8 @@
     "installments": 3,
     "free_shipping_threshold": 150,
     "sections": {
-      "announcement-bar": {
-        "type": "announcement-bar",
+      "top-bar": {
+        "type": "top-bar",
         "blocks": {
           "message_zkMfja": {
             "type": "message",
