@@ -1,3 +1,17 @@
+{%- style -%}
+  .announcement { background: var(--text, #14161A); color: var(--ink, #fff); overflow: hidden; font-size: 13px; font-weight: 500; letter-spacing: .02em; }
+  .announcement__track { display: flex; width: max-content; animation: announcement-marquee 28s linear infinite; }
+  .announcement__group { display: flex; flex: 0 0 auto; min-width: 100vw; justify-content: space-around; }
+  .announcement__item { display: block; padding: 14px 40px; white-space: nowrap; line-height: 1.2; }
+  .announcement__item::after { content: "•"; margin-left: 72px; opacity: .5; }
+  @keyframes announcement-marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  @media (prefers-reduced-motion: reduce) {
+    .announcement__track { animation: none; justify-content: center; width: auto; }
+    .announcement__group[aria-hidden="true"] { display: none; }
+    .announcement__group { min-width: 0; width: 100vw; }
+    .announcement__item::after { display: none; }
+  }
+{%- endstyle -%}
 {%- if section.blocks.size > 0 -%}
   <div class="announcement" {{ section.shopify_attributes }}>
     <div class="announcement__track">
