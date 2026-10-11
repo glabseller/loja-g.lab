@@ -17,8 +17,33 @@
     "installments": 3,
     "free_shipping_threshold": 150,
     "sections": {
-      "announcement-bar": {
-        "type": "announcement-bar",
+      "top-bar": {
+        "type": "top-bar",
+        "blocks": {
+          "message_zkMfja": {
+            "type": "message",
+            "settings": {
+              "text": "Frete grátis em compras acima de R$ 150"
+            }
+          },
+          "message_38EXD4": {
+            "type": "message",
+            "settings": {
+              "text": "Frete grátis em compras acima de R$ 150"
+            }
+          },
+          "message_Gih9AX": {
+            "type": "message",
+            "settings": {
+              "text": "Frete grátis em compras acima de R$ 150"
+            }
+          }
+        },
+        "block_order": [
+          "message_zkMfja",
+          "message_38EXD4",
+          "message_Gih9AX"
+        ],
         "settings": {}
       },
       "header": {
