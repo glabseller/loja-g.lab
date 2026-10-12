@@ -29,12 +29,19 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  {%- assign is_cartoon = true -%}
+  {%- if settings.cartoon == false -%}{%- assign is_cartoon = false -%}{%- endif -%}
   {%- case settings.font_choice -%}
     {%- when 'poppins' -%}{%- assign font_family = 'Poppins' -%}{%- assign font_query = 'Poppins:wght@400;500;600;700;800' -%}
     {%- when 'dm_sans' -%}{%- assign font_family = 'DM Sans' -%}{%- assign font_query = 'DM+Sans:wght@400;500;600;700' -%}
     {%- when 'manrope' -%}{%- assign font_family = 'Manrope' -%}{%- assign font_query = 'Manrope:wght@400;500;600;700;800' -%}
     {%- else -%}{%- assign font_family = 'Inter' -%}{%- assign font_query = 'Inter:wght@400;500;600;700;800' -%}
   {%- endcase -%}
+  {%- assign font_head = font_family -%}
+  {%- if is_cartoon -%}
+    {%- assign font_family = 'Nunito' -%}{%- assign font_head = 'Fredoka' -%}
+    {%- assign font_query = 'Nunito:wght@500;600;700;800&family=Fredoka:wght@500;600;700' -%}
+  {%- endif -%}
   <link href="https://fonts.googleapis.com/css2?family={{ font_query }}&display=swap" rel="stylesheet">
 
   {{ 'theme.css' | asset_url | stylesheet_tag }}
@@ -49,6 +56,8 @@
       --radius: {{ settings.corner_radius | default: 10 }}px;
       --container: {{ settings.container_width | default: 1700 }}px;
       --cols: {{ settings.grid_columns | default: 4 }};
+      --accent-3: {{ settings.color_accent_3 | default: '#FFC93C' }};
+      --font-head: '{{ font_head }}', '{{ font_family }}', system-ui, sans-serif;
       --font: '{{ font_family }}', system-ui, -apple-system, 'Segoe UI', sans-serif;
     }
   </style>
@@ -72,7 +81,7 @@
   </script>
 </head>
 
-<body class="template-{{ request.page_type | handleize }}{% if settings.colorful != false %} is-colorful{% endif %}{% if settings.glass != false %} is-glass{% endif %}{% if settings.header_sticky %} has-sticky-header{% endif %}{% if settings.heading_uppercase %} heading-upper{% endif %}{% if settings.gallery_sticky %} sticky-gallery{% endif %}">
+<body class="template-{{ request.page_type | handleize }}{% if is_cartoon %} is-cartoon{% else %}{% if settings.colorful != false %} is-colorful{% endif %}{% if settings.glass != false %} is-glass{% endif %}{% endif %}{% if settings.header_sticky %} has-sticky-header{% endif %}{% if settings.heading_uppercase %} heading-upper{% endif %}{% if settings.gallery_sticky %} sticky-gallery{% endif %}">
   <a class="skip-link" href="#MainContent">{{ 'general.skip_to_content' | t }}</a>
 
   {% section 'top-bar' %}

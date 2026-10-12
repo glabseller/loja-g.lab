@@ -42,6 +42,12 @@
       },
       {
         "type": "color",
+        "id": "color_accent_3",
+        "label": "Terceira cor de destaque (amarelo dos selos e faixas)",
+        "default": "#FFC93C"
+      },
+      {
+        "type": "color",
         "id": "color_text",
         "label": "Cor do texto, rodapé e faixas escuras",
         "default": "#14161A"
@@ -99,6 +105,13 @@
         "id": "header_sticky",
         "label": "Cabeçalho fixo ao rolar a página",
         "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "cartoon",
+        "label": "Estilo cartoon (contornos grossos, sombras duras, cores de desenho animado)",
+        "default": true,
+        "info": "Quando ligado, substitui o visual colorido e o efeito vidro."
       },
       {
         "type": "checkbox",
