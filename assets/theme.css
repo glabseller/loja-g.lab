@@ -581,17 +581,17 @@ svg.placeholder { width: 100%; height: 100%; background: #EEF0F3; fill: #B6BCC6;
    ===================================================================== */
 .is-cartoon {
   --radius: 18px;
-  --line: #14213D;
-  --line-strong: #14213D;
+  --line: #0E0B1F;
+  --line-strong: #0E0B1F;
   --ol: 3px solid var(--text);
   --sh: 4px 4px 0 var(--text);
   --sh-lg: 7px 7px 0 var(--text);
-  --c-yellow: var(--accent-3, #FFE3A3);
-  --c-pink: var(--accent-2, #FF8A00);
-  --c-mint: #DCEBFF;
-  --c-sky: #BFD8FF;
-  --c-lilac: #E6F0FF;
-  --c-peach: #FFE0BF;
+  --c-yellow: var(--accent-3, #C6FF3D);
+  --c-pink: var(--accent-2, #FF2E93);
+  --c-mint: #C9FFE2;
+  --c-sky: #BDF3FF;
+  --c-lilac: #E4D9FF;
+  --c-peach: #FFD3E8;
   --shadow-sm: var(--sh);
   --shadow-md: var(--sh);
 }
@@ -640,7 +640,7 @@ body.is-cartoon { background-color: var(--ink); font-weight: 500; }
 
 /* Títulos de seção com rabisco */
 .is-cartoon .section-title { font-weight: 700; font-size: 34px; letter-spacing: -.01em; }
-.is-cartoon .section-title::after { content: ""; display: block; width: 64px; height: 10px; margin-top: 8px; border-radius: 0; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='10' viewBox='0 0 64 10'%3E%3Cpath d='M2 5 Q10 -1 18 5 T34 5 T50 5 T62 5' fill='none' stroke='%23FF8A00' stroke-width='4' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat; }
+.is-cartoon .section-title::after { content: ""; display: block; width: 64px; height: 10px; margin-top: 8px; border-radius: 0; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='10' viewBox='0 0 64 10'%3E%3Cpath d='M2 5 Q10 -1 18 5 T34 5 T50 5 T62 5' fill='none' stroke='%23FF2E93' stroke-width='4' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat; }
 .is-cartoon .link-strong { color: var(--accent); font-weight: 800; }
 
 /* Capa */
@@ -774,3 +774,29 @@ body.is-cartoon { background-color: var(--ink); font-weight: 500; }
   .is-cartoon .nav > .nav__item--parent.is-open > a { background: #fff; color: var(--text); border-color: var(--text); }
 }
 @media (prefers-reduced-motion: reduce) { .is-cartoon .circle:hover .circle__media, .is-cartoon .tile:hover .tile__media { animation: none; } }
+
+/* Cartoon gamer: barra de menu e painéis escuros com neon */
+.is-cartoon .nav-bar { background: var(--text); border-top: 3px solid var(--c-yellow); }
+.is-cartoon .nav > .nav__item > a { color: #fff; }
+.is-cartoon .nav > .nav__item:hover > a, .is-cartoon .nav > .nav__item:focus-within > a { background: var(--c-yellow); color: var(--text); border-color: var(--c-yellow); box-shadow: 2px 2px 0 var(--c-pink); }
+.is-cartoon .nav a[aria-current="page"], .is-cartoon .nav .nav__highlight { color: var(--c-yellow); }
+.is-cartoon .nav__sub, .is-cartoon .nav__sub a { color: var(--text); }
+.is-cartoon .nav__sub .nav__item > a:hover { background: var(--c-lilac); color: var(--text); }
+.is-cartoon .nav__item--parent > a::after { border-color: currentColor; }
+.is-cartoon .hero__panel { background: var(--accent); }
+.is-cartoon .hero__title { color: #fff; }
+.is-cartoon .hero__lead, .is-cartoon .hero__rating { color: #fff; opacity: .95; }
+.is-cartoon .hero__panel .btn--accent { background: var(--c-yellow); color: var(--text); }
+.is-cartoon .hero__panel .btn--outline { background: #fff; }
+.is-cartoon .hero__media { background: var(--c-yellow); }
+.is-cartoon .deal__panel { background: var(--text); }
+.is-cartoon .deal__media { background: var(--accent); }
+.is-cartoon .deal__panel .stockbar__fill { background: var(--c-yellow); }
+.is-cartoon .deal__price { color: var(--c-yellow); }
+.is-cartoon .reviews { background: var(--c-lilac); }
+.is-cartoon .footer { border-top-color: var(--c-yellow); }
+.is-cartoon .cart-badge { color: #fff; }
+@media (max-width: 700px) {
+  .is-cartoon .nav > .nav__item--parent.is-open > a { background: var(--c-yellow); color: var(--text); border-color: var(--c-yellow); }
+  .is-cartoon .nav-panel .nav-panel__all { background: var(--accent); color: #fff; }
+}
