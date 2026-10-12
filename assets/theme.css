@@ -574,3 +574,229 @@ svg.placeholder { width: 100%; height: 100%; background: #EEF0F3; fill: #B6BCC6;
   .nav-panel .nav-panel__all { flex: 0 0 100%; text-align: center; border: 0; border-radius: var(--radius); background: var(--accent); color: var(--ink); font-weight: 600; }
   .is-glass .nav-panel { background: var(--glass-strong); -webkit-backdrop-filter: var(--blur); backdrop-filter: var(--blur); border-top-color: var(--glass-line); }
 }
+
+/* =====================================================================
+   ESTILO CARTOON (Configurações do tema → Estilo e layout → Estilo cartoon)
+   Contornos grossos, sombras duras, cores de desenho animado.
+   ===================================================================== */
+.is-cartoon {
+  --radius: 18px;
+  --line: #0E0B1F;
+  --line-strong: #0E0B1F;
+  --ol: 3px solid var(--text);
+  --sh: 4px 4px 0 var(--text);
+  --sh-lg: 7px 7px 0 var(--text);
+  --c-yellow: var(--accent-3, #C6FF3D);
+  --c-pink: var(--accent-2, #FF2E93);
+  --c-mint: #C9FFE2;
+  --c-sky: #BDF3FF;
+  --c-lilac: #E4D9FF;
+  --c-peach: #FFD3E8;
+  --shadow-sm: var(--sh);
+  --shadow-md: var(--sh);
+}
+body.is-cartoon { background-color: var(--ink); font-weight: 500; }
+.is-cartoon h1, .is-cartoon h2, .is-cartoon h3, .is-cartoon .section-title, .is-cartoon .hero__title, .is-cartoon .deal__title, .is-cartoon .banner__title, .is-cartoon .product__title,
+.is-cartoon .newsletter__title, .is-cartoon .bundle__title, .is-cartoon .card__price, .is-cartoon .price-block__current, .is-cartoon .btn, .is-cartoon .logo, .is-cartoon .footer__brand,
+.is-cartoon .circle__name, .is-cartoon .tile__name, .is-cartoon .trust__title, .is-cartoon .nav, .is-cartoon .badge, .is-cartoon .pill, .is-cartoon .footer__heading { font-family: var(--font-head); }
+
+/* Botões chunky */
+.is-cartoon .btn { border: var(--ol); border-radius: 999px; box-shadow: var(--sh); font-weight: 600; letter-spacing: .01em; background: var(--ink); color: var(--text); transition: transform .12s, box-shadow .12s; }
+.is-cartoon .btn:hover { transform: translate(2px, 2px); box-shadow: 2px 2px 0 var(--text); border-color: var(--text); filter: none; }
+.is-cartoon .btn:active { transform: translate(4px, 4px); box-shadow: 0 0 0 var(--text); }
+.is-cartoon .btn--accent { background: var(--accent); color: #fff; border-color: var(--text); }
+.is-cartoon .btn--ink { background: var(--text); color: var(--ink); }
+.is-cartoon .btn--outline, .is-cartoon .btn--white { background: #fff; color: var(--text); }
+.is-cartoon .btn[disabled], .is-cartoon .btn--disabled { box-shadow: none; transform: none; background: #ddd; }
+
+/* Selos e adesivos */
+.is-cartoon .pill { background: var(--c-yellow); color: var(--text); border: 2.5px solid var(--text); box-shadow: 3px 3px 0 var(--text); font-weight: 600; transform: rotate(-2.5deg); }
+.is-cartoon .pill__dot { background: var(--c-pink); border: 2px solid var(--text); width: 10px; height: 10px; }
+.is-cartoon .badge { background: var(--c-yellow); color: var(--text); border: 2.5px solid var(--text); border-radius: 10px; box-shadow: 2px 2px 0 var(--text); transform: rotate(-4deg); font-weight: 600; }
+.is-cartoon .badge--accent { background: var(--c-pink); }
+.is-cartoon .badge--ink { background: #fff; }
+.is-cartoon .badge--right { transform: rotate(4deg); }
+
+/* Barra de anúncio */
+.is-cartoon .announcement { border-bottom: 3px solid var(--text); }
+
+/* Cabeçalho */
+.is-cartoon .site-header { background: var(--ink); border-bottom: 3px solid var(--text); }
+.is-cartoon .logo { color: var(--accent); font-weight: 700; font-size: 28px; text-shadow: 2px 2px 0 var(--c-yellow), 3px 3px 0 var(--text); letter-spacing: -.01em; }
+.is-cartoon .header-search { background: #fff; border: var(--ol); border-radius: 999px; box-shadow: 3px 3px 0 var(--text); }
+.is-cartoon .header-search:focus-within { background: #fff; border-color: var(--text); box-shadow: 3px 3px 0 var(--accent); }
+.is-cartoon .header-search button { color: var(--text); }
+.is-cartoon .icon-btn { border: 2.5px solid transparent; border-radius: 999px; }
+.is-cartoon .icon-btn:hover { background: var(--c-yellow); border-color: var(--text); }
+.is-cartoon .cart-badge { background: var(--c-pink); color: var(--text); border: 2.5px solid var(--text); min-width: 22px; height: 22px; right: -2px; top: -2px; font-weight: 700; }
+.is-cartoon .nav-bar { background: var(--c-yellow); border-top: 0; border-bottom: 0; }
+.is-cartoon .nav { font-weight: 600; }
+.is-cartoon .nav > .nav__item > a { border: 2.5px solid transparent; border-radius: 999px; padding: 7px 14px; margin: 8px 0; }
+.is-cartoon .nav > .nav__item:hover > a, .is-cartoon .nav > .nav__item:focus-within > a { background: #fff; border-color: var(--text); color: var(--text); box-shadow: 2px 2px 0 var(--text); }
+.is-cartoon .nav a[aria-current="page"], .is-cartoon .nav .nav__highlight { color: var(--accent); }
+.is-cartoon .nav__sub { background: #fff; border: var(--ol); border-radius: var(--radius); box-shadow: var(--sh-lg); top: calc(100% - 4px); }
+.is-cartoon .nav__sub .nav__item > a { border-radius: 12px; font-weight: 600; }
+.is-cartoon .nav__sub .nav__item > a:hover { background: var(--c-lilac); }
+
+/* Títulos de seção com rabisco */
+.is-cartoon .section-title { font-weight: 700; font-size: 34px; letter-spacing: -.01em; }
+.is-cartoon .section-title::after { content: ""; display: block; width: 64px; height: 10px; margin-top: 8px; border-radius: 0; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='10' viewBox='0 0 64 10'%3E%3Cpath d='M2 5 Q10 -1 18 5 T34 5 T50 5 T62 5' fill='none' stroke='%23FF2E93' stroke-width='4' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat; }
+.is-cartoon .link-strong { color: var(--accent); font-weight: 800; }
+
+/* Capa */
+.is-cartoon .hero__panel { background: var(--c-lilac); border: var(--ol); border-radius: calc(var(--radius) * 1.6); box-shadow: var(--sh-lg); }
+.is-cartoon .hero__title { font-weight: 700; letter-spacing: -.02em; }
+.is-cartoon .hero__lead { color: var(--text); opacity: .8; font-weight: 600; }
+.is-cartoon .hero__media { background: var(--c-yellow); border-left: 3px solid var(--text); }
+.is-cartoon .hero--left .hero__media { border-left: 0; border-right: 3px solid var(--text); }
+.is-cartoon .hero__card { background: #fff; border: var(--ol); box-shadow: var(--sh); border-radius: var(--radius); }
+.is-cartoon .hero__card-tag { color: var(--c-pink); font-weight: 800; }
+.is-cartoon .hero__card-img { border: 2.5px solid var(--text); border-radius: 12px; }
+
+/* Faixa de confiança */
+.is-cartoon .trust__row { background: #fff; border: var(--ol); border-radius: var(--radius); box-shadow: var(--sh); }
+.is-cartoon .trust__item { border-right: 3px dashed var(--text); }
+.is-cartoon .trust__item:last-child { border-right: 0; }
+.is-cartoon .trust__icon { color: var(--text); border: 2.5px solid var(--text); box-shadow: 2px 2px 0 var(--text); background: var(--c-yellow); }
+.is-cartoon .trust__item:nth-child(4n+2) .trust__icon { background: var(--c-pink); }
+.is-cartoon .trust__item:nth-child(4n+3) .trust__icon { background: var(--c-mint); }
+.is-cartoon .trust__item:nth-child(4n+4) .trust__icon { background: var(--c-sky); }
+.is-cartoon .trust__title { font-weight: 600; font-size: 15px; }
+.is-cartoon .trust__sub { color: var(--text); opacity: .7; }
+
+/* Categorias */
+@keyframes cartoon-wiggle { 0%, 100% { transform: rotate(0); } 25% { transform: rotate(-3deg); } 75% { transform: rotate(3deg); } }
+.is-cartoon .circle__media, .is-cartoon .tile__media { border: var(--ol); border-radius: calc(var(--radius) * 1.2); box-shadow: var(--sh); background: var(--c-yellow); transition: box-shadow .12s; }
+.is-cartoon .circle:nth-child(6n+2) .circle__media { background: var(--c-pink); }
+.is-cartoon .circle:nth-child(6n+3) .circle__media { background: var(--c-mint); }
+.is-cartoon .circle:nth-child(6n+4) .circle__media { background: var(--c-sky); }
+.is-cartoon .circle:nth-child(6n+5) .circle__media { background: var(--c-lilac); }
+.is-cartoon .circle:nth-child(6n+6) .circle__media { background: var(--c-peach); }
+.is-cartoon .circle:hover .circle__media, .is-cartoon .tile:hover .tile__media { transform: none; animation: cartoon-wiggle .45s ease-in-out; box-shadow: var(--sh-lg); }
+.is-cartoon .circle__name, .is-cartoon .tile__name { font-weight: 600; font-size: 16px; }
+.is-cartoon .circle:hover .circle__name { color: var(--accent); }
+
+/* Cartões de produto */
+.is-cartoon .card__media { background: #fff; border: var(--ol); border-radius: calc(var(--radius) * 1.2); box-shadow: var(--sh); transition: transform .15s, box-shadow .15s; }
+.is-cartoon .card:hover .card__media { transform: translate(-3px, -3px) rotate(-1deg); box-shadow: var(--sh-lg); border-color: var(--text); }
+.is-cartoon .card__title { font-weight: 700; font-size: 15px; }
+.is-cartoon .card__title:hover { color: var(--accent); }
+.is-cartoon .card__price { color: var(--accent); font-weight: 700; font-size: 20px; }
+.is-cartoon .card__pix { color: var(--positive); font-weight: 700; }
+.is-cartoon .card__compare { text-decoration-thickness: 2px; }
+.is-cartoon .card .btn--outline { min-height: 44px; background: var(--c-yellow); border-color: var(--text); color: var(--text); }
+.is-cartoon .card .btn--outline:hover { background: var(--c-yellow); color: var(--text); }
+.is-cartoon svg.placeholder { background: color-mix(in srgb, var(--c-lilac) 55%, #fff); }
+
+/* Carrossel de banners */
+.is-cartoon .promo__track { border: var(--ol); border-radius: calc(var(--radius) * 1.6); box-shadow: var(--sh-lg); background: #fff; }
+.is-cartoon .promo { padding-right: calc(clamp(16px, 3vw, 48px) + 7px); }
+.is-cartoon .promo__arrow { background: var(--c-yellow); border: var(--ol); box-shadow: 3px 3px 0 var(--text); color: var(--text); font-weight: 800; }
+.is-cartoon .promo__arrow:hover { background: var(--c-yellow); transform: translateY(-50%) translate(1px, 1px); box-shadow: 2px 2px 0 var(--text); }
+.is-cartoon .promo__dot { width: 13px; height: 13px; border: 2.5px solid var(--text); background: #fff; }
+.is-cartoon .promo__dot[aria-current="true"] { width: 32px; background: var(--accent); }
+
+/* Oferta do dia */
+.is-cartoon .deal__panel { background: var(--accent); border: var(--ol); border-radius: calc(var(--radius) * 1.6); box-shadow: var(--sh-lg); color: #fff; }
+.is-cartoon .deal__media { background: var(--c-yellow); border-right: 3px solid var(--text); }
+.is-cartoon .deal__title { font-weight: 700; }
+.is-cartoon .countdown__box { background: var(--c-yellow); color: var(--text); border: 2.5px solid var(--text); box-shadow: 2px 2px 0 var(--text); }
+.is-cartoon .deal__panel .btn--accent { background: var(--c-yellow); color: var(--text); box-shadow: var(--sh); }
+.is-cartoon .stockbar__track { background: rgba(255,255,255,.3); border: 2px solid var(--text); height: 12px; }
+.is-cartoon .stockbar__fill { background: var(--c-yellow); }
+
+/* Avaliações, cadastro, FAQ */
+.is-cartoon .reviews { background: var(--c-yellow); border-top: 3px solid var(--text); border-bottom: 3px solid var(--text); }
+.is-cartoon .review { background: #fff; border: var(--ol); border-radius: var(--radius); box-shadow: var(--sh); }
+.is-cartoon .review__verified { color: var(--positive); font-weight: 700; }
+.is-cartoon .newsletter__panel { background: var(--c-sky); border: var(--ol); border-radius: calc(var(--radius) * 1.6); box-shadow: var(--sh-lg); }
+.is-cartoon .newsletter__lead { color: var(--text); opacity: .8; font-weight: 600; }
+.is-cartoon .newsletter__fields input[type="email"] { background: #fff; border: var(--ol); border-radius: 999px; box-shadow: 3px 3px 0 var(--text); }
+.is-cartoon .faq details, .is-cartoon .accordion details { border-bottom: 2.5px dashed var(--text); }
+.is-cartoon .faq summary, .is-cartoon .accordion summary { font-weight: 700; }
+.is-cartoon .banner { border: var(--ol); border-radius: calc(var(--radius) * 1.4); box-shadow: var(--sh); }
+
+/* Rodapé */
+.is-cartoon .footer { background: var(--text); border-top: 6px solid var(--c-yellow); }
+.is-cartoon .footer__brand { color: var(--c-yellow); font-weight: 700; }
+.is-cartoon .footer__heading { color: var(--c-yellow); font-weight: 600; }
+
+/* Página de produto */
+.is-cartoon .product__image { background: #fff; border: var(--ol); border-radius: calc(var(--radius) * 1.4); box-shadow: var(--sh-lg); }
+.is-cartoon .thumb { border: 2.5px solid var(--text); border-radius: 12px; }
+.is-cartoon .thumb[aria-current="true"] { border-color: var(--text); background: var(--c-yellow); box-shadow: 3px 3px 0 var(--accent); }
+.is-cartoon .product__title { font-weight: 700; }
+.is-cartoon .price-block { border-top: 3px dashed var(--text); border-bottom: 3px dashed var(--text); }
+.is-cartoon .price-block__current { color: var(--accent); font-weight: 700; }
+.is-cartoon .price-block__pix { color: var(--positive); font-weight: 700; }
+.is-cartoon .option__values label { border: var(--ol); border-radius: 999px; font-weight: 700; background: #fff; box-shadow: 2px 2px 0 var(--text); }
+.is-cartoon .option__values input:checked + label { background: var(--c-yellow); box-shadow: 2px 2px 0 var(--text); border-color: var(--text); }
+.is-cartoon .qty input, .is-cartoon .sort select, .is-cartoon .field input, .is-cartoon .cart-item__actions input { background: #fff; border: var(--ol); border-radius: 14px; box-shadow: 2px 2px 0 var(--text); }
+.is-cartoon .buy-block .btn--ink { background: #fff; color: var(--text); }
+.is-cartoon .delivery { background: var(--c-mint); border: var(--ol); border-radius: var(--radius); box-shadow: var(--sh); }
+.is-cartoon .delivery svg { color: var(--text); }
+.is-cartoon .urgency { background: var(--c-peach); border: var(--ol); border-radius: var(--radius); box-shadow: var(--sh); }
+.is-cartoon .urgency__stock { color: var(--text); font-weight: 800; }
+.is-cartoon .urgency .countdown__box { background: #fff; }
+.is-cartoon .badges-row svg, .is-cartoon .benefits__item svg { color: var(--positive); }
+.is-cartoon .bundle { background: #fff; border: var(--ol); border-radius: calc(var(--radius) * 1.4); box-shadow: var(--sh); }
+.is-cartoon .bundle__item { border: 2.5px solid var(--text); border-radius: 14px; }
+.is-cartoon .bundle__item--main, .is-cartoon .bundle__item.is-on { background: var(--c-yellow); box-shadow: 3px 3px 0 var(--text); }
+.is-cartoon .bundle__img { border: 2.5px solid var(--text); }
+
+/* Carrinho, coleção, busca */
+.is-cartoon .cart__summary { background: var(--c-yellow); border: var(--ol); border-radius: calc(var(--radius) * 1.4); box-shadow: var(--sh); }
+.is-cartoon .cart-item { border-bottom: 3px dashed var(--text); }
+.is-cartoon .cart-item__img { border: 2.5px solid var(--text); border-radius: 14px; }
+.is-cartoon .shipbar__track { height: 14px; border: 2.5px solid var(--text); background: #fff; }
+.is-cartoon .shipbar__fill { background: var(--c-mint); }
+.is-cartoon .collection__head { border-bottom: 3px dashed var(--text); }
+.is-cartoon .pagination a, .is-cartoon .pagination span { border: 2.5px solid var(--text); box-shadow: 2px 2px 0 var(--text); background: #fff; font-weight: 700; }
+.is-cartoon .pagination .current { background: var(--accent); color: #fff; }
+.is-cartoon .search { background: #fff; border: var(--ol); border-radius: 999px; box-shadow: 3px 3px 0 var(--text); }
+.is-cartoon .errors { color: #D6245F; font-weight: 700; }
+
+/* Celular */
+@media (max-width: 700px) {
+  .is-cartoon .section-title { font-size: 27px; }
+  .is-cartoon .logo { font-size: 24px; }
+  .is-cartoon .hero__media { border-left: 0; border-top: 3px solid var(--text); }
+  .is-cartoon .deal__media { border-right: 0; border-bottom: 3px solid var(--text); }
+  .is-cartoon .trust__row { box-shadow: 3px 3px 0 var(--text); }
+  .is-cartoon .trust__item { border-right: 3px dashed var(--text); border-bottom: 0; }
+  .is-cartoon .trust__item:last-child { border-right: 0; }
+  .is-cartoon .promo { padding-right: calc(16px + 4px); }
+  .is-cartoon .promo__track { box-shadow: 4px 4px 0 var(--text); }
+  .is-cartoon .nav > .nav__item > a { padding: 6px 12px; }
+  .is-cartoon .nav-panel { background: #fff; border-top: 3px solid var(--text); }
+  .is-cartoon .nav-panel a { border: 2.5px solid var(--text); box-shadow: 2px 2px 0 var(--text); font-weight: 600; }
+  .is-cartoon .nav-panel .nav-panel__all { background: var(--accent); color: #fff; }
+  .is-cartoon .nav > .nav__item--parent.is-open > a { background: #fff; color: var(--text); border-color: var(--text); }
+}
+@media (prefers-reduced-motion: reduce) { .is-cartoon .circle:hover .circle__media, .is-cartoon .tile:hover .tile__media { animation: none; } }
+
+/* Cartoon gamer: barra de menu e painéis escuros com neon */
+.is-cartoon .nav-bar { background: var(--text); border-top: 3px solid var(--c-yellow); }
+.is-cartoon .nav > .nav__item > a { color: #fff; }
+.is-cartoon .nav > .nav__item:hover > a, .is-cartoon .nav > .nav__item:focus-within > a { background: var(--c-yellow); color: var(--text); border-color: var(--c-yellow); box-shadow: 2px 2px 0 var(--c-pink); }
+.is-cartoon .nav a[aria-current="page"], .is-cartoon .nav .nav__highlight { color: var(--c-yellow); }
+.is-cartoon .nav__sub, .is-cartoon .nav__sub a { color: var(--text); }
+.is-cartoon .nav__sub .nav__item > a:hover { background: var(--c-lilac); color: var(--text); }
+.is-cartoon .nav__item--parent > a::after { border-color: currentColor; }
+.is-cartoon .hero__panel { background: var(--accent); }
+.is-cartoon .hero__title { color: #fff; }
+.is-cartoon .hero__lead, .is-cartoon .hero__rating { color: #fff; opacity: .95; }
+.is-cartoon .hero__panel .btn--accent { background: var(--c-yellow); color: var(--text); }
+.is-cartoon .hero__panel .btn--outline { background: #fff; }
+.is-cartoon .hero__media { background: var(--c-yellow); }
+.is-cartoon .deal__panel { background: var(--text); }
+.is-cartoon .deal__media { background: var(--accent); }
+.is-cartoon .deal__panel .stockbar__fill { background: var(--c-yellow); }
+.is-cartoon .deal__price { color: var(--c-yellow); }
+.is-cartoon .reviews { background: var(--c-lilac); }
+.is-cartoon .footer { border-top-color: var(--c-yellow); }
+.is-cartoon .cart-badge { color: #fff; }
+@media (max-width: 700px) {
+  .is-cartoon .nav > .nav__item--parent.is-open > a { background: var(--c-yellow); color: var(--text); border-color: var(--c-yellow); }
+  .is-cartoon .nav-panel .nav-panel__all { background: var(--accent); color: #fff; }
+}

@@ -38,7 +38,13 @@
         "type": "color",
         "id": "color_accent_2",
         "label": "Segunda cor de destaque (selos de oferta, detalhes)",
-        "default": "#FF5A3C"
+        "default": "#FF2E93"
+      },
+      {
+        "type": "color",
+        "id": "color_accent_3",
+        "label": "Terceira cor de destaque (verde neon dos selos e destaques)",
+        "default": "#C6FF3D"
       },
       {
         "type": "color",
@@ -99,6 +105,13 @@
         "id": "header_sticky",
         "label": "Cabeçalho fixo ao rolar a página",
         "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "cartoon",
+        "label": "Estilo cartoon (contornos grossos, sombras duras, cores de desenho animado)",
+        "default": true,
+        "info": "Quando ligado, substitui o visual colorido e o efeito vidro."
       },
       {
         "type": "checkbox",
