@@ -107,22 +107,55 @@
         "default": true
       },
       {
+        "type": "select",
+        "id": "visual_style",
+        "label": "Estilo visual do site",
+        "options": [
+          { "value": "modern", "label": "Moderno (sério, gamer, com modo escuro)" },
+          { "value": "cartoon", "label": "Cartoon (contornos grossos, divertido)" },
+          { "value": "classic", "label": "Clássico (colorido ou vidro, abaixo)" }
+        ],
+        "default": "modern"
+      },
+      {
+        "type": "select",
+        "id": "dark_mode",
+        "label": "Modo escuro (só no estilo Moderno)",
+        "options": [
+          { "value": "auto", "label": "Automático (segue o aparelho + botão no cabeçalho)" },
+          { "value": "light", "label": "Sempre claro" },
+          { "value": "dark", "label": "Sempre escuro" }
+        ],
+        "default": "auto"
+      },
+      {
         "type": "checkbox",
-        "id": "cartoon",
-        "label": "Estilo cartoon (contornos grossos, sombras duras, cores de desenho animado)",
-        "default": true,
-        "info": "Quando ligado, substitui o visual colorido e o efeito vidro."
+        "id": "cart_drawer",
+        "label": "Carrinho lateral (abre ao adicionar um produto)",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "mobile_bar",
+        "label": "Barra de navegação fixa embaixo no celular",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "reveal",
+        "label": "Animação suave ao rolar a página",
+        "default": true
       },
       {
         "type": "checkbox",
         "id": "colorful",
-        "label": "Visual colorido (fundos coloridos nas seções, categorias e rodapé)",
+        "label": "Clássico: visual colorido (fundos coloridos nas seções, categorias e rodapé)",
         "default": true
       },
       {
         "type": "checkbox",
         "id": "glass",
-        "label": "Efeito vidro (liquid glass: transparência e desfoque)",
+        "label": "Clássico: efeito vidro (liquid glass)",
         "default": true
       },
       {

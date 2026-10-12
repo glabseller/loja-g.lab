@@ -29,8 +29,11 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  {%- assign is_cartoon = true -%}
-  {%- if settings.cartoon == false -%}{%- assign is_cartoon = false -%}{%- endif -%}
+  {%- assign visual = settings.visual_style | default: 'modern' -%}
+  {%- assign is_cartoon = false -%}
+  {%- assign is_modern = false -%}
+  {%- if visual == 'cartoon' -%}{%- assign is_cartoon = true -%}{%- elsif visual == 'classic' -%}{%- else -%}{%- assign is_modern = true -%}{%- endif -%}
+  {%- assign dark_mode = settings.dark_mode | default: 'auto' -%}
   {%- case settings.font_choice -%}
     {%- when 'poppins' -%}{%- assign font_family = 'Poppins' -%}{%- assign font_query = 'Poppins:wght@400;500;600;700;800' -%}
     {%- when 'dm_sans' -%}{%- assign font_family = 'DM Sans' -%}{%- assign font_query = 'DM+Sans:wght@400;500;600;700' -%}
@@ -38,11 +41,30 @@
     {%- else -%}{%- assign font_family = 'Inter' -%}{%- assign font_query = 'Inter:wght@400;500;600;700;800' -%}
   {%- endcase -%}
   {%- assign font_head = font_family -%}
-  {%- if is_cartoon -%}
+  {%- if is_modern -%}
+    {%- assign font_family = 'Inter' -%}{%- assign font_head = 'Space Grotesk' -%}
+    {%- assign font_query = 'Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700' -%}
+  {%- elsif is_cartoon -%}
     {%- assign font_family = 'Nunito' -%}{%- assign font_head = 'Fredoka' -%}
     {%- assign font_query = 'Nunito:wght@500;600;700;800&family=Fredoka:wght@500;600;700' -%}
   {%- endif -%}
   <link href="https://fonts.googleapis.com/css2?family={{ font_query }}&display=swap" rel="stylesheet">
+
+  {%- if is_modern -%}
+  <script>
+    (function () {
+      var mode = {{ dark_mode | json }};
+      var t = mode;
+      try {
+        if (mode === 'auto') {
+          t = localStorage.getItem('theme') || (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        }
+      } catch (e) { if (mode === 'auto') { t = 'light'; } }
+      document.documentElement.setAttribute('data-theme', t === 'dark' ? 'dark' : 'light');
+    })();
+  </script>
+  <meta name="color-scheme" content="{% if dark_mode == 'dark' %}dark{% elsif dark_mode == 'light' %}light{% else %}light dark{% endif %}">
+  {%- endif -%}
 
   {{ 'theme.css' | asset_url | stylesheet_tag }}
   <style>
@@ -76,12 +98,14 @@
     window.themeConfig = {
       moneyFormat: {{ shop.money_format | json }},
       cartAddUrl: {{ routes.cart_add_url | append: '.js' | json }},
-      cartUrl: {{ routes.cart_url | json }}
+      cartUrl: {{ routes.cart_url | json }},
+      cartJsUrl: {{ routes.cart_url | append: '.js' | json }},
+      cartChangeUrl: {{ routes.cart_change_url | append: '.js' | json }}
     };
   </script>
 </head>
 
-<body class="template-{{ request.page_type | handleize }}{% if is_cartoon %} is-cartoon{% else %}{% if settings.colorful != false %} is-colorful{% endif %}{% if settings.glass != false %} is-glass{% endif %}{% endif %}{% if settings.header_sticky %} has-sticky-header{% endif %}{% if settings.heading_uppercase %} heading-upper{% endif %}{% if settings.gallery_sticky %} sticky-gallery{% endif %}">
+<body class="template-{{ request.page_type | handleize }}{% if is_modern %} is-modern{% elsif is_cartoon %} is-cartoon{% else %}{% if settings.colorful != false %} is-colorful{% endif %}{% if settings.glass != false %} is-glass{% endif %}{% endif %}{% if settings.header_sticky %} has-sticky-header{% endif %}{% if settings.heading_uppercase %} heading-upper{% endif %}{% if settings.gallery_sticky %} sticky-gallery{% endif %}{% if settings.mobile_bar != false %} has-mobile-bar{% endif %}{% if settings.reveal != false %} has-reveal{% endif %}">
   <a class="skip-link" href="#MainContent">{{ 'general.skip_to_content' | t }}</a>
 
   {% section 'top-bar' %}
@@ -92,6 +116,9 @@
   </main>
 
   {% sections 'footer-group' %}
+
+  {%- if settings.cart_drawer != false -%}{% render 'cart-drawer' %}{%- endif -%}
+  {%- if settings.mobile_bar != false -%}{% render 'mobile-bar' %}{%- endif -%}
 
   <script src="{{ 'theme.js' | asset_url }}" defer></script>
 </body>
