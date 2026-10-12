@@ -300,4 +300,50 @@
       setInterval(function () { if (!paused && !document.hidden) { go(index() + 1); } }, delay * 1000);
     }
   });
+  /* ---------- Celular: tocar numa categoria abre as subcategorias ---------- */
+  (function () {
+    var nav = document.querySelector('.nav');
+    var panel = document.querySelector('[data-nav-panel]');
+    if (!nav || !panel) { return; }
+    var mq = window.matchMedia('(max-width: 700px)');
+    var openItem = null;
+
+    function close() {
+      panel.hidden = true;
+      panel.innerHTML = '';
+      if (openItem) { openItem.classList.remove('is-open'); openItem = null; }
+    }
+
+    function link(href, text, cls) {
+      var a = document.createElement('a');
+      a.href = href;
+      a.textContent = text;
+      if (cls) { a.className = cls; }
+      return a;
+    }
+
+    nav.addEventListener('click', function (e) {
+      if (!mq.matches) { return; }
+      var a = e.target.closest ? e.target.closest('.nav > .nav__item--parent > a') : null;
+      if (!a) { return; }
+      e.preventDefault();
+      var item = a.parentNode;
+      if (openItem === item) { close(); return; }
+      close();
+      openItem = item;
+      item.classList.add('is-open');
+      panel.appendChild(link(a.getAttribute('href'), 'Ver tudo em ' + a.textContent.trim(), 'nav-panel__all'));
+      item.querySelectorAll('.nav__sub a').forEach(function (s) {
+        panel.appendChild(link(s.getAttribute('href'), s.textContent.trim()));
+      });
+      panel.hidden = false;
+    });
+
+    document.addEventListener('click', function (e) {
+      if (!openItem) { return; }
+      if (e.target.closest && (e.target.closest('.nav') || e.target.closest('[data-nav-panel]'))) { return; }
+      close();
+    });
+    window.addEventListener('resize', function () { if (!mq.matches) { close(); } });
+  })();
 })();
