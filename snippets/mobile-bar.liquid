@@ -1,0 +1,17 @@
+<nav class="mbar" aria-label="Navegação rápida">
+  <a class="mbar__item" href="{{ routes.root_url }}"{% if request.page_type == 'index' %} aria-current="page"{% endif %}>
+    {% render 'icon', name: 'home', size: 22 %}<span>Início</span>
+  </a>
+  <a class="mbar__item" href="{{ routes.collections_url }}"{% if request.page_type == 'list-collections' %} aria-current="page"{% endif %}>
+    {% render 'icon', name: 'grid', size: 22 %}<span>Categorias</span>
+  </a>
+  <button type="button" class="mbar__item" data-search-focus>
+    {% render 'icon', name: 'search', size: 22 %}<span>Buscar</span>
+  </button>
+  <a class="mbar__item" href="{{ routes.account_url }}">
+    {% render 'icon', name: 'user', size: 22 %}<span>Conta</span>
+  </a>
+  <a class="mbar__item" href="{{ routes.cart_url }}" data-cart-open>
+    <span class="mbar__icon">{% render 'icon', name: 'cart', size: 22 %}{%- if cart.item_count > 0 -%}<span class="cart-badge">{{ cart.item_count }}</span>{%- endif -%}</span><span>Carrinho</span>
+  </a>
+</nav>

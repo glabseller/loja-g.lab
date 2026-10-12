@@ -16,8 +16,14 @@
     </form>
 
     <div class="header__icons">
+      {%- if settings.visual_style != 'cartoon' and settings.visual_style != 'classic' and settings.dark_mode != 'light' and settings.dark_mode != 'dark' -%}
+        <button type="button" class="icon-btn theme-toggle" data-theme-toggle aria-label="Alternar tema claro e escuro">
+          <span class="theme-toggle__moon">{% render 'icon', name: 'moon' %}</span>
+          <span class="theme-toggle__sun">{% render 'icon', name: 'sun' %}</span>
+        </button>
+      {%- endif -%}
       <a class="icon-btn" href="{{ routes.account_url }}" aria-label="Minha conta">{% render 'icon', name: 'user' %}</a>
-      <a class="icon-btn" href="{{ routes.cart_url }}" aria-label="Carrinho">
+      <a class="icon-btn" href="{{ routes.cart_url }}" aria-label="Carrinho" data-cart-open>
         {% render 'icon', name: 'cart' %}
         {%- if cart.item_count > 0 -%}<span class="cart-badge">{{ cart.item_count }}</span>{%- endif -%}
       </a>
