@@ -38,13 +38,13 @@
         "type": "color",
         "id": "color_accent_2",
         "label": "Segunda cor de destaque (selos de oferta, detalhes)",
-        "default": "#FF5A3C"
+        "default": "#FF8A00"
       },
       {
         "type": "color",
         "id": "color_accent_3",
-        "label": "Terceira cor de destaque (amarelo dos selos e faixas)",
-        "default": "#FFC93C"
+        "label": "Terceira cor de destaque (areia dos selos e faixas)",
+        "default": "#FFE3A3"
       },
       {
         "type": "color",
