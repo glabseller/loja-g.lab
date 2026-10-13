@@ -1329,3 +1329,11 @@ body.is-gamer { background: var(--ink); }
   .is-gamer .section { padding-bottom: 64px; }
   .is-gamer .trust__item { border-right: 0; border-bottom: 1px solid var(--line); }
 }
+
+/* ---- GAMER: legibilidade do formulário + logo só com o nome ---- */
+.is-gamer .logo::after { content: none !important; }
+.is-gamer .newsletter__title { color: var(--text); }
+.is-gamer .newsletter__lead, .is-gamer .newsletter__text p { color: #3A4570; opacity: 1; }
+.is-gamer .newsletter__fields input[type="email"] { background: #fff; color: var(--text); border: 1.5px solid var(--line-strong); border-radius: 4px; }
+.is-gamer .newsletter__fields input[type="email"]::placeholder { color: #6B7599; opacity: 1; }
+.is-gamer .newsletter__msg { color: var(--text); }
