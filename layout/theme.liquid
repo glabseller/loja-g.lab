@@ -34,7 +34,9 @@
   {%- assign is_modern = false -%}
   {%- assign is_toon = false -%}
   {%- if visual == 'cartoon' -%}{%- assign is_cartoon = true -%}{%- elsif visual == 'classic' -%}{%- else -%}{%- assign is_modern = true -%}{%- endif -%}
-  {%- if visual == 'toon' -%}{%- assign is_toon = true -%}{%- endif -%}
+  {%- assign is_night = false -%}
+  {%- if visual == 'toon' or visual == 'toon_night' -%}{%- assign is_toon = true -%}{%- endif -%}
+  {%- if visual == 'toon_night' -%}{%- assign is_night = true -%}{%- endif -%}
   {%- assign dark_mode = settings.dark_mode | default: 'auto' -%}
   {%- if is_toon -%}{%- assign dark_mode = 'light' -%}{%- endif -%}
   {%- case settings.font_choice -%}
@@ -111,7 +113,7 @@
   </script>
 </head>
 
-<body class="template-{{ request.page_type | handleize }}{% if is_modern %} is-modern{% if is_toon %} is-toon{% endif %}{% elsif is_cartoon %} is-cartoon{% else %}{% if settings.colorful != false %} is-colorful{% endif %}{% if settings.glass != false %} is-glass{% endif %}{% endif %}{% if settings.header_sticky %} has-sticky-header{% endif %}{% if settings.heading_uppercase %} heading-upper{% endif %}{% if settings.gallery_sticky %} sticky-gallery{% endif %}{% if settings.mobile_bar != false %} has-mobile-bar{% endif %}{% if settings.reveal != false %} has-reveal{% endif %}">
+<body class="template-{{ request.page_type | handleize }}{% if is_modern %} is-modern{% if is_toon %} is-toon{% endif %}{% if is_night %} is-night{% endif %}{% elsif is_cartoon %} is-cartoon{% else %}{% if settings.colorful != false %} is-colorful{% endif %}{% if settings.glass != false %} is-glass{% endif %}{% endif %}{% if settings.header_sticky %} has-sticky-header{% endif %}{% if settings.heading_uppercase %} heading-upper{% endif %}{% if settings.gallery_sticky %} sticky-gallery{% endif %}{% if settings.mobile_bar != false %} has-mobile-bar{% endif %}{% if settings.reveal != false %} has-reveal{% endif %}">
   <a class="skip-link" href="#MainContent">{{ 'general.skip_to_content' | t }}</a>
 
   {% section 'top-bar' %}

@@ -1131,3 +1131,49 @@ body.is-toon { background: var(--ink); letter-spacing: -.005em; }
   .is-toon { --sh: 3px 3px 0 var(--text); --sh-lg: 4px 4px 0 var(--text); }
   .is-toon .hero__title { text-shadow: 2px 2px 0 #12101F; }
 }
+
+/* =====================================================================
+   CARTOON NOTURNO (Estilo visual → Cartoon Noturno)
+   Fundo escuro, contornos e sombras em neon. Usa a base Cartoon Moderno.
+   ===================================================================== */
+.is-toon.is-night {
+  --ink: #0F0B24;
+  --soft: #1B1540;
+  --text: #F5F2FF;
+  --muted: #B5ABDD;
+  --oc: #C6FF3D;
+  --ol: 2.5px solid var(--oc);
+  --sh: 4px 4px 0 var(--accent-2);
+  --sh-lg: 7px 7px 0 var(--accent-2);
+  --line: #3A2F73;
+  --line-strong: var(--oc);
+  --t-yellow: #3B3410;
+  --t-mint: #0F3A33;
+  --t-sky: #123150;
+  --t-pink: #4A1B3C;
+  --t-lilac: #2D2266;
+  color-scheme: dark;
+}
+.is-night .btn { background: var(--soft); color: var(--text); border-color: var(--oc); }
+.is-night .btn:hover { border-color: var(--oc); box-shadow: 6px 6px 0 var(--accent-2); }
+.is-night .btn:active { box-shadow: 1px 1px 0 var(--accent-2); }
+.is-night .btn--accent { background: var(--oc); color: #14102B; border-color: var(--oc); box-shadow: 4px 4px 0 var(--accent-2); }
+.is-night .btn--accent:hover { border-color: var(--oc); box-shadow: 6px 6px 0 var(--accent-2); }
+.is-night .btn--ink, .is-night .btn--white { background: var(--text); color: #14102B; border-color: var(--text); }
+.is-night .badge, .is-night .pill { background: var(--oc); color: #14102B; border-color: #14102B; box-shadow: 2px 2px 0 var(--accent-2); }
+.is-night .badge--sale, .is-night .badge--discount { background: var(--accent-2); color: #fff; }
+.is-night .header, .is-night .mbar { background: var(--ink); }
+.is-night .header .search, .is-night .header input[type="search"], .is-night input, .is-night select, .is-night textarea { background: var(--soft); color: var(--text); }
+.is-night .hero { background: linear-gradient(135deg, #4B2DD6, #8A2BE2); }
+.is-night .trust__item, .is-night .trust > *, .is-night .review { background: var(--soft); color: var(--text); }
+.is-night .trust > *:nth-child(4n+1) { background: var(--t-yellow); }
+.is-night .trust > *:nth-child(4n+2) { background: var(--t-mint); }
+.is-night .trust > *:nth-child(4n+3) { background: var(--t-sky); }
+.is-night .trust > *:nth-child(4n+4) { background: var(--t-pink); }
+.is-night .card:hover .card__media, .is-night .circle:hover .circle__img, .is-night .circle:hover .circle__media, .is-night .tile:hover { box-shadow: 7px 8px 0 var(--accent-2); }
+.is-night .deal { background: var(--accent-2); color: #fff; }
+.is-night .newsletter { background: var(--t-lilac); color: var(--text); }
+.is-night .drawer__panel { background: var(--ink); color: var(--text); }
+.is-night .nav a:hover, .is-night .nav__link:hover { background: var(--oc); color: #14102B; }
+.is-night .footer { border-top-color: var(--oc); }
+@media (max-width: 700px) { .is-toon.is-night { --sh: 3px 3px 0 var(--accent-2); --sh-lg: 4px 4px 0 var(--accent-2); } }
