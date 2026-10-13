@@ -1473,3 +1473,12 @@ body.is-gift { background: var(--ink); color: var(--text); }
 }
 .is-gift .card__title { font-size: 14px; }
 .is-gift .card .btn { min-height: 42px; font-size: 13px; padding-inline: 18px; }
+
+/* ---- Página de produto: tamanho mais compacto no computador ---- */
+@media (min-width: 901px) {
+  .product { justify-content: center; gap: 24px 64px; padding-top: 16px; }
+  .gallery { flex: 0 1 540px; max-width: 540px; }
+  .product__info { flex: 1 1 420px; max-width: 560px; gap: 16px; }
+  .product__title { font-size: 25px; }
+  .price-block__current { font-size: 28px; }
+}
