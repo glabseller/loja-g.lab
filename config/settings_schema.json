@@ -111,6 +111,9 @@
         "id": "visual_style",
         "label": "Estilo visual do site",
         "options": [
+          { "value": "gamer", "label": "Gamer (claro, HUD neon, cantos cortados)" },
+          { "value": "toon", "label": "Cartoon Moderno (contornos, adesivos, bento, atual)" },
+          { "value": "toon_night", "label": "Cartoon Noturno (escuro com neon, gamer)" },
           { "value": "modern", "label": "Moderno (sério, gamer, com modo escuro)" },
           { "value": "cartoon", "label": "Cartoon (contornos grossos, divertido)" },
           { "value": "classic", "label": "Clássico (colorido ou vidro, abaixo)" }

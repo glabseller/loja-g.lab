@@ -1029,3 +1029,265 @@ html.drawer-open { overflow: hidden; }
   .mbar .cart-badge { right: -9px; top: -5px; }
   html.drawer-open .mbar { display: none; }
 }
+
+/* =====================================================================
+   CARTOON MODERNO (Estilo visual → Cartoon Moderno)
+   Camada sobre o Moderno: contornos, sombras duras, adesivos, bento.
+   ===================================================================== */
+.is-toon {
+  --ol: 2.5px solid var(--text);
+  --sh: 4px 4px 0 var(--text);
+  --sh-lg: 7px 7px 0 var(--text);
+  --line: var(--text);
+  --line-strong: var(--text);
+  --radius: 16px;
+  --t-yellow: #FFE14D;
+  --t-mint: #8CF2C6;
+  --t-sky: #9BDCFF;
+  --t-pink: #FFB3D4;
+  --t-lilac: #D6C7FF;
+  --shadow-sm: var(--sh);
+  --shadow-md: var(--sh);
+  --glow: var(--sh);
+  --font-head: 'Bricolage Grotesque', 'Inter', system-ui, sans-serif;
+}
+body.is-toon { background: var(--ink); letter-spacing: -.005em; }
+.is-toon h1, .is-toon h2, .is-toon h3, .is-toon .section-title, .is-toon .hero__title { font-family: var(--font-head); font-weight: 800; letter-spacing: -.02em; }
+.is-toon ::selection { background: var(--accent-3, #C6FF3D); color: #12101F; }
+
+/* botões: chunky, afundam ao clicar */
+.is-toon .btn { border: var(--ol); border-radius: 999px; font-weight: 700; box-shadow: var(--sh); background: #fff; color: var(--text); transition: transform .12s, box-shadow .12s; }
+.is-toon .btn:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0 var(--text); border-color: var(--text); filter: none; }
+.is-toon .btn:active { transform: translate(3px, 3px); box-shadow: 1px 1px 0 var(--text); }
+.is-toon .btn--accent { background: var(--accent); color: #fff; border-color: var(--text); box-shadow: var(--sh); }
+.is-toon .btn--accent:hover { border-color: var(--text); box-shadow: 6px 6px 0 var(--text); }
+.is-toon .btn--ink { background: var(--text); color: #fff; }
+.is-toon .btn--white { background: #fff; color: var(--text); border-color: var(--text); }
+.is-toon .btn--outline { background: transparent; }
+
+/* etiquetas viram adesivos */
+.is-toon .badge, .is-toon .pill { border: 2px solid var(--text); border-radius: 999px; font-weight: 800; box-shadow: 2px 2px 0 var(--text); transform: rotate(-3deg); }
+.is-toon .badge--sale, .is-toon .badge--discount { background: var(--accent-2); color: #fff; }
+
+/* cabeçalho */
+.is-toon .header { background: var(--ink); -webkit-backdrop-filter: none; backdrop-filter: none; border-bottom: var(--ol); }
+.is-toon .header .search, .is-toon .header input[type="search"] { border: var(--ol); border-radius: 999px; background: #fff; box-shadow: 3px 3px 0 var(--text); }
+.is-toon .nav a:hover, .is-toon .nav__link:hover { background: var(--accent-3, #C6FF3D); color: #12101F; border-radius: 999px; }
+
+/* hero colorido, com padrão de pontos e formas */
+.is-toon .hero { background: var(--accent); color: #fff; border: var(--ol); border-radius: 28px; box-shadow: var(--sh-lg); overflow: hidden; position: relative; }
+.is-toon .hero::before { content: ""; position: absolute; inset: 0; background: radial-gradient(circle at 85% 20%, var(--accent-3, #C6FF3D) 0 70px, transparent 71px), radial-gradient(circle at 92% 82%, var(--accent-2) 0 46px, transparent 47px); opacity: .9; pointer-events: none; }
+.is-toon .hero > * { position: relative; }
+.is-toon .hero__title { color: #fff; text-shadow: 3px 3px 0 #12101F; }
+
+/* faixas e categorias: cartões coloridos tipo bento */
+.is-toon .trust__item, .is-toon .trust > * { border: var(--ol); border-radius: var(--radius); box-shadow: 3px 3px 0 var(--text); background: #fff; }
+.is-toon .trust > *:nth-child(4n+1) { background: var(--t-yellow); }
+.is-toon .trust > *:nth-child(4n+2) { background: var(--t-mint); }
+.is-toon .trust > *:nth-child(4n+3) { background: var(--t-sky); }
+.is-toon .trust > *:nth-child(4n+4) { background: var(--t-pink); }
+.is-toon .circle__img, .is-toon .circle__media, .is-toon .tile, .is-toon .tile__media { border: var(--ol); border-radius: 22px; box-shadow: var(--sh); transition: transform .15s, box-shadow .15s; }
+.is-toon .circle:hover .circle__img, .is-toon .circle:hover .circle__media, .is-toon .tile:hover { transform: translate(-2px, -3px) rotate(-1.5deg); box-shadow: 6px 7px 0 var(--text); }
+.is-toon .circle:nth-child(5n+1) .circle__img, .is-toon .tile:nth-child(5n+1) { background: var(--t-yellow); }
+.is-toon .circle:nth-child(5n+2) .circle__img, .is-toon .tile:nth-child(5n+2) { background: var(--t-mint); }
+.is-toon .circle:nth-child(5n+3) .circle__img, .is-toon .tile:nth-child(5n+3) { background: var(--t-sky); }
+.is-toon .circle:nth-child(5n+4) .circle__img, .is-toon .tile:nth-child(5n+4) { background: var(--t-pink); }
+.is-toon .circle:nth-child(5n+5) .circle__img, .is-toon .tile:nth-child(5n+5) { background: var(--t-lilac); }
+
+/* cards de produto */
+.is-toon .card__media { border: var(--ol); border-radius: 20px; box-shadow: var(--sh); background: var(--t-lilac); transition: transform .15s, box-shadow .15s; }
+.is-toon .card:nth-child(4n+2) .card__media { background: var(--t-yellow); }
+.is-toon .card:nth-child(4n+3) .card__media { background: var(--t-mint); }
+.is-toon .card:nth-child(4n+4) .card__media { background: var(--t-sky); }
+.is-toon .card:hover .card__media { transform: translate(-3px, -4px) rotate(-1deg); border-color: var(--text); box-shadow: 7px 8px 0 var(--text); }
+.is-toon .card__price { font-family: var(--font-head); font-weight: 800; }
+
+/* carrossel de promoções e blocos de destaque */
+.is-toon .promo, .is-toon .promo__slide, .is-toon .carousel { border-radius: 24px; }
+.is-toon .promo__viewport, .is-toon .promo__track { border-radius: 24px; }
+.is-toon .promo { border: var(--ol); box-shadow: var(--sh-lg); overflow: hidden; }
+.is-toon .deal, .is-toon .newsletter, .is-toon .bundle, .is-toon .reviews__item, .is-toon .review { border: var(--ol); border-radius: 24px; box-shadow: var(--sh-lg); }
+.is-toon .deal { background: var(--t-yellow); color: #12101F; }
+.is-toon .newsletter { background: var(--t-pink); color: #12101F; }
+.is-toon .review { background: #fff; box-shadow: var(--sh); }
+.is-toon input, .is-toon select, .is-toon textarea { border: var(--ol); border-radius: 14px; background: #fff; }
+.is-toon input:focus, .is-toon select:focus, .is-toon textarea:focus { outline: none; box-shadow: 3px 3px 0 var(--accent); }
+
+/* produto, rodapé, gaveta e barra mobile */
+.is-toon .product__gallery img, .is-toon .product__media { border-radius: 22px; }
+.is-toon .product__media, .is-toon .gallery__main { border: var(--ol); box-shadow: var(--sh-lg); background: var(--t-lilac); }
+.is-toon .footer { background: #12101F; color: #fff; border-top: var(--ol); }
+.is-toon .drawer__panel { border-left: var(--ol); border-radius: 24px 0 0 24px; }
+.is-toon .drawer__bar-fill, .is-toon .drawer__progress span { background: var(--accent-3, #C6FF3D); }
+.is-toon .mbar { border-top: var(--ol); background: var(--ink); -webkit-backdrop-filter: none; backdrop-filter: none; }
+.is-toon .mbar a:active, .is-toon .mbar button:active { background: var(--accent-3, #C6FF3D); }
+
+/* movimento: respeita quem prefere menos animação */
+@media (prefers-reduced-motion: no-preference) {
+  .is-toon .badge, .is-toon .pill { animation: toon-wobble 3.2s ease-in-out infinite; }
+  @keyframes toon-wobble { 0%, 100% { transform: rotate(-3deg); } 50% { transform: rotate(2deg); } }
+}
+@media (max-width: 700px) {
+  .is-toon { --sh: 3px 3px 0 var(--text); --sh-lg: 4px 4px 0 var(--text); }
+  .is-toon .hero__title { text-shadow: 2px 2px 0 #12101F; }
+}
+
+/* =====================================================================
+   CARTOON NOTURNO (Estilo visual → Cartoon Noturno)
+   Fundo escuro, contornos e sombras em neon. Usa a base Cartoon Moderno.
+   ===================================================================== */
+.is-toon.is-night {
+  --ink: #0F0B24;
+  --soft: #1B1540;
+  --text: #F5F2FF;
+  --muted: #B5ABDD;
+  --oc: #C6FF3D;
+  --ol: 2.5px solid var(--oc);
+  --sh: 4px 4px 0 var(--accent-2);
+  --sh-lg: 7px 7px 0 var(--accent-2);
+  --line: #3A2F73;
+  --line-strong: var(--oc);
+  --t-yellow: #3B3410;
+  --t-mint: #0F3A33;
+  --t-sky: #123150;
+  --t-pink: #4A1B3C;
+  --t-lilac: #2D2266;
+  color-scheme: dark;
+}
+.is-night .btn { background: var(--soft); color: var(--text); border-color: var(--oc); }
+.is-night .btn:hover { border-color: var(--oc); box-shadow: 6px 6px 0 var(--accent-2); }
+.is-night .btn:active { box-shadow: 1px 1px 0 var(--accent-2); }
+.is-night .btn--accent { background: var(--oc); color: #14102B; border-color: var(--oc); box-shadow: 4px 4px 0 var(--accent-2); }
+.is-night .btn--accent:hover { border-color: var(--oc); box-shadow: 6px 6px 0 var(--accent-2); }
+.is-night .btn--ink, .is-night .btn--white { background: var(--text); color: #14102B; border-color: var(--text); }
+.is-night .badge, .is-night .pill { background: var(--oc); color: #14102B; border-color: #14102B; box-shadow: 2px 2px 0 var(--accent-2); }
+.is-night .badge--sale, .is-night .badge--discount { background: var(--accent-2); color: #fff; }
+.is-night .header, .is-night .mbar { background: var(--ink); }
+.is-night .header .search, .is-night .header input[type="search"], .is-night input, .is-night select, .is-night textarea { background: var(--soft); color: var(--text); }
+.is-night .hero { background: linear-gradient(135deg, #4B2DD6, #8A2BE2); }
+.is-night .trust__item, .is-night .trust > *, .is-night .review { background: var(--soft); color: var(--text); }
+.is-night .trust > *:nth-child(4n+1) { background: var(--t-yellow); }
+.is-night .trust > *:nth-child(4n+2) { background: var(--t-mint); }
+.is-night .trust > *:nth-child(4n+3) { background: var(--t-sky); }
+.is-night .trust > *:nth-child(4n+4) { background: var(--t-pink); }
+.is-night .card:hover .card__media, .is-night .circle:hover .circle__img, .is-night .circle:hover .circle__media, .is-night .tile:hover { box-shadow: 7px 8px 0 var(--accent-2); }
+.is-night .deal { background: var(--accent-2); color: #fff; }
+.is-night .newsletter { background: var(--t-lilac); color: var(--text); }
+.is-night .drawer__panel { background: var(--ink); color: var(--text); }
+.is-night .nav a:hover, .is-night .nav__link:hover { background: var(--oc); color: #14102B; }
+.is-night .footer { border-top-color: var(--oc); }
+@media (max-width: 700px) { .is-toon.is-night { --sh: 3px 3px 0 var(--accent-2); --sh-lg: 4px 4px 0 var(--accent-2); } }
+
+/* =====================================================================
+   GAMER (Estilo visual → Gamer)
+   Interface tipo HUD de jogo: escuro, neon ciano/magenta, cantos cortados,
+   fonte tecnológica, barras de XP. Base: Moderno em modo escuro.
+   ===================================================================== */
+.is-gamer { --radius: 4px; --cut: 12px; --neon: var(--accent); --neon-2: var(--accent-2); --neon-3: var(--accent-3); --font-head: 'Chakra Petch', 'Inter', system-ui, sans-serif; }
+html[data-theme="dark"] body.is-gamer {
+  --ink: #07070F;
+  --soft: #0E0E1C;
+  --text: #E9F1FF;
+  --muted: #8E9BC0;
+  --line: #1F2745;
+  --line-strong: #2C3A6B;
+  --accent: #00E5FF;
+  --accent-2: #FF2BD6;
+  --accent-3: #B6FF00;
+  --on-accent: #04101A;
+  --shadow-md: 0 0 0 1px #00E5FF55, 0 10px 40px rgba(0, 229, 255, .18);
+  --glow: 0 0 0 1px #00E5FF, 0 0 24px rgba(0, 229, 255, .45);
+}
+.is-gamer h1, .is-gamer h2, .is-gamer h3, .is-gamer .section-title, .is-gamer .hero__title { font-family: var(--font-head); text-transform: uppercase; letter-spacing: .04em; font-weight: 700; }
+.is-gamer .section-title { position: relative; padding-left: 16px; }
+.is-gamer .section-title::before { content: ""; position: absolute; left: 0; top: 12%; bottom: 12%; width: 5px; background: linear-gradient(var(--accent), var(--accent-2)); box-shadow: 0 0 14px var(--accent); }
+
+/* botões: cantos cortados + brilho */
+.is-gamer .btn { clip-path: polygon(var(--cut) 0, 100% 0, 100% calc(100% - var(--cut)), calc(100% - var(--cut)) 100%, 0 100%, 0 var(--cut)); border: 0; border-radius: 0; background: #151B33; color: var(--text); text-transform: uppercase; letter-spacing: .08em; font-family: var(--font-head); font-weight: 700; box-shadow: none; transition: filter .15s, transform .15s; }
+.is-gamer .btn:hover { filter: brightness(1.25) drop-shadow(0 0 8px var(--accent)); transform: translateY(-1px); }
+.is-gamer .btn--accent { background: linear-gradient(90deg, var(--accent), #5B8CFF); color: #04101A; box-shadow: none; }
+.is-gamer .btn--accent:hover { box-shadow: none; filter: brightness(1.12); }
+.is-gamer .btn--ink, .is-gamer .btn--white { background: var(--text); color: #04101A; }
+
+/* selos e etiquetas */
+.is-gamer .badge, .is-gamer .pill { border-radius: 2px; font-family: var(--font-head); text-transform: uppercase; letter-spacing: .08em; background: var(--accent-3); color: #0A0F00; border: 0; clip-path: polygon(6px 0, 100% 0, calc(100% - 6px) 100%, 0 100%); padding-inline: 12px; }
+.is-gamer .badge--sale, .is-gamer .badge--discount { background: var(--accent-2); color: #fff; }
+
+/* cabeçalho e navegação */
+.is-gamer .header { background: color-mix(in srgb, var(--ink) 88%, transparent); border-bottom: 1px solid var(--line-strong); box-shadow: 0 1px 0 var(--accent), 0 8px 30px rgba(0, 229, 255, .08); }
+.is-gamer .nav a, .is-gamer .nav__link { font-family: var(--font-head); text-transform: uppercase; letter-spacing: .08em; font-weight: 600; }
+.is-gamer .nav a:hover, .is-gamer .nav__link:hover { color: var(--accent); text-shadow: 0 0 12px var(--accent); background: transparent; }
+.is-gamer .header .search, .is-gamer .header input[type="search"], .is-gamer input, .is-gamer select, .is-gamer textarea { background: var(--soft); border: 1px solid var(--line-strong); border-radius: 2px; color: var(--text); }
+.is-gamer input:focus, .is-gamer select:focus, .is-gamer textarea:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 2px #00E5FF44, 0 0 18px #00E5FF33; }
+
+/* hero: grade de HUD + brilho */
+.is-gamer .hero { background: radial-gradient(600px 300px at 85% 10%, #FF2BD655, transparent 70%), radial-gradient(700px 400px at 10% 100%, #00E5FF40, transparent 70%), #0B0B1A; border: 1px solid var(--line-strong); border-radius: 4px; position: relative; overflow: hidden; color: var(--text); }
+.is-gamer .hero::before { content: ""; position: absolute; inset: 0; background-image: linear-gradient(#ffffff0d 1px, transparent 1px), linear-gradient(90deg, #ffffff0d 1px, transparent 1px); background-size: 48px 48px; -webkit-mask-image: linear-gradient(#000, transparent 85%); mask-image: linear-gradient(#000, transparent 85%); pointer-events: none; }
+.is-gamer .hero > * { position: relative; }
+.is-gamer .hero__title { color: #fff; text-shadow: 0 0 22px rgba(0, 229, 255, .55); }
+
+/* cantos "mira" (colchetes) em cards e blocos */
+.is-gamer .card__media, .is-gamer .trust > *, .is-gamer .tile, .is-gamer .circle__img, .is-gamer .circle__media, .is-gamer .review, .is-gamer .deal, .is-gamer .newsletter, .is-gamer .bundle, .is-gamer .promo { border: 1px solid var(--line-strong); border-radius: 4px; background: var(--soft); position: relative; transition: border-color .2s, box-shadow .2s, transform .2s; }
+.is-gamer .card__media::after, .is-gamer .promo::after { content: ""; position: absolute; inset: 6px; pointer-events: none; background:
+  linear-gradient(var(--accent), var(--accent)) top left / 14px 2px no-repeat,
+  linear-gradient(var(--accent), var(--accent)) top left / 2px 14px no-repeat,
+  linear-gradient(var(--accent-2), var(--accent-2)) bottom right / 14px 2px no-repeat,
+  linear-gradient(var(--accent-2), var(--accent-2)) bottom right / 2px 14px no-repeat; opacity: 0; transition: opacity .2s; }
+.is-gamer .card:hover .card__media, .is-gamer .tile:hover, .is-gamer .circle:hover .circle__img, .is-gamer .circle:hover .circle__media { border-color: var(--accent); box-shadow: var(--glow); transform: translateY(-3px); }
+.is-gamer .card:hover .card__media::after, .is-gamer .promo:hover::after { opacity: 1; }
+.is-gamer .card__price, .is-gamer .price-block__current { font-family: var(--font-head); font-weight: 700; color: var(--accent-3); text-shadow: 0 0 14px #B6FF0055; }
+.is-gamer .deal { background: linear-gradient(120deg, #1B0A3A, #3A0A33); border-color: var(--accent-2); box-shadow: 0 0 30px #FF2BD622; }
+.is-gamer .newsletter { background: linear-gradient(120deg, #07243A, #0B0B1A); border-color: var(--accent); }
+
+/* barras de XP: frete grátis no carrinho */
+.is-gamer .drawer__bar, .is-gamer .drawer__progress { height: 10px; border-radius: 2px; background: #151B33; border: 1px solid var(--line-strong); overflow: hidden; }
+.is-gamer .drawer__bar-fill, .is-gamer .drawer__progress span { background: repeating-linear-gradient(135deg, var(--accent-3) 0 8px, #8FD000 8px 16px); box-shadow: 0 0 14px var(--accent-3); }
+.is-gamer .drawer__panel { background: var(--ink); color: var(--text); border-left: 1px solid var(--accent); box-shadow: -12px 0 40px rgba(0, 229, 255, .12); }
+.is-gamer .mbar { background: color-mix(in srgb, var(--ink) 92%, transparent); border-top: 1px solid var(--accent); box-shadow: 0 -6px 24px rgba(0, 229, 255, .12); }
+.is-gamer .footer { background: #04040A; border-top: 1px solid var(--accent); }
+.is-gamer ::selection { background: var(--accent-2); color: #fff; }
+.is-gamer ::-webkit-scrollbar { width: 10px; height: 10px; }
+.is-gamer ::-webkit-scrollbar-track { background: var(--ink); }
+.is-gamer ::-webkit-scrollbar-thumb { background: linear-gradient(var(--accent), var(--accent-2)); }
+@media (prefers-reduced-motion: no-preference) {
+  .is-gamer .hero__title { animation: gamer-glow 3.5s ease-in-out infinite alternate; }
+  @keyframes gamer-glow { from { text-shadow: 0 0 14px rgba(0, 229, 255, .35); } to { text-shadow: 0 0 30px rgba(255, 43, 214, .6); } }
+}
+@media (max-width: 700px) { .is-gamer { --cut: 9px; } }
+
+/* ---- GAMER CLARO: fundo claro, blocos de destaque escuros ---- */
+.is-gamer {
+  --line: #D9DEF5;
+  --line-strong: #B9C2EA;
+  --muted: #55608A;
+  --glow: 0 0 0 1px var(--accent), 0 8px 28px color-mix(in srgb, var(--accent) 30%, transparent);
+  --shadow-md: 0 10px 30px rgba(40, 40, 120, .14);
+}
+body.is-gamer { background: var(--ink); }
+.is-gamer .btn { background: #fff; color: var(--text); box-shadow: inset 0 0 0 1.5px var(--line-strong); }
+.is-gamer .btn:hover { filter: brightness(.97) drop-shadow(0 0 8px color-mix(in srgb, var(--accent) 50%, transparent)); }
+.is-gamer .btn--accent { background: linear-gradient(90deg, var(--accent), #2E7BFF 60%, var(--accent-3)); color: #fff; box-shadow: none; }
+.is-gamer .btn--ink, .is-gamer .btn--white { background: #0B1030; color: #fff; }
+.is-gamer .badge, .is-gamer .pill { background: var(--accent); color: #fff; }
+.is-gamer .badge--sale, .is-gamer .badge--discount { background: var(--accent-2); color: #fff; }
+.is-gamer .header { background: color-mix(in srgb, #fff 88%, transparent); border-bottom: 1px solid var(--line); box-shadow: 0 1px 0 var(--accent), 0 8px 24px rgba(91, 61, 245, .08); }
+.is-gamer .nav a:hover, .is-gamer .nav__link:hover { color: var(--accent); text-shadow: none; }
+.is-gamer .section-title::before { box-shadow: none; }
+.is-gamer .header .search, .is-gamer .header input[type="search"], .is-gamer input, .is-gamer select, .is-gamer textarea { background: #fff; border-color: var(--line-strong); }
+.is-gamer input:focus, .is-gamer select:focus, .is-gamer textarea:focus { border-color: var(--accent); box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 22%, transparent); }
+/* hero escuro como "tela de jogo" */
+.is-gamer .hero { background: radial-gradient(600px 300px at 85% 10%, #FF2BD655, transparent 70%), radial-gradient(700px 400px at 10% 100%, #00C2E055, transparent 70%), #0B0B22; color: #fff; border-color: #0B1030; }
+.is-gamer .hero .btn { background: #fff; color: #0B1030; }
+.is-gamer .hero .btn--accent { background: linear-gradient(90deg, var(--accent), #2E7BFF 60%, var(--accent-3)); color: #fff; }
+.is-gamer .card__media, .is-gamer .trust > *, .is-gamer .tile, .is-gamer .circle__img, .is-gamer .circle__media, .is-gamer .review, .is-gamer .bundle { background: #fff; border-color: var(--line); }
+.is-gamer .card:hover .card__media, .is-gamer .tile:hover, .is-gamer .circle:hover .circle__img, .is-gamer .circle:hover .circle__media { border-color: var(--accent); }
+.is-gamer .card__price, .is-gamer .price-block__current { color: var(--text); text-shadow: none; }
+.is-gamer .deal { background: linear-gradient(120deg, #1B0A52, #4A0F5E); color: #fff; border-color: var(--accent-2); box-shadow: 0 10px 30px rgba(255, 43, 214, .18); }
+.is-gamer .deal .btn { background: #fff; color: #0B1030; }
+.is-gamer .newsletter { background: linear-gradient(120deg, #E8ECFF, #F6E9FF); color: var(--text); border-color: var(--line-strong); }
+.is-gamer .drawer__bar, .is-gamer .drawer__progress { background: #E7EAFB; border-color: var(--line-strong); }
+.is-gamer .drawer__bar-fill, .is-gamer .drawer__progress span { background: repeating-linear-gradient(135deg, var(--accent) 0 8px, #7A62FF 8px 16px); box-shadow: none; }
+.is-gamer .drawer__panel { background: #fff; color: var(--text); border-left: 1px solid var(--accent); box-shadow: -12px 0 40px rgba(40, 40, 120, .14); }
+.is-gamer .mbar { background: color-mix(in srgb, #fff 94%, transparent); border-top: 1px solid var(--accent); box-shadow: 0 -6px 24px rgba(91, 61, 245, .1); }
+.is-gamer .footer { background: #0B1030; color: #E9F1FF; border-top: 2px solid var(--accent); }
+.is-gamer ::-webkit-scrollbar-track { background: #fff; }

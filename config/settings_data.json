@@ -10,9 +10,9 @@
 {
   "current": {
     "color_accent": "#5B3DF5",
-    "color_ink": "#FAFAFC",
+    "color_ink": "#F3F5FF",
     "color_positive": "#0E9F6E",
-    "color_soft": "#F1F0F8",
+    "color_soft": "#FFFFFF",
     "pix_discount": 5,
     "installments": 3,
     "free_shipping_threshold": 150,
@@ -219,11 +219,11 @@
       }
     },
     "content_for_index": [],
-    "color_accent_2": "#FF3B7F",
-    "color_accent_3": "#C6FF3D",
-    "color_text": "#0B0B14",
-    "visual_style": "modern",
-    "dark_mode": "auto",
-    "corner_radius": 12
+    "color_accent_2": "#FF2BD6",
+    "color_accent_3": "#00C2E0",
+    "color_text": "#0B1030",
+    "visual_style": "gamer",
+    "dark_mode": "light",
+    "corner_radius": 4
   }
 }
