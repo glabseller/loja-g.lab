@@ -1452,3 +1452,10 @@ body.is-gift { background: var(--ink); color: var(--text); }
 @media (min-width: 701px) {
   .is-gift .grid { grid-template-columns: repeat(auto-fit, minmax(max(220px, calc((100% - (var(--cols) - 1) * 26px) / var(--cols))), 1fr)); }
 }
+
+/* ---- PRESENTE: barra de busca limpa (uma só pílula) ---- */
+.is-gift .header-search { background: #fff; border: 1.5px solid var(--line-strong); border-radius: 999px; padding-left: 20px; box-shadow: var(--shadow-sm); transition: border-color .15s, box-shadow .15s; }
+.is-gift .header-search:focus-within { background: #fff; border-color: var(--accent); box-shadow: 0 0 0 4px rgba(242, 85, 90, .15); }
+.is-gift .header-search input, .is-gift .header-search input:focus { border: 0; border-radius: 0; background: transparent; box-shadow: none; outline: none; padding-left: 0; }
+.is-gift .header-search button { margin-right: 4px; border-radius: 50%; color: var(--accent); }
+.is-gift .header-search button:hover { background: #FFE9E3; color: var(--accent); }
