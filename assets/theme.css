@@ -1337,3 +1337,108 @@ body.is-gamer { background: var(--ink); }
 .is-gamer .newsletter__fields input[type="email"] { background: #fff; color: var(--text); border: 1.5px solid var(--line-strong); border-radius: 4px; }
 .is-gamer .newsletter__fields input[type="email"]::placeholder { color: #6B7599; opacity: 1; }
 .is-gamer .newsletter__msg { color: var(--text); }
+
+/* =====================================================================
+   PRESENTE (Estilo visual → Presente)
+   Claro, fofo e limpo: creme, coral e menta, cantos bem arredondados,
+   fotos em destaque. Base: Moderno em modo claro.
+   ===================================================================== */
+.is-gift {
+  --line: #F1DFD4;
+  --line-strong: #E6C9B8;
+  --muted: #7A6A70;
+  --on-accent: #fff;
+  --font-head: 'Plus Jakarta Sans', 'Inter', system-ui, sans-serif;
+  --shadow-sm: 0 2px 8px rgba(120, 70, 60, .06);
+  --shadow-md: 0 14px 34px rgba(120, 70, 60, .14);
+  --glow: 0 10px 28px rgba(242, 85, 90, .28);
+}
+body.is-gift { background: var(--ink); color: var(--text); }
+.is-gift h1, .is-gift h2, .is-gift h3, .is-gift .section-title { font-family: var(--font-head); font-weight: 800; letter-spacing: -.02em; }
+.is-gift .section-title { text-transform: none; }
+
+/* botões grandes e arredondados */
+.is-gift .btn { border-radius: 999px; border: 1.5px solid var(--line-strong); background: #fff; color: var(--text); font-weight: 700; min-height: 48px; padding-inline: 26px; box-shadow: none; transition: transform .15s, box-shadow .15s, border-color .15s; }
+.is-gift .btn:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+.is-gift .btn--accent { background: var(--accent); border-color: var(--accent); color: #fff; box-shadow: 0 8px 20px rgba(242, 85, 90, .28); }
+.is-gift .btn--accent:hover { color: #fff; border-color: var(--accent); box-shadow: var(--glow); filter: brightness(1.04); }
+.is-gift .btn--ink { background: var(--text); border-color: var(--text); color: #fff; }
+.is-gift .btn--ink:hover { color: #fff; }
+
+/* selos */
+.is-gift .badge, .is-gift .pill { border-radius: 999px; font-weight: 700; }
+.is-gift .badge--accent, .is-gift .badge--sale, .is-gift .badge--discount { background: var(--accent); color: #fff; }
+.is-gift .badge--ink { background: var(--accent-2); color: #0F3D2E; }
+
+/* cabeçalho */
+.is-gift .header { background: color-mix(in srgb, #fff 88%, transparent); border-bottom: 1px solid var(--line); }
+.is-gift .nav a:hover, .is-gift .nav__link:hover { color: var(--accent); }
+.is-gift .header .search, .is-gift .header input[type="search"], .is-gift input, .is-gift select, .is-gift textarea { background: #fff; border: 1.5px solid var(--line-strong); border-radius: 999px; color: var(--text); }
+.is-gift textarea { border-radius: 18px; }
+.is-gift input:focus, .is-gift select:focus, .is-gift textarea:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 4px rgba(242, 85, 90, .15); }
+
+/* hero claro e acolhedor */
+.is-gift .hero__panel { background: linear-gradient(135deg, #FFE3D6 0%, #FFF0E8 55%, #DDF7EC 100%); color: var(--text); border: 0; border-radius: 32px; box-shadow: var(--shadow-sm); }
+.is-gift .hero__panel::before { content: none; }
+.is-gift .hero__title { color: var(--text); font-weight: 800; letter-spacing: -.035em; }
+.is-gift .hero__lead, .is-gift .hero__rating { color: var(--muted); }
+.is-gift .hero .pill { background: #fff; border: 1px solid var(--line-strong); color: var(--text); }
+.is-gift .hero .btn--accent { background: var(--accent); border-color: var(--accent); color: #fff; box-shadow: 0 8px 20px rgba(242, 85, 90, .28); }
+.is-gift .hero .btn--outline { background: #fff; color: var(--text); border-color: var(--line-strong); }
+.is-gift .hero .btn--outline:hover { border-color: var(--accent); color: var(--accent); }
+.is-gift .hero__card { background: #fff; color: var(--text); border: 1px solid var(--line); box-shadow: var(--shadow-md); -webkit-backdrop-filter: none; backdrop-filter: none; border-radius: 20px; }
+.is-gift .hero__card-tag { color: var(--accent); font-family: var(--font); letter-spacing: .04em; font-weight: 700; }
+
+/* faixa de confiança e categorias */
+.is-gift .trust__row { background: #fff; border: 1px solid var(--line); border-radius: 24px; box-shadow: var(--shadow-sm); }
+.is-gift .trust__item { border-right: 1px solid var(--line); padding: 22px 26px; }
+.is-gift .trust__item:last-child { border-right: 0; }
+.is-gift .trust__icon { background: #FFE9E3; color: var(--accent); border: 0; border-radius: 50%; }
+.is-gift .circle__media, .is-gift .tile__media { background: #FFF0E8; border: 2px solid #fff; border-radius: 28px; box-shadow: var(--shadow-sm); }
+.is-gift .circle:nth-child(3n+2) .circle__media, .is-gift .tile:nth-child(3n+2) .tile__media { background: #E3F8EF; }
+.is-gift .circle:nth-child(3n+3) .circle__media, .is-gift .tile:nth-child(3n+3) .tile__media { background: #FFF3CC; }
+.is-gift .circle:hover .circle__media, .is-gift .tile:hover .tile__media { border-color: var(--accent); box-shadow: var(--glow); transform: translateY(-4px); }
+
+/* produtos */
+.is-gift .grid { gap: 44px 26px; }
+.is-gift .card { gap: 16px; }
+.is-gift .card__body { gap: 6px; padding: 0 4px; }
+.is-gift .card__media { background: #fff; border: 1px solid var(--line); border-radius: 24px; overflow: hidden; box-shadow: var(--shadow-sm); }
+.is-gift .card:hover .card__media { border-color: var(--accent); box-shadow: var(--shadow-md); transform: translateY(-4px); }
+.is-gift .card__price { font-family: var(--font-head); font-weight: 800; color: var(--text); }
+.is-gift .card__pix { color: var(--positive); font-weight: 600; }
+
+/* promoções, oferta, newsletter, avaliações */
+.is-gift .promo__viewport { border-radius: 28px; overflow: hidden; border: 0; box-shadow: var(--shadow-md); }
+.is-gift .promo__dots { margin-top: 14px; }
+.is-gift .promo { padding-bottom: 36px; }
+.is-gift .trust { padding-bottom: 56px; }
+.is-gift .deal__panel { background: linear-gradient(120deg, #F2555A, #FF8A6B); color: #fff; border: 0; border-radius: 32px; box-shadow: 0 16px 36px rgba(242, 85, 90, .28); }
+.is-gift .deal__panel::before, .is-gift .deal__panel::after { opacity: .25; }
+.is-gift .deal__media { background: rgba(255, 255, 255, .22); border-radius: 24px; }
+.is-gift .deal__price { color: #fff; }
+.is-gift .deal .btn--accent { background: #fff; border-color: #fff; color: var(--accent); box-shadow: none; }
+.is-gift .newsletter__panel { background: linear-gradient(120deg, #DDF7EC, #FFF0E8); color: var(--text); border: 0; border-radius: 32px; }
+.is-gift .newsletter__title { color: var(--text); }
+.is-gift .newsletter__lead { color: #5E4F55; }
+.is-gift .newsletter__fields input[type="email"] { background: #fff; color: var(--text); border: 1.5px solid var(--line-strong); }
+.is-gift .newsletter__fields input[type="email"]::placeholder { color: #8A7A80; }
+.is-gift .review { background: #fff; border: 1px solid var(--line); border-radius: 24px; box-shadow: var(--shadow-sm); }
+.is-gift .bundle { background: #fff; border-radius: 28px; }
+
+/* carrinho lateral, barra do celular, rodapé */
+.is-gift .drawer__panel { background: #fff; color: var(--text); border-radius: 28px 0 0 28px; }
+.is-gift .drawer__bar, .is-gift .drawer__progress { background: #FBE6DC; border-radius: 999px; overflow: hidden; }
+.is-gift .drawer__bar-fill, .is-gift .drawer__progress span { background: linear-gradient(90deg, var(--accent-2), #7FE0BD); border-radius: 999px; }
+.is-gift .mbar { background: color-mix(in srgb, #fff 94%, transparent); border-top: 1px solid var(--line); }
+.is-gift .footer { background: #2B2430; color: #F6EDE8; border-top: 0; border-radius: 32px 32px 0 0; }
+.is-gift .footer__brand { color: #fff; }
+.is-gift .footer__col a:hover { color: var(--accent-3); }
+.is-gift .section { padding-bottom: 88px; }
+.is-gift ::selection { background: var(--accent-3); color: var(--text); }
+@media (max-width: 700px) {
+  .is-gift .grid { gap: 30px 14px; }
+  .is-gift .section { padding-bottom: 60px; }
+  .is-gift .trust__item { border-right: 0; border-bottom: 1px solid var(--line); }
+  .is-gift .hero__panel, .is-gift .deal__panel, .is-gift .newsletter__panel { border-radius: 24px; }
+}

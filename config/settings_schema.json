@@ -111,6 +111,7 @@
         "id": "visual_style",
         "label": "Estilo visual do site",
         "options": [
+          { "value": "gift", "label": "Presente (claro, fofo e limpo, coral e menta)" },
           { "value": "gamer", "label": "Gamer (claro, HUD neon, cantos cortados)" },
           { "value": "toon", "label": "Cartoon Moderno (contornos, adesivos, bento, atual)" },
           { "value": "toon_night", "label": "Cartoon Noturno (escuro com neon, gamer)" },
