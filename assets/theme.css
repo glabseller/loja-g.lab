@@ -1291,3 +1291,41 @@ body.is-gamer { background: var(--ink); }
 .is-gamer .mbar { background: color-mix(in srgb, #fff 94%, transparent); border-top: 1px solid var(--accent); box-shadow: 0 -6px 24px rgba(91, 61, 245, .1); }
 .is-gamer .footer { background: #0B1030; color: #E9F1FF; border-top: 2px solid var(--accent); }
 .is-gamer ::-webkit-scrollbar-track { background: #fff; }
+
+/* ---- GAMER: correções de alinhamento e respiro ---- */
+/* os blocos-seção não levam borda/fundo; só os painéis internos */
+.is-gamer .promo, .is-gamer .deal, .is-gamer .newsletter, .is-gamer .bundle, .is-gamer .reviews, .is-gamer .trust { border: 0; background: transparent; box-shadow: none; border-radius: 0; transform: none; }
+.is-gamer .promo::after { content: none; }
+.is-gamer .promo__viewport { border: 1px solid var(--line-strong); border-radius: 6px; overflow: hidden; box-shadow: 0 10px 30px rgba(40, 40, 120, .12); }
+.is-gamer .promo__slide, .is-gamer .promo__track { border-radius: 0; }
+.is-gamer .promo__dots { margin-top: 14px; }
+.is-gamer .deal__panel { background: linear-gradient(120deg, #1B0A52, #4A0F5E); color: #fff; border: 1px solid var(--accent-2); border-radius: 6px; box-shadow: 0 10px 30px rgba(255, 43, 214, .18); }
+.is-gamer .newsletter__panel { background: linear-gradient(120deg, #E8ECFF, #F6E9FF); color: var(--text); border: 1px solid var(--line-strong); border-radius: 6px; }
+
+/* faixa de confiança: um bloco só, com espaço do carrossel */
+.is-gamer .promo { padding-bottom: 36px; }
+.is-gamer .trust { padding-bottom: 56px; }
+.is-gamer .trust__row { border: 1px solid var(--line); border-radius: 6px; background: #fff; box-shadow: 0 6px 20px rgba(40, 40, 120, .06); }
+.is-gamer .trust__item { border: 0; border-right: 1px solid var(--line); background: transparent; box-shadow: none; padding: 22px 26px; }
+.is-gamer .trust__item:last-child { border-right: 0; }
+.is-gamer .trust__icon { border-radius: 4px; }
+
+/* botões secundários: contorno inteiro, sem corte torto */
+.is-gamer .btn:not(.btn--accent):not(.btn--ink) { clip-path: none; border: 1.5px solid var(--line-strong); border-radius: 4px; box-shadow: none; }
+.is-gamer .btn:not(.btn--accent):not(.btn--ink):hover { border-color: var(--accent); color: var(--accent); filter: none; }
+.is-gamer .btn { min-height: 46px; padding-inline: 22px; }
+
+/* grade e cards com mais respiro */
+.is-gamer .grid { gap: 48px 28px; }
+.is-gamer .card { gap: 18px; }
+.is-gamer .card__body { gap: 8px; padding: 0 4px; }
+.is-gamer .card__title { line-height: 1.35; }
+.is-gamer .card__media { overflow: hidden; border-radius: 6px; }
+.is-gamer .card:hover .card__media { transform: translateY(-4px); }
+.is-gamer .section { padding-bottom: 96px; }
+.is-gamer .section-head { margin-bottom: 28px; }
+@media (max-width: 700px) {
+  .is-gamer .grid { gap: 32px 14px; }
+  .is-gamer .section { padding-bottom: 64px; }
+  .is-gamer .trust__item { border-right: 0; border-bottom: 1px solid var(--line); }
+}
