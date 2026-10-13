@@ -1442,3 +1442,13 @@ body.is-gift { background: var(--ink); color: var(--text); }
   .is-gift .trust__item { border-right: 0; border-bottom: 1px solid var(--line); }
   .is-gift .hero__panel, .is-gift .deal__panel, .is-gift .newsletter__panel { border-radius: 24px; }
 }
+
+/* ---- PRESENTE: alinhamento da grade de produtos ---- */
+.is-gift .grid { align-items: stretch; }
+.is-gift .card { height: 100%; }
+.is-gift .card__body { flex: 1 1 auto; }
+.is-gift .card__title { min-height: 2.7em; }
+.is-gift .card .btn { margin-top: auto; width: 100%; }
+@media (min-width: 701px) {
+  .is-gift .grid { grid-template-columns: repeat(auto-fit, minmax(max(220px, calc((100% - (var(--cols) - 1) * 26px) / var(--cols))), 1fr)); }
+}
