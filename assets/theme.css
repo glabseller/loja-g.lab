@@ -1459,3 +1459,7 @@ body.is-gift { background: var(--ink); color: var(--text); }
 .is-gift .header-search input, .is-gift .header-search input:focus { border: 0; border-radius: 0; background: transparent; box-shadow: none; outline: none; padding-left: 0; }
 .is-gift .header-search button { margin-right: 4px; border-radius: 50%; color: var(--accent); }
 .is-gift .header-search button:hover { background: #FFE9E3; color: var(--accent); }
+
+/* ---- Logo só com as letras (todos os estilos Moderno) ---- */
+.is-modern .logo::after, .is-gift .logo::after { content: none !important; display: none !important; }
+.is-gift .logo { font-family: var(--font-head); font-weight: 800; letter-spacing: -.02em; color: var(--text); }
