@@ -32,8 +32,11 @@
   {%- assign visual = settings.visual_style | default: 'modern' -%}
   {%- assign is_cartoon = false -%}
   {%- assign is_modern = false -%}
+  {%- assign is_toon = false -%}
   {%- if visual == 'cartoon' -%}{%- assign is_cartoon = true -%}{%- elsif visual == 'classic' -%}{%- else -%}{%- assign is_modern = true -%}{%- endif -%}
+  {%- if visual == 'toon' -%}{%- assign is_toon = true -%}{%- endif -%}
   {%- assign dark_mode = settings.dark_mode | default: 'auto' -%}
+  {%- if is_toon -%}{%- assign dark_mode = 'light' -%}{%- endif -%}
   {%- case settings.font_choice -%}
     {%- when 'poppins' -%}{%- assign font_family = 'Poppins' -%}{%- assign font_query = 'Poppins:wght@400;500;600;700;800' -%}
     {%- when 'dm_sans' -%}{%- assign font_family = 'DM Sans' -%}{%- assign font_query = 'DM+Sans:wght@400;500;600;700' -%}
@@ -41,7 +44,10 @@
     {%- else -%}{%- assign font_family = 'Inter' -%}{%- assign font_query = 'Inter:wght@400;500;600;700;800' -%}
   {%- endcase -%}
   {%- assign font_head = font_family -%}
-  {%- if is_modern -%}
+  {%- if is_toon -%}
+    {%- assign font_family = 'Inter' -%}{%- assign font_head = 'Bricolage Grotesque' -%}
+    {%- assign font_query = 'Inter:wght@400;500;600;700&family=Bricolage+Grotesque:wght@600;700;800' -%}
+  {%- elsif is_modern -%}
     {%- assign font_family = 'Inter' -%}{%- assign font_head = 'Space Grotesk' -%}
     {%- assign font_query = 'Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700' -%}
   {%- elsif is_cartoon -%}
@@ -105,7 +111,7 @@
   </script>
 </head>
 
-<body class="template-{{ request.page_type | handleize }}{% if is_modern %} is-modern{% elsif is_cartoon %} is-cartoon{% else %}{% if settings.colorful != false %} is-colorful{% endif %}{% if settings.glass != false %} is-glass{% endif %}{% endif %}{% if settings.header_sticky %} has-sticky-header{% endif %}{% if settings.heading_uppercase %} heading-upper{% endif %}{% if settings.gallery_sticky %} sticky-gallery{% endif %}{% if settings.mobile_bar != false %} has-mobile-bar{% endif %}{% if settings.reveal != false %} has-reveal{% endif %}">
+<body class="template-{{ request.page_type | handleize }}{% if is_modern %} is-modern{% if is_toon %} is-toon{% endif %}{% elsif is_cartoon %} is-cartoon{% else %}{% if settings.colorful != false %} is-colorful{% endif %}{% if settings.glass != false %} is-glass{% endif %}{% endif %}{% if settings.header_sticky %} has-sticky-header{% endif %}{% if settings.heading_uppercase %} heading-upper{% endif %}{% if settings.gallery_sticky %} sticky-gallery{% endif %}{% if settings.mobile_bar != false %} has-mobile-bar{% endif %}{% if settings.reveal != false %} has-reveal{% endif %}">
   <a class="skip-link" href="#MainContent">{{ 'general.skip_to_content' | t }}</a>
 
   {% section 'top-bar' %}

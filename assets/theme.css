@@ -1029,3 +1029,105 @@ html.drawer-open { overflow: hidden; }
   .mbar .cart-badge { right: -9px; top: -5px; }
   html.drawer-open .mbar { display: none; }
 }
+
+/* =====================================================================
+   CARTOON MODERNO (Estilo visual → Cartoon Moderno)
+   Camada sobre o Moderno: contornos, sombras duras, adesivos, bento.
+   ===================================================================== */
+.is-toon {
+  --ol: 2.5px solid var(--text);
+  --sh: 4px 4px 0 var(--text);
+  --sh-lg: 7px 7px 0 var(--text);
+  --line: var(--text);
+  --line-strong: var(--text);
+  --radius: 16px;
+  --t-yellow: #FFE14D;
+  --t-mint: #8CF2C6;
+  --t-sky: #9BDCFF;
+  --t-pink: #FFB3D4;
+  --t-lilac: #D6C7FF;
+  --shadow-sm: var(--sh);
+  --shadow-md: var(--sh);
+  --glow: var(--sh);
+  --font-head: 'Bricolage Grotesque', 'Inter', system-ui, sans-serif;
+}
+body.is-toon { background: var(--ink); letter-spacing: -.005em; }
+.is-toon h1, .is-toon h2, .is-toon h3, .is-toon .section-title, .is-toon .hero__title { font-family: var(--font-head); font-weight: 800; letter-spacing: -.02em; }
+.is-toon ::selection { background: var(--accent-3, #C6FF3D); color: #12101F; }
+
+/* botões: chunky, afundam ao clicar */
+.is-toon .btn { border: var(--ol); border-radius: 999px; font-weight: 700; box-shadow: var(--sh); background: #fff; color: var(--text); transition: transform .12s, box-shadow .12s; }
+.is-toon .btn:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0 var(--text); border-color: var(--text); filter: none; }
+.is-toon .btn:active { transform: translate(3px, 3px); box-shadow: 1px 1px 0 var(--text); }
+.is-toon .btn--accent { background: var(--accent); color: #fff; border-color: var(--text); box-shadow: var(--sh); }
+.is-toon .btn--accent:hover { border-color: var(--text); box-shadow: 6px 6px 0 var(--text); }
+.is-toon .btn--ink { background: var(--text); color: #fff; }
+.is-toon .btn--white { background: #fff; color: var(--text); border-color: var(--text); }
+.is-toon .btn--outline { background: transparent; }
+
+/* etiquetas viram adesivos */
+.is-toon .badge, .is-toon .pill { border: 2px solid var(--text); border-radius: 999px; font-weight: 800; box-shadow: 2px 2px 0 var(--text); transform: rotate(-3deg); }
+.is-toon .badge--sale, .is-toon .badge--discount { background: var(--accent-2); color: #fff; }
+
+/* cabeçalho */
+.is-toon .header { background: var(--ink); -webkit-backdrop-filter: none; backdrop-filter: none; border-bottom: var(--ol); }
+.is-toon .header .search, .is-toon .header input[type="search"] { border: var(--ol); border-radius: 999px; background: #fff; box-shadow: 3px 3px 0 var(--text); }
+.is-toon .nav a:hover, .is-toon .nav__link:hover { background: var(--accent-3, #C6FF3D); color: #12101F; border-radius: 999px; }
+
+/* hero colorido, com padrão de pontos e formas */
+.is-toon .hero { background: var(--accent); color: #fff; border: var(--ol); border-radius: 28px; box-shadow: var(--sh-lg); overflow: hidden; position: relative; }
+.is-toon .hero::before { content: ""; position: absolute; inset: 0; background: radial-gradient(circle at 85% 20%, var(--accent-3, #C6FF3D) 0 70px, transparent 71px), radial-gradient(circle at 92% 82%, var(--accent-2) 0 46px, transparent 47px); opacity: .9; pointer-events: none; }
+.is-toon .hero > * { position: relative; }
+.is-toon .hero__title { color: #fff; text-shadow: 3px 3px 0 #12101F; }
+
+/* faixas e categorias: cartões coloridos tipo bento */
+.is-toon .trust__item, .is-toon .trust > * { border: var(--ol); border-radius: var(--radius); box-shadow: 3px 3px 0 var(--text); background: #fff; }
+.is-toon .trust > *:nth-child(4n+1) { background: var(--t-yellow); }
+.is-toon .trust > *:nth-child(4n+2) { background: var(--t-mint); }
+.is-toon .trust > *:nth-child(4n+3) { background: var(--t-sky); }
+.is-toon .trust > *:nth-child(4n+4) { background: var(--t-pink); }
+.is-toon .circle__img, .is-toon .circle__media, .is-toon .tile, .is-toon .tile__media { border: var(--ol); border-radius: 22px; box-shadow: var(--sh); transition: transform .15s, box-shadow .15s; }
+.is-toon .circle:hover .circle__img, .is-toon .circle:hover .circle__media, .is-toon .tile:hover { transform: translate(-2px, -3px) rotate(-1.5deg); box-shadow: 6px 7px 0 var(--text); }
+.is-toon .circle:nth-child(5n+1) .circle__img, .is-toon .tile:nth-child(5n+1) { background: var(--t-yellow); }
+.is-toon .circle:nth-child(5n+2) .circle__img, .is-toon .tile:nth-child(5n+2) { background: var(--t-mint); }
+.is-toon .circle:nth-child(5n+3) .circle__img, .is-toon .tile:nth-child(5n+3) { background: var(--t-sky); }
+.is-toon .circle:nth-child(5n+4) .circle__img, .is-toon .tile:nth-child(5n+4) { background: var(--t-pink); }
+.is-toon .circle:nth-child(5n+5) .circle__img, .is-toon .tile:nth-child(5n+5) { background: var(--t-lilac); }
+
+/* cards de produto */
+.is-toon .card__media { border: var(--ol); border-radius: 20px; box-shadow: var(--sh); background: var(--t-lilac); transition: transform .15s, box-shadow .15s; }
+.is-toon .card:nth-child(4n+2) .card__media { background: var(--t-yellow); }
+.is-toon .card:nth-child(4n+3) .card__media { background: var(--t-mint); }
+.is-toon .card:nth-child(4n+4) .card__media { background: var(--t-sky); }
+.is-toon .card:hover .card__media { transform: translate(-3px, -4px) rotate(-1deg); border-color: var(--text); box-shadow: 7px 8px 0 var(--text); }
+.is-toon .card__price { font-family: var(--font-head); font-weight: 800; }
+
+/* carrossel de promoções e blocos de destaque */
+.is-toon .promo, .is-toon .promo__slide, .is-toon .carousel { border-radius: 24px; }
+.is-toon .promo__viewport, .is-toon .promo__track { border-radius: 24px; }
+.is-toon .promo { border: var(--ol); box-shadow: var(--sh-lg); overflow: hidden; }
+.is-toon .deal, .is-toon .newsletter, .is-toon .bundle, .is-toon .reviews__item, .is-toon .review { border: var(--ol); border-radius: 24px; box-shadow: var(--sh-lg); }
+.is-toon .deal { background: var(--t-yellow); color: #12101F; }
+.is-toon .newsletter { background: var(--t-pink); color: #12101F; }
+.is-toon .review { background: #fff; box-shadow: var(--sh); }
+.is-toon input, .is-toon select, .is-toon textarea { border: var(--ol); border-radius: 14px; background: #fff; }
+.is-toon input:focus, .is-toon select:focus, .is-toon textarea:focus { outline: none; box-shadow: 3px 3px 0 var(--accent); }
+
+/* produto, rodapé, gaveta e barra mobile */
+.is-toon .product__gallery img, .is-toon .product__media { border-radius: 22px; }
+.is-toon .product__media, .is-toon .gallery__main { border: var(--ol); box-shadow: var(--sh-lg); background: var(--t-lilac); }
+.is-toon .footer { background: #12101F; color: #fff; border-top: var(--ol); }
+.is-toon .drawer__panel { border-left: var(--ol); border-radius: 24px 0 0 24px; }
+.is-toon .drawer__bar-fill, .is-toon .drawer__progress span { background: var(--accent-3, #C6FF3D); }
+.is-toon .mbar { border-top: var(--ol); background: var(--ink); -webkit-backdrop-filter: none; backdrop-filter: none; }
+.is-toon .mbar a:active, .is-toon .mbar button:active { background: var(--accent-3, #C6FF3D); }
+
+/* movimento: respeita quem prefere menos animação */
+@media (prefers-reduced-motion: no-preference) {
+  .is-toon .badge, .is-toon .pill { animation: toon-wobble 3.2s ease-in-out infinite; }
+  @keyframes toon-wobble { 0%, 100% { transform: rotate(-3deg); } 50% { transform: rotate(2deg); } }
+}
+@media (max-width: 700px) {
+  .is-toon { --sh: 3px 3px 0 var(--text); --sh-lg: 4px 4px 0 var(--text); }
+  .is-toon .hero__title { text-shadow: 2px 2px 0 #12101F; }
+}
