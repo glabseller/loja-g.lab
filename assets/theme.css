@@ -1463,3 +1463,13 @@ body.is-gift { background: var(--ink); color: var(--text); }
 /* ---- Logo só com as letras (todos os estilos Moderno) ---- */
 .is-modern .logo::after, .is-gift .logo::after { content: none !important; display: none !important; }
 .is-gift .logo { font-family: var(--font-head); font-weight: 800; letter-spacing: -.02em; color: var(--text); }
+
+/* ---- PRESENTE: produtos menores no computador (até 5 por linha) ---- */
+@media (min-width: 701px) {
+  .is-gift .grid { grid-template-columns: repeat(auto-fill, minmax(max(230px, calc((100% - 4 * 26px) / 5)), 1fr)); gap: 40px 24px; }
+}
+@media (min-width: 701px) and (max-width: 1000px) {
+  .is-gift .grid { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); }
+}
+.is-gift .card__title { font-size: 14px; }
+.is-gift .card .btn { min-height: 42px; font-size: 13px; padding-inline: 18px; }
