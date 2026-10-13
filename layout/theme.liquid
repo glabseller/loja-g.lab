@@ -36,11 +36,12 @@
   {%- if visual == 'cartoon' -%}{%- assign is_cartoon = true -%}{%- elsif visual == 'classic' -%}{%- else -%}{%- assign is_modern = true -%}{%- endif -%}
   {%- assign is_night = false -%}
   {%- assign is_gamer = false -%}
-  {%- if visual == 'gamer' -%}{%- assign is_gamer = true -%}{%- assign dark_mode = 'dark' -%}{%- endif -%}
+  {%- if visual == 'gamer' -%}{%- assign is_gamer = true -%}{%- endif -%}
   {%- if visual == 'toon' or visual == 'toon_night' -%}{%- assign is_toon = true -%}{%- endif -%}
   {%- if visual == 'toon_night' -%}{%- assign is_night = true -%}{%- endif -%}
   {%- assign dark_mode = settings.dark_mode | default: 'auto' -%}
   {%- if is_toon -%}{%- assign dark_mode = 'light' -%}{%- endif -%}
+  {%- if is_gamer -%}{%- assign dark_mode = 'dark' -%}{%- endif -%}
   {%- case settings.font_choice -%}
     {%- when 'poppins' -%}{%- assign font_family = 'Poppins' -%}{%- assign font_query = 'Poppins:wght@400;500;600;700;800' -%}
     {%- when 'dm_sans' -%}{%- assign font_family = 'DM Sans' -%}{%- assign font_query = 'DM+Sans:wght@400;500;600;700' -%}
