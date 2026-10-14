@@ -1573,3 +1573,8 @@ body.vmodal-open { overflow: hidden; }
   .product { gap: 16px 44px; }
   .product__info { flex: 1 1 380px; max-width: 500px; }
 }
+
+/* ---- Produto: miniaturas na esquerda ---- */
+@media (min-width: 901px) {
+  .gallery { flex-direction: row; }
+}
