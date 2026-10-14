@@ -1564,3 +1564,12 @@ body.vmodal-open { overflow: hidden; }
   .section-head { margin-bottom: 18px; }
   .is-gift .section-head { margin-bottom: 18px; }
 }
+
+/* ---- Produto: galeria maior no computador ---- */
+@media (min-width: 901px) {
+  .gallery { flex: 0 1 660px; max-width: 660px; gap: 12px; }
+  .gallery__thumbs { flex: 0 0 68px; max-height: 570px; gap: 9px; }
+  .thumb { flex: 0 0 68px; width: 68px; }
+  .product { gap: 16px 44px; }
+  .product__info { flex: 1 1 380px; max-width: 500px; }
+}
