@@ -1578,3 +1578,36 @@ body.vmodal-open { overflow: hidden; }
 @media (min-width: 901px) {
   .gallery { flex-direction: row; }
 }
+
+/* =====================================================================
+   CELULAR COMPACTO (até 700px): menos espaço vazio, tudo mais junto
+   ===================================================================== */
+@media (max-width: 700px) {
+  /* cabeçalho */
+  body.is-modern .header__row { padding-top: 8px; padding-bottom: 6px; gap: 8px 12px; }
+  body.is-modern .logo { font-size: 22px; }
+  body.is-modern .header-search { min-height: 40px; margin: 0; }
+  body.is-modern .header-search input { min-height: 38px; font-size: 14px; }
+  body.is-modern .header-search button { height: 38px; width: 40px; }
+  body.is-modern .nav a, body.is-modern .nav__link { padding-top: 6px; padding-bottom: 8px; font-size: 13.5px; }
+
+  /* promoções e faixa de confiança */
+  body.is-modern .promo { padding-top: 10px; padding-bottom: 10px; }
+  body.is-modern .promo__dots { margin-top: 8px; }
+  body.is-modern .trust { padding-top: 0; padding-bottom: 14px; }
+  body.is-modern .trust__row { border-radius: 16px; }
+  body.is-modern .trust__item { flex: 0 0 72%; padding: 10px 14px; gap: 10px; border-bottom: 0; border-right: 1px solid var(--line); }
+  body.is-modern .trust__item:last-child { border-right: 0; }
+  body.is-modern .trust__icon { width: 36px; height: 36px; flex: 0 0 36px; }
+  body.is-modern .trust__icon svg { width: 18px; height: 18px; }
+  body.is-modern .trust__title { font-size: 13.5px; }
+  body.is-modern .trust__sub { font-size: 12px; }
+
+  /* seções e grades */
+  body.is-modern .section { padding-bottom: 28px; }
+  body.is-modern .section-head { margin-bottom: 12px; }
+  body.is-modern .section-title { font-size: 20px; }
+  body.is-modern .grid { gap: 22px 12px; }
+  body.is-modern .hero__media { min-height: 220px; }
+  body.is-modern .product { padding-bottom: 24px; }
+}
