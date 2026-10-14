@@ -1611,3 +1611,12 @@ body.vmodal-open { overflow: hidden; }
   body.is-modern .hero__media { min-height: 220px; }
   body.is-modern .product { padding-bottom: 24px; }
 }
+
+/* ---- Banner maior no celular: de ponta a ponta da tela ---- */
+@media (max-width: 700px) {
+  body.is-modern .promo { padding-left: 0; padding-right: 0; padding-top: 6px; }
+  body.is-modern .promo__viewport, body.is-modern .promo__track, body.is-modern .promo__viewport .promo__link { border-radius: 0; }
+  body.is-modern .promo__viewport { border: 0; box-shadow: none; }
+  body.is-modern .promo__slide--m .promo__link { aspect-ratio: 4 / 5; }
+  body.is-modern .promo__dots { margin-top: 10px; }
+}
