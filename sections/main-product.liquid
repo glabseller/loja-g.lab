@@ -119,6 +119,31 @@
       <span>{% render 'icon', name: 'truck', size: 18 %} Envio rastreado</span>
     </div>
 
+    {%- assign video_list = product.media | where: 'media_type', 'video' -%}
+    {%- assign ext_video_list = product.media | where: 'media_type', 'external_video' -%}
+    {%- assign all_videos = video_list | concat: ext_video_list -%}
+    {%- if all_videos.size > 0 -%}
+      <div class="pvideos" data-pvideos>
+        <h3 class="pvideos__title">{{ section.settings.video_title | default: 'Descubra cada detalhe em vídeo' }}</h3>
+        <div class="pvideos__row">
+          {%- for vid in all_videos limit: 6 -%}
+            <button type="button" class="pvideo" data-pvideo-open="{{ forloop.index0 }}" aria-label="Assistir vídeo {{ forloop.index }}">
+              {{ vid.preview_image | image_url: width: 240 | image_tag: loading: 'lazy', alt: '' }}
+              <span class="pvideo__play" aria-hidden="true"></span>
+            </button>
+            <template data-pvideo-src="{{ forloop.index0 }}">{{ vid | media_tag: image_size: '1200x', controls: true, autoplay: true }}</template>
+          {%- endfor -%}
+        </div>
+        <div class="vmodal" data-vmodal hidden>
+          <div class="vmodal__overlay" data-vmodal-close></div>
+          <div class="vmodal__box" role="dialog" aria-modal="true" aria-label="Vídeo do produto">
+            <button type="button" class="vmodal__close" data-vmodal-close aria-label="Fechar">&times;</button>
+            <div class="vmodal__body" data-vmodal-body></div>
+          </div>
+        </div>
+      </div>
+    {%- endif -%}
+
     {%- for block in section.blocks -%}
       {%- if block.type == '@app' -%}{% render block %}{%- endif -%}
     {%- endfor -%}
@@ -142,6 +167,8 @@
   "name": "Produto",
   "blocks": [{ "type": "@app" }],
   "settings": [
+    { "type": "header", "content": "Vídeos do produto" },
+    { "type": "text", "id": "video_title", "label": "Título da área de vídeo", "default": "Descubra cada detalhe em vídeo", "info": "Para aparecer, envie um vídeo na mídia do produto (Produtos → seu produto → Mídia → Adicionar → Vídeo)." },
     { "type": "header", "content": "Benefícios (lista com ✓)" },
     { "type": "text", "id": "benefit_1", "label": "Benefício 1" },
     { "type": "text", "id": "benefit_2", "label": "Benefício 2" },

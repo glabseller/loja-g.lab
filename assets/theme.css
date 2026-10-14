@@ -1499,3 +1499,22 @@ body.is-gift { background: var(--ink); color: var(--text); }
   .header__row .header-search.is-open input[type="search"] { width: 100%; flex: 1 1 auto; opacity: 1; }
   .header__row .header-search button { width: 44px; border-radius: 50%; }
 }
+
+/* ---- Vídeos do produto ---- */
+.pvideos { display: flex; flex-direction: column; gap: 12px; }
+.pvideos__title { font-size: 15px; font-weight: 700; letter-spacing: 0; text-transform: none; }
+.pvideos__row { display: flex; flex-wrap: wrap; gap: 14px; }
+.pvideo { position: relative; width: 76px; height: 76px; padding: 0; border: 2px solid var(--line-strong); border-radius: 50%; overflow: hidden; background: var(--soft); cursor: pointer; transition: transform .15s, border-color .15s, box-shadow .15s; }
+.pvideo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.pvideo:hover { transform: scale(1.06); border-color: var(--accent); box-shadow: 0 6px 18px rgba(0, 0, 0, .18); }
+.pvideo__play { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: rgba(0, 0, 0, .22); }
+.pvideo__play::before { content: ""; border-style: solid; border-width: 9px 0 9px 15px; border-color: transparent transparent transparent #fff; margin-left: 3px; filter: drop-shadow(0 1px 3px rgba(0, 0, 0, .5)); }
+.vmodal { position: fixed; inset: 0; z-index: 200; display: flex; align-items: center; justify-content: center; padding: 20px; }
+.vmodal[hidden] { display: none; }
+.vmodal__overlay { position: absolute; inset: 0; background: rgba(10, 8, 20, .72); }
+.vmodal__box { position: relative; width: min(92vw, 420px); max-height: 90vh; background: #000; border-radius: 18px; overflow: hidden; box-shadow: 0 24px 70px rgba(0, 0, 0, .5); }
+.vmodal__body video, .vmodal__body iframe { display: block; width: 100%; max-height: 82vh; border: 0; aspect-ratio: 9 / 16; background: #000; object-fit: contain; }
+.vmodal__body video { aspect-ratio: auto; }
+.vmodal__close { position: absolute; top: 8px; right: 8px; z-index: 2; width: 38px; height: 38px; border: 0; border-radius: 50%; background: rgba(255, 255, 255, .92); color: #111; font-size: 26px; line-height: 1; cursor: pointer; }
+body.vmodal-open { overflow: hidden; }
+@media (min-width: 901px) { .vmodal__box { width: min(90vw, 460px); } }
