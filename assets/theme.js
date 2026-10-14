@@ -361,6 +361,8 @@
     btn.addEventListener('click', function () {
       window.scrollTo({ top: 0, behavior: 'smooth' });
       var field = document.getElementById('header-search-input');
+      var sform = document.querySelector('.header-search');
+      if (sform) { sform.classList.add('is-open'); }
       if (field) { setTimeout(function () { field.focus(); }, 300); }
     });
   });
@@ -545,7 +547,6 @@
     function close() { form.classList.remove('is-open'); }
     if (btn) {
       btn.addEventListener('click', function (e) {
-        if (!wide.matches) { return; }
         if (!form.classList.contains('is-open')) {
           e.preventDefault();
           form.classList.add('is-open');
