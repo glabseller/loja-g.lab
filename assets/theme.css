@@ -1518,3 +1518,49 @@ body.is-gift { background: var(--ink); color: var(--text); }
 .vmodal__close { position: absolute; top: 8px; right: 8px; z-index: 2; width: 38px; height: 38px; border: 0; border-radius: 50%; background: rgba(255, 255, 255, .92); color: #111; font-size: 26px; line-height: 1; cursor: pointer; }
 body.vmodal-open { overflow: hidden; }
 @media (min-width: 901px) { .vmodal__box { width: min(90vw, 460px); } }
+
+/* =====================================================================
+   VISUAL COMPACTO (computador): tudo mais junto, menos rolagem
+   ===================================================================== */
+@media (min-width: 901px) {
+  /* cabeçalho mais baixo */
+  .header__row { padding-top: 8px; padding-bottom: 6px; gap: 8px 24px; }
+  .header__row .logo { font-size: 24px; }
+  .header__row .logo img { max-height: 34px; }
+  .header__icons { gap: 4px; }
+  .header-search button { height: 38px; }
+  .nav a, .nav__link { padding-top: 6px; padding-bottom: 8px; font-size: 13.5px; }
+
+  /* página de produto: miniaturas na lateral, foto menor, textos enxutos */
+  .product { padding-top: 12px; padding-bottom: 40px; gap: 16px 40px; }
+  .gallery { flex: 0 1 520px; max-width: 520px; flex-direction: row-reverse; align-items: flex-start; gap: 10px; }
+  .gallery__stage { flex: 1 1 auto; min-width: 0; }
+  .gallery__thumbs { flex-direction: column; flex-wrap: nowrap; gap: 8px; flex: 0 0 60px; max-height: 440px; overflow-y: auto; scrollbar-width: none; }
+  .gallery__thumbs::-webkit-scrollbar { display: none; }
+  .thumb { flex: 0 0 60px; width: 60px; }
+  .product__info { flex: 1 1 400px; max-width: 520px; gap: 10px; }
+  .product__title { font-size: 21px; line-height: 1.2; }
+  .price-block { padding: 10px 0; gap: 2px; }
+  .price-block__current { font-size: 26px; }
+  .price-block__pix { font-size: 13px; }
+  .option legend { margin-bottom: 6px; }
+  .option__values label { min-height: 34px; padding: 0 14px; font-size: 13px; }
+  .qty input { min-height: 38px; width: 72px; }
+  .btn--lg { min-height: 44px; }
+  .delivery { padding: 10px 14px; gap: 10px; }
+  .delivery svg { width: 22px; height: 22px; }
+  .delivery__sub, .badges-row { font-size: 12px; }
+  .badges-row { gap: 4px 16px; }
+  .pvideos { gap: 8px; }
+  .pvideo { width: 60px; height: 60px; }
+
+  /* demais seções da loja */
+  .section { padding-bottom: 56px; }
+  .is-gift .section { padding-bottom: 56px; }
+  .promo { padding-top: 16px; padding-bottom: 20px; }
+  .is-gift .promo { padding-bottom: 24px; }
+  .is-gift .trust { padding-bottom: 36px; }
+  .hero__media { min-height: 340px; }
+  .section-head { margin-bottom: 18px; }
+  .is-gift .section-head { margin-bottom: 18px; }
+}
