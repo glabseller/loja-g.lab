@@ -1490,3 +1490,12 @@ body.is-gift { background: var(--ink); color: var(--text); }
   .header__row .logo { grid-column: 2; grid-row: 1; justify-self: center; text-align: center; font-size: 28px; }
   .header__row .header__icons { grid-column: 3; grid-row: 1; justify-self: end; }
 }
+
+/* ---- Busca só com a lupa (computador); abre ao clicar ---- */
+@media (min-width: 901px) {
+  .header__row .header-search { background: transparent; border-color: transparent; box-shadow: none; padding-left: 0; width: auto; max-width: none; justify-self: start; transition: background .2s, border-color .2s, box-shadow .2s; }
+  .header__row .header-search input[type="search"] { width: 0; min-width: 0; flex: 0 0 auto; padding: 0; opacity: 0; transition: width .25s ease, opacity .2s; }
+  .header__row .header-search.is-open { background: #fff; border-color: var(--line-strong); width: 100%; max-width: 440px; padding-left: 18px; box-shadow: var(--shadow-sm); }
+  .header__row .header-search.is-open input[type="search"] { width: 100%; flex: 1 1 auto; opacity: 1; }
+  .header__row .header-search button { width: 44px; border-radius: 50%; }
+}

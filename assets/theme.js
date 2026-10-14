@@ -535,4 +535,34 @@
         .catch(function () { if (btn) { btn.disabled = false; } form.submit(); });
     });
   })();
+  /* Busca em lupa (computador): clica na lupa para abrir o campo */
+  (function () {
+    var form = document.querySelector('.header-search');
+    if (!form) { return; }
+    var input = form.querySelector('input[type="search"]');
+    var btn = form.querySelector('button[type="submit"]');
+    var wide = window.matchMedia ? window.matchMedia('(min-width: 901px)') : { matches: false };
+    function close() { form.classList.remove('is-open'); }
+    if (btn) {
+      btn.addEventListener('click', function (e) {
+        if (!wide.matches) { return; }
+        if (!form.classList.contains('is-open')) {
+          e.preventDefault();
+          form.classList.add('is-open');
+          if (input) { input.focus(); }
+        } else if (input && !input.value.trim()) {
+          e.preventDefault();
+          close();
+        }
+      });
+    }
+    if (input) {
+      input.addEventListener('blur', function () {
+        setTimeout(function () {
+          if (!form.contains(document.activeElement) && !input.value.trim()) { close(); }
+        }, 120);
+      });
+    }
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') { close(); } });
+  })();
 })();
