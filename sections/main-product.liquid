@@ -162,6 +162,17 @@
   </div>
 </section>
 
+{%- if current.available -%}
+<div class="buybar" data-buybar>
+  <div class="buybar__qty">
+    <button type="button" data-buybar-minus aria-label="Diminuir quantidade">&minus;</button>
+    <input type="number" inputmode="numeric" min="1" value="1" data-buybar-qty aria-label="Quantidade">
+    <button type="button" data-buybar-plus aria-label="Aumentar quantidade">+</button>
+  </div>
+  <button type="button" class="buybar__btn" data-buybar-buy>Comprar</button>
+</div>
+{%- endif -%}
+
 {% schema %}
 {
   "name": "Produto",

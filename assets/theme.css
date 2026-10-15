@@ -1632,3 +1632,50 @@ body.vmodal-open { overflow: hidden; }
   body.is-modern .header__row .header-search.is-open { position: absolute; left: 12px; right: 12px; top: 50%; transform: translateY(-50%); z-index: 6; width: auto; background: #fff; border: 1.5px solid var(--accent); border-radius: 999px; padding-left: 16px; box-shadow: 0 8px 24px rgba(0, 0, 0, .14); }
   body.is-modern .header-search.is-open input[type="search"] { width: 100%; flex: 1 1 auto; opacity: 1; min-height: 42px; font-size: 16px; }
 }
+
+/* =====================================================================
+   PRODUTO NO CELULAR: página mais curta + barra de compra fixa
+   ===================================================================== */
+.buybar { display: none; }
+@media (max-width: 700px) {
+  /* barra fixa: quantidade + Comprar (acima da barra de navegação) */
+  .buybar { display: flex; position: fixed; left: 0; right: 0; bottom: calc(66px + env(safe-area-inset-bottom)); z-index: 59; background: #fff; border-top: 1px solid var(--line); box-shadow: 0 -6px 18px rgba(0, 0, 0, .08); }
+  body:not(.has-mobile-bar) .buybar { bottom: 0; }
+  .buybar__qty { flex: 0 0 38%; display: flex; align-items: center; justify-content: space-between; border: 1px solid var(--line-strong); border-right: 0; margin: 8px 0 8px 10px; border-radius: 12px 0 0 12px; height: 48px; background: #fff; }
+  .buybar__qty button { width: 38px; height: 100%; border: 0; background: transparent; color: var(--text); font-size: 22px; line-height: 1; cursor: pointer; }
+  .buybar__qty input { width: 100%; min-width: 0; border: 0 !important; border-radius: 0 !important; box-shadow: none !important; background: transparent !important; text-align: center; font-size: 16px; font-weight: 600; padding: 0; -moz-appearance: textfield; }
+  .buybar__qty input::-webkit-outer-spin-button, .buybar__qty input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+  .buybar__btn { flex: 1 1 auto; margin: 8px 10px 8px 0; height: 48px; border: 0; border-radius: 0 12px 12px 0; background: #14102B; color: #fff; font-size: 16px; font-weight: 700; letter-spacing: .02em; cursor: pointer; }
+  .buybar__btn:active { filter: brightness(1.3); }
+  .template-product.has-mobile-bar { padding-bottom: calc(66px + 66px + env(safe-area-inset-bottom)); }
+
+  /* botões e quantidade do formulário saem (a barra fixa faz o papel) */
+  .product-form .qty, .product-form .buy-block .btn { display: none; }
+  .product-form .urgency__stock { margin: 0; }
+
+  /* página mais enxuta */
+  .product { gap: 10px; padding-top: 6px; padding-bottom: 8px; }
+  .gallery { gap: 8px; }
+  .gallery__thumbs { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; gap: 8px; }
+  .gallery__thumbs::-webkit-scrollbar { display: none; }
+  .thumb { flex: 0 0 54px; width: 54px; }
+  .product__image { border-radius: 16px; }
+  .product__info { gap: 8px; }
+  .product__title { font-size: 18px; line-height: 1.25; }
+  .price-block { padding: 8px 0; gap: 2px; }
+  .price-block__current { font-size: 24px; }
+  .price-block__pix { font-size: 13px; }
+  .price-block__sub { font-size: 12px; }
+  .option legend { margin-bottom: 6px; font-size: 13px; }
+  .option__values label { min-height: 34px; padding: 0 14px; font-size: 13px; }
+  .delivery { padding: 10px 12px; gap: 10px; }
+  .delivery svg { width: 20px; height: 20px; }
+  .delivery__text strong { font-size: 13px; }
+  .delivery__sub, .badges-row { font-size: 11.5px; }
+  .badges-row { gap: 4px 14px; }
+  .pvideos { gap: 6px; }
+  .pvideos__title { font-size: 14px; }
+  .pvideo { width: 56px; height: 56px; }
+  .accordion summary { padding-top: 12px; padding-bottom: 12px; font-size: 14px; }
+  .whatsapp-float, [class*="whatsapp"] { bottom: calc(66px + 66px + 12px + env(safe-area-inset-bottom)); }
+}

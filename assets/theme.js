@@ -597,4 +597,23 @@
     modal.querySelectorAll('[data-vmodal-close]').forEach(function (el) { el.addEventListener('click', close); });
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !modal.hidden) { close(); } });
   })();
+  /* Barra de compra fixa no celular (página de produto) */
+  (function () {
+    var bar = document.querySelector('[data-buybar]');
+    if (!bar) { return; }
+    var qty = bar.querySelector('[data-buybar-qty]');
+    function val() { var n = parseInt(qty.value, 10); return isNaN(n) || n < 1 ? 1 : n; }
+    bar.querySelector('[data-buybar-minus]').addEventListener('click', function () { qty.value = Math.max(1, val() - 1); });
+    bar.querySelector('[data-buybar-plus]').addEventListener('click', function () { qty.value = val() + 1; });
+    qty.addEventListener('change', function () { qty.value = val(); });
+    bar.querySelector('[data-buybar-buy]').addEventListener('click', function () {
+      var form = document.querySelector('form.product-form');
+      if (!form) { return; }
+      var addBtn = form.querySelector('[name="add"]');
+      if (!addBtn || addBtn.disabled) { return; }
+      var real = form.querySelector('input[name="quantity"]');
+      if (real) { real.value = val(); }
+      if (form.requestSubmit) { form.requestSubmit(addBtn); } else { addBtn.click(); }
+    });
+  })();
 })();
