@@ -1679,17 +1679,3 @@ body.vmodal-open { overflow: hidden; }
   .accordion summary { padding-top: 12px; padding-bottom: 12px; font-size: 14px; }
   .whatsapp-float, [class*="whatsapp"] { bottom: calc(66px + 66px + 12px + env(safe-area-inset-bottom)); }
 }
-
-/* ---- Barra fixa: escolha do kit ---- */
-@media (max-width: 700px) {
-  .buybar { flex-wrap: wrap; }
-  .buybar__opts { flex: 0 0 100%; padding: 8px 10px 0; display: flex; flex-direction: column; gap: 6px; }
-  .buybar__optrow { display: flex; align-items: center; gap: 6px; overflow-x: auto; scrollbar-width: none; }
-  .buybar__optrow::-webkit-scrollbar { display: none; }
-  .buybar__optname { flex: 0 0 auto; font-size: 12.5px; font-weight: 700; margin-right: 2px; }
-  .buybar__pill { flex: 0 0 auto; min-width: 46px; height: 34px; padding: 0 14px; border: 1.5px solid var(--line-strong); border-radius: 999px; background: #fff; color: var(--text); font-size: 13.5px; font-weight: 600; cursor: pointer; }
-  .buybar__pill[aria-pressed="true"] { border-color: var(--accent); background: color-mix(in srgb, var(--accent) 10%, #fff); color: var(--accent); box-shadow: 0 0 0 1px var(--accent); }
-  .template-product.has-mobile-bar { padding-bottom: calc(66px + var(--buybar-h, 66px) + 8px + env(safe-area-inset-bottom)); }
-  /* as opções do corpo da página saem: a barra fixa faz o papel */
-  .product__info .option { display: none; }
-}

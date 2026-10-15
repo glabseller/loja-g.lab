@@ -616,43 +616,4 @@
       if (form.requestSubmit) { form.requestSubmit(addBtn); } else { addBtn.click(); }
     });
   })();
-  /* Barra fixa: escolha do kit/variação (espelha as opções do produto) */
-  (function () {
-    var bar = document.querySelector('[data-buybar]');
-    if (!bar) { return; }
-    function setH() { document.documentElement.style.setProperty('--buybar-h', bar.offsetHeight + 'px'); }
-    setH();
-    window.addEventListener('resize', setH);
-    window.addEventListener('load', setH);
-    var rows = bar.querySelectorAll('[data-bb-option]');
-    function sync() {
-      rows.forEach(function (row) {
-        var pos = row.getAttribute('data-bb-option');
-        var checked = document.querySelector('[data-option] input[name="option-' + pos + '"]:checked');
-        row.querySelectorAll('[data-bb-value]').forEach(function (b) {
-          b.setAttribute('aria-pressed', checked && checked.value === b.getAttribute('data-bb-value') ? 'true' : 'false');
-        });
-      });
-    }
-    rows.forEach(function (row) {
-      var pos = row.getAttribute('data-bb-option');
-      row.querySelectorAll('[data-bb-value]').forEach(function (b) {
-        b.addEventListener('click', function () {
-          var val = b.getAttribute('data-bb-value');
-          var radios = document.querySelectorAll('[data-option] input[name="option-' + pos + '"]');
-          for (var i = 0; i < radios.length; i++) {
-            if (radios[i].value === val) {
-              radios[i].checked = true;
-              radios[i].dispatchEvent(new Event('change', { bubbles: true }));
-              break;
-            }
-          }
-          sync();
-        });
-      });
-    });
-    document.addEventListener('change', function (e) {
-      if (e.target && e.target.closest && e.target.closest('[data-option]')) { sync(); }
-    });
-  })();
 })();
