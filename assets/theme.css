@@ -1679,3 +1679,12 @@ body.vmodal-open { overflow: hidden; }
   .accordion summary { padding-top: 12px; padding-bottom: 12px; font-size: 14px; }
   .whatsapp-float, [class*="whatsapp"] { bottom: calc(66px + 66px + 12px + env(safe-area-inset-bottom)); }
 }
+
+/* ---- Vídeo do produto: maior no celular ---- */
+@media (max-width: 700px) {
+  .pvideos { gap: 10px; }
+  .pvideos__title { font-size: 15px; }
+  .pvideos__row { gap: 12px; }
+  .pvideo { width: 84px; height: 84px; }
+  .pvideo__play::before { border-width: 11px 0 11px 18px; }
+}
