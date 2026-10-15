@@ -164,6 +164,18 @@
 
 {%- if current.available -%}
 <div class="buybar" data-buybar>
+  {%- unless product.has_only_default_variant -%}
+    <div class="buybar__opts">
+      {%- for option in product.options_with_values -%}
+        <div class="buybar__optrow" data-bb-option="{{ option.position }}">
+          <span class="buybar__optname">{{ option.name }}</span>
+          {%- for value in option.values -%}
+            <button type="button" class="buybar__pill" data-bb-value="{{ value | escape }}" aria-pressed="{% if option.selected_value == value %}true{% else %}false{% endif %}">{{ value }}</button>
+          {%- endfor -%}
+        </div>
+      {%- endfor -%}
+    </div>
+  {%- endunless -%}
   <div class="buybar__qty">
     <button type="button" data-buybar-minus aria-label="Diminuir quantidade">&minus;</button>
     <input type="number" inputmode="numeric" min="1" value="1" data-buybar-qty aria-label="Quantidade">
