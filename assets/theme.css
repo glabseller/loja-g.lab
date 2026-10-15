@@ -1688,3 +1688,37 @@ body.vmodal-open { overflow: hidden; }
   .pvideo { width: 84px; height: 84px; }
   .pvideo__play::before { border-width: 11px 0 11px 18px; }
 }
+
+/* =====================================================================
+   BARRA DO CELULAR: toque confiável + folha de categorias + desempenho
+   ===================================================================== */
+.catsheet[hidden] { display: none; }
+@media (max-width: 700px) {
+  .mbar { z-index: 2000; pointer-events: auto; touch-action: manipulation; -webkit-tap-highlight-color: rgba(0, 0, 0, .08); }
+  .mbar__item { min-height: 54px; justify-content: center; touch-action: manipulation; position: relative; z-index: 1; }
+  .buybar { z-index: 1900; }
+  .catsheet { position: fixed; inset: 0; z-index: 2100; display: flex; align-items: flex-end; }
+  .catsheet__overlay { position: absolute; inset: 0; background: rgba(10, 8, 20, .5); }
+  .catsheet__box { position: relative; width: 100%; max-height: 78vh; display: flex; flex-direction: column; background: var(--ink); color: var(--text); border-radius: 22px 22px 0 0; box-shadow: 0 -12px 40px rgba(0, 0, 0, .25); animation: catsheet-up .22s ease-out; padding-bottom: env(safe-area-inset-bottom); }
+  @keyframes catsheet-up { from { transform: translateY(40px); opacity: 0; } to { transform: none; opacity: 1; } }
+  .catsheet__head { display: flex; align-items: center; justify-content: space-between; padding: 16px 18px 10px; font-size: 17px; }
+  .catsheet__close { width: 40px; height: 40px; border: 0; border-radius: 50%; background: var(--soft); color: var(--text); font-size: 24px; line-height: 1; cursor: pointer; }
+  .catsheet__list { overflow-y: auto; padding: 0 12px 16px; -webkit-overflow-scrolling: touch; }
+  .catsheet__row { border-bottom: 1px solid var(--line); }
+  .catsheet__parent { display: flex; align-items: center; justify-content: space-between; width: 100%; min-height: 52px; padding: 0 6px; border: 0; background: none; color: var(--text); font: inherit; font-size: 16px; font-weight: 600; text-align: left; cursor: pointer; }
+  .catsheet__parent::after { content: ""; width: 8px; height: 8px; border-right: 2px solid currentColor; border-bottom: 2px solid currentColor; transform: rotate(45deg); transition: transform .2s; margin-right: 6px; }
+  a.catsheet__parent::after { transform: rotate(-45deg); }
+  .catsheet__row.is-open .catsheet__parent::after { transform: rotate(-135deg); }
+  .catsheet__subs { display: flex; flex-direction: column; padding: 0 6px 10px; }
+  .catsheet__subs a { padding: 12px 8px; border-radius: 10px; color: var(--text); font-size: 15px; }
+  .catsheet__subs a:active { background: var(--soft); }
+  .catsheet__all { font-weight: 700; color: var(--accent) !important; }
+  html.catsheet-open { overflow: hidden; }
+
+  /* mais leve: tira os desfoques (pesados no celular) e adia seções fora da tela */
+  .site-header, .header, .mbar, .nav-panel, .promo__arrow, .drawer__overlay, .hero__card { -webkit-backdrop-filter: none !important; backdrop-filter: none !important; }
+  .site-header, .mbar { background: var(--ink); }
+  .is-gift .site-header, .is-gift .header, .is-gift .mbar { background: #fff; }
+  main .shopify-section ~ .shopify-section ~ .shopify-section ~ .shopify-section { content-visibility: auto; contain-intrinsic-size: auto 600px; }
+}
+.announcement__track { will-change: transform; }

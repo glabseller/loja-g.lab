@@ -616,4 +616,118 @@
       if (form.requestSubmit) { form.requestSubmit(addBtn); } else { addBtn.click(); }
     });
   })();
+  /* ---------- Barra do celular: folha de categorias (abre na hora, sem carregar página) ---------- */
+  (function () {
+    var trigger = document.querySelector('[data-cats-open]');
+    var nav = document.querySelector('.nav');
+    if (!trigger || !nav) { return; }
+    var mq = window.matchMedia ? window.matchMedia('(max-width: 700px)') : { matches: true };
+    var sheet = null;
+
+    function build() {
+      sheet = document.createElement('div');
+      sheet.className = 'catsheet';
+      sheet.hidden = true;
+      var overlay = document.createElement('div');
+      overlay.className = 'catsheet__overlay';
+      var box = document.createElement('div');
+      box.className = 'catsheet__box';
+      box.setAttribute('role', 'dialog');
+      box.setAttribute('aria-label', 'Categorias');
+      var head = document.createElement('div');
+      head.className = 'catsheet__head';
+      var h = document.createElement('strong');
+      h.textContent = 'Categorias';
+      var x = document.createElement('button');
+      x.type = 'button';
+      x.className = 'catsheet__close';
+      x.setAttribute('aria-label', 'Fechar');
+      x.textContent = '\u00d7';
+      head.appendChild(h);
+      head.appendChild(x);
+      var list = document.createElement('div');
+      list.className = 'catsheet__list';
+      nav.querySelectorAll(':scope > .nav__item').forEach(function (item) {
+        var a = item.querySelector(':scope > a');
+        if (!a) { return; }
+        var subs = item.querySelectorAll('.nav__sub a');
+        var row = document.createElement('div');
+        row.className = 'catsheet__row';
+        if (subs.length) {
+          var btn = document.createElement('button');
+          btn.type = 'button';
+          btn.className = 'catsheet__parent';
+          btn.setAttribute('aria-expanded', 'false');
+          btn.textContent = a.textContent.trim();
+          var panel = document.createElement('div');
+          panel.className = 'catsheet__subs';
+          panel.hidden = true;
+          var all = document.createElement('a');
+          all.href = a.getAttribute('href');
+          all.className = 'catsheet__all';
+          all.textContent = 'Ver tudo em ' + a.textContent.trim();
+          panel.appendChild(all);
+          subs.forEach(function (sa) {
+            var l = document.createElement('a');
+            l.href = sa.getAttribute('href');
+            l.textContent = sa.textContent.trim();
+            panel.appendChild(l);
+          });
+          btn.addEventListener('click', function () {
+            var open = panel.hidden;
+            panel.hidden = !open;
+            btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+            row.classList.toggle('is-open', open);
+          });
+          row.appendChild(btn);
+          row.appendChild(panel);
+        } else {
+          var l2 = document.createElement('a');
+          l2.href = a.getAttribute('href');
+          l2.className = 'catsheet__parent';
+          l2.textContent = a.textContent.trim();
+          row.appendChild(l2);
+        }
+        list.appendChild(row);
+      });
+      box.appendChild(head);
+      box.appendChild(list);
+      sheet.appendChild(overlay);
+      sheet.appendChild(box);
+      document.body.appendChild(sheet);
+      overlay.addEventListener('click', closeSheet);
+      x.addEventListener('click', closeSheet);
+    }
+    function closeSheet() { if (sheet) { sheet.hidden = true; document.documentElement.classList.remove('catsheet-open'); } }
+    trigger.addEventListener('click', function (e) {
+      if (!mq.matches) { return; }
+      e.preventDefault();
+      if (!sheet) { build(); }
+      sheet.hidden = !sheet.hidden;
+      document.documentElement.classList.toggle('catsheet-open', !sheet.hidden);
+    });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') { closeSheet(); } });
+  })();
+
+  /* ---------- Velocidade: carrega a próxima página assim que o dedo toca / mouse passa ---------- */
+  (function () {
+    var done = {};
+    function prefetch(a) {
+      if (!a || !a.href || a.target === '_blank' || a.hasAttribute('download')) { return; }
+      var u;
+      try { u = new URL(a.href, location.href); } catch (err) { return; }
+      if (u.origin !== location.origin) { return; }
+      if (/^\/(cart|checkout|account)/.test(u.pathname) && !/^\/account\/?$/.test(u.pathname)) { return; }
+      if (u.href === location.href || done[u.href]) { return; }
+      done[u.href] = true;
+      var l = document.createElement('link');
+      l.rel = 'prefetch';
+      l.href = u.href;
+      l.as = 'document';
+      document.head.appendChild(l);
+    }
+    function onTouch(e) { prefetch(e.target.closest ? e.target.closest('a[href]') : null); }
+    document.addEventListener('touchstart', onTouch, { passive: true });
+    document.addEventListener('mouseover', onTouch, { passive: true });
+  })();
 })();
