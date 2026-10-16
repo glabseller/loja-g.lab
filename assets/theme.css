@@ -1723,27 +1723,15 @@ body.vmodal-open { overflow: hidden; }
 }
 .announcement__track { will-change: transform; }
 
-/* ===== Barra de frete grátis: chamativa ===== */
-.drawer__ship, .shipbar {
-  position: relative; background: #FFF4D6; border: 2px solid #F5B72E; border-radius: 16px;
-  padding: 14px 16px 16px; box-shadow: 0 6px 18px rgba(245,183,46,.28);
-}
-.drawer__ship { margin: 12px 16px 4px; border-bottom: 2px solid #F5B72E; }
+/* ===== Barra de frete grátis: destaque suave ===== */
+.drawer__ship, .shipbar { background: #FFF6E5; border: 1px solid #F3D9A4; border-radius: 14px; padding: 12px 14px 14px; }
+.drawer__ship { margin: 10px 16px 2px; }
 .shipbar { margin-bottom: 24px; }
-.drawer__ship::before, .shipbar::before {
-  content: "FRETE GRÁTIS"; position: absolute; top: -11px; left: 14px; background: #1E9E6A; color: #fff;
-  font-size: 11px; font-weight: 800; letter-spacing: .08em; padding: 3px 10px; border-radius: 999px;
-}
-.drawer__ship-text, .shipbar__text { font-size: 16px; line-height: 1.35; color: var(--text); font-weight: 600; margin: 4px 0 10px; }
-.drawer__ship-amount, .shipbar__amount { color: #D9363E; font-size: 20px; font-weight: 800; }
-.drawer__ship-goal, .shipbar__goal { color: #1E9E6A; font-weight: 800; }
-.drawer__ship .shipbar__track, .shipbar .shipbar__track { height: 14px; background: #fff; border: 1.5px solid #F5B72E; border-radius: 999px; overflow: hidden; }
-.drawer__ship .shipbar__fill, .shipbar .shipbar__fill {
-  background: repeating-linear-gradient(45deg, #1E9E6A 0 10px, #35C58A 10px 20px); background-size: 28px 28px;
-  animation: shipstripes 1s linear infinite; border-radius: 999px; transition: width .5s ease;
-}
-@keyframes shipstripes { from { background-position: 0 0; } to { background-position: 28px 0; } }
-.drawer__ship.is-done, .shipbar.is-done { background: #E3F7EC; border-color: #1E9E6A; box-shadow: 0 6px 18px rgba(30,158,106,.25); }
-.drawer__ship.is-done .shipbar__track, .shipbar.is-done .shipbar__track { border-color: #1E9E6A; }
-.drawer__ship.is-done .drawer__ship-goal, .shipbar.is-done .shipbar__goal { font-size: 17px; }
-@media (prefers-reduced-motion: reduce) { .drawer__ship .shipbar__fill, .shipbar .shipbar__fill { animation: none; } }
+.drawer__ship-text, .shipbar__text { font-size: 15px; line-height: 1.35; color: var(--text); margin: 0 0 8px; }
+.drawer__ship-amount, .shipbar__amount { color: #1E9E6A; font-size: 17px; font-weight: 700; }
+.drawer__ship-goal, .shipbar__goal { color: var(--text); font-weight: 700; }
+.drawer__ship .shipbar__track, .shipbar .shipbar__track { height: 10px; background: #fff; border: 1px solid #F3D9A4; border-radius: 999px; overflow: hidden; }
+.drawer__ship .shipbar__fill, .shipbar .shipbar__fill { background: #1E9E6A; border-radius: 999px; transition: width .4s ease; }
+.drawer__ship.is-done, .shipbar.is-done { background: #E8F7EF; border-color: #BFE6D1; }
+.drawer__ship.is-done .shipbar__track, .shipbar.is-done .shipbar__track { border-color: #BFE6D1; }
+.drawer__ship.is-done .drawer__ship-goal, .shipbar.is-done .shipbar__goal { color: #1E9E6A; }
