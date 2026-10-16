@@ -225,7 +225,7 @@
         "min": 0,
         "max": 1000,
         "step": 10,
-        "default": 150,
+        "default": 100,
         "info": "Use 0 para não mostrar a barra de frete grátis."
       }
     ]

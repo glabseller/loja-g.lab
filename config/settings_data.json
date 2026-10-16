@@ -15,7 +15,7 @@
     "color_soft": "#FFF0E8",
     "pix_discount": 5,
     "installments": 3,
-    "free_shipping_threshold": 150,
+    "free_shipping_threshold": 100,
     "sections": {
       "header": {
         "type": "header",
@@ -202,7 +202,7 @@
           "message_dzhdHD": {
             "type": "message",
             "settings": {
-              "text": "Frete grátis em compras acima de R$ 150"
+              "text": "Frete grátis em compras acima de R$ 100"
             }
           }
         },
