@@ -61,7 +61,11 @@
 
               <div class="cart-item__actions">
                 <label class="visually-hidden" for="CartQty-{{ item.index }}">Quantidade de {{ item.product.title | escape }}</label>
-                <input id="CartQty-{{ item.index }}" type="number" name="updates[]" value="{{ item.quantity }}" min="0" inputmode="numeric" data-cart-qty>
+                <div class="qty-stepper qty-stepper--cart">
+                  <button type="button" data-cart-minus aria-label="Diminuir quantidade">−</button>
+                  <input id="CartQty-{{ item.index }}" type="number" name="updates[]" value="{{ item.quantity }}" min="0" inputmode="numeric" data-cart-qty>
+                  <button type="button" data-cart-plus aria-label="Aumentar quantidade">+</button>
+                </div>
                 <a class="cart-item__remove" href="{{ item.url_to_remove }}">Remover</a>
               </div>
             </div>
@@ -85,7 +89,6 @@
         <p class="note">O frete é calculado no checkout, depois que você informar o CEP.</p>
 
         <button type="submit" name="checkout" class="btn btn--accent btn--lg btn--block">Finalizar compra</button>
-        <button type="submit" name="update" class="btn btn--outline btn--block">Atualizar carrinho</button>
         <a class="link-strong" style="text-align: center;" href="{{ routes.all_products_collection_url }}">Continuar comprando</a>
       </div>
     </form>

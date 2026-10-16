@@ -1743,3 +1743,9 @@ html.drawer-open .buybar, html.drawer-open .mbar { display: none !important; }
 /* Fotos dos produtos no carrinho lateral: um pouco maiores */
 .drawer-item { gap: 16px; }
 .drawer-item__img { flex: 0 0 104px; width: 104px; height: 104px; border-radius: 14px; }
+
+/* Carrinho (página): seletor de quantidade com - e + */
+.qty-stepper--cart { border-radius: 999px; }
+.qty-stepper--cart button { width: 44px; height: 44px; font-size: 20px; }
+.qty-stepper--cart input, .cart-item__actions .qty-stepper--cart input { width: 44px; min-height: 44px; border: 0; border-radius: 0; background: transparent; box-shadow: none; padding: 0; font-weight: 600; font-size: 16px; -moz-appearance: textfield; appearance: textfield; }
+.qty-stepper--cart input::-webkit-outer-spin-button, .qty-stepper--cart input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }

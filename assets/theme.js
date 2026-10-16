@@ -58,9 +58,15 @@
 
   /* ---------- Carrinho: atualizar ao mudar a quantidade ---------- */
   document.querySelectorAll('[data-cart-qty]').forEach(function (input) {
-    input.addEventListener('change', function () {
-      if (input.form) { input.form.submit(); }
-    });
+    function send() { if (input.form) { input.form.submit(); } }
+    function val() { var n = parseInt(input.value, 10); return isNaN(n) || n < 0 ? 0 : n; }
+    input.addEventListener('change', send);
+    var wrap = input.closest('.qty-stepper');
+    if (!wrap) { return; }
+    var minus = wrap.querySelector('[data-cart-minus]');
+    var plus = wrap.querySelector('[data-cart-plus]');
+    if (minus) { minus.addEventListener('click', function () { input.value = Math.max(0, val() - 1); send(); }); }
+    if (plus) { plus.addEventListener('click', function () { input.value = val() + 1; send(); }); }
   });
 
   /* ---------- Busca: foca no campo ao abrir ---------- */
