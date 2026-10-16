@@ -537,6 +537,7 @@
     }
 
     function render(cart) {
+      document.dispatchEvent(new CustomEvent('cart:updated', { detail: cart }));
       body.innerHTML = '';
       countEl.textContent = cart.item_count > 0 ? '(' + cart.item_count + ')' : '';
       updateBadges(cart.item_count);
@@ -850,4 +851,22 @@
     document.addEventListener('touchstart', onTouch, { passive: true });
     document.addEventListener('mouseover', onTouch, { passive: true });
   })();
+})();
+
+/* Produto: barra sutil de frete grátis (acompanha o carrinho) */
+(function () {
+  var box = document.querySelector('[data-pfree]');
+  if (!box) { return; }
+  var free = parseInt(box.getAttribute('data-free-cents'), 10) || 0;
+  var text = box.querySelector('[data-pfree-text]');
+  var fill = box.querySelector('[data-pfree-fill]');
+  var fmt = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' });
+  document.addEventListener('cart:updated', function (e) {
+    var cart = e.detail || {};
+    var total = cart.total_price || 0;
+    var left = free - total;
+    box.classList.toggle('is-empty', !cart.item_count);
+    text.textContent = left > 0 ? 'Faltam ' + fmt.format(left / 100) + ' no carrinho para o frete grátis' : 'Você já tem frete grátis no carrinho';
+    fill.style.width = Math.min(100, Math.round(total / free * 100)) + '%';
+  });
 })();
