@@ -11,7 +11,7 @@
   endif
 -%}
 
-<section class="page-pad container" {{ section.shopify_attributes }}>
+<section class="page-pad container" data-cart-page {{ section.shopify_attributes }}>
   <h1 class="section-title" style="margin-bottom: 32px;">Carrinho</h1>
 
   {%- if cart.item_count == 0 -%}
