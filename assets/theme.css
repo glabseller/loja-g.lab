@@ -1735,3 +1735,7 @@ body.vmodal-open { overflow: hidden; }
 .drawer__ship.is-done, .shipbar.is-done { background: #E8F7EF; border-color: #BFE6D1; }
 .drawer__ship.is-done .shipbar__track, .shipbar.is-done .shipbar__track { border-color: #BFE6D1; }
 .drawer__ship.is-done .drawer__ship-goal, .shipbar.is-done .shipbar__goal { color: #1E9E6A; }
+
+/* Carrinho lateral sempre por cima da barra fixa de compra e da barra de baixo */
+.drawer { z-index: 2100; }
+html.drawer-open .buybar, html.drawer-open .mbar { display: none !important; }
