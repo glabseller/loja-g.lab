@@ -22,12 +22,12 @@
   {%- else -%}
 
     {%- if free_cents > 0 -%}
-      <div class="shipbar">
+      <div class="shipbar{% if remaining <= 0 %} is-done{% endif %}">
         <div class="shipbar__text">
           {%- if remaining > 0 -%}
-            Faltam <strong>{{ remaining | money }}</strong> para você ganhar frete grátis
+            Falta só <strong class="shipbar__amount">{{ remaining | money }}</strong> para ganhar <strong class="shipbar__goal">FRETE GRÁTIS</strong>
           {%- else -%}
-            <strong>Você ganhou frete grátis!</strong>
+            <strong class="shipbar__goal">Parabéns! Você ganhou FRETE GRÁTIS</strong>
           {%- endif -%}
         </div>
         <div class="shipbar__track"><div class="shipbar__fill" style="width: {{ progress }}%;"></div></div>

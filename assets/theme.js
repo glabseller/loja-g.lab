@@ -477,9 +477,16 @@
         var remaining = freeCents - cart.total_price;
         ship.hidden = false;
         shipFill.style.width = Math.min(100, Math.round(cart.total_price / freeCents * 100)) + '%';
-        shipText.textContent = remaining > 0
-          ? 'Faltam ' + formatMoney(remaining, config.moneyFormat) + ' para o frete grátis'
-          : 'Você ganhou frete grátis!';
+        shipText.textContent = '';
+        ship.classList.toggle('is-done', remaining <= 0);
+        if (remaining > 0) {
+          shipText.appendChild(document.createTextNode('Falta só '));
+          shipText.appendChild(el('strong', 'drawer__ship-amount', formatMoney(remaining, config.moneyFormat)));
+          shipText.appendChild(document.createTextNode(' para ganhar '));
+          shipText.appendChild(el('strong', 'drawer__ship-goal', 'FRETE GRÁTIS'));
+        } else {
+          shipText.appendChild(el('strong', 'drawer__ship-goal', 'Parabéns! Você ganhou FRETE GRÁTIS'));
+        }
       } else {
         ship.hidden = true;
       }
