@@ -116,7 +116,7 @@
           {%- if pf_left < 0 -%}{%- assign pf_left = 0 -%}{%- endif -%}
           {%- assign pf_pct = cart.total_price | times: 100 | divided_by: pf_free -%}
           {%- if pf_pct > 100 -%}{%- assign pf_pct = 100 -%}{%- endif -%}
-          <div class="pfree{% if cart.item_count == 0 %} is-empty{% endif %}" data-pfree data-free-cents="{{ pf_free }}">
+          <div class="pfree{% if cart.item_count == 0 %} is-empty{% endif %}" data-pfree data-free-cents="{{ pf_free }}" data-cart-cents="{{ cart.total_price }}">
             <span class="pfree__text" data-pfree-text>
               {%- if pf_left == 0 -%}Você já tem frete grátis no carrinho
               {%- else -%}Faltam {{ pf_left | money }} no carrinho para o frete grátis{%- endif -%}
@@ -178,6 +178,12 @@
 
 {%- if current.available -%}
 <div class="buybar" data-buybar>
+  {%- if settings.free_shipping_threshold > 0 -%}
+    <div class="buybar__free" data-bfree data-free-cents="{{ settings.free_shipping_threshold | times: 100 }}" data-cart-cents="{{ cart.total_price }}">
+      <span class="buybar__free-text" data-bfree-text></span>
+      <div class="pfree__track"><div class="pfree__fill" data-bfree-fill style="width:0%"></div></div>
+    </div>
+  {%- endif -%}
   <div class="buybar__qty">
     <button type="button" data-buybar-minus aria-label="Diminuir quantidade">&minus;</button>
     <input type="number" inputmode="numeric" min="1" value="1" data-buybar-qty aria-label="Quantidade">

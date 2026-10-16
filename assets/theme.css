@@ -1759,3 +1759,14 @@ html.drawer-open .buybar, html.drawer-open .mbar { display: none !important; }
 .pfree__text { display: block; font-size: 12px; color: var(--muted); margin-bottom: 5px; }
 .pfree__track { height: 4px; border-radius: 999px; background: rgba(0, 0, 0, .08); overflow: hidden; }
 .pfree__fill { height: 100%; border-radius: 999px; background: var(--positive, #1E9E6A); transition: width .3s ease; }
+
+.pfree.is-done .pfree__text, .buybar__free.is-done .buybar__free-text { color: var(--positive, #1E9E6A); font-weight: 600; }
+@media (max-width: 700px) {
+  .buybar { flex-wrap: wrap; }
+  .buybar__free { flex: 0 0 100%; order: -1; padding: 6px 12px 0; }
+  .buybar__free-text { display: block; font-size: 12px; color: var(--muted); margin-bottom: 4px; text-align: center; }
+  .buybar__free .pfree__track { height: 3px; }
+  .buybar__qty { margin-top: 6px; } .buybar__btn { margin-top: 6px; }
+  .template-product.has-mobile-bar { padding-bottom: calc(66px + 86px + env(safe-area-inset-bottom)); }
+}
+@media (min-width: 701px) { .buybar__free { display: none; } }

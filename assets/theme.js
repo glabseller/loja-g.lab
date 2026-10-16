@@ -853,20 +853,53 @@
   })();
 })();
 
-/* Produto: barra sutil de frete grátis (acompanha o carrinho) */
+/* Produto: barra sutil de frete grátis (carrinho + o que o cliente está comprando agora) */
 (function () {
   var box = document.querySelector('[data-pfree]');
-  if (!box) { return; }
-  var free = parseInt(box.getAttribute('data-free-cents'), 10) || 0;
-  var text = box.querySelector('[data-pfree-text]');
-  var fill = box.querySelector('[data-pfree-fill]');
+  var strip = document.querySelector('[data-bfree]');
+  var ref = box || strip;
+  if (!ref) { return; }
+  var free = parseInt(ref.getAttribute('data-free-cents'), 10) || 0;
+  var cartCents = parseInt(ref.getAttribute('data-cart-cents'), 10) || 0;
+  var counting = true; /* depois de adicionar ao carrinho, só volta a contar se o cliente mexer na quantidade/opção */
   var fmt = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' });
-  document.addEventListener('cart:updated', function (e) {
-    var cart = e.detail || {};
-    var total = cart.total_price || 0;
+  var priceEl = document.querySelector('[data-product] .price-block__current') || document.querySelector('.price-block__current');
+  var qtyEl = document.querySelector('[data-buybar-qty]') || document.querySelector('.product-form input[name="quantity"]');
+
+  function priceCents() {
+    if (!priceEl) { return 0; }
+    var digits = (priceEl.textContent || '').replace(/[^0-9,]/g, '').replace(',', '.');
+    var v = parseFloat(digits);
+    return isNaN(v) ? 0 : Math.round(v * 100);
+  }
+  function qty() { var n = parseInt(qtyEl && qtyEl.value, 10); return isNaN(n) || n < 1 ? 1 : n; }
+
+  function paint() {
+    var pending = counting ? priceCents() * qty() : 0;
+    var total = cartCents + pending;
     var left = free - total;
-    box.classList.toggle('is-empty', !cart.item_count);
-    text.textContent = left > 0 ? 'Faltam ' + fmt.format(left / 100) + ' no carrinho para o frete grátis' : 'Você já tem frete grátis no carrinho';
-    fill.style.width = Math.min(100, Math.round(total / free * 100)) + '%';
+    var msg = left > 0 ? 'Faltam ' + fmt.format(left / 100) + ' para o frete grátis' : 'Frete grátis garantido!';
+    var pct = Math.min(100, Math.round(total / free * 100)) + '%';
+    [['[data-pfree-text]', '[data-pfree-fill]', box], ['[data-bfree-text]', '[data-bfree-fill]', strip]].forEach(function (a) {
+      var wrap = a[2]; if (!wrap) { return; }
+      wrap.querySelector(a[0]).textContent = msg;
+      wrap.querySelector(a[1]).style.width = pct;
+      wrap.classList.toggle('is-done', left <= 0);
+    });
+  }
+  function touch() { counting = true; paint(); }
+
+  document.addEventListener('cart:updated', function (e) {
+    cartCents = (e.detail && e.detail.total_price) || 0;
+    counting = false; paint();
   });
+  document.addEventListener('click', function (e) {
+    if (e.target.closest('[data-buybar-minus], [data-buybar-plus]')) { touch(); }
+  });
+  document.addEventListener('input', function (e) { if (e.target.matches('[data-buybar-qty], .product-form input[name="quantity"]')) { touch(); } });
+  document.addEventListener('change', function (e) { if (e.target.closest('[data-option], .product-form')) { setTimeout(touch, 0); } });
+  if (priceEl && window.MutationObserver) {
+    new MutationObserver(function () { touch(); }).observe(priceEl, { childList: true, characterData: true, subtree: true, attributes: true });
+  }
+  paint();
 })();
