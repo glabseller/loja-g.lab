@@ -1750,4 +1750,4 @@ html.drawer-open .buybar, html.drawer-open .mbar { display: none !important; }
 .qty-stepper--cart input, .cart-item__actions .qty-stepper--cart input { width: 44px; min-height: 44px; border: 0; border-radius: 0; background: transparent; box-shadow: none; padding: 0; font-weight: 600; font-size: 16px; -moz-appearance: textfield; appearance: textfield; }
 .qty-stepper--cart input::-webkit-outer-spin-button, .qty-stepper--cart input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
 
-[data-cart-page].is-updating { opacity: .8; transition: opacity .15s; }
+

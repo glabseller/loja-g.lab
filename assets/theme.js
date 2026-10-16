@@ -74,7 +74,7 @@
     }
     function refresh(updates) {
       if (busy) { again = true; return; }
-      busy = true; page.classList.add('is-updating');
+      busy = true;
       fetch((window.__theme && window.__theme.cartUpdateUrl) || '/cart/update.js', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
@@ -85,13 +85,41 @@
       }).then(function (html) {
         var doc = new DOMParser().parseFromString(html, 'text/html');
         var fresh = doc.querySelector('[data-cart-page]');
-        if (fresh) { page.innerHTML = fresh.innerHTML; }
+        if (fresh) { patch(fresh); }
       }).catch(function () {
         var f = page.querySelector('form'); if (f) { f.submit(); }
       }).then(function () {
-        busy = false; page.classList.remove('is-updating');
+        busy = false;
         if (again) { again = false; refresh(readQuantities()); }
       });
+    }
+    function swap(sel, fresh) {
+      var a = page.querySelector(sel), b = fresh.querySelector(sel);
+      if (a && b && a.innerHTML !== b.innerHTML) { a.innerHTML = b.innerHTML; }
+    }
+    function patch(fresh) {
+      var rows = page.querySelectorAll('.cart-item'), frows = fresh.querySelectorAll('.cart-item');
+      /* carrinho vazio ou número de linhas mudou: refaz só a lista e o resumo */
+      if (!fresh.querySelector('.cart__layout') || rows.length !== frows.length) {
+        page.innerHTML = fresh.innerHTML; return;
+      }
+      rows.forEach(function (row, i) {
+        var f = frows[i];
+        var t = row.querySelector('.cart-item__total'), ft = f.querySelector('.cart-item__total');
+        if (t && ft && t.textContent !== ft.textContent) { t.textContent = ft.textContent; }
+        var m = row.querySelectorAll('.cart-item__meta'), fm = f.querySelectorAll('.cart-item__meta');
+        m.forEach(function (x, k) { if (fm[k] && x.innerHTML !== fm[k].innerHTML) { x.innerHTML = fm[k].innerHTML; } });
+      });
+      swap('.cart__summary', fresh);
+      /* barra de frete grátis: só muda o texto e a largura (a barra desliza sem piscar) */
+      var bar = page.querySelector('.shipbar'), fbar = fresh.querySelector('.shipbar');
+      if (bar && fbar) {
+        var tx = bar.querySelector('.shipbar__text'), ftx = fbar.querySelector('.shipbar__text');
+        if (tx && ftx && tx.innerHTML !== ftx.innerHTML) { tx.innerHTML = ftx.innerHTML; }
+        bar.classList.toggle('is-done', fbar.classList.contains('is-done'));
+        var fill = bar.querySelector('.shipbar__fill'), ffill = fbar.querySelector('.shipbar__fill');
+        if (fill && ffill) { fill.style.width = ffill.style.width; }
+      }
     }
     function queue() { clearTimeout(timer); timer = setTimeout(function () { refresh(readQuantities()); }, 250); }
 
