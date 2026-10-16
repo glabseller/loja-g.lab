@@ -1770,3 +1770,13 @@ html.drawer-open .buybar, html.drawer-open .mbar { display: none !important; }
   .template-product.has-mobile-bar { padding-bottom: calc(66px + 86px + env(safe-area-inset-bottom)); }
 }
 @media (min-width: 701px) { .buybar__free { display: none; } }
+
+/* Vídeo do produto: miniaturas maiores */
+body.is-modern .pvideos { gap: 10px; }
+body.is-modern .pvideos__title { font-size: 16px; }
+body.is-modern .pvideos__row { gap: 14px; }
+body.is-modern .pvideo { width: 104px; height: 104px; }
+body.is-modern .pvideo__play::before { border-width: 13px 0 13px 21px; }
+@media (max-width: 700px) {
+  body.is-modern .pvideo { width: 96px; height: 96px; }
+}
