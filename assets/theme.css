@@ -1751,3 +1751,5 @@ html.drawer-open .buybar, html.drawer-open .mbar { display: none !important; }
 .qty-stepper--cart input::-webkit-outer-spin-button, .qty-stepper--cart input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
 
 
+
+.drawer__ship .shipbar__fill, .shipbar .shipbar__fill { transition: width .2s ease; }

@@ -121,7 +121,40 @@
         if (fill && ffill) { fill.style.width = ffill.style.width; }
       }
     }
-    function queue() { clearTimeout(timer); timer = setTimeout(function () { refresh(readQuantities()); }, 250); }
+    /* barra de frete grátis: atualiza na hora, antes de o servidor responder */
+    function el(tag, cls, text) {
+      var n = document.createElement(tag);
+      if (cls) { n.className = cls; }
+      if (text != null) { n.textContent = text; }
+      return n;
+    }
+    var moneyFmt = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' });
+    function instantBar() {
+      var free = parseInt(page.getAttribute('data-free-cents'), 10) || 0;
+      var bar = page.querySelector('.shipbar');
+      if (!free || !bar) { return; }
+      var total = 0;
+      page.querySelectorAll('[data-cart-qty]').forEach(function (i) {
+        total += (parseInt(i.value, 10) || 0) * (parseInt(i.getAttribute('data-unit-cents'), 10) || 0);
+      });
+      var left = free - total, done = left <= 0;
+      bar.classList.toggle('is-done', done);
+      var tx = bar.querySelector('.shipbar__text');
+      if (tx) {
+        tx.textContent = '';
+        if (done) {
+          tx.appendChild(el('strong', 'shipbar__goal', 'Parabéns! Você ganhou FRETE GRÁTIS'));
+        } else {
+          tx.appendChild(document.createTextNode('Falta só '));
+          tx.appendChild(el('strong', 'shipbar__amount', moneyFmt.format(left / 100)));
+          tx.appendChild(document.createTextNode(' para ganhar '));
+          tx.appendChild(el('strong', 'shipbar__goal', 'FRETE GRÁTIS'));
+        }
+      }
+      var fill = bar.querySelector('.shipbar__fill');
+      if (fill) { fill.style.width = Math.min(100, Math.round(total / free * 100)) + '%'; }
+    }
+    function queue() { instantBar(); clearTimeout(timer); timer = setTimeout(function () { refresh(readQuantities()); }, 120); }
 
     page.addEventListener('click', function (e) {
       var minus = e.target.closest('[data-cart-minus]'), plus = e.target.closest('[data-cart-plus]');

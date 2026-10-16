@@ -11,7 +11,7 @@
   endif
 -%}
 
-<section class="page-pad container" data-cart-page {{ section.shopify_attributes }}>
+<section class="page-pad container" data-cart-page data-free-cents="{{ free_cents }}" {{ section.shopify_attributes }}>
   <h1 class="section-title" style="margin-bottom: 32px;">Carrinho</h1>
 
   {%- if cart.item_count == 0 -%}
@@ -63,7 +63,7 @@
                 <label class="visually-hidden" for="CartQty-{{ item.index }}">Quantidade de {{ item.product.title | escape }}</label>
                 <div class="qty-stepper qty-stepper--cart">
                   <button type="button" data-cart-minus aria-label="Diminuir quantidade">−</button>
-                  <input id="CartQty-{{ item.index }}" type="number" name="updates[]" value="{{ item.quantity }}" min="0" inputmode="numeric" data-cart-qty>
+                  <input id="CartQty-{{ item.index }}" type="number" name="updates[]" value="{{ item.quantity }}" min="0" inputmode="numeric" data-cart-qty data-unit-cents="{{ item.final_price }}">
                   <button type="button" data-cart-plus aria-label="Aumentar quantidade">+</button>
                 </div>
                 <a class="cart-item__remove" href="{{ item.url_to_remove }}">Remover</a>
