@@ -1913,3 +1913,23 @@ body .accordion .rte ul li strong, body .accordion .rte ul li b { display: block
 .footer__pay-list { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; margin: 0; padding: 0; }
 .footer__pay-list li { display: flex; }
 .footer__pay-icon { height: 26px; width: auto; border-radius: 4px; background: #fff; }
+
+/* Página de contato */
+.contact__lead { color: var(--muted); max-width: 560px; margin: 8px 0 24px; }
+.contact__grid { display: grid; gap: 28px; grid-template-columns: 1fr 1fr; align-items: start; }
+.contact__cards { display: grid; gap: 12px; }
+.contact__card { display: flex; align-items: center; gap: 14px; padding: 16px; background: #fff; border: 1px solid var(--line); border-radius: 16px; color: var(--text); }
+.contact__card:hover { border-color: var(--accent); }
+.contact__card strong { display: block; font-size: 15px; }
+.contact__card small { color: var(--muted); font-size: 13px; }
+.contact__ico { flex: none; width: 44px; height: 44px; border-radius: 12px; background: #FFF0E8; color: var(--text); display: inline-flex; align-items: center; justify-content: center; }
+.contact__ico--wa { background: #DDF6E6; color: #138A4B; }
+.contact__hours, .contact__links { color: var(--muted); font-size: 14px; margin: 4px 0 0; }
+.contact__links a { text-decoration: underline; }
+.contact__form { display: grid; gap: 14px; background: #fff; border: 1px solid var(--line); border-radius: 18px; padding: 20px; }
+.contact__form form { display: grid; gap: 14px; }
+.contact__form label { display: grid; gap: 6px; font-size: 14px; font-weight: 600; }
+.contact__form input, .contact__form textarea { font: inherit; font-weight: 400; padding: 12px 14px; border: 1px solid var(--line); border-radius: 12px; background: #fff; width: 100%; box-sizing: border-box; }
+.contact__ok { background: #DDF6E6; color: #0d6b39; padding: 12px 14px; border-radius: 12px; margin: 0; }
+.contact__err { background: #FDE8E8; color: #a11; padding: 12px 14px; border-radius: 12px; margin: 0; }
+@media (max-width: 749px) { .contact__grid { grid-template-columns: 1fr; } }
