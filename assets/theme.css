@@ -1835,3 +1835,13 @@ body.is-modern .pvideo__play::before { border-width: 13px 0 13px 21px; }
 .card__chip { flex: 1 1 0; min-width: 0; padding: 0 4px; height: 40px; }
 .card .card__form--opts .btn.card__add { flex: 0 0 48px; width: 48px; height: 40px; min-height: 40px; margin-left: 0; background: var(--text); border-color: var(--text); color: #fff; }
 .card .card__form--opts .btn.card__add:hover { background: var(--accent); border-color: var(--accent); color: #fff; }
+
+/* Celular: kit e carrinho do cartão menores */
+@media (max-width: 700px) {
+  .card__form--opts { gap: 6px; }
+  .card__chips { gap: 4px; }
+  .card__chip { height: 32px; min-width: 0; font-size: 13px; padding: 0 2px; }
+  .card__chip-in:checked + .card__chip { border-width: 1.5px; }
+  .card .card__form--opts .btn.card__add { flex: 0 0 40px; width: 40px; height: 32px; min-height: 32px; }
+  .card__add svg { width: 17px; height: 17px; }
+}
