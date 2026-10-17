@@ -68,7 +68,8 @@
     {%- assign font_family = 'Nunito' -%}{%- assign font_head = 'Fredoka' -%}
     {%- assign font_query = 'Nunito:wght@500;600;700;800&family=Fredoka:wght@500;600;700' -%}
   {%- endif -%}
-  <link href="https://fonts.googleapis.com/css2?family={{ font_query }}&display=swap" rel="stylesheet">
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family={{ font_query }}&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link href="https://fonts.googleapis.com/css2?family={{ font_query }}&display=swap" rel="stylesheet"></noscript>
 
   {%- if is_modern -%}
   <script>

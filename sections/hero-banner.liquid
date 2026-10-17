@@ -22,7 +22,7 @@
 
     <div class="hero__media">
       {%- if section.settings.image != blank -%}
-        {{ section.settings.image | image_url: width: 1200 | image_tag: loading: 'eager', widths: '600, 900, 1200', sizes: '(min-width: 1280px) 600px, 100vw' }}
+        {{ section.settings.image | image_url: width: 1200 | image_tag: loading: 'eager', fetchpriority: 'high', widths: '600, 900, 1200', sizes: '(min-width: 1280px) 600px, 100vw' }}
       {%- else -%}
         {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder' }}
       {%- endif -%}

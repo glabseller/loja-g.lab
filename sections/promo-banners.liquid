@@ -16,13 +16,14 @@
     <div class="promo__track" data-carousel-track tabindex="0" aria-label="Promoções">
       {%- for block in section.blocks -%}
         {%- if block.settings.image != blank or request.design_mode -%}
+          {%- if forloop.first -%}{%- assign slide_loading = 'eager' -%}{%- assign slide_priority = 'high' -%}{%- else -%}{%- assign slide_loading = 'lazy' -%}{%- assign slide_priority = 'auto' -%}{%- endif -%}
           {%- capture slide -%}
             {%- if block.settings.image != blank -%}
               <picture>
                 {%- if block.settings.image_mobile != blank -%}
                   <source media="(max-width: 700px)" srcset="{{ block.settings.image_mobile | image_url: width: 800 }}">
                 {%- endif -%}
-                {{ block.settings.image | image_url: width: 1800 | image_tag: alt: block.settings.alt, loading: 'eager', widths: '800, 1200, 1800', sizes: '(min-width: 1300px) 1252px, 100vw' }}
+                {{ block.settings.image | image_url: width: 1800 | image_tag: alt: block.settings.alt, loading: slide_loading, fetchpriority: slide_priority, widths: '800, 1200, 1800', sizes: '(min-width: 1300px) 1252px, 100vw' }}
               </picture>
             {%- else -%}
               {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder' }}
