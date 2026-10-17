@@ -69,12 +69,21 @@
         {%- endform -%}
       {%- else -%}
         {%- form 'product', product, class: 'card__form card__form--opts' -%}
-          <label class="visually-hidden" for="card-opt-{{ section.id }}-{{ product.id }}">Escolha a opção de {{ product.title | escape }}</label>
-          <select class="card__select" id="card-opt-{{ section.id }}-{{ product.id }}" name="id">
-            {%- for v in product.variants -%}
-              <option value="{{ v.id }}"{% if v.available == false %} disabled{% endif %}{% if v.id == card_variant.id %} selected{% endif %}>{{ v.title }} · {{ v.price | money_without_trailing_zeros }}{% if v.available == false %} (esgotado){% endif %}</option>
-            {%- endfor -%}
-          </select>
+          {%- if product.variants.size <= 4 -%}
+            <div class="card__chips" role="radiogroup" aria-label="Quantidade de {{ product.title | escape }}">
+              {%- for v in product.variants -%}
+                {%- assign v_pix = v.price | times: pix_factor | divided_by: 100 -%}
+                <input type="radio" class="card__chip-in" name="id" id="chip-{{ product.id }}-{{ v.id }}" value="{{ v.id }}" data-price="{{ v.price | money }}" data-pix="no Pix {{ v_pix | money }}"{% if v.available == false %} disabled{% endif %}{% if v.id == card_variant.id %} checked{% endif %}>
+                <label class="card__chip" for="chip-{{ product.id }}-{{ v.id }}">{{ v.title }}</label>
+              {%- endfor -%}
+            </div>
+          {%- else -%}
+            <select class="card__select" name="id" aria-label="Escolha a opção de {{ product.title | escape }}">
+              {%- for v in product.variants -%}
+                <option value="{{ v.id }}"{% if v.available == false %} disabled{% endif %}{% if v.id == card_variant.id %} selected{% endif %}>{{ v.title }} · {{ v.price | money_without_trailing_zeros }}{% if v.available == false %} (esgotado){% endif %}</option>
+              {%- endfor -%}
+            </select>
+          {%- endif -%}
           <button type="submit" name="add" class="btn btn--outline card__add" aria-label="Adicionar ao carrinho">{% render 'icon', name: 'cart', size: 22 %}</button>
         {%- endform -%}
       {%- endif -%}

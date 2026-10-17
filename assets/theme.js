@@ -918,3 +918,20 @@
   document.addEventListener('click', function (e) { if (!wrap.contains(e.target)) { setOpen(false); } });
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape') { setOpen(false); } });
 })();
+
+/* Cartão de produto: ao escolher a quantidade, o preço do cartão acompanha */
+document.addEventListener('change', function (e) {
+  var input = e.target;
+  if (!input.matches || !input.matches('.card__chip-in')) { return; }
+  var card = input.closest('.card');
+  if (!card) { return; }
+  var from = card.querySelector('.card__from');
+  var price = card.querySelector('.card__price');
+  var pix = card.querySelector('.card__pix');
+  if (from) { from.hidden = true; }
+  if (price && input.dataset.price) { price.textContent = input.dataset.price; }
+  if (pix && input.dataset.pix) {
+    var tail = pix.textContent.indexOf('·') > -1 ? ' ' + pix.textContent.slice(pix.textContent.indexOf('·')) : '';
+    pix.textContent = input.dataset.pix + tail;
+  }
+});
