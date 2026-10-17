@@ -1871,3 +1871,8 @@ body .option__values--kits input:disabled + .kit-opt.kit-opt { opacity: .45; cur
   .kit-opt__name { font-size: 14px; }
   .kit-opt__price { font-size: 15px; }
 }
+
+/* Categorias sem foto: desenho do tipo de produto */
+.circle__media--icon { display: flex; align-items: center; justify-content: center; color: var(--text); }
+.circle__media--icon svg.cat-icon { position: static; inset: auto; width: 58%; height: 58%; object-fit: contain; }
+.circle:hover .circle__media--icon svg.cat-icon { color: var(--accent); }

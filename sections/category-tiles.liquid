@@ -8,12 +8,27 @@
       {%- assign col = block.settings.collection -%}
       {%- assign name = block.settings.title | default: col.title -%}
       {%- assign pic = block.settings.image | default: col.featured_image -%}
-      <a class="circle" href="{{ col.url | default: routes.all_products_collection_url }}" {{ block.shopify_attributes }}>
-        <span class="circle__media">
+      {%- assign icon_key = col.handle | default: name -%}
+      {%- assign fallback_url = routes.all_products_collection_url -%}
+      {%- if col == blank -%}
+        {%- assign low = name | downcase -%}
+        {%- if low contains 'chave' -%}{%- assign guess = 'chaveiros' -%}
+        {%- elsif low contains 'lata' -%}{%- assign guess = 'porta-latas' -%}
+        {%- elsif low contains 'retrato' -%}{%- assign guess = 'porta-retratos' -%}
+        {%- elsif low contains 'ampola' -%}{%- assign guess = 'porta-ampolas' -%}
+        {%- elsif low contains 'setup' or low contains 'gamer' -%}{%- assign guess = 'setup-e-gamer' -%}
+        {%- elsif low contains 'decor' or low contains 'casa' -%}{%- assign guess = 'casa-e-decoracao' -%}
+        {%- elsif low contains 'present' -%}{%- assign guess = 'presentes' -%}
+        {%- elsif low contains 'pet' -%}{%- assign guess = 'pets' -%}
+        {%- else -%}{%- assign guess = '' -%}{%- endif -%}
+        {%- if guess != blank and collections[guess].handle != blank -%}{%- assign fallback_url = collections[guess].url -%}{%- endif -%}
+      {%- endif -%}
+      <a class="circle" href="{{ col.url | default: fallback_url }}" {{ block.shopify_attributes }}>
+        <span class="circle__media{% if pic == blank %} circle__media--icon{% endif %}">
           {%- if pic != blank -%}
             {{ pic | image_url: width: 320 | image_tag: loading: 'lazy', alt: name }}
           {%- else -%}
-            {{ 'collection-1' | placeholder_svg_tag: 'placeholder' }}
+            {% render 'category-icon', key: icon_key %}
           {%- endif -%}
         </span>
         <span class="circle__name">{{ name }}</span>
