@@ -68,7 +68,15 @@
           <button type="submit" name="add" class="btn btn--outline btn--block">Adicionar ao carrinho</button>
         {%- endform -%}
       {%- else -%}
-        <a class="btn btn--outline btn--block" href="{{ product.url }}">Ver opções</a>
+        {%- form 'product', product, class: 'card__form card__form--opts' -%}
+          <label class="visually-hidden" for="card-opt-{{ section.id }}-{{ product.id }}">Escolha a opção de {{ product.title | escape }}</label>
+          <select class="card__select" id="card-opt-{{ section.id }}-{{ product.id }}" name="id">
+            {%- for v in product.variants -%}
+              <option value="{{ v.id }}"{% if v.available == false %} disabled{% endif %}{% if v.id == card_variant.id %} selected{% endif %}>{{ v.title }} · {{ v.price | money }}{% if v.available == false %} (esgotado){% endif %}</option>
+            {%- endfor -%}
+          </select>
+          <button type="submit" name="add" class="btn btn--outline btn--block">Adicionar ao carrinho</button>
+        {%- endform -%}
       {%- endif -%}
     {%- else -%}
       <span class="btn btn--outline btn--block btn--disabled">Esgotado</span>
