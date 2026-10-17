@@ -24,22 +24,25 @@
   endif
 -%}
 <div class="card">
-  <a class="card__media" href="{{ product.url }}" aria-label="{{ product.title | escape }}">
-    {%- if product.featured_image != blank -%}
-      {{ product.featured_image | image_url: width: 600 | image_tag: loading: 'lazy', widths: '300, 450, 600', sizes: '(min-width: 1280px) 290px, (min-width: 700px) 25vw, 50vw' }}
-    {%- else -%}
-      {{ 'product-1' | placeholder_svg_tag: 'placeholder' }}
-    {%- endif -%}
+  <div class="card__mw">
+    <a class="card__media" href="{{ product.url }}" aria-label="{{ product.title | escape }}">
+      {%- if product.featured_image != blank -%}
+        {{ product.featured_image | image_url: width: 600 | image_tag: loading: 'lazy', widths: '300, 450, 600', sizes: '(min-width: 1280px) 290px, (min-width: 700px) 25vw, 50vw' }}
+      {%- else -%}
+        {{ 'product-1' | placeholder_svg_tag: 'placeholder' }}
+      {%- endif -%}
+      {%- if on_sale -%}
+        <span class="badge badge--accent badge--left">-{{ off }}%</span>
+      {%- endif -%}
+      {%- if product.available == false -%}
+        <span class="badge badge--ink badge--right">Esgotado</span>
+      {%- elsif tag_text != blank -%}
+        <span class="badge badge--ink badge--right">{{ tag_text }}</span>
+      {%- endif -%}
+    </a>
 
-    {%- if on_sale -%}
-      <span class="badge badge--accent badge--left">-{{ off }}%</span>
-    {%- endif -%}
-    {%- if product.available == false -%}
-      <span class="badge badge--ink badge--right">Esgotado</span>
-    {%- elsif tag_text != blank -%}
-      <span class="badge badge--ink badge--right">{{ tag_text }}</span>
-    {%- endif -%}
-  </a>
+    <button type="button" class="fav" data-fav="{{ product.handle }}" aria-pressed="false" aria-label="Favoritar">{% render 'icon', name: 'heart', size: 20 %}</button>
+  </div>
 
   <div class="card__body">
     {% render 'stars', product: product %}

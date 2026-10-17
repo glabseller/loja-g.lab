@@ -65,7 +65,10 @@
 
   <div class="product__info">
     {% render 'stars', product: product %}
-    <h1 class="product__title">{{ product.title }}</h1>
+    <div class="product__titlerow">
+      <h1 class="product__title">{{ product.title }}</h1>
+      <button type="button" class="fav fav--pdp" data-fav="{{ product.handle }}" aria-pressed="false" aria-label="Favoritar">{% render 'icon', name: 'heart', size: 22 %}</button>
+    </div>
 
     {%- capture benefits -%}
       {%- for i in (1..3) -%}

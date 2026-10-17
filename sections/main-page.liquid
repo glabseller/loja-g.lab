@@ -1,5 +1,12 @@
 <section class="page-pad container" {{ section.shopify_attributes }}>
   <h1 class="section-title" style="margin-bottom: 24px;">{{ page.title }}</h1>
+  {%- if page.handle == 'favoritos' -%}
+    <p class="favpage__lead">Os produtos que você salvou ficam guardados neste aparelho.</p>
+    <div class="favpage" data-fav-page>
+      <p class="favpage__empty" data-fav-empty hidden>Você ainda não favoritou nada. Toque no coração dos produtos para guardar aqui.<br><a class="btn btn--accent" href="{{ routes.all_products_collection_url }}">Ver produtos</a></p>
+      <div class="favpage__grid" data-fav-grid></div>
+    </div>
+  {%- endif -%}
   <div class="rte">{{ page.content }}</div>
 </section>
 
