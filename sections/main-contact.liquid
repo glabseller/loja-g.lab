@@ -32,11 +32,12 @@
     <div class="contact__form">
       {%- form 'contact', id: 'ContactForm' -%}
         {%- if form.posted_successfully? -%}
-          <p class="contact__ok">Mensagem enviada! Respondemos o quanto antes.</p>
+          <p class="contact__ok" data-protocol-ok>Mensagem enviada! Seu protocolo: <strong data-protocol-code></strong>. Guarde esse número para falar com a gente. Respondemos o quanto antes.</p>
         {%- endif -%}
         {%- if form.errors -%}
           <p class="contact__err">{{ form.errors | default_errors }}</p>
         {%- endif -%}
+        <input type="hidden" name="contact[protocolo]" value="">
         <label>Nome<input type="text" name="contact[name]" autocomplete="name" value="{{ form.name }}" required></label>
         <label>E-mail<input type="email" name="contact[email]" autocomplete="email" value="{{ form.email }}" required></label>
         <label>Telefone (opcional)<input type="tel" name="contact[phone]" autocomplete="tel" value="{{ form.phone }}"></label>

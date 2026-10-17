@@ -935,3 +935,58 @@ document.addEventListener('change', function (e) {
     pix.textContent = input.dataset.pix + tail;
   }
 });
+
+/* Protocolo de atendimento: gerado ao falar com a loja (WhatsApp, e-mail ou formulário) */
+(function () {
+  var KEY = 'glab_protocol';
+  function gen() {
+    var d = new Date(), p = function (n) { return (n < 10 ? '0' : '') + n; };
+    var chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789', r = '';
+    for (var i = 0; i < 4; i++) r += chars.charAt(Math.floor(Math.random() * chars.length));
+    return 'GL' + String(d.getFullYear()).slice(2) + p(d.getMonth() + 1) + p(d.getDate()) + '-' + r;
+  }
+  function save(code) { try { localStorage.setItem(KEY, code); } catch (e) {} }
+  function last() { try { return localStorage.getItem(KEY) || ''; } catch (e) { return ''; } }
+  function toast(code) {
+    var t = document.createElement('div');
+    t.className = 'protocol-toast';
+    t.textContent = 'Seu protocolo: ' + code;
+    document.body.appendChild(t);
+    setTimeout(function () { t.classList.add('is-out'); }, 4200);
+    setTimeout(function () { if (t.parentNode) t.parentNode.removeChild(t); }, 4800);
+  }
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a[href^="https://wa.me/"], a[href^="mailto:"]');
+    if (!a) return;
+    var code = gen(); save(code);
+    var href = a.getAttribute('href');
+    if (href.indexOf('mailto:') === 0) {
+      e.preventDefault();
+      var to = href.slice(7).split('?')[0];
+      window.location.href = 'mailto:' + to + '?subject=' + encodeURIComponent('Atendimento G LAB - Protocolo ' + code) +
+        '&body=' + encodeURIComponent('Protocolo: ' + code + '\n\nOlá! Escreva aqui sua mensagem:\n');
+    } else {
+      e.preventDefault();
+      var u = new URL(href), base = u.searchParams.get('text') || 'Olá! Vim pelo site da G LAB.';
+      u.searchParams.set('text', 'Protocolo: ' + code + '\n' + base);
+      window.open(u.toString(), '_blank', 'noopener');
+    }
+    toast(code);
+  });
+  document.addEventListener('submit', function (e) {
+    var f = e.target;
+    if (!f || f.id !== 'ContactForm') return;
+    var code = gen(); save(code);
+    var h = f.querySelector('[name="contact[protocolo]"]');
+    if (h) h.value = code;
+    var b = f.querySelector('[name="contact[body]"]');
+    if (b && b.value.indexOf('Protocolo:') !== 0) b.value = 'Protocolo: ' + code + '\n\n' + b.value;
+  }, true);
+  document.addEventListener('DOMContentLoaded', function () {
+    var ok = document.querySelector('[data-protocol-ok]');
+    if (ok && last()) {
+      var s = ok.querySelector('[data-protocol-code]');
+      if (s) s.textContent = last();
+    }
+  });
+})();

@@ -1933,3 +1933,6 @@ body .accordion .rte ul li strong, body .accordion .rte ul li b { display: block
 .contact__ok { background: #DDF6E6; color: #0d6b39; padding: 12px 14px; border-radius: 12px; margin: 0; }
 .contact__err { background: #FDE8E8; color: #a11; padding: 12px 14px; border-radius: 12px; margin: 0; }
 @media (max-width: 749px) { .contact__grid { grid-template-columns: 1fr; } }
+
+.protocol-toast { position: fixed; left: 50%; bottom: 92px; transform: translateX(-50%); z-index: 3000; background: #1b1626; color: #fff; padding: 12px 18px; border-radius: 999px; font-weight: 600; font-size: 14px; box-shadow: 0 8px 24px rgba(0,0,0,.25); transition: opacity .5s; }
+.protocol-toast.is-out { opacity: 0; }
