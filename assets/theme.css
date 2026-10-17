@@ -1876,3 +1876,14 @@ body .option__values--kits input:disabled + .kit-opt.kit-opt { opacity: .45; cur
 .circle__media--icon { display: flex; align-items: center; justify-content: center; color: var(--text); }
 .circle__media--icon svg.cat-icon { position: static; inset: auto; width: 58%; height: 58%; object-fit: contain; }
 .circle:hover .circle__media--icon svg.cat-icon { color: var(--accent); }
+
+/* Descrição do produto: mais viva (destaques em cartões com ✓) */
+body .accordion details[open] > .rte { color: var(--text); font-size: 15px; line-height: 1.65; }
+body .accordion .rte h2, body .accordion .rte h3, body .accordion .rte h4 { font-size: 16px; margin: 18px 0 8px; }
+body .accordion .rte > p:first-child strong, body .accordion .rte > p:first-child b { color: var(--accent); font-size: 17px; line-height: 1.35; }
+body .accordion .rte p { color: var(--text); opacity: .85; }
+body .accordion .rte p strong:only-child, body .accordion .rte h2, body .accordion .rte h3 { color: var(--text); }
+body .accordion .rte ul { list-style: none; padding: 0; margin: 14px 0; display: grid; gap: 10px; }
+body .accordion .rte ul li { position: relative; background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 12px 14px 12px 46px; color: var(--text); box-shadow: 0 1px 0 rgba(0,0,0,.03); }
+body .accordion .rte ul li::before { content: "✓"; position: absolute; left: 12px; top: 12px; width: 24px; height: 24px; border-radius: 50%; background: var(--accent); color: #fff; font-weight: 700; font-size: 13px; display: flex; align-items: center; justify-content: center; }
+body .accordion .rte ul li strong, body .accordion .rte ul li b { display: block; color: var(--text); margin-bottom: 2px; }
