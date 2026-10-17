@@ -75,7 +75,7 @@
               <option value="{{ v.id }}"{% if v.available == false %} disabled{% endif %}{% if v.id == card_variant.id %} selected{% endif %}>{{ v.title }} · {{ v.price | money_without_trailing_zeros }}{% if v.available == false %} (esgotado){% endif %}</option>
             {%- endfor -%}
           </select>
-          <button type="submit" name="add" class="btn btn--outline card__add" aria-label="Adicionar ao carrinho">{% render 'icon', name: 'cart', size: 18 %}<span>Adicionar</span></button>
+          <button type="submit" name="add" class="btn btn--outline card__add" aria-label="Adicionar ao carrinho">{% render 'icon', name: 'cart', size: 22 %}</button>
         {%- endform -%}
       {%- endif -%}
     {%- else -%}

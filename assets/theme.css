@@ -1813,3 +1813,7 @@ body.is-modern .pvideo__play::before { border-width: 13px 0 13px 21px; }
   .card__form--opts { flex-direction: column; gap: 6px; }
   .card__form--opts .card__select, .card .card__form--opts .btn { min-height: 38px; width: 100%; }
 }
+
+/* Cartão: botão só com o carrinho */
+.card .card__form--opts .btn.card__add { width: 48px; padding: 0; }
+@media (max-width: 700px) { .card__form--opts { flex-direction: row; } .card .card__form--opts .btn.card__add { width: 46px; min-height: 38px; } .card__form--opts .card__select { width: auto; } }
