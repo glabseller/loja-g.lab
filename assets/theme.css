@@ -1780,3 +1780,8 @@ body.is-modern .pvideo__play::before { border-width: 13px 0 13px 21px; }
 @media (max-width: 700px) {
   body.is-modern .pvideo { width: 96px; height: 96px; }
 }
+
+/* Espaço entre a faixa de categorias e o produto (computador) */
+@media (min-width: 701px) {
+  body.is-modern .product { padding-top: 36px; }
+}
