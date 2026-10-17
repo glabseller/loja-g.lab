@@ -874,7 +874,8 @@
   }
   function qty() {
     var bar = document.querySelector('[data-buybar-qty]');
-    var el = (bar && bar.offsetParent !== null) ? bar : qtyEl;
+    var mobile = window.matchMedia && window.matchMedia('(max-width: 700px)').matches;
+    var el = (mobile && bar) ? bar : (qtyEl || bar);
     var n = parseInt(el && el.value, 10); return isNaN(n) || n < 1 ? 1 : n;
   }
 
