@@ -1902,6 +1902,8 @@ body .accordion .rte ul li strong, body .accordion .rte ul li b { display: block
 .footer__pill { font-size: 12px; padding: 6px 12px; border-radius: 999px; border: 1px solid rgba(255,255,255,.2); color: rgba(255,255,255,.8); }
 @media (max-width: 749px) {
   .footer__row { padding-top: 44px; gap: 28px 20px; }
-  .footer__col--wide, .footer__col--contact { flex-basis: 100%; }
   .footer__col { flex: 1 1 40%; }
+  .footer__row .footer__col--wide, .footer__row .footer__col--contact { flex: 1 1 100%; }
 }
+
+.footer__col--contact a { white-space: nowrap; }
