@@ -995,3 +995,15 @@ document.addEventListener('change', function (e) {
     }
   });
 })();
+
+/* Produto: botões − / + da quantidade */
+document.addEventListener('click', function (e) {
+  var b = e.target.closest && e.target.closest('[data-qty-minus], [data-qty-plus]');
+  if (!b) { return; }
+  var input = b.parentNode.querySelector('input[name="quantity"]');
+  if (!input) { return; }
+  var n = parseInt(input.value, 10); if (isNaN(n) || n < 1) { n = 1; }
+  n += b.hasAttribute('data-qty-plus') ? 1 : -1;
+  input.value = Math.max(1, Math.min(99, n));
+  input.dispatchEvent(new Event('input', { bubbles: true }));
+});

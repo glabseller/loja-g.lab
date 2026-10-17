@@ -90,6 +90,22 @@
       {%- endif -%}
     </div>
 
+    {%- if settings.free_shipping_threshold > 0 -%}
+      {%- assign pf_free = settings.free_shipping_threshold | times: 100 -%}
+      {%- assign pf_left = pf_free | minus: cart.total_price -%}
+      {%- if pf_left < 0 -%}{%- assign pf_left = 0 -%}{%- endif -%}
+      {%- assign pf_pct = cart.total_price | times: 100 | divided_by: pf_free -%}
+      {%- if pf_pct > 100 -%}{%- assign pf_pct = 100 -%}{%- endif -%}
+      <div class="pfree{% if cart.item_count == 0 %} is-empty{% endif %}" data-pfree data-free-cents="{{ pf_free }}" data-cart-cents="{{ cart.total_price }}">
+        {% render 'icon', name: 'truck', size: 18 %}
+        <span class="pfree__text" data-pfree-text>
+          {%- if pf_left == 0 -%}Você já tem frete grátis no carrinho
+          {%- else -%}Faltam {{ pf_left | money }} no carrinho para o frete grátis{%- endif -%}
+        </span>
+        <div class="pfree__track"><div class="pfree__fill" data-pfree-fill style="width: {{ pf_pct }}%;"></div></div>
+      </div>
+    {%- endif -%}
+
     {%- if section.settings.countdown_end != blank -%}
       <div class="urgency">
         <div class="countdown" data-countdown="{{ section.settings.countdown_end }}" hidden>
@@ -140,7 +156,13 @@
 
     {%- form 'product', product, class: 'product-form' -%}
       {%- if current.available -%}
-        <div class="qty"><label for="qty-{{ section.id }}">Quantidade</label><input id="qty-{{ section.id }}" type="number" name="quantity" value="1" min="1"></div>
+        <div class="qty"><label for="qty-{{ section.id }}">Quantidade</label>
+          <div class="qty-stepper qty-stepper--pdp">
+            <button type="button" data-qty-minus aria-label="Diminuir quantidade">&minus;</button>
+            <input id="qty-{{ section.id }}" type="number" inputmode="numeric" name="quantity" value="1" min="1" max="99">
+            <button type="button" data-qty-plus aria-label="Aumentar quantidade">+</button>
+          </div>
+        </div>
       {%- endif -%}
 
       <div class="buy-block" data-buy-block>
@@ -165,20 +187,6 @@
           {%- if settings.free_shipping_threshold > 0 -%}Frete grátis acima de {{ settings.free_shipping_threshold | times: 100 | money_without_trailing_zeros }}. {% endif -%}
           O prazo aparece no checkout.
         </span>
-        {%- if settings.free_shipping_threshold > 0 -%}
-          {%- assign pf_free = settings.free_shipping_threshold | times: 100 -%}
-          {%- assign pf_left = pf_free | minus: cart.total_price -%}
-          {%- if pf_left < 0 -%}{%- assign pf_left = 0 -%}{%- endif -%}
-          {%- assign pf_pct = cart.total_price | times: 100 | divided_by: pf_free -%}
-          {%- if pf_pct > 100 -%}{%- assign pf_pct = 100 -%}{%- endif -%}
-          <div class="pfree{% if cart.item_count == 0 %} is-empty{% endif %}" data-pfree data-free-cents="{{ pf_free }}" data-cart-cents="{{ cart.total_price }}">
-            <span class="pfree__text" data-pfree-text>
-              {%- if pf_left == 0 -%}Você já tem frete grátis no carrinho
-              {%- else -%}Faltam {{ pf_left | money }} no carrinho para o frete grátis{%- endif -%}
-            </span>
-            <div class="pfree__track"><div class="pfree__fill" data-pfree-fill style="width: {{ pf_pct }}%;"></div></div>
-          </div>
-        {%- endif -%}
       </div>
     </div>
 
