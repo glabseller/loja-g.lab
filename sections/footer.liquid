@@ -21,7 +21,7 @@
       </div>
     </div>
 
-    {%- assign shop_menu = linklists[section.settings.shop_menu] -%}
+    {%- assign shop_menu = linklists['footer-loja'] -%}
     {%- if shop_menu.links.size > 0 -%}
       <div class="footer__col">
         <span class="footer__heading">{{ section.settings.shop_heading }}</span>
@@ -37,7 +37,7 @@
       </div>
     {%- endif -%}
 
-    {%- assign co_menu = linklists[section.settings.company_menu] -%}
+    {%- assign co_menu = linklists['footer-empresa'] -%}
     {%- if co_menu.links.size > 0 -%}
       <div class="footer__col">
         <span class="footer__heading">{{ section.settings.company_heading }}</span>
@@ -56,14 +56,13 @@
   </div>
 
   <div class="container footer__pay">
-    {%- if shop.enabled_payment_types.size > 0 -%}
-      <span class="footer__pay-title">Meios de pagamento</span>
-      <ul class="footer__pay-list" role="list">
-        {%- for type in shop.enabled_payment_types -%}
-          <li>{{ type | payment_type_svg_tag: class: 'footer__pay-icon' }}</li>
-        {%- endfor -%}
-      </ul>
-    {%- endif -%}
+    <span class="footer__pay-title">Meios de pagamento</span>
+    <ul class="footer__pay-list" role="list">
+      {%- assign pay_types = 'visa,master,american_express,elo,hipercard,diners_club,discover,pix' | split: ',' -%}
+      {%- for type in pay_types -%}
+        <li>{{ type | payment_type_svg_tag: class: 'footer__pay-icon' }}</li>
+      {%- endfor -%}
+    </ul>
     <span class="footer__pill">Compra 100% segura</span>
     <span class="footer__pill">Enviamos para todo o Brasil</span>
   </div>
@@ -86,11 +85,9 @@
     { "type": "text", "id": "email", "label": "E-mail de atendimento", "info": "Vazio = usa o e-mail da loja" },
     { "type": "text", "id": "hours", "label": "Horário de atendimento", "default": "Atendimento de segunda a sexta, 9h às 18h" },
     { "type": "header", "content": "Colunas" },
-    { "type": "link_list", "id": "shop_menu", "label": "Menu: Loja" },
     { "type": "text", "id": "shop_heading", "label": "Título: Loja", "default": "Loja" },
     { "type": "link_list", "id": "menu", "label": "Menu: Ajuda", "default": "footer" },
     { "type": "text", "id": "menu_heading", "label": "Título: Ajuda", "default": "Ajuda" },
-    { "type": "link_list", "id": "company_menu", "label": "Menu: Empresa" },
     { "type": "text", "id": "company_heading", "label": "Título: Empresa", "default": "Institucional" },
     { "type": "text", "id": "contact_heading", "label": "Título do atendimento", "default": "Atendimento" },
     { "type": "richtext", "id": "contact", "label": "Texto extra do atendimento" },
