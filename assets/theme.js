@@ -903,3 +903,18 @@
   }
   paint();
 })();
+
+/* Menu da conta (ícone do boneco): entrar / criar conta */
+(function () {
+  var wrap = document.querySelector('[data-acct]');
+  if (!wrap) { return; }
+  var toggle = wrap.querySelector('[data-acct-toggle]');
+  var menu = wrap.querySelector('[data-acct-menu]');
+  function setOpen(open) {
+    menu.hidden = !open;
+    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  }
+  toggle.addEventListener('click', function (e) { e.preventDefault(); setOpen(menu.hidden); });
+  document.addEventListener('click', function (e) { if (!wrap.contains(e.target)) { setOpen(false); } });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') { setOpen(false); } });
+})();
