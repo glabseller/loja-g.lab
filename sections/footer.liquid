@@ -58,7 +58,7 @@
   <div class="container footer__pay">
     <span class="footer__pay-title">Meios de pagamento</span>
     <ul class="footer__pay-list" role="list">
-      {%- assign pay_types = 'visa,master,american_express,elo,hipercard,diners_club,discover,pix' | split: ',' -%}
+      {%- assign pay_types = 'visa,master,american_express,elo,diners_club,discover,pix' | split: ',' -%}
       {%- for type in pay_types -%}
         <li>{{ type | payment_type_svg_tag: class: 'footer__pay-icon' }}</li>
       {%- endfor -%}

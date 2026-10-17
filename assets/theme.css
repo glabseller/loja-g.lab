@@ -1944,3 +1944,8 @@ body .accordion .rte ul li strong, body .accordion .rte ul li b { display: block
 body .card__chip-in:checked + .card__chip,
 body .card__chip-in:checked + .card__chip.is-on { background: var(--accent); border: 1.5px solid var(--accent); color: #fff; }
 body .card__chip-in:not(:checked) + .card__chip.is-on { background: #fff; border: 1px solid var(--line-strong); color: var(--text); }
+
+/* Logos de pagamento: maiores e nítidos */
+.footer__pay-list { gap: 10px; }
+.footer__pay-icon { height: 36px; width: auto; min-width: 54px; background: transparent; border-radius: 6px; display: block; }
+@media (max-width: 749px) { .footer__pay-icon { height: 32px; min-width: 48px; } }
