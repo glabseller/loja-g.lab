@@ -47,7 +47,7 @@
 
     <div class="footer__col footer__col--contact">
       <span class="footer__heading">{{ section.settings.contact_heading }}</span>
-      {%- if wa_digits != blank -%}<a href="https://wa.me/{{ wa_digits }}" target="_blank" rel="noopener">WhatsApp: {{ section.settings.whatsapp }}</a>{%- endif -%}
+      {%- if wa_digits != blank -%}<a href="https://wa.me/{{ wa_digits }}" target="_blank" rel="noopener"><span class="footer__lbl">WhatsApp: </span><span class="footer__num">{{ section.settings.whatsapp }}</span></a>{%- endif -%}
       {%- if mail != blank -%}<a href="mailto:{{ mail }}">{{ mail }}</a>{%- endif -%}
       {%- if section.settings.instagram != blank -%}<a href="{{ section.settings.instagram }}" target="_blank" rel="noopener">Instagram</a>{%- endif -%}
       {%- if section.settings.hours != blank -%}<span class="footer__muted">{{ section.settings.hours }}</span>{%- endif -%}

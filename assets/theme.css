@@ -1982,3 +1982,30 @@ body .qty .qty-stepper--pdp input { width: 52px; min-height: 46px; border: 0; bo
 .qty-total strong { color: var(--text); font-size: 18px; margin-left: 2px; }
 .qty-total[hidden] { display: none; }
 @media (max-width: 700px) { .qty-total { display: none; } }
+
+/* Rodapé compacto no celular */
+@media (max-width: 749px) {
+  .footer { border-top-left-radius: 24px; border-top-right-radius: 24px; }
+  .footer__row { padding-top: 28px; padding-bottom: 16px; gap: 20px 16px; }
+  .footer__brand { font-size: 20px; }
+  .footer__row .footer__muted { font-size: 13px; line-height: 1.5; margin: 0; }
+  .footer__col { gap: 6px; flex: 1 1 42%; }
+  .footer__col a, .footer__col--contact .footer__muted { font-size: 13px; line-height: 1.35; padding: 2px 0; }
+  .footer__heading { font-size: 11px; margin-bottom: 2px; }
+  .footer__social { gap: 8px; padding-top: 2px; }
+  .footer__soc { width: 34px; height: 34px; }
+  .footer__soc svg { width: 17px; height: 17px; }
+  .footer__row .footer__col--contact { flex: 1 1 100%; }
+  .footer__row .footer__col--contact a { display: inline; }
+  .footer__pay { padding-bottom: 12px; gap: 8px; }
+  .footer__pill:last-child { display: none; }
+  .footer__pill { font-size: 11px; padding: 4px 10px; }
+  .footer__pay-icon { height: 18px; }
+  .footer__bottom { padding-top: 14px; padding-bottom: 20px; font-size: 11px; }
+}
+@media (max-width: 749px) {
+  .footer__row .footer__col--contact { flex: 1 1 42%; }
+  .footer__col--contact a { white-space: normal; overflow-wrap: anywhere; }
+}
+
+@media (max-width: 749px) { .footer__lbl { display: block; font-size: 11px; opacity: .65; } .footer__num { white-space: nowrap; } }
