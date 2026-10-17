@@ -2,7 +2,7 @@
   "name": "Grupo do rodapé",
   "type": "footer",
   "sections": {
-    "footer": { "type": "footer", "settings": { "menu": "footer" } }
+    "footer": { "type": "footer", "settings": { "menu": "footer", "shop_menu": "footer-loja", "company_menu": "footer-empresa" } }
   },
   "order": ["footer"]
 }

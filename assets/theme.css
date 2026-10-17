@@ -1887,3 +1887,21 @@ body .accordion .rte ul { list-style: none; padding: 0; margin: 14px 0; display:
 body .accordion .rte ul li { position: relative; background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 12px 14px 12px 46px; color: var(--text); box-shadow: 0 1px 0 rgba(0,0,0,.03); }
 body .accordion .rte ul li::before { content: "✓"; position: absolute; left: 12px; top: 12px; width: 24px; height: 24px; border-radius: 50%; background: var(--accent); color: #fff; font-weight: 700; font-size: 13px; display: flex; align-items: center; justify-content: center; }
 body .accordion .rte ul li strong, body .accordion .rte ul li b { display: block; color: var(--text); margin-bottom: 2px; }
+
+/* Rodapé completo */
+.footer__row { gap: 32px 40px; }
+.footer__col { flex: 1 1 150px; }
+.footer__col--wide { flex: 2 1 260px; }
+.footer__col--contact { flex: 1.3 1 200px; }
+.footer__col a { font-size: 14px; }
+.footer__heading { text-transform: uppercase; letter-spacing: .08em; font-size: 12px; opacity: .9; }
+.footer__social { display: flex; gap: 10px; padding-top: 6px; }
+.footer__soc { width: 40px; height: 40px; border-radius: 50%; border: 1px solid rgba(255,255,255,.25); display: inline-flex; align-items: center; justify-content: center; color: #fff !important; transition: background .15s, transform .15s; }
+.footer__soc:hover { background: rgba(255,255,255,.14); transform: translateY(-2px); }
+.footer__pay { display: flex; flex-wrap: wrap; gap: 8px; padding-bottom: 22px; }
+.footer__pill { font-size: 12px; padding: 6px 12px; border-radius: 999px; border: 1px solid rgba(255,255,255,.2); color: rgba(255,255,255,.8); }
+@media (max-width: 749px) {
+  .footer__row { padding-top: 44px; gap: 28px 20px; }
+  .footer__col--wide, .footer__col--contact { flex-basis: 100%; }
+  .footer__col { flex: 1 1 40%; }
+}
