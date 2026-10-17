@@ -1955,3 +1955,10 @@ body .card__chip-in:not(:checked) + .card__chip.is-on { background: #fff; border
 .footer__pay-list { gap: 6px; }
 .footer__pay-title { font-size: 12px; opacity: .7; }
 @media (max-width: 749px) { .footer__pay-icon { height: 20px; min-width: 0; } }
+
+/* Miniaturas da galeria: cantos redondos completos (a seleção não é mais cortada) */
+.gallery__thumbs { padding: 3px; box-sizing: content-box; }
+.thumb, .is-modern .thumb { border-radius: 14px; box-shadow: none; position: relative; isolation: isolate; }
+.thumb img { border-radius: inherit; display: block; }
+.thumb[aria-current="true"], .is-modern .thumb[aria-current="true"] { border: 2px solid var(--accent); box-shadow: none; }
+@media (min-width: 750px) { .gallery__thumbs { padding: 3px 6px 3px 3px; } }
