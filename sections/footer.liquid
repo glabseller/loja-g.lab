@@ -56,8 +56,14 @@
   </div>
 
   <div class="container footer__pay">
-    <span class="footer__pill">Pix</span>
-    <span class="footer__pill">Cartão de crédito</span>
+    {%- if shop.enabled_payment_types.size > 0 -%}
+      <span class="footer__pay-title">Meios de pagamento</span>
+      <ul class="footer__pay-list" role="list">
+        {%- for type in shop.enabled_payment_types -%}
+          <li>{{ type | payment_type_svg_tag: class: 'footer__pay-icon' }}</li>
+        {%- endfor -%}
+      </ul>
+    {%- endif -%}
     <span class="footer__pill">Compra 100% segura</span>
     <span class="footer__pill">Enviamos para todo o Brasil</span>
   </div>
