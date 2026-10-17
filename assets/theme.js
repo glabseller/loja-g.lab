@@ -925,6 +925,11 @@ document.addEventListener('change', function (e) {
   if (!input.matches || !input.matches('.card__chip-in')) { return; }
   var card = input.closest('.card');
   if (!card) { return; }
+  var all = card.querySelectorAll('.card__chip-in');
+  for (var i = 0; i < all.length; i++) {
+    var lb = all[i].nextElementSibling;
+    if (lb) { lb.classList.toggle('is-on', all[i] === input); }
+  }
   var from = card.querySelector('.card__from');
   var price = card.querySelector('.card__price');
   var pix = card.querySelector('.card__pix');
