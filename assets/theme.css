@@ -1828,3 +1828,10 @@ body.is-modern .pvideo__play::before { border-width: 13px 0 13px 21px; }
 .card__chip-in:focus-visible + .card__chip { outline: 2px solid var(--accent); outline-offset: 2px; }
 .card__chip-in:disabled + .card__chip { opacity: .4; text-decoration: line-through; cursor: not-allowed; }
 .card .card__form--opts .btn.card__add { flex: 0 0 auto; width: 44px; min-height: 38px; height: 38px; padding: 0; border-radius: 999px; margin-left: auto; }
+
+/* Cartão: opções e carrinho ocupam a largura toda, bem alinhados */
+.card__form--opts { flex-wrap: nowrap; gap: 8px; }
+.card__chips { flex: 1 1 auto; flex-wrap: nowrap; gap: 6px; }
+.card__chip { flex: 1 1 0; min-width: 0; padding: 0 4px; height: 40px; }
+.card .card__form--opts .btn.card__add { flex: 0 0 48px; width: 48px; height: 40px; min-height: 40px; margin-left: 0; background: var(--text); border-color: var(--text); color: #fff; }
+.card .card__form--opts .btn.card__add:hover { background: var(--accent); border-color: var(--accent); color: #fff; }
