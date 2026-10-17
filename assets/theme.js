@@ -864,7 +864,7 @@
   var counting = true; /* depois de adicionar ao carrinho, só volta a contar se o cliente mexer na quantidade/opção */
   var fmt = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' });
   var priceEl = document.querySelector('[data-product] .price-block__current') || document.querySelector('.price-block__current');
-  var qtyEl = document.querySelector('[data-buybar-qty]') || document.querySelector('.product-form input[name="quantity"]');
+  var qtyEl = document.querySelector('.product-form input[name="quantity"]') || document.querySelector('[data-buybar-qty]');
 
   function priceCents() {
     if (!priceEl) { return 0; }
@@ -872,7 +872,11 @@
     var v = parseFloat(digits);
     return isNaN(v) ? 0 : Math.round(v * 100);
   }
-  function qty() { var n = parseInt(qtyEl && qtyEl.value, 10); return isNaN(n) || n < 1 ? 1 : n; }
+  function qty() {
+    var bar = document.querySelector('[data-buybar-qty]');
+    var el = (bar && bar.offsetParent !== null) ? bar : qtyEl;
+    var n = parseInt(el && el.value, 10); return isNaN(n) || n < 1 ? 1 : n;
+  }
 
   function paint() {
     var pending = counting ? priceCents() * qty() : 0;
@@ -996,14 +1000,44 @@ document.addEventListener('change', function (e) {
   });
 })();
 
-/* Produto: botões − / + da quantidade */
-document.addEventListener('click', function (e) {
-  var b = e.target.closest && e.target.closest('[data-qty-minus], [data-qty-plus]');
-  if (!b) { return; }
-  var input = b.parentNode.querySelector('input[name="quantity"]');
-  if (!input) { return; }
-  var n = parseInt(input.value, 10); if (isNaN(n) || n < 1) { n = 1; }
-  n += b.hasAttribute('data-qty-plus') ? 1 : -1;
-  input.value = Math.max(1, Math.min(99, n));
-  input.dispatchEvent(new Event('input', { bubbles: true }));
-});
+/* Produto: quantidade (− / +), sincronizada com a barra fixa, e total da compra ao vivo */
+(function () {
+  var form = document.querySelector('.product-form input[name="quantity"]');
+  var bar = document.querySelector('[data-buybar-qty]');
+  var totalEl = document.querySelector('[data-qty-total]');
+  var last = '';
+  var fmt = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' });
+  function num(el) { var n = parseInt(el && el.value, 10); return isNaN(n) || n < 1 ? 1 : n; }
+  function unit() {
+    var el = document.querySelector('[data-product] [data-price-cents]') || document.querySelector('[data-price-cents]');
+    return el ? (parseInt(el.getAttribute('data-price-cents'), 10) || 0) : 0;
+  }
+  function total() {
+    if (!totalEl) { return; }
+    var n = num(form || bar), u = unit();
+    if (!u) { if (!totalEl.hidden) { totalEl.hidden = true; } return; }
+    if (totalEl.hidden) { totalEl.hidden = false; }
+    var html = (n > 1 ? n + ' × ' + fmt.format(u / 100) + ' = ' : 'Total: ') + '<strong>' + fmt.format(u * n / 100) + '</strong>';
+    if (last !== html) { last = html; totalEl.innerHTML = html; }
+  }
+  function mirror(src) {
+    var other = src === form ? bar : form;
+    if (other && other !== src) { other.value = src.value; }
+  }
+  document.addEventListener('click', function (e) {
+    var b = e.target.closest && e.target.closest('[data-qty-minus], [data-qty-plus]');
+    if (!b || !form) { return; }
+    form.value = Math.max(1, Math.min(99, num(form) + (b.hasAttribute('data-qty-plus') ? 1 : -1)));
+    form.dispatchEvent(new Event('input', { bubbles: true }));
+  });
+  document.addEventListener('input', function (e) {
+    if (e.target === form || e.target === bar) { mirror(e.target); total(); }
+  });
+  document.addEventListener('click', function (e) {
+    if (e.target.closest && e.target.closest('[data-buybar-minus], [data-buybar-plus]')) { setTimeout(function () { if (form && bar) { form.value = bar.value; } total(); }, 0); }
+  });
+  document.addEventListener('change', function (e) { if (e.target.closest && e.target.closest('[data-option], .product-form')) { setTimeout(total, 60); } });
+  var pb = document.querySelector('[data-price-block]');
+  if (pb && window.MutationObserver) { new MutationObserver(total).observe(pb.parentNode, { childList: true, subtree: true, attributes: true, attributeFilter: ['data-price-cents'] }); }
+  total();
+})();

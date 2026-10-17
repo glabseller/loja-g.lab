@@ -1977,3 +1977,8 @@ body .qty .qty-stepper--pdp input { width: 52px; min-height: 46px; border: 0; bo
 .price-block + .pfree .pfree__text { margin: 0 0 6px; font-size: 13px; color: #2d5a43; }
 .price-block + .pfree .pfree__track { background: rgba(30,158,106,.18); }
 @media (max-width: 700px) { .price-block + .pfree { display: none; } }
+
+.qty-total { margin: -4px 0 10px; font-size: 14px; color: var(--muted); }
+.qty-total strong { color: var(--text); font-size: 18px; margin-left: 2px; }
+.qty-total[hidden] { display: none; }
+@media (max-width: 700px) { .qty-total { display: none; } }
