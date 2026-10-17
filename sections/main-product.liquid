@@ -1,6 +1,36 @@
 {%- liquid
   assign current = product.selected_or_first_available_variant
   assign pix_factor = 100 | minus: settings.pix_discount
+
+  comment
+    Kits: produto com 1 opção cujos valores são números crescentes (ex.: 5, 10, 20).
+    Mostra cartões com a economia e já deixa marcado o kit do meio (mais vendido).
+  endcomment
+  assign kits = false
+  if product.options.size == 1 and product.variants.size > 1 and product.has_only_default_variant == false
+    assign kits = true
+    assign prev_n = 0
+    for v in product.variants
+      assign n = v.option1 | plus: 0
+      if n < 1 or n <= prev_n
+        assign kits = false
+      endif
+      assign prev_n = n
+    endfor
+  endif
+  if kits
+    assign kit_first = product.variants.first
+    assign kit_first_n = kit_first.option1 | plus: 0
+    assign kit_first_n_f = kit_first_n | times: 1.0
+    assign kit_pick = product.variants.size | divided_by: 2 | plus: 1
+    if product.selected_variant == nil
+      assign kit_pick_idx = kit_pick | minus: 1
+      assign pick_variant = product.variants[kit_pick_idx]
+      if pick_variant.available
+        assign current = pick_variant
+      endif
+    endif
+  endif
 -%}
 <section class="container product" data-product data-section-id="{{ section.id }}" data-product-url="{{ product.url }}" {{ section.shopify_attributes }}>
   <script type="application/json" data-variants>[{% for v in product.variants %}{"id":{{ v.id }},"options":{{ v.options | json }}}{% unless forloop.last %},{% endunless %}{% endfor %}]</script>
@@ -73,12 +103,37 @@
       {%- for option in product.options_with_values -%}
         <fieldset class="option" data-option>
           <legend>{{ option.name }}: <span data-option-selected>{{ option.selected_value }}</span></legend>
+          {%- if kits -%}
+            <div class="option__values option__values--kits">
+              {%- for v in product.variants -%}
+                {%- assign kn = v.option1 | plus: 0 -%}
+                {%- assign kn_f = kn | times: 1.0 -%}
+                {%- assign full_cents = kit_first.price | divided_by: kit_first_n_f | times: kn_f | round -%}
+                {%- assign save_cents = full_cents | minus: v.price -%}
+                {%- assign save_pct = save_cents | times: 100 | divided_by: full_cents -%}
+                {%- assign unit_cents = v.price | divided_by: kn_f | round -%}
+                <input type="radio" id="opt-{{ section.id }}-1-{{ forloop.index }}" name="option-1" value="{{ v.option1 | escape }}"{% if current.option1 == v.option1 %} checked{% endif %}{% unless v.available %} disabled{% endunless %}>
+                <label class="kit-opt" for="opt-{{ section.id }}-1-{{ forloop.index }}">
+                  {%- if forloop.index == kit_pick and product.variants.size > 2 -%}<span class="kit-opt__badge">MAIS POPULAR</span>
+                  {%- elsif forloop.last -%}<span class="kit-opt__badge kit-opt__badge--best">MELHOR VALOR</span>{%- endif -%}
+                  <span class="kit-opt__dot" aria-hidden="true"></span>
+                  <span class="kit-opt__main">
+                    <strong class="kit-opt__name">{% if kn == 1 %}1 unidade{% else %}Kit com {{ kn }}{% endif %}</strong>
+                    <span class="kit-opt__unit">{{ unit_cents | money }} cada</span>
+                    {%- if save_cents > 0 -%}<span class="kit-opt__save">Você economiza {{ save_cents | money }} ({{ save_pct }}%)</span>{%- endif -%}
+                  </span>
+                  <span class="kit-opt__price">{{ v.price | money }}{% if save_cents > 0 %}<s>{{ full_cents | money }}</s>{% endif %}</span>
+                </label>
+              {%- endfor -%}
+            </div>
+          {%- else -%}
           <div class="option__values">
             {%- for value in option.values -%}
               <input type="radio" id="opt-{{ section.id }}-{{ option.position }}-{{ forloop.index }}" name="option-{{ option.position }}" value="{{ value | escape }}"{% if option.selected_value == value %} checked{% endif %}>
               <label for="opt-{{ section.id }}-{{ option.position }}-{{ forloop.index }}">{{ value }}</label>
             {%- endfor -%}
           </div>
+          {%- endif -%}
         </fieldset>
       {%- endfor -%}
     {%- endunless -%}

@@ -1845,3 +1845,29 @@ body.is-modern .pvideo__play::before { border-width: 13px 0 13px 21px; }
   .card .card__form--opts .btn.card__add { flex: 0 0 40px; width: 40px; height: 32px; min-height: 32px; }
   .card__add svg { width: 17px; height: 17px; }
 }
+
+/* Kits: cartões com a economia (5 / 10 / 20 ...) */
+.option__values--kits { display: flex; flex-direction: column; flex-wrap: nowrap; gap: 12px; }
+body .option__values--kits input[type="radio"] { position: absolute; opacity: 0; pointer-events: none; }
+body .option__values--kits .kit-opt.kit-opt { position: relative; display: flex; align-items: center; gap: 12px; min-height: 0; padding: 14px 14px 12px; border: 1.5px solid var(--line-strong); border-radius: 14px; background: #fff; color: var(--text); font-weight: 400; box-shadow: none; cursor: pointer; transition: border-color .15s, box-shadow .15s, background .15s; }
+body .option__values--kits .kit-opt.kit-opt:hover { border-color: var(--accent); }
+body .option__values--kits input:checked + .kit-opt.kit-opt { border-color: var(--accent); background: #FFF6F5; box-shadow: 0 0 0 1px var(--accent); color: var(--text); font-weight: 400; }
+body .option__values--kits input:focus-visible + .kit-opt.kit-opt { outline: 2px solid var(--accent); outline-offset: 2px; }
+body .option__values--kits input:disabled + .kit-opt.kit-opt { opacity: .45; cursor: not-allowed; }
+.kit-opt__dot { flex: 0 0 18px; width: 18px; height: 18px; border-radius: 50%; border: 2px solid var(--line-strong); background: #fff; position: relative; }
+.option__values--kits input:checked + .kit-opt .kit-opt__dot { border-color: var(--accent); }
+.option__values--kits input:checked + .kit-opt .kit-opt__dot::after { content: ""; position: absolute; inset: 3px; border-radius: 50%; background: var(--accent); }
+.kit-opt__main { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+.kit-opt__name { font-size: 15px; font-weight: 700; color: var(--text); }
+.kit-opt__unit { font-size: 12px; color: var(--muted); }
+.kit-opt__save { font-size: 12px; font-weight: 600; color: var(--positive, #1E9E6A); }
+.kit-opt__price { flex: 0 0 auto; display: flex; flex-direction: column; align-items: flex-end; font-size: 16px; font-weight: 800; color: var(--text); }
+.kit-opt__price s { font-size: 12px; font-weight: 500; color: var(--muted); }
+.kit-opt__badge { position: absolute; top: -9px; right: 12px; padding: 2px 9px; border-radius: 999px; background: var(--text); color: #fff; font-size: 10px; font-weight: 800; letter-spacing: .06em; }
+.kit-opt__badge--best { background: var(--positive, #1E9E6A); }
+@media (max-width: 700px) {
+  .option__values--kits { gap: 10px; }
+  body .option__values--kits .kit-opt.kit-opt { padding: 11px 12px 10px; gap: 10px; }
+  .kit-opt__name { font-size: 14px; }
+  .kit-opt__price { font-size: 15px; }
+}
