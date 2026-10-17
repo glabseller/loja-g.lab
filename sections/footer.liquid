@@ -23,36 +23,44 @@
 
     {%- assign shop_menu = linklists['footer-loja'] -%}
     {%- if shop_menu.links.size > 0 -%}
-      <div class="footer__col">
-        <span class="footer__heading">{{ section.settings.shop_heading }}</span>
-        {%- for link in shop_menu.links -%}<a href="{{ link.url }}">{{ link.title }}</a>{%- endfor -%}
-      </div>
+      <details class="footer__col footer__acc" open>
+        <summary class="footer__heading">{{ section.settings.shop_heading }}</summary>
+        <div class="footer__links">
+          {%- for link in shop_menu.links -%}<a href="{{ link.url }}">{{ link.title }}</a>{%- endfor -%}
+        </div>
+      </details>
     {%- endif -%}
 
     {%- assign menu = linklists[section.settings.menu] -%}
     {%- if menu.links.size > 0 -%}
-      <div class="footer__col">
-        <span class="footer__heading">{{ section.settings.menu_heading }}</span>
-        {%- for link in menu.links -%}<a href="{{ link.url }}">{{ link.title }}</a>{%- endfor -%}
-      </div>
+      <details class="footer__col footer__acc" open>
+        <summary class="footer__heading">{{ section.settings.menu_heading }}</summary>
+        <div class="footer__links">
+          {%- for link in menu.links -%}<a href="{{ link.url }}">{{ link.title }}</a>{%- endfor -%}
+        </div>
+      </details>
     {%- endif -%}
 
     {%- assign co_menu = linklists['footer-empresa'] -%}
     {%- if co_menu.links.size > 0 -%}
-      <div class="footer__col">
-        <span class="footer__heading">{{ section.settings.company_heading }}</span>
-        {%- for link in co_menu.links -%}<a href="{{ link.url }}">{{ link.title }}</a>{%- endfor -%}
-      </div>
+      <details class="footer__col footer__acc" open>
+        <summary class="footer__heading">{{ section.settings.company_heading }}</summary>
+        <div class="footer__links">
+          {%- for link in co_menu.links -%}<a href="{{ link.url }}">{{ link.title }}</a>{%- endfor -%}
+        </div>
+      </details>
     {%- endif -%}
 
-    <div class="footer__col footer__col--contact">
-      <span class="footer__heading">{{ section.settings.contact_heading }}</span>
+    <details class="footer__col footer__col--contact footer__acc" open>
+      <summary class="footer__heading">{{ section.settings.contact_heading }}</summary>
+      <div class="footer__links">
       {%- if wa_digits != blank -%}<a href="https://wa.me/{{ wa_digits }}" target="_blank" rel="noopener"><span class="footer__lbl">WhatsApp: </span><span class="footer__num">{{ section.settings.whatsapp }}</span></a>{%- endif -%}
       {%- if mail != blank -%}<a href="mailto:{{ mail }}">{{ mail }}</a>{%- endif -%}
       {%- if section.settings.instagram != blank -%}<a href="{{ section.settings.instagram }}" target="_blank" rel="noopener">Instagram</a>{%- endif -%}
       {%- if section.settings.hours != blank -%}<span class="footer__muted">{{ section.settings.hours }}</span>{%- endif -%}
       {%- if section.settings.contact != blank -%}<div class="rte">{{ section.settings.contact }}</div>{%- endif -%}
     </div>
+    </details>
   </div>
 
   <div class="container footer__pay">

@@ -1042,3 +1042,13 @@ document.addEventListener('change', function (e) {
   if (pb && window.MutationObserver) { new MutationObserver(total).observe(pb.parentNode, { childList: true, subtree: true, attributes: true, attributeFilter: ['data-price-cents'] }); }
   total();
 })();
+
+/* Rodapé: no celular as colunas começam fechadas (sanfona); no computador ficam abertas */
+(function () {
+  var accs = document.querySelectorAll('.footer__acc');
+  if (!accs.length || !window.matchMedia) { return; }
+  var mq = window.matchMedia('(max-width: 749px)');
+  function sync() { for (var i = 0; i < accs.length; i++) { accs[i].open = !mq.matches; } }
+  sync();
+  if (mq.addEventListener) { mq.addEventListener('change', sync); } else if (mq.addListener) { mq.addListener(sync); }
+})();

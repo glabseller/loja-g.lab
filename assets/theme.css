@@ -2009,3 +2009,21 @@ body .qty .qty-stepper--pdp input { width: 52px; min-height: 46px; border: 0; bo
 }
 
 @media (max-width: 749px) { .footer__lbl { display: block; font-size: 11px; opacity: .65; } .footer__num { white-space: nowrap; } }
+
+/* Rodapé: colunas viram sanfona (+/−) no celular, como em lojas grandes */
+.footer__acc > summary { list-style: none; cursor: default; }
+.footer__acc > summary::-webkit-details-marker { display: none; }
+.footer__links { display: flex; flex-direction: column; gap: 10px; }
+@media (min-width: 750px) { .footer__acc > summary { pointer-events: none; } }
+@media (max-width: 749px) {
+  .footer__row { gap: 0; }
+  .footer__row .footer__col--wide { padding-bottom: 18px; }
+  .footer__row .footer__acc, .footer__row .footer__col--contact.footer__acc { flex: 1 1 100%; border-top: 1px solid rgba(255,255,255,.14); display: block; }
+  .footer__acc > summary { cursor: pointer; display: flex; align-items: center; justify-content: space-between; padding: 14px 0; font-size: 13px; margin: 0; -webkit-tap-highlight-color: transparent; }
+  .footer__acc > summary::after { content: "+"; font-size: 22px; font-weight: 300; line-height: 1; opacity: .8; }
+  .footer__acc[open] > summary::after { content: "−"; }
+  .footer__acc .footer__links { padding: 0 0 14px; gap: 8px; }
+  .footer__acc .footer__links a { font-size: 14px; padding: 3px 0; }
+  .footer__pay { padding-top: 16px; border-top: 1px solid rgba(255,255,255,.14); }
+  .footer__lbl { display: inline; font-size: inherit; opacity: 1; }
+}
