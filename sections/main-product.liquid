@@ -65,6 +65,7 @@
 
   <div class="product__info">
     {% render 'stars', product: product %}
+    <span data-recent-product="{{ product.handle }}" hidden></span>
     <div class="product__titlerow">
       <h1 class="product__title">{{ product.title }}</h1>
       <button type="button" class="fav fav--pdp" data-fav="{{ product.handle }}" aria-pressed="false" aria-label="Favoritar">{% render 'icon', name: 'heart', size: 22 %}</button>
@@ -194,6 +195,10 @@
       </div>
     </div>
 
+    <div class="share" data-share data-title="{{ product.title | escape }}" data-url="{{ shop.url }}{{ product.url }}">
+      <button type="button" class="share__btn" data-share-btn>{% render 'icon', name: 'share', size: 18 %}<span>Compartilhar</span></button>
+    </div>
+
     <div class="badges-row">
       <span>{% render 'icon', name: 'shield', size: 18 %} Compra segura</span>
       <span>{% render 'icon', name: 'refresh', size: 18 %} 7 dias para devolver</span>
@@ -259,6 +264,8 @@
   <button type="button" class="buybar__btn" data-buybar-buy>Comprar</button>
 </div>
 {%- endif -%}
+
+<script type="application/ld+json">{{ product | structured_data }}</script>
 
 {% schema %}
 {

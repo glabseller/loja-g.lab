@@ -11,8 +11,10 @@
       <div class="shipbar__track"><div class="shipbar__fill" data-drawer-ship-fill style="width:0%"></div></div>
     </div>
     <div class="drawer__body" data-drawer-body></div>
+    <div class="drawer__xsell" data-drawer-xsell hidden></div>
     <div class="drawer__foot" data-drawer-foot hidden>
       <div class="summary-row summary-row--total"><span>Subtotal</span><span data-drawer-total></span></div>
+      <p class="drawer__pix" data-drawer-pix hidden></p>
       <p class="note">Frete e descontos são calculados na finalização.</p>
       <a class="btn btn--accent btn--lg btn--block" href="{{ routes.cart_url }}/checkout" data-drawer-checkout>Finalizar compra</a>
       <a class="btn btn--block" href="{{ routes.cart_url }}">Ver carrinho</a>

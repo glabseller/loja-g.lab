@@ -1,0 +1,16 @@
+{%- if settings.recently_viewed != false -%}
+<section class="section container recent" data-recent hidden {{ section.shopify_attributes }}>
+  <div class="section-head"><h2 class="section-title">{{ section.settings.heading }}</h2></div>
+  <div class="grid" data-recent-grid></div>
+</section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Vistos recentemente",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Título", "default": "Vistos recentemente" }
+  ],
+  "presets": [{ "name": "Vistos recentemente" }]
+}
+{% endschema %}

@@ -62,10 +62,22 @@
         "id": "font_choice",
         "label": "Fonte do site",
         "options": [
-          { "value": "inter", "label": "Inter (neutra e moderna)" },
-          { "value": "poppins", "label": "Poppins (arredondada e jovem)" },
-          { "value": "dm_sans", "label": "DM Sans (limpa e suave)" },
-          { "value": "manrope", "label": "Manrope (elegante)" }
+          {
+            "value": "inter",
+            "label": "Inter (neutra e moderna)"
+          },
+          {
+            "value": "poppins",
+            "label": "Poppins (arredondada e jovem)"
+          },
+          {
+            "value": "dm_sans",
+            "label": "DM Sans (limpa e suave)"
+          },
+          {
+            "value": "manrope",
+            "label": "Manrope (elegante)"
+          }
         ],
         "default": "inter"
       },
@@ -84,9 +96,18 @@
         "id": "grid_columns",
         "label": "Produtos por linha (computador)",
         "options": [
-          { "value": "3", "label": "3 produtos" },
-          { "value": "4", "label": "4 produtos" },
-          { "value": "5", "label": "5 produtos" }
+          {
+            "value": "3",
+            "label": "3 produtos"
+          },
+          {
+            "value": "4",
+            "label": "4 produtos"
+          },
+          {
+            "value": "5",
+            "label": "5 produtos"
+          }
         ],
         "default": "4"
       },
@@ -111,13 +132,34 @@
         "id": "visual_style",
         "label": "Estilo visual do site",
         "options": [
-          { "value": "gift", "label": "Presente (claro, fofo e limpo, coral e menta)" },
-          { "value": "gamer", "label": "Gamer (claro, HUD neon, cantos cortados)" },
-          { "value": "toon", "label": "Cartoon Moderno (contornos, adesivos, bento, atual)" },
-          { "value": "toon_night", "label": "Cartoon Noturno (escuro com neon, gamer)" },
-          { "value": "modern", "label": "Moderno (sério, gamer, com modo escuro)" },
-          { "value": "cartoon", "label": "Cartoon (contornos grossos, divertido)" },
-          { "value": "classic", "label": "Clássico (colorido ou vidro, abaixo)" }
+          {
+            "value": "gift",
+            "label": "Presente (claro, fofo e limpo, coral e menta)"
+          },
+          {
+            "value": "gamer",
+            "label": "Gamer (claro, HUD neon, cantos cortados)"
+          },
+          {
+            "value": "toon",
+            "label": "Cartoon Moderno (contornos, adesivos, bento, atual)"
+          },
+          {
+            "value": "toon_night",
+            "label": "Cartoon Noturno (escuro com neon, gamer)"
+          },
+          {
+            "value": "modern",
+            "label": "Moderno (sério, gamer, com modo escuro)"
+          },
+          {
+            "value": "cartoon",
+            "label": "Cartoon (contornos grossos, divertido)"
+          },
+          {
+            "value": "classic",
+            "label": "Clássico (colorido ou vidro, abaixo)"
+          }
         ],
         "default": "modern"
       },
@@ -126,9 +168,18 @@
         "id": "dark_mode",
         "label": "Modo escuro (só no estilo Moderno)",
         "options": [
-          { "value": "auto", "label": "Automático (segue o aparelho + botão no cabeçalho)" },
-          { "value": "light", "label": "Sempre claro" },
-          { "value": "dark", "label": "Sempre escuro" }
+          {
+            "value": "auto",
+            "label": "Automático (segue o aparelho + botão no cabeçalho)"
+          },
+          {
+            "value": "light",
+            "label": "Sempre claro"
+          },
+          {
+            "value": "dark",
+            "label": "Sempre escuro"
+          }
         ],
         "default": "auto"
       },
@@ -227,6 +278,45 @@
         "step": 10,
         "default": 100,
         "info": "Use 0 para não mostrar a barra de frete grátis."
+      }
+    ]
+  },
+  {
+    "name": "Atendimento e conversão",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Funções que ajudam a vender mais. Deixe o WhatsApp vazio para esconder o botão flutuante."
+      },
+      {
+        "type": "text",
+        "id": "whatsapp_number",
+        "label": "WhatsApp da loja (com 55 e DDD)",
+        "default": "55 11 99651-6641"
+      },
+      {
+        "type": "text",
+        "id": "whatsapp_greeting",
+        "label": "Mensagem inicial do WhatsApp",
+        "default": "Olá! Vim pelo site da G LAB e gostaria de ajuda."
+      },
+      {
+        "type": "checkbox",
+        "id": "cross_sell",
+        "label": "Sugestões \"Complete seu pedido\" no carrinho",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "search_suggest",
+        "label": "Sugestões na busca enquanto digita",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "recently_viewed",
+        "label": "Mostrar \"Vistos recentemente\" no produto",
+        "default": true
       }
     ]
   }

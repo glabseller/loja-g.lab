@@ -2071,3 +2071,51 @@ body .drawer__ship .shipbar__track, body .shipbar .shipbar__track { border-color
 body .drawer__ship.is-done, body .shipbar.is-done { background: color-mix(in srgb, var(--accent) 8%, #fff); border-color: color-mix(in srgb, var(--accent) 28%, #fff); }
 body .drawer__ship.is-done .shipbar__track, body .shipbar.is-done .shipbar__track { border-color: color-mix(in srgb, var(--accent) 28%, #fff); }
 body .drawer__ship.is-done .drawer__ship-goal, body .shipbar.is-done .shipbar__goal { color: var(--accent); }
+
+/* ===== Conversão ===== */
+/* WhatsApp flutuante */
+.wa-float { position: fixed; right: 16px; bottom: 24px; z-index: 55; display: inline-flex; align-items: center; gap: 8px; height: 56px; min-width: 56px; padding: 0 16px; justify-content: center; border-radius: 999px; background: #25D366; color: #fff; box-shadow: 0 8px 22px rgba(0,0,0,.22); font-weight: 600; font-size: 14px; transition: transform .15s; }
+.wa-float:hover { transform: translateY(-2px); }
+.wa-float__label { display: none; }
+@media (min-width: 900px) { .wa-float__label { display: inline; } }
+@media (max-width: 700px) { .wa-float { width: 52px; height: 52px; min-width: 0; padding: 0; bottom: calc(82px + env(safe-area-inset-bottom)); right: 12px; } body.template-product .wa-float { bottom: calc(156px + env(safe-area-inset-bottom)); } }
+html.drawer-open .wa-float { display: none; }
+
+/* Pix e sugestões no carrinho lateral */
+.drawer__pix { margin: 0 0 6px; font-size: 14px; color: var(--accent); }
+.drawer__pix strong { font-size: 16px; }
+.drawer__xsell { padding: 10px 22px 8px; border-top: 1px solid var(--line); background: var(--soft); }
+.drawer__xsell-title { margin: 0 0 8px; font-size: 13px; font-weight: 700; }
+.drawer__xsell-row { display: flex; gap: 10px; overflow-x: auto; scrollbar-width: none; padding-bottom: 2px; }
+.drawer__xsell-row::-webkit-scrollbar { display: none; }
+.xs { flex: 0 0 132px; display: grid; gap: 4px; background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 8px; }
+.xs__img { display: block; aspect-ratio: 1/1; border-radius: 8px; overflow: hidden; background: var(--soft); }
+.xs__img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.xs__title { font-size: 12px; line-height: 1.3; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; min-height: 31px; }
+.xs__price { font-size: 12px; font-weight: 700; }
+.xs__add { border: 1px solid var(--accent); background: transparent; color: var(--accent); border-radius: 999px; font-weight: 700; font-size: 12px; padding: 6px 8px; cursor: pointer; }
+.xs__add:disabled { opacity: .6; }
+@media (max-height: 760px) { .drawer__xsell { display: none; } }
+
+/* Compartilhar */
+.share { margin: 2px 0 6px; }
+.share__btn { display: inline-flex; align-items: center; gap: 8px; border: 0; background: transparent; color: var(--muted); font-size: 14px; cursor: pointer; padding: 6px 0; }
+.share__btn:hover { color: var(--text); }
+
+/* Busca com sugestões */
+.header-search { position: relative; }
+.suggest { position: absolute; left: 0; right: 0; top: calc(100% + 8px); z-index: 80; background: #fff; border: 1px solid var(--line); border-radius: 16px; box-shadow: 0 16px 40px rgba(0,0,0,.16); padding: 6px; max-height: 70vh; overflow-y: auto; min-width: 280px; }
+.suggest[hidden] { display: none; }
+.suggest__item { display: flex; align-items: center; gap: 12px; padding: 8px; border-radius: 10px; color: var(--text); }
+.suggest__item:hover, .suggest__item:focus { background: var(--soft); }
+.suggest__item img { width: 44px; height: 44px; border-radius: 8px; object-fit: cover; flex: none; }
+.suggest__txt { display: grid; gap: 2px; min-width: 0; }
+.suggest__title { font-size: 14px; font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.suggest__price { font-size: 13px; color: var(--muted); }
+.suggest__all { display: block; text-align: center; padding: 10px; font-weight: 700; font-size: 14px; color: var(--accent); }
+.suggest__empty { margin: 0; padding: 14px; color: var(--muted); font-size: 14px; }
+
+/* Vistos recentemente */
+.recent[hidden] { display: none; }
+.recent .grid { grid-template-columns: repeat(4, 1fr); }
+@media (max-width: 699px) { .recent .grid { grid-template-columns: repeat(2, 1fr); } }

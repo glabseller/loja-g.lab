@@ -1,8 +1,28 @@
 {
   "sections": {
-    "main": { "type": "main-product", "blocks": {}, "block_order": [], "settings": {} },
-    "bundle": { "type": "frequently-bought", "settings": {} },
-    "recommendations": { "type": "product-recommendations", "settings": {} }
+    "main": {
+      "type": "main-product",
+      "blocks": {},
+      "block_order": [],
+      "settings": {}
+    },
+    "bundle": {
+      "type": "frequently-bought",
+      "settings": {}
+    },
+    "recommendations": {
+      "type": "product-recommendations",
+      "settings": {}
+    },
+    "recent": {
+      "type": "recently-viewed",
+      "settings": {}
+    }
   },
-  "order": ["main", "bundle", "recommendations"]
+  "order": [
+    "main",
+    "bundle",
+    "recommendations",
+    "recent"
+  ]
 }

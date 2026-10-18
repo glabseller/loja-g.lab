@@ -13,6 +13,7 @@
       <label class="visually-hidden" for="header-search-input">Buscar</label>
       <input id="header-search-input" type="search" name="q" placeholder="Buscar produtos" value="{{ search.terms | escape }}">
       <button type="submit" aria-label="Buscar">{% render 'icon', name: 'search', size: 20 %}</button>
+      <div class="suggest" data-suggest hidden></div>
     </form>
 
     <div class="header__icons">
