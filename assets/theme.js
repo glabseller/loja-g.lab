@@ -1328,7 +1328,7 @@ document.addEventListener('change', function (e) {
   function openSheet() {
     if (!sheet) {
       sheet = el('div', 'msearch'); sheet.hidden = true;
-      sheet.innerHTML = '<div class="msearch__bar"><form class="msearch__form" action="/search" method="get" role="search"><input type="search" name="q" placeholder="Buscar produtos" autocomplete="off" enterkeyhint="search" aria-label="Buscar"><button type="submit" aria-label="Buscar">OK</button></form><button type="button" class="msearch__close" aria-label="Fechar busca">Cancelar</button></div><div class="suggest msearch__res" data-suggest hidden></div>';
+      sheet.innerHTML = '<div class="msearch__bar"><form class="msearch__form" action="/search" method="get" role="search"><svg class="msearch__ico" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg><input type="search" name="q" placeholder="O que você procura?" autocomplete="off" enterkeyhint="search" aria-label="Buscar"></form><button type="button" class="msearch__close" aria-label="Fechar busca">Cancelar</button></div><div class="suggest msearch__res" data-suggest hidden></div>';
       document.body.appendChild(sheet);
       var f = sheet.querySelector('form'), i = f.querySelector('input'), bx = sheet.querySelector('[data-suggest]');
       bindSuggest(f, i, bx);
