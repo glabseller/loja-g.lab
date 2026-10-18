@@ -2063,3 +2063,11 @@ body .qty .qty-stepper--pdp input { width: 52px; min-height: 46px; border: 0; bo
 .fav-toast.is-loading { opacity: .92; }
 .fav-toast.is-loading .fav-toast__go { text-decoration: none; opacity: .8; pointer-events: none; }
 html.nav-loading, html.nav-loading a { cursor: progress; }
+
+/* Barra de frete grátis do carrinho: mesma cor do botão "Finalizar compra" */
+body .drawer__ship .shipbar__fill, body .shipbar .shipbar__fill { background: var(--accent); }
+body .drawer__ship-amount, body .shipbar__amount { color: var(--accent); }
+body .drawer__ship .shipbar__track, body .shipbar .shipbar__track { border-color: #F3D9A4; }
+body .drawer__ship.is-done, body .shipbar.is-done { background: color-mix(in srgb, var(--accent) 8%, #fff); border-color: color-mix(in srgb, var(--accent) 28%, #fff); }
+body .drawer__ship.is-done .shipbar__track, body .shipbar.is-done .shipbar__track { border-color: color-mix(in srgb, var(--accent) 28%, #fff); }
+body .drawer__ship.is-done .drawer__ship-goal, body .shipbar.is-done .shipbar__goal { color: var(--accent); }
