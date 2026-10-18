@@ -2048,3 +2048,11 @@ body .qty .qty-stepper--pdp input { width: 52px; min-height: 46px; border: 0; bo
 .favpage .card .btn { margin-top: 10px; }
 @media (max-width: 999px) { .favpage__grid { grid-template-columns: repeat(3, 1fr); } }
 @media (max-width: 699px) { .favpage__grid { grid-template-columns: repeat(2, 1fr); gap: 18px 12px; } .fav { width: 34px; height: 34px; right: 8px; bottom: 8px; } }
+
+/* Aviso: entrar para favoritar */
+.fav-toast { position: fixed; left: 12px; right: 12px; bottom: 92px; z-index: 3000; max-width: 520px; margin: 0 auto; display: flex; align-items: center; gap: 14px; padding: 16px 16px 16px 20px; background: #1b1450; color: #fff; border-radius: 14px; box-shadow: 0 12px 32px rgba(0,0,0,.3); animation: fav-toast-in .25s ease; }
+.fav-toast__txt { flex: 1; font-size: 15px; line-height: 1.35; font-weight: 500; }
+.fav-toast__go { color: #fff; font-weight: 700; letter-spacing: .04em; font-size: 14px; text-decoration: underline; text-underline-offset: 3px; }
+.fav-toast__x { border: 0; background: transparent; color: #fff; font-size: 26px; line-height: 1; cursor: pointer; padding: 0 4px; }
+@keyframes fav-toast-in { from { transform: translateY(16px); opacity: 0; } to { transform: none; opacity: 1; } }
+@media (min-width: 750px) { .fav-toast { bottom: 28px; } }

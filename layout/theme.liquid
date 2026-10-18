@@ -121,7 +121,10 @@
       cartAddUrl: {{ routes.cart_add_url | append: '.js' | json }},
       cartUrl: {{ routes.cart_url | json }},
       cartJsUrl: {{ routes.cart_url | append: '.js' | json }},
-      cartChangeUrl: {{ routes.cart_change_url | append: '.js' | json }}
+      cartChangeUrl: {{ routes.cart_change_url | append: '.js' | json }},
+      loggedIn: {% if customer %}true{% else %}false{% endif %},
+      customerId: {{ customer.id | json }},
+      loginUrl: {{ routes.account_login_url | json }}
     };
   </script>
 </head>

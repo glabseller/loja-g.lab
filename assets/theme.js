@@ -1055,7 +1055,8 @@ document.addEventListener('change', function (e) {
 
 /* Favoritos: coração nos produtos, contador no cabeçalho e página "Favoritos" (guardado neste aparelho) */
 (function () {
-  var KEY = 'glab_favs', mem = null;
+  var cfg = window.themeConfig || {};
+  var KEY = 'glab_favs_' + (cfg.customerId || 'anon'), mem = null;
   function read() {
     if (mem) { return mem.slice(); }
     try { var a = JSON.parse(localStorage.getItem(KEY) || '[]'); return Array.isArray(a) ? a : []; } catch (e) { return []; }
@@ -1076,10 +1077,22 @@ document.addEventListener('change', function (e) {
     for (var j = 0; j < counts.length; j++) { counts[j].textContent = list.length; counts[j].hidden = list.length === 0; }
   }
 
+  function needLogin() {
+    var old = document.querySelector('.fav-toast'); if (old) { old.remove(); }
+    var t = el('div', 'fav-toast'); t.setAttribute('role', 'alert');
+    t.appendChild(el('span', 'fav-toast__txt', 'Acesse sua conta antes de favoritar um produto.'));
+    var go = el('a', 'fav-toast__go', 'ENTRAR'); go.href = cfg.loginUrl || '/account/login'; t.appendChild(go);
+    var x = el('button', 'fav-toast__x', '×'); x.type = 'button'; x.setAttribute('aria-label', 'Fechar'); x.addEventListener('click', function () { t.remove(); }); t.appendChild(x);
+    document.body.appendChild(t);
+    setTimeout(function () { if (t.parentNode) { t.remove(); } }, 7000);
+  }
+
   function toggle(handle) {
+    if (!cfg.loggedIn) { needLogin(); return false; }
     var list = read(), at = list.indexOf(handle);
     if (at > -1) { list.splice(at, 1); } else { list.push(handle); }
     write(list); paint(); renderPage();
+    return true;
   }
 
   function el(tag, cls, text) { var n = document.createElement(tag); if (cls) { n.className = cls; } if (text) { n.textContent = text; } return n; }
@@ -1110,7 +1123,12 @@ document.addEventListener('change', function (e) {
     var grid = document.querySelector('[data-fav-grid]');
     if (!grid) { return; }
     var empty = document.querySelector('[data-fav-empty]');
-    var list = read();
+    var list = cfg.loggedIn ? read() : [];
+    if (!cfg.loggedIn) {
+      grid.innerHTML = '';
+      if (empty) { empty.hidden = false; var m = empty.querySelector('[data-fav-msg]'); if (m) { m.textContent = 'Entre na sua conta para ver e guardar seus favoritos.'; } var lk = empty.querySelector('a'); if (lk) { lk.textContent = 'Entrar'; lk.href = cfg.loginUrl || '/account/login'; } }
+      return;
+    }
     if (!list.length) { grid.innerHTML = ''; if (empty) { empty.hidden = false; } return; }
     if (empty) { empty.hidden = true; }
     Promise.all(list.map(function (h) {
@@ -1132,9 +1150,12 @@ document.addEventListener('change', function (e) {
     var b = e.target.closest && e.target.closest('[data-fav]');
     if (!b) { return; }
     e.preventDefault(); e.stopPropagation();
-    toggle(b.getAttribute('data-fav'));
-    if (b.classList.contains('is-on')) { b.classList.add('is-pop'); setTimeout(function () { b.classList.remove('is-pop'); }, 400); }
+    if (toggle(b.getAttribute('data-fav')) && b.classList.contains('is-on')) { b.classList.add('is-pop'); setTimeout(function () { b.classList.remove('is-pop'); }, 400); }
   }, true);
+  document.addEventListener('click', function (e) {
+    var l = e.target.closest && e.target.closest('.fav-link');
+    if (l && !cfg.loggedIn) { e.preventDefault(); needLogin(); }
+  });
   window.addEventListener('storage', function (ev) { if (ev.key === KEY) { mem = null; paint(); renderPage(); } });
   paint(); renderPage();
 })();
