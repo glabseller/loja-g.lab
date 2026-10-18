@@ -2058,8 +2058,8 @@ body .qty .qty-stepper--pdp input { width: 52px; min-height: 46px; border: 0; bo
 @media (min-width: 750px) { .fav-toast { bottom: 28px; } }
 
 /* Barra de carregamento ao abrir o login */
-.nav-bar { position: fixed; top: 0; left: 0; height: 3px; width: 100%; z-index: 4000; background: linear-gradient(90deg, var(--accent), var(--accent-2, var(--accent))); transform-origin: left; animation: nav-bar 2.4s ease-out forwards; }
-@keyframes nav-bar { from { transform: scaleX(.05); } 60% { transform: scaleX(.7); } to { transform: scaleX(.95); } }
+.load-bar { position: fixed; top: 0; left: 0; height: 3px; width: 100%; z-index: 4000; background: linear-gradient(90deg, var(--accent), var(--accent-2, var(--accent))); transform-origin: left; animation: load-bar 2.4s ease-out forwards; }
+@keyframes load-bar { from { transform: scaleX(.05); } 60% { transform: scaleX(.7); } to { transform: scaleX(.95); } }
 .fav-toast.is-loading { opacity: .92; }
 .fav-toast.is-loading .fav-toast__go { text-decoration: none; opacity: .8; pointer-events: none; }
 html.nav-loading, html.nav-loading a { cursor: progress; }

@@ -1165,7 +1165,7 @@ document.addEventListener('change', function (e) {
   function start(link) {
     if (document.documentElement.classList.contains('nav-loading')) { return; }
     document.documentElement.classList.add('nav-loading');
-    var bar = document.createElement('div'); bar.className = 'nav-bar'; document.body.appendChild(bar);
+    var bar = document.createElement('div'); bar.className = 'load-bar'; document.body.appendChild(bar);
     var t = document.querySelector('.fav-toast');
     if (t) { t.classList.add('is-loading'); var txt = t.querySelector('.fav-toast__txt'); if (txt) { txt.textContent = 'Abrindo o login…'; } }
     if (link && link.classList.contains('fav-toast__go')) { link.textContent = 'AGUARDE'; }
@@ -1173,7 +1173,7 @@ document.addEventListener('change', function (e) {
   }
   function stop() {
     document.documentElement.classList.remove('nav-loading');
-    var b = document.querySelector('.nav-bar'); if (b) { b.remove(); }
+    var b = document.querySelector('.load-bar'); if (b) { b.remove(); }
     var t = document.querySelector('.fav-toast'); if (t) { t.remove(); }
   }
   document.addEventListener('click', function (e) {
