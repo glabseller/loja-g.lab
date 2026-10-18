@@ -1159,3 +1159,28 @@ document.addEventListener('change', function (e) {
   window.addEventListener('storage', function (ev) { if (ev.key === KEY) { mem = null; paint(); renderPage(); } });
   paint(); renderPage();
 })();
+
+/* Feedback imediato ao ir para o login/conta (a página da Shopify demora um pouco para abrir) */
+(function () {
+  function start(link) {
+    if (document.documentElement.classList.contains('nav-loading')) { return; }
+    document.documentElement.classList.add('nav-loading');
+    var bar = document.createElement('div'); bar.className = 'nav-bar'; document.body.appendChild(bar);
+    var t = document.querySelector('.fav-toast');
+    if (t) { t.classList.add('is-loading'); var txt = t.querySelector('.fav-toast__txt'); if (txt) { txt.textContent = 'Abrindo o login…'; } }
+    if (link && link.classList.contains('fav-toast__go')) { link.textContent = 'AGUARDE'; }
+    setTimeout(stop, 15000);
+  }
+  function stop() {
+    document.documentElement.classList.remove('nav-loading');
+    var b = document.querySelector('.nav-bar'); if (b) { b.remove(); }
+    var t = document.querySelector('.fav-toast'); if (t) { t.remove(); }
+  }
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a[href]');
+    if (!a || e.defaultPrevented || e.metaKey || e.ctrlKey || a.target === '_blank') { return; }
+    var h = a.getAttribute('href') || '';
+    if (/\/account\/(login|register)|customer_authentication|shopify\.com\/.*account/.test(h)) { start(a); }
+  });
+  window.addEventListener('pageshow', function (e) { if (e.persisted) { stop(); } });
+})();
