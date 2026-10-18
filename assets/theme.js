@@ -469,17 +469,6 @@
     });
   });
 
-  /* ---------- Barra fixa do celular: buscar ---------- */
-  document.querySelectorAll('[data-search-focus]').forEach(function (btn) {
-    btn.addEventListener('click', function () {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-      var field = document.getElementById('header-search-input');
-      var sform = document.querySelector('.header-search');
-      if (sform) { sform.classList.add('is-open'); }
-      if (field) { setTimeout(function () { field.focus(); }, 300); }
-    });
-  });
-
   /* ---------- Animação suave ao rolar ---------- */
   (function () {
     if (!document.body.classList.contains('has-reveal')) { return; }
@@ -1296,9 +1285,7 @@ document.addEventListener('change', function (e) {
   });
 
   /* --- Busca com sugestões --- */
-  var form = document.querySelector('.header-search');
-  var input = form && form.querySelector('input[type="search"]');
-  var box = form && form.querySelector('[data-suggest]');
+  function bindSuggest(form, input, box) {
   if (form && input && box && cfg.searchSuggest !== false) {
     var timer = null, ctrl = null;
     function hide() { box.hidden = true; box.innerHTML = ''; }
@@ -1332,4 +1319,28 @@ document.addEventListener('change', function (e) {
     document.addEventListener('click', function (e) { if (!form.contains(e.target)) { hide(); } });
     input.addEventListener('keydown', function (e) { if (e.key === 'Escape') { hide(); } });
   }
+  }
+  var hform = document.querySelector('.header-search');
+  bindSuggest(hform, hform && hform.querySelector('input[type="search"]'), hform && hform.querySelector('[data-suggest]'));
+
+  /* --- Busca do celular: painel próprio no topo da tela (sem rolar a página) --- */
+  var sheet = null;
+  function openSheet() {
+    if (!sheet) {
+      sheet = el('div', 'msearch'); sheet.hidden = true;
+      sheet.innerHTML = '<div class="msearch__bar"><form class="msearch__form" action="/search" method="get" role="search"><input type="search" name="q" placeholder="Buscar produtos" autocomplete="off" enterkeyhint="search" aria-label="Buscar"><button type="submit" aria-label="Buscar">OK</button></form><button type="button" class="msearch__close" aria-label="Fechar busca">Cancelar</button></div><div class="suggest msearch__res" data-suggest hidden></div>';
+      document.body.appendChild(sheet);
+      var f = sheet.querySelector('form'), i = f.querySelector('input'), bx = sheet.querySelector('[data-suggest]');
+      bindSuggest(f, i, bx);
+      function close() { sheet.hidden = true; document.body.classList.remove('msearch-on'); i.blur(); }
+      sheet.querySelector('.msearch__close').addEventListener('click', close);
+      i.addEventListener('keydown', function (e) { if (e.key === 'Escape') { close(); } });
+      sheet.addEventListener('click', function (e) { if (e.target === sheet) { close(); } });
+    }
+    sheet.hidden = false; document.body.classList.add('msearch-on');
+    sheet.querySelector('input').focus();
+  }
+  document.querySelectorAll('[data-search-focus]').forEach(function (btn) {
+    btn.addEventListener('click', openSheet);
+  });
 })();

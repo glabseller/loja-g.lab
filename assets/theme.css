@@ -2119,3 +2119,15 @@ html.drawer-open .wa-float { display: none; }
 .recent[hidden] { display: none; }
 .recent .grid { grid-template-columns: repeat(4, 1fr); }
 @media (max-width: 699px) { .recent .grid { grid-template-columns: repeat(2, 1fr); } }
+
+/* Busca do celular: painel fixo no topo, sem rolar a página */
+.msearch { position: fixed; inset: 0; z-index: 200; background: rgba(0,0,0,.4); }
+.msearch[hidden] { display: none; }
+.msearch__bar { display: flex; align-items: center; gap: 10px; padding: calc(10px + env(safe-area-inset-top)) 12px 10px; background: #fff; }
+.msearch__form { flex: 1 1 auto; display: flex; align-items: center; border: 1.5px solid var(--accent); border-radius: 999px; padding-left: 16px; background: #fff; min-width: 0; }
+.msearch__form input { flex: 1 1 auto; min-width: 0; border: 0; outline: 0; background: transparent; min-height: 42px; font-size: 16px; color: var(--text); }
+.msearch__form button { border: 0; background: var(--accent); color: #fff; font-weight: 600; border-radius: 999px; padding: 0 16px; min-height: 34px; margin-right: 4px; font-family: inherit; }
+.msearch__close { border: 0; background: none; color: var(--text); font-size: 14px; font-family: inherit; padding: 8px 2px; }
+.msearch__res { position: static; margin: 0; border: 0; border-radius: 0 0 16px 16px; box-shadow: 0 16px 30px rgba(0,0,0,.15); max-height: 60vh; }
+body.msearch-on { overflow: hidden; }
+@media (min-width: 750px) { .msearch { display: none !important; } }
