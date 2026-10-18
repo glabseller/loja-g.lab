@@ -30,12 +30,10 @@
             <p class="acct__hello">Olá, {{ customer.first_name | default: 'cliente' | escape }}</p>
             <a role="menuitem" href="{{ routes.account_url }}">Minha conta</a>
             <a role="menuitem" href="{{ routes.account_url }}">Meus pedidos</a>
-            <a role="menuitem" href="/pages/favoritos">Favoritos</a>
             <a role="menuitem" class="acct__out" href="{{ routes.account_logout_url }}">Sair</a>
           {%- else -%}
             <a role="menuitem" class="acct__primary" href="{{ routes.account_login_url }}">Entrar</a>
             <a role="menuitem" href="{{ routes.account_register_url }}">Criar conta</a>
-            <a role="menuitem" href="/pages/favoritos">Favoritos</a>
             <p class="acct__note">Acompanhe seus pedidos e compre mais rápido.</p>
           {%- endif -%}
         </div>
