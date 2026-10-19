@@ -2281,3 +2281,11 @@ body.lb-on { overflow: hidden; }
 .shortcuts__chip { padding: 9px 16px; border-radius: 999px; border: 1.5px solid var(--line-strong, #e5d5cc); background: #fff; font-size: 14px; font-weight: 600; color: var(--text); }
 .shortcuts__chip:hover { border-color: var(--accent); color: var(--accent); }
 .shortcuts__wa { font-size: 13.5px; color: #1E9E6A; font-weight: 600; text-decoration: underline; }
+
+/* WhatsApp flutuante: só o ícone redondo; o texto aparece ao passar o mouse (computador) */
+.wa-float { width: 54px; height: 54px; min-width: 0; padding: 0; gap: 0; }
+@media (min-width: 900px) {
+  .wa-float { bottom: 22px; right: 22px; }
+  .wa-float__label { display: block; position: absolute; right: calc(100% + 10px); top: 50%; transform: translateY(-50%) translateX(6px); white-space: nowrap; background: #1f1f1f; color: #fff; font-size: 13px; font-weight: 600; padding: 7px 12px; border-radius: 10px; opacity: 0; pointer-events: none; transition: opacity .15s, transform .15s; }
+  .wa-float:hover .wa-float__label, .wa-float:focus-visible .wa-float__label { opacity: 1; transform: translateY(-50%); }
+}
