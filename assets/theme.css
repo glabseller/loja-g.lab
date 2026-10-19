@@ -2176,3 +2176,31 @@ body .xs__add { justify-self: start; padding: 4px 12px; font-size: 11px; line-he
   body .site-header .header__icons .icon-btn, body .site-header .header__row .header-search button { width: 36px; height: 36px; }
   body .site-header .header__row { column-gap: 4px; }
 }
+
+/* Carrinho lateral: versão compacta */
+body .drawer__head { padding: 8px 8px 8px 18px; }
+body .drawer__title { font-size: 18px; }
+body .drawer__head .icon-btn { width: 38px; height: 38px; }
+body .drawer__ship { margin: 8px 12px 0; padding: 9px 12px 11px; border-radius: 12px; }
+body .drawer__ship-text { font-size: 13px; line-height: 1.3; margin: 0 0 6px; }
+body .drawer__ship-amount { font-size: 14px; }
+body .drawer__ship .shipbar__track { height: 7px; }
+body .drawer__body { padding: 0 16px; }
+body .drawer-item { gap: 12px; padding: 12px 0; }
+body .drawer-item__img { flex: 0 0 68px; width: 68px; height: 68px; border-radius: 12px; }
+body .drawer-item__main { gap: 2px; }
+body .drawer-item__title { font-size: 13px; line-height: 1.3; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+body .drawer-item__meta { font-size: 11px; }
+body .drawer-item__price { font-size: 13px; }
+body .drawer-item__controls { margin-top: 4px; gap: 10px; }
+body .drawer-item .qty-stepper { border-radius: 999px; }
+body .drawer-item .qty-stepper button { width: 28px; height: 28px; }
+body .drawer-item .qty-stepper input, body .drawer-item .qty-stepper span { min-width: 24px; font-size: 13px; }
+body .drawer__xsell { padding: 6px 12px 8px; }
+body .drawer__foot { padding: 10px 16px calc(12px + env(safe-area-inset-bottom)); gap: 6px; }
+body .drawer__foot .summary-row--total { font-size: 17px; }
+body .drawer__pix { margin: 0; font-size: 13px; }
+body .drawer__pix strong { font-size: 14px; }
+body .drawer__foot .note { margin: 0; font-size: 11.5px; line-height: 1.3; }
+body .drawer__foot .btn { min-height: 44px; font-size: 15px; }
+body .drawer__foot .btn:not(.btn--accent) { min-height: 38px; font-size: 14px; }
