@@ -1354,20 +1354,32 @@ document.addEventListener('change', function (e) {
   function mask(v) { v = String(v).replace(/\D/g, '').slice(0, 8); return v.length > 5 ? v.slice(0, 5) + '-' + v.slice(5) : v; }
   function sleep(ms) { return new Promise(function (r) { setTimeout(r, ms); }); }
   function getJSON(url, opt) { return fetch(url, opt).then(function (r) { return r.text().then(function (t) { var j = null; try { j = JSON.parse(t); } catch (e) {} return { status: r.status, ok: r.ok, json: j }; }); }); }
-  function addrQs(zip) { return 'shipping_address[zip]=' + encodeURIComponent(zip) + '&shipping_address[country]=Brazil'; }
-  function quote(zip) {
-    return getJSON('/cart/prepare_shipping_rates.json?' + addrQs(zip), { method: 'POST', headers: { Accept: 'application/json' } }).then(function (r) {
-      if (!(r.ok || r.status === 202)) { throw new Error('prepare'); }
+  /* O Brasil exige o estado (UF) no cálculo; deduzimos pela faixa do CEP (tabela dos Correios). */
+  var UF = [[1000,19999,'SP'],[20000,28999,'RJ'],[29000,29999,'ES'],[30000,39999,'MG'],[40000,48999,'BA'],[49000,49999,'SE'],[50000,56999,'PE'],[57000,57999,'AL'],[58000,58999,'PB'],[59000,59999,'RN'],[60000,63999,'CE'],[64000,64999,'PI'],[65000,65999,'MA'],[66000,68899,'PA'],[68900,68999,'AP'],[69000,69299,'AM'],[69300,69399,'RR'],[69400,69899,'AM'],[69900,69999,'AC'],[70000,72799,'DF'],[72800,72999,'GO'],[73000,73699,'DF'],[73700,76799,'GO'],[76800,76999,'RO'],[77000,77999,'TO'],[78000,78899,'MT'],[79000,79999,'MS'],[80000,87999,'PR'],[88000,89999,'SC'],[90000,99999,'RS']];
+  function ufOf(zip) { var n = parseInt(String(zip).slice(0, 5), 10), i; for (i = 0; i < UF.length; i++) { if (n >= UF[i][0] && n <= UF[i][1]) { return UF[i][2]; } } return ''; }
+  function addrQs(zip, country) {
+    var uf = ufOf(zip);
+    return 'shipping_address[zip]=' + encodeURIComponent(zip) + '&shipping_address[country]=' + (country || 'Brazil') + (uf ? '&shipping_address[province]=' + uf : '');
+  }
+  function quoteWith(zip, country) {
+    return getJSON('/cart/prepare_shipping_rates.json?' + addrQs(zip, country), { method: 'POST', headers: { Accept: 'application/json' } }).then(function (r) {
+      if (!(r.ok || r.status === 202)) { var er = new Error('prepare ' + r.status); er.detail = r.json; throw er; }
       var tries = 0;
       function poll() {
         tries++;
-        return getJSON('/cart/async_shipping_rates.json?' + addrQs(zip), { headers: { Accept: 'application/json' } }).then(function (p) {
+        return getJSON('/cart/async_shipping_rates.json?' + addrQs(zip, country), { headers: { Accept: 'application/json' } }).then(function (p) {
           if (p.status === 200 && p.json) { return p.json.shipping_rates || []; }
-          if (tries >= 12) { throw new Error('timeout'); }
+          if (tries >= 14) { throw new Error('timeout ' + p.status); }
           return sleep(700).then(poll);
         });
       }
       return poll();
+    });
+  }
+  function quote(zip) {
+    return quoteWith(zip, 'Brazil').catch(function (e) {
+      try { console.warn('[frete] 1ª tentativa falhou:', e.message, e.detail || ''); } catch (x) {}
+      return quoteWith(zip, 'BR');
     });
   }
   function days(r) {
@@ -1405,7 +1417,7 @@ document.addEventListener('change', function (e) {
         });
         out.appendChild(ul);
         if (freeCents > 0) { out.appendChild(node('p', 'cep__note', 'Pedidos a partir de ' + fmt.format(freeCents / 100) + ' têm desconto de frete aplicado automaticamente no checkout.')); }
-      }).catch(function () { if (my === seq) { msg('Não conseguimos calcular agora. O frete é mostrado no checkout, sem compromisso.', true); } })
+      }).catch(function (e) { try { console.warn('[frete] falhou:', e && e.message, e && e.detail || ''); } catch (x) {} if (my === seq) { msg('Não conseguimos calcular agora. O frete é mostrado no checkout, sem compromisso.', true); } })
         .then(function () { btn.disabled = false; btn.textContent = 'Calcular'; });
     }
     form.addEventListener('submit', function (e) { e.preventDefault(); run(); });
