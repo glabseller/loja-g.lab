@@ -1,0 +1,16 @@
+{%- comment -%} Atalhos para o cliente não ficar num beco sem saída: categorias do menu + WhatsApp. {%- endcomment -%}
+{%- assign es_links = linklists['main-menu'].links -%}
+{%- assign es_wa = settings.whatsapp_number | replace: ' ', '' | replace: '-', '' | replace: '(', '' | replace: ')', '' | replace: '+', '' -%}
+<div class="shortcuts">
+  {%- if es_links.size > 0 -%}
+    <p class="shortcuts__title">Explore por categoria</p>
+    <div class="shortcuts__chips">
+      {%- for link in es_links limit: 8 -%}
+        <a class="shortcuts__chip" href="{{ link.url }}">{{ link.title }}</a>
+      {%- endfor -%}
+    </div>
+  {%- endif -%}
+  {%- if es_wa != blank -%}
+    <a class="shortcuts__wa" href="https://wa.me/{{ es_wa }}?text={{ 'Olá! Preciso de ajuda para encontrar um produto.' | url_encode }}" target="_blank" rel="noopener">Não achou? Chame a gente no WhatsApp</a>
+  {%- endif -%}
+</div>

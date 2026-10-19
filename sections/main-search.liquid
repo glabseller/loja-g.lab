@@ -29,6 +29,7 @@
         <div class="empty">
           <p>Não encontramos nada para "{{ search.terms | escape }}". Tente outra palavra.</p>
           <a class="btn btn--ink" href="{{ routes.all_products_collection_url }}">Ver todos os produtos</a>
+          {% render 'empty-shortcuts' %}
         </div>
       {%- endif -%}
     {%- endif -%}

@@ -180,6 +180,11 @@
           <button type="submit" name="checkout" class="btn btn--ink btn--lg btn--block">Comprar agora</button>
         {%- else -%}
           <button type="button" class="btn btn--lg btn--block" disabled>Esgotado</button>
+          {%- assign wa_d = settings.whatsapp_number | replace: ' ', '' | replace: '-', '' | replace: '(', '' | replace: ')', '' | replace: '+', '' -%}
+          {%- if wa_d != blank -%}
+            {%- capture notify_msg -%}Olá! Quero ser avisado(a) quando o produto "{{ product.title }}" voltar ao estoque: {{ shop.url }}{{ product.url }}{%- endcapture -%}
+            <a class="btn btn--outline btn--block notify-btn" href="https://wa.me/{{ wa_d }}?text={{ notify_msg | url_encode }}" target="_blank" rel="noopener">{% render 'icon', name: 'bell', size: 18 %} Avise-me quando voltar</a>
+          {%- endif -%}
         {%- endif -%}
       </div>
     {%- endform -%}

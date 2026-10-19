@@ -27,7 +27,7 @@
   <div class="card__mw">
     <a class="card__media" href="{{ product.url }}" aria-label="{{ product.title | escape }}">
       {%- if product.featured_image != blank -%}
-        {{ product.featured_image | image_url: width: 600 | image_tag: loading: 'lazy', widths: '300, 450, 600', sizes: '(min-width: 1280px) 290px, (min-width: 700px) 25vw, 50vw' }}
+        {{ product.featured_image | image_url: width: 600 | image_tag: alt: product.featured_image.alt | default: product.title, loading: 'lazy', widths: '300, 450, 600', sizes: '(min-width: 1280px) 290px, (min-width: 700px) 25vw, 50vw' }}
       {%- else -%}
         {{ 'product-1' | placeholder_svg_tag: 'placeholder' }}
       {%- endif -%}

@@ -18,6 +18,7 @@
     <div class="empty">
       <p>Seu carrinho está vazio.</p>
       <a class="btn btn--accent btn--lg" href="{{ routes.all_products_collection_url }}">Continuar comprando</a>
+      {% render 'empty-shortcuts' %}
     </div>
   {%- else -%}
 
@@ -40,7 +41,7 @@
           <div class="cart-item">
             <a class="cart-item__img" href="{{ item.url }}">
               {%- if item.image != blank -%}
-                {{ item.image | image_url: width: 200 | image_tag: loading: 'lazy' }}
+                {{ item.image | image_url: width: 200 | image_tag: alt: item.image.alt | default: item.product.title, loading: 'lazy' }}
               {%- else -%}
                 {{ 'product-1' | placeholder_svg_tag: 'placeholder' }}
               {%- endif -%}
@@ -86,7 +87,8 @@
           {%- assign pix_factor = 100 | minus: settings.pix_discount -%}
           <p class="note">Pagando no Pix: <strong>{{ cart.total_price | times: pix_factor | divided_by: 100 | money }}</strong></p>
         {%- endif -%}
-        <p class="note">O frete é calculado no checkout, depois que você informar o CEP.</p>
+        {% render 'cep-calc' %}
+        <p class="note">O valor final do frete é confirmado no checkout.</p>
 
         <button type="submit" name="checkout" class="btn btn--accent btn--lg btn--block">Finalizar compra</button>
         <a class="link-strong" style="text-align: center;" href="{{ routes.all_products_collection_url }}">Continuar comprando</a>

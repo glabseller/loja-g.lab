@@ -1,0 +1,12 @@
+{%- comment -%} Calculadora de frete por CEP (usa o carrinho atual). Lógica em assets/theme.js ([data-cep]). {%- endcomment -%}
+<div class="cep" data-cep data-free-cents="{{ settings.free_shipping_threshold | times: 100 }}"{% if cart.item_count == 0 %} hidden{% endif %}>
+  <form class="cep__form" data-cep-form novalidate>
+    <label class="cep__label" for="cep-{{ section.id | default: 'drawer' }}">{% render 'icon', name: 'truck', size: 16 %}<span>Calcular frete e prazo</span></label>
+    <div class="cep__row">
+      <input id="cep-{{ section.id | default: 'drawer' }}" class="cep__input" data-cep-input type="text" inputmode="numeric" autocomplete="postal-code" maxlength="9" placeholder="Digite seu CEP" aria-describedby="cep-msg-{{ section.id | default: 'drawer' }}">
+      <button class="cep__btn" type="submit" data-cep-btn>Calcular</button>
+    </div>
+    <a class="cep__help" href="https://buscacepinter.correios.com.br/app/endereco/index.php" target="_blank" rel="noopener">Não sei meu CEP</a>
+  </form>
+  <div class="cep__out" id="cep-msg-{{ section.id | default: 'drawer' }}" data-cep-out role="status" aria-live="polite"></div>
+</div>

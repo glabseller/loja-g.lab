@@ -1344,3 +1344,147 @@ document.addEventListener('change', function (e) {
     btn.addEventListener('click', openSheet);
   });
 })();
+
+/* ===== Calculadora de frete por CEP ===== */
+(function () {
+  'use strict';
+  var cfg = window.themeConfig || {};
+  var KEY = 'glab_cep';
+  var fmt = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' });
+  function mask(v) { v = String(v).replace(/\D/g, '').slice(0, 8); return v.length > 5 ? v.slice(0, 5) + '-' + v.slice(5) : v; }
+  function sleep(ms) { return new Promise(function (r) { setTimeout(r, ms); }); }
+  function getJSON(url, opt) { return fetch(url, opt).then(function (r) { return r.text().then(function (t) { var j = null; try { j = JSON.parse(t); } catch (e) {} return { status: r.status, ok: r.ok, json: j }; }); }); }
+  function addrQs(zip) { return 'shipping_address[zip]=' + encodeURIComponent(zip) + '&shipping_address[country]=Brazil'; }
+  function quote(zip) {
+    return getJSON('/cart/prepare_shipping_rates.json?' + addrQs(zip), { method: 'POST', headers: { Accept: 'application/json' } }).then(function (r) {
+      if (!(r.ok || r.status === 202)) { throw new Error('prepare'); }
+      var tries = 0;
+      function poll() {
+        tries++;
+        return getJSON('/cart/async_shipping_rates.json?' + addrQs(zip), { headers: { Accept: 'application/json' } }).then(function (p) {
+          if (p.status === 200 && p.json) { return p.json.shipping_rates || []; }
+          if (tries >= 12) { throw new Error('timeout'); }
+          return sleep(700).then(poll);
+        });
+      }
+      return poll();
+    });
+  }
+  function days(r) {
+    var d = r.delivery_days; if (d && d.length) { var a = d[0], b = d[d.length - 1]; return a === b ? a + ' dia' + (a > 1 ? 's' : '') + ' úteis' : a + ' a ' + b + ' dias úteis'; }
+    if (r.delivery_range && r.delivery_range.length === 2) { return r.delivery_range.map(function (x) { return new Date(x).toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit' }); }).join(' a '); }
+    return '';
+  }
+  function node(tag, cls, txt) { var n = document.createElement(tag); if (cls) { n.className = cls; } if (txt != null) { n.textContent = txt; } return n; }
+
+  function setup(box) {
+    var form = box.querySelector('[data-cep-form]'), input = box.querySelector('[data-cep-input]'), out = box.querySelector('[data-cep-out]'), btn = box.querySelector('[data-cep-btn]');
+    if (!form || !input || !out || box.__cep) { return; }
+    box.__cep = true;
+    var freeCents = parseInt(box.getAttribute('data-free-cents'), 10) || 0;
+    var seq = 0;
+    try { var saved = localStorage.getItem(KEY); if (saved) { input.value = mask(saved); } } catch (e) {}
+    input.addEventListener('input', function () { var p = input.selectionStart === input.value.length; input.value = mask(input.value); out.textContent = ''; box.classList.remove('has-error'); });
+    function msg(text, err) { out.innerHTML = ''; out.appendChild(node('p', 'cep__msg' + (err ? ' is-err' : ''), text)); box.classList.toggle('has-error', !!err); }
+    function run() {
+      var zip = input.value.replace(/\D/g, '');
+      if (zip.length !== 8) { msg('Digite um CEP com 8 números.', true); input.focus(); return; }
+      try { localStorage.setItem(KEY, zip); } catch (e) {}
+      var my = ++seq; btn.disabled = true; btn.textContent = 'Calculando…'; out.innerHTML = ''; out.appendChild(node('p', 'cep__msg', 'Consultando transportadoras…'));
+      quote(zip).then(function (rates) {
+        if (my !== seq) { return; }
+        out.innerHTML = '';
+        if (!rates.length) { msg('Não encontramos entrega para esse CEP agora. Você pode tentar no checkout ou falar com a gente no WhatsApp.', true); return; }
+        rates.sort(function (a, b) { return parseFloat(a.price) - parseFloat(b.price); });
+        var ul = node('ul', 'cep__list');
+        rates.slice(0, 4).forEach(function (r) {
+          var li = node('li', 'cep__opt'), left = node('span', 'cep__name', r.presentment_name || r.name), right = node('span', 'cep__price'); var pr = parseFloat(r.price);
+          right.textContent = pr > 0 ? fmt.format(pr) : 'Grátis';
+          var d = days(r); if (d) { left.appendChild(node('small', null, d)); }
+          li.appendChild(left); li.appendChild(right); ul.appendChild(li);
+        });
+        out.appendChild(ul);
+        if (freeCents > 0) { out.appendChild(node('p', 'cep__note', 'Pedidos a partir de ' + fmt.format(freeCents / 100) + ' têm desconto de frete aplicado automaticamente no checkout.')); }
+      }).catch(function () { if (my === seq) { msg('Não conseguimos calcular agora. O frete é mostrado no checkout, sem compromisso.', true); } })
+        .then(function () { btn.disabled = false; btn.textContent = 'Calcular'; });
+    }
+    form.addEventListener('submit', function (e) { e.preventDefault(); run(); });
+    box.__cepReset = function () { seq++; out.innerHTML = ''; };
+  }
+  function boot() { document.querySelectorAll('[data-cep]').forEach(setup); }
+  boot();
+  document.addEventListener('cart:updated', function (e) {
+    var cart = e.detail; if (!cart) { return; }
+    document.querySelectorAll('[data-cep]').forEach(function (b) { setup(b); b.hidden = !(cart.item_count > 0); if (b.__cepReset) { b.__cepReset(); } });
+  });
+})();
+
+/* ===== Galeria: deslizar no celular + zoom em tela cheia ===== */
+(function () {
+  'use strict';
+  var stage = document.querySelector('.gallery__stage');
+  var main = stage && stage.querySelector('[data-gallery-main]');
+  if (!stage || !main) { return; }
+  function thumbs() { return Array.prototype.slice.call(document.querySelectorAll('.gallery__thumbs [data-large]')); }
+  function curIndex() { var t = thumbs(), i; for (i = 0; i < t.length; i++) { if (t[i].getAttribute('aria-current') === 'true') { return i; } } return 0; }
+  function go(step) {
+    var t = thumbs(); if (t.length < 2) { return; }
+    var i = (curIndex() + step + t.length) % t.length; t[i].click();
+    var th = t[i]; if (th.scrollIntoView) { try { th.scrollIntoView({ block: 'nearest', inline: 'center' }); } catch (e) {} }
+  }
+  /* botão de ampliar */
+  var zbtn = document.createElement('button'); zbtn.type = 'button'; zbtn.className = 'gallery__zoom'; zbtn.setAttribute('aria-label', 'Ampliar imagem');
+  zbtn.innerHTML = '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5M11 8v6M8 11h6"/></svg>';
+  stage.appendChild(zbtn);
+  /* swipe */
+  var sx = 0, sy = 0, moved = false;
+  main.addEventListener('touchstart', function (e) { var t = e.touches[0]; sx = t.clientX; sy = t.clientY; moved = false; }, { passive: true });
+  main.addEventListener('touchend', function (e) {
+    var t = e.changedTouches[0], dx = t.clientX - sx, dy = t.clientY - sy;
+    if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy) * 1.5) { moved = true; go(dx < 0 ? 1 : -1); }
+  }, { passive: true });
+  /* lightbox */
+  var box = null, img = null, count = null;
+  function src() { var im = main.querySelector('img'); var t = thumbs(); return t.length ? t[curIndex()].getAttribute('data-large') : (im ? im.currentSrc || im.src : ''); }
+  function paint() { img.src = src(); var t = thumbs(); count.textContent = t.length > 1 ? (curIndex() + 1) + ' / ' + t.length : ''; }
+  function close() { if (box) { box.hidden = true; document.body.classList.remove('lb-on'); } }
+  function open() {
+    if (!box) {
+      box = document.createElement('div'); box.className = 'lb'; box.setAttribute('role', 'dialog'); box.setAttribute('aria-modal', 'true'); box.setAttribute('aria-label', 'Imagem ampliada'); box.hidden = true;
+      box.innerHTML = '<button type="button" class="lb__close" aria-label="Fechar">✕</button><button type="button" class="lb__nav lb__nav--prev" aria-label="Imagem anterior">‹</button><img class="lb__img" alt=""><button type="button" class="lb__nav lb__nav--next" aria-label="Próxima imagem">›</button><span class="lb__count"></span>';
+      document.body.appendChild(box); img = box.querySelector('.lb__img'); count = box.querySelector('.lb__count');
+      box.querySelector('.lb__close').addEventListener('click', close);
+      box.querySelector('.lb__nav--prev').addEventListener('click', function (e) { e.stopPropagation(); go(-1); paint(); });
+      box.querySelector('.lb__nav--next').addEventListener('click', function (e) { e.stopPropagation(); go(1); paint(); });
+      box.addEventListener('click', function (e) { if (e.target === box) { close(); } });
+      document.addEventListener('keydown', function (e) {
+        if (box.hidden) { return; }
+        if (e.key === 'Escape') { close(); } else if (e.key === 'ArrowRight') { go(1); paint(); } else if (e.key === 'ArrowLeft') { go(-1); paint(); }
+      });
+      var lx = 0;
+      box.addEventListener('touchstart', function (e) { lx = e.touches[0].clientX; }, { passive: true });
+      box.addEventListener('touchend', function (e) { var dx = e.changedTouches[0].clientX - lx; if (Math.abs(dx) > 50) { go(dx < 0 ? 1 : -1); paint(); } }, { passive: true });
+    }
+    if (thumbs().length < 2) { box.classList.add('is-single'); } else { box.classList.remove('is-single'); }
+    paint(); box.hidden = false; document.body.classList.add('lb-on'); box.querySelector('.lb__close').focus();
+  }
+  zbtn.addEventListener('click', open);
+  main.addEventListener('click', function () { if (!moved) { open(); } moved = false; });
+})();
+
+/* ===== Filtros da coleção ===== */
+(function () {
+  'use strict';
+  var form = document.querySelector('[data-filters]');
+  if (!form) { return; }
+  var groups = Array.prototype.slice.call(form.querySelectorAll('.filters__group'));
+  groups.forEach(function (d) { d.addEventListener('toggle', function () { if (d.open) { groups.forEach(function (o) { if (o !== d) { o.open = false; } }); } }); });
+  document.addEventListener('click', function (e) { if (!form.contains(e.target)) { groups.forEach(function (d) { d.open = false; }); } });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') { groups.forEach(function (d) { d.open = false; }); } });
+  form.addEventListener('submit', function () {
+    Array.prototype.forEach.call(form.querySelectorAll('input[type="number"]'), function (i) { if (i.value === '') { i.disabled = true; } });
+  });
+  form.addEventListener('change', function (e) {
+    if (e.target.type === 'checkbox') { form.requestSubmit ? form.requestSubmit() : form.submit(); }
+  });
+})();

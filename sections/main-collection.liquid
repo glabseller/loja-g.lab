@@ -21,6 +21,62 @@
       {%- endif -%}
     </div>
 
+    {%- if collection.filters.size > 0 -%}
+      <form class="filters" method="get" data-filters>
+        {%- if collection.sort_by != blank -%}<input type="hidden" name="sort_by" value="{{ collection.sort_by }}">{%- endif -%}
+        <div class="filters__bar">
+          {%- for filter in collection.filters -%}
+            {%- assign f_active = filter.active_values.size -%}
+            {%- if filter.type == 'price_range' -%}
+              {%- if filter.min_value.value != nil or filter.max_value.value != nil -%}{%- assign f_active = 1 -%}{%- endif -%}
+            {%- endif -%}
+            <details class="filters__group">
+              <summary>{{ filter.label }}{% if f_active > 0 %} <span class="filters__n">{{ f_active }}</span>{% endif %}</summary>
+              <div class="filters__panel">
+                {%- if filter.type == 'price_range' -%}
+                  <div class="filters__price">
+                    <label>De (R$)<input type="number" inputmode="numeric" min="0" name="{{ filter.min_value.param_name }}" value="{% if filter.min_value.value != nil %}{{ filter.min_value.value | divided_by: 100.0 | floor }}{% endif %}" placeholder="0"></label>
+                    <label>Até (R$)<input type="number" inputmode="numeric" min="0" name="{{ filter.max_value.param_name }}" value="{% if filter.max_value.value != nil %}{{ filter.max_value.value | divided_by: 100.0 | ceil }}{% endif %}" placeholder="{{ filter.range_max | divided_by: 100.0 | ceil }}"></label>
+                  </div>
+                {%- else -%}
+                  {%- for value in filter.values -%}
+                    <label class="filters__opt{% if value.count == 0 and value.active == false %} is-off{% endif %}">
+                      <input type="checkbox" name="{{ value.param_name }}" value="{{ value.value }}"{% if value.active %} checked{% endif %}{% if value.count == 0 and value.active == false %} disabled{% endif %}>
+                      <span>{{ value.label }}</span><small>{{ value.count }}</small>
+                    </label>
+                  {%- endfor -%}
+                {%- endif -%}
+                <button type="submit" class="btn btn--accent filters__apply">Aplicar</button>
+              </div>
+            </details>
+          {%- endfor -%}
+        </div>
+        {%- assign any_active = false -%}
+        {%- for filter in collection.filters -%}
+          {%- if filter.active_values.size > 0 or filter.min_value.value != nil or filter.max_value.value != nil -%}{%- assign any_active = true -%}{%- endif -%}
+        {%- endfor -%}
+        {%- if any_active -%}
+          <div class="filters__active">
+            {%- for filter in collection.filters -%}
+              {%- if filter.type == 'price_range' -%}
+                {%- if filter.min_value.value != nil or filter.max_value.value != nil -%}
+                  <a class="filters__chip" href="{{ filter.url_to_remove }}">Preço{% if filter.min_value.value != nil %} de {{ filter.min_value.value | money }}{% endif %}{% if filter.max_value.value != nil %} até {{ filter.max_value.value | money }}{% endif %} ✕</a>
+                {%- endif -%}
+              {%- else -%}
+                {%- for value in filter.active_values -%}
+                  <a class="filters__chip" href="{{ value.url_to_remove }}">{{ value.label }} ✕</a>
+                {%- endfor -%}
+              {%- endif -%}
+            {%- endfor -%}
+            <a class="filters__clear" href="{{ collection.url }}{% if collection.sort_by != blank %}?sort_by={{ collection.sort_by }}{% endif %}">Limpar tudo</a>
+          </div>
+        {%- endif -%}
+      </form>
+    {%- endif -%}
+    {%- if paginate.items > 0 -%}
+      <p class="collection__count">{{ paginate.items }} produto{% if paginate.items != 1 %}s{% endif %}</p>
+    {%- endif -%}
+
     {%- if collection.products.size > 0 -%}
       <div class="grid">
         {%- for product in collection.products -%}
@@ -35,6 +91,7 @@
       <div class="empty">
         <p>Nenhum produto nesta coleção por enquanto.</p>
         <a class="btn btn--ink" href="{{ routes.all_products_collection_url }}">Ver todos os produtos</a>
+        {% render 'empty-shortcuts' %}
       </div>
     {%- endif -%}
   </section>

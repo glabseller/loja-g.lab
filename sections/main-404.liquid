@@ -2,7 +2,9 @@
   <div class="empty">
     <h1 class="section-title">Página não encontrada</h1>
     <p>O endereço que você acessou não existe mais ou foi digitado errado.</p>
-    <a class="btn btn--accent btn--lg" href="{{ routes.all_products_collection_url }}">Ver produtos</a>
+    <form class="search search-page__form" action="{{ routes.search_url }}" method="get" role="search"><label class="visually-hidden" for="Search404">Buscar produtos</label><input id="Search404" type="search" name="q" placeholder="Buscar produtos"><button type="submit" aria-label="Buscar">{% render 'icon', name: 'search', size: 20 %}</button></form>
+    <a class="btn btn--accent btn--lg" href="{{ routes.all_products_collection_url }}">Ver todos os produtos</a>
+    {% render 'empty-shortcuts' %}
   </div>
 </section>
 

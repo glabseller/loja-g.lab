@@ -32,6 +32,9 @@
     <meta property="og:price:amount" content="{{ product.price | money_without_currency }}">
     <meta property="og:price:currency" content="{{ cart.currency.iso_code }}">
   {%- endif -%}
+  {%- if request.page_type == 'index' -%}
+    <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","name":{{ shop.name | json }},"url":{{ shop.url | json }}{% if settings.logo != blank %},"logo":"https:{{ settings.logo | image_url: width: 400 }}"{% endif %}},{"@type":"WebSite","name":{{ shop.name | json }},"url":{{ shop.url | json }},"potentialAction":{"@type":"SearchAction","target":"{{ shop.url }}/search?q={search_term_string}","query-input":"required name=search_term_string"}}]}</script>
+  {%- endif -%}
   <meta property="og:site_name" content="{{ shop.name }}">
   <meta property="og:url" content="{{ canonical_url }}">
   <meta property="og:title" content="{{ page_title | escape }}">
