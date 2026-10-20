@@ -1501,10 +1501,10 @@ document.addEventListener('change', function (e) {
   });
 })();
 
-/* ===== Cartão de produto: trocar foto ao escolher a cor, deslizar e segurar ===== */
+/* ===== Cartão de produto: trocar foto ao escolher a cor e ao deslizar ===== */
 (function () {
   'use strict';
-  var HOLD_MS = 450, CYCLE_MS = 1000;
+  var CYCLE_MS = 1000;
   function base(u) { return String(u || '').split('?')[0].replace(/^https?:/, ''); }
   function setup(media) {
     if (media.__cardImgs) { return media.__cardImgs; }
@@ -1554,40 +1554,32 @@ document.addEventListener('change', function (e) {
     st.i = idx; show(media, st, url); dots(media, st);
   });
 
-  /* 2) deslizar para o lado e 3) segurar o dedo */
+  /* 2) deslizar para o lado */
   var active = null;
   document.addEventListener('touchstart', function (e) {
     var media = e.target.closest && e.target.closest('.card__media'); if (!media || !media.getAttribute('data-imgs')) { return; }
     var st = setup(media); if (!st || st.list.length < 2) { return; }
     preload(st);
     var t = e.touches[0];
-    active = { media: media, st: st, x: t.clientX, y: t.clientY, swiped: false, held: false, timer: null, cycle: null };
-    active.timer = setTimeout(function () {
-      if (!active) { return; }
-      active.held = true; dots(media, st);
-      active.cycle = setInterval(function () { go(media, st, 1); }, CYCLE_MS); go(media, st, 1);
-    }, HOLD_MS);
+    active = { media: media, st: st, x: t.clientX, y: t.clientY, swiped: false };
   }, { passive: true });
   document.addEventListener('touchmove', function (e) {
     if (!active) { return; }
     var t = e.touches[0], dx = t.clientX - active.x, dy = t.clientY - active.y;
-    if (Math.abs(dx) > 10 || Math.abs(dy) > 10) { clearTimeout(active.timer); }
     if (!active.swiped && Math.abs(dx) > 28 && Math.abs(dx) > Math.abs(dy) * 1.3) { active.swiped = true; go(active.media, active.st, dx < 0 ? 1 : -1); }
   }, { passive: true });
   function end() {
     if (!active) { return; }
-    clearTimeout(active.timer); if (active.cycle) { clearInterval(active.cycle); }
-    var block = active.swiped || active.held, m = active.media; active = null;
+    var block = active.swiped, m = active.media; active = null;
     if (block) { m.__block = true; setTimeout(function () { m.__block = false; }, 450); }
   }
   document.addEventListener('touchend', end, { passive: true });
   document.addEventListener('touchcancel', end, { passive: true });
-  /* depois de deslizar/segurar, não abrir o produto sem querer */
+  /* depois de deslizar, não abrir o produto sem querer */
   document.addEventListener('click', function (e) {
     var media = e.target.closest && e.target.closest('.card__media');
     if (media && media.__block) { e.preventDefault(); e.stopPropagation(); }
   }, true);
-  document.addEventListener('contextmenu', function (e) { if (e.target.closest && e.target.closest('.card__media[data-imgs]') && window.matchMedia && window.matchMedia('(hover: none)').matches) { e.preventDefault(); } });
 
   /* 4) computador: passar o mouse alterna as fotos */
   if (window.matchMedia && window.matchMedia('(hover: hover)').matches) {
