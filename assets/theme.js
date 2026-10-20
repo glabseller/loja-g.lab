@@ -1560,6 +1560,10 @@ document.addEventListener('change', function (e) {
     var media = e.target.closest && e.target.closest('.card__media'); if (!media || !media.getAttribute('data-imgs')) { return; }
     var st = setup(media); if (!st || st.list.length < 2) { return; }
     preload(st);
+    /* iOS mostra um balão com o endereço do site ao segurar o dedo num link; tiramos o href só durante o toque */
+    var hrefNow = media.getAttribute('href');
+    if (hrefNow) { media.__href = hrefNow; media.removeAttribute('href'); }
+    clearTimeout(media.__rt); media.__rt = setTimeout(function () { restore(media); }, 4000);
     var t = e.touches[0];
     active = { media: media, st: st, x: t.clientX, y: t.clientY, swiped: false };
   }, { passive: true });
@@ -1568,8 +1572,10 @@ document.addEventListener('change', function (e) {
     var t = e.touches[0], dx = t.clientX - active.x, dy = t.clientY - active.y;
     if (!active.swiped && Math.abs(dx) > 28 && Math.abs(dx) > Math.abs(dy) * 1.3) { active.swiped = true; go(active.media, active.st, dx < 0 ? 1 : -1); }
   }, { passive: true });
+  function restore(m) { if (m.__href && !m.getAttribute('href')) { m.setAttribute('href', m.__href); } }
   function end() {
     if (!active) { return; }
+    var mm = active.media; clearTimeout(mm.__rt); mm.__rt = setTimeout(function () { restore(mm); }, 600);
     var block = active.swiped, m = active.media; active = null;
     if (block) { m.__block = true; setTimeout(function () { m.__block = false; }, 450); }
   }
@@ -1578,7 +1584,9 @@ document.addEventListener('change', function (e) {
   /* depois de deslizar, não abrir o produto sem querer */
   document.addEventListener('click', function (e) {
     var media = e.target.closest && e.target.closest('.card__media');
-    if (media && media.__block) { e.preventDefault(); e.stopPropagation(); }
+    if (!media) { return; }
+    if (media.__block) { e.preventDefault(); e.stopPropagation(); return; }
+    if (media.__href && !media.getAttribute('href') && !e.defaultPrevented) { e.preventDefault(); location.href = media.__href; }
   }, true);
 
   /* 4) computador: passar o mouse alterna as fotos */
