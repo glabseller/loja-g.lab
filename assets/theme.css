@@ -2298,3 +2298,11 @@ body.lb-on { overflow: hidden; }
   body .card__form--opts { gap: 6px; justify-content: flex-start; }
   body .card__add svg { width: 17px; height: 17px; }
 }
+
+/* Cartão: fotos que trocam (cor, deslizar, segurar) */
+.card__media[data-imgs] { touch-action: pan-y; -webkit-touch-callout: none; -webkit-user-select: none; user-select: none; }
+.card__media img { -webkit-user-drag: none; transition: opacity .16s ease; }
+.card__media img.is-swap { opacity: .55; }
+.card__dots { position: absolute; left: 0; right: 0; bottom: 10px; display: flex; justify-content: center; gap: 5px; pointer-events: none; z-index: 2; }
+.card__dots i { width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,.75); box-shadow: 0 0 0 1px rgba(0,0,0,.12); }
+.card__dots i.is-on { background: var(--accent); box-shadow: 0 0 0 1px #fff; width: 16px; border-radius: 999px; }

@@ -1500,3 +1500,106 @@ document.addEventListener('change', function (e) {
     if (e.target.type === 'checkbox') { form.requestSubmit ? form.requestSubmit() : form.submit(); }
   });
 })();
+
+/* ===== Cartão de produto: trocar foto ao escolher a cor, deslizar e segurar ===== */
+(function () {
+  'use strict';
+  var HOLD_MS = 450, CYCLE_MS = 1000;
+  function base(u) { return String(u || '').split('?')[0].replace(/^https?:/, ''); }
+  function setup(media) {
+    if (media.__cardImgs) { return media.__cardImgs; }
+    var raw = media.getAttribute('data-imgs');
+    var list = raw ? raw.split('|') : [];
+    var img = media.querySelector('img');
+    if (!img) { return null; }
+    var st = { list: list, i: 0, img: img, dots: null, loaded: false };
+    media.__cardImgs = st;
+    var cur = base(img.currentSrc || img.src), k;
+    for (k = 0; k < list.length; k++) { if (base(list[k]) === cur) { st.i = k; break; } }
+    return st;
+  }
+  function preload(st) { if (st.loaded) { return; } st.loaded = true; st.list.forEach(function (u) { var im = new Image(); im.src = u; }); }
+  function dots(media, st) {
+    if (st.list.length < 2) { return; }
+    if (!st.dots) {
+      st.dots = document.createElement('span'); st.dots.className = 'card__dots'; st.dots.setAttribute('aria-hidden', 'true');
+      st.list.forEach(function () { st.dots.appendChild(document.createElement('i')); });
+      media.appendChild(st.dots);
+    }
+    Array.prototype.forEach.call(st.dots.children, function (d, n) { d.className = n === st.i ? 'is-on' : ''; });
+  }
+  function show(media, st, url) {
+    st.img.removeAttribute('srcset'); st.img.removeAttribute('sizes');
+    st.img.classList.add('is-swap');
+    st.img.src = url;
+    setTimeout(function () { st.img.classList.remove('is-swap'); }, 160);
+  }
+  function go(media, st, step) {
+    if (st.list.length < 2) { return; }
+    st.i = (st.i + step + st.list.length) % st.list.length;
+    show(media, st, st.list[st.i]); dots(media, st);
+  }
+
+  function init() { Array.prototype.forEach.call(document.querySelectorAll('.card__media[data-imgs]'), function (m) { var st = setup(m); if (st) { dots(m, st); } }); }
+  if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', init); } else { init(); }
+
+  /* 1) escolher a cor/opção troca a foto */
+  document.addEventListener('change', function (e) {
+    var inp = e.target; if (!inp || !inp.classList || !inp.classList.contains('card__chip-in')) { return; }
+    var url = inp.getAttribute('data-img'); if (!url) { return; }
+    var card = inp.closest('.card'); var media = card && card.querySelector('.card__media'); if (!media) { return; }
+    var st = setup(media); if (!st) { return; }
+    var idx = -1, k; for (k = 0; k < st.list.length; k++) { if (base(st.list[k]) === base(url)) { idx = k; break; } }
+    if (idx < 0) { st.list.push(url); idx = st.list.length - 1; }
+    st.i = idx; show(media, st, url); dots(media, st);
+  });
+
+  /* 2) deslizar para o lado e 3) segurar o dedo */
+  var active = null;
+  document.addEventListener('touchstart', function (e) {
+    var media = e.target.closest && e.target.closest('.card__media'); if (!media || !media.getAttribute('data-imgs')) { return; }
+    var st = setup(media); if (!st || st.list.length < 2) { return; }
+    preload(st);
+    var t = e.touches[0];
+    active = { media: media, st: st, x: t.clientX, y: t.clientY, swiped: false, held: false, timer: null, cycle: null };
+    active.timer = setTimeout(function () {
+      if (!active) { return; }
+      active.held = true; dots(media, st);
+      active.cycle = setInterval(function () { go(media, st, 1); }, CYCLE_MS); go(media, st, 1);
+    }, HOLD_MS);
+  }, { passive: true });
+  document.addEventListener('touchmove', function (e) {
+    if (!active) { return; }
+    var t = e.touches[0], dx = t.clientX - active.x, dy = t.clientY - active.y;
+    if (Math.abs(dx) > 10 || Math.abs(dy) > 10) { clearTimeout(active.timer); }
+    if (!active.swiped && Math.abs(dx) > 28 && Math.abs(dx) > Math.abs(dy) * 1.3) { active.swiped = true; go(active.media, active.st, dx < 0 ? 1 : -1); }
+  }, { passive: true });
+  function end() {
+    if (!active) { return; }
+    clearTimeout(active.timer); if (active.cycle) { clearInterval(active.cycle); }
+    var block = active.swiped || active.held, m = active.media; active = null;
+    if (block) { m.__block = true; setTimeout(function () { m.__block = false; }, 450); }
+  }
+  document.addEventListener('touchend', end, { passive: true });
+  document.addEventListener('touchcancel', end, { passive: true });
+  /* depois de deslizar/segurar, não abrir o produto sem querer */
+  document.addEventListener('click', function (e) {
+    var media = e.target.closest && e.target.closest('.card__media');
+    if (media && media.__block) { e.preventDefault(); e.stopPropagation(); }
+  }, true);
+  document.addEventListener('contextmenu', function (e) { if (e.target.closest && e.target.closest('.card__media[data-imgs]') && window.matchMedia && window.matchMedia('(hover: none)').matches) { e.preventDefault(); } });
+
+  /* 4) computador: passar o mouse alterna as fotos */
+  if (window.matchMedia && window.matchMedia('(hover: hover)').matches) {
+    var hv = null;
+    document.addEventListener('mouseover', function (e) {
+      var media = e.target.closest && e.target.closest('.card__media[data-imgs]'); if (!media || media === (hv && hv.media)) { return; }
+      if (hv) { stop(); }
+      var st = setup(media); if (!st || st.list.length < 2) { return; }
+      preload(st);
+      hv = { media: media, st: st, start: st.i, t: setTimeout(function () { hv.c = setInterval(function () { go(media, st, 1); }, CYCLE_MS); go(media, st, 1); }, 500) };
+    });
+    function stop() { if (!hv) { return; } clearTimeout(hv.t); if (hv.c) { clearInterval(hv.c); } if (hv.st.i !== hv.start) { hv.st.i = hv.start; show(hv.media, hv.st, hv.st.list[hv.start]); dots(hv.media, hv.st); } hv = null; }
+    document.addEventListener('mouseout', function (e) { if (hv && !(e.relatedTarget && e.relatedTarget.closest && e.relatedTarget.closest('.card__media') === hv.media)) { stop(); } });
+  }
+})();

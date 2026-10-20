@@ -25,7 +25,7 @@
 -%}
 <div class="card">
   <div class="card__mw">
-    <a class="card__media" href="{{ product.url }}" aria-label="{{ product.title | escape }}">
+    <a class="card__media" href="{{ product.url }}" aria-label="{{ product.title | escape }}"{% if product.images.size > 1 %} data-imgs="{% for img in product.images limit: 5 %}{{ img | image_url: width: 600 }}{% unless forloop.last %}|{% endunless %}{% endfor %}"{% endif %}>
       {%- if product.featured_image != blank -%}
         {{ product.featured_image | image_url: width: 600 | image_tag: alt: product.featured_image.alt | default: product.title, loading: 'lazy', widths: '300, 450, 600', sizes: '(min-width: 1280px) 290px, (min-width: 700px) 25vw, 50vw' }}
       {%- else -%}
@@ -76,7 +76,7 @@
             <div class="card__chips" role="radiogroup" aria-label="Quantidade de {{ product.title | escape }}">
               {%- for v in product.variants -%}
                 {%- assign v_pix = v.price | times: pix_factor | divided_by: 100 -%}
-                <input type="radio" class="card__chip-in" name="id" id="chip-{{ product.id }}-{{ v.id }}" value="{{ v.id }}" data-price="{{ v.price | money }}" data-pix="no Pix {{ v_pix | money }}"{% if v.available == false %} disabled{% endif %}{% if v.id == card_variant.id %} checked{% endif %}>
+                <input type="radio" class="card__chip-in" name="id" id="chip-{{ product.id }}-{{ v.id }}" value="{{ v.id }}" data-price="{{ v.price | money }}" data-pix="no Pix {{ v_pix | money }}"{% if v.featured_image != blank %} data-img="{{ v.featured_image | image_url: width: 600 }}"{% endif %}{% if v.available == false %} disabled{% endif %}{% if v.id == card_variant.id %} checked{% endif %}>
                 <label class="card__chip" for="chip-{{ product.id }}-{{ v.id }}">{{ v.title }}</label>
               {%- endfor -%}
             </div>
