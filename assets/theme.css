@@ -2541,3 +2541,43 @@ body.is-studio.is-gift .card__chip-in:not(:checked) + .card__chip.is-on { backgr
 body.is-studio.is-gift .card .card__form--opts .btn.card__add { border-radius: 3px; background: #fff; border: 1px solid #0B1020; color: #0B1020; box-shadow: none; }
 body.is-studio.is-gift .card .card__form--opts .btn.card__add:hover { background: #0B1020; border-color: #0B1020; color: #fff; }
 body.is-studio.is-gift .card .btn { border-radius: 3px; }
+
+/* ===== GNERAL STUDIO — acabamento premium: cantos suaves, botões em pílula, sombras delicadas ===== */
+body.is-studio.is-gift { --radius: 14px; --shadow-sm: 0 1px 2px rgba(11,16,32,.05), 0 6px 18px -10px rgba(11,16,32,.14); --shadow-md: 0 24px 48px -26px rgba(11,16,32,.32); }
+/* botões: pílula, tipografia mais calma */
+body.is-studio.is-gift .btn, body.is-studio.is-gift .card .btn { border-radius: 999px; letter-spacing: .06em; font-weight: 600; min-height: 50px; }
+body.is-studio.is-gift .btn--lg { min-height: 54px; }
+body.is-studio.is-gift .btn--accent { box-shadow: 0 10px 24px -12px rgba(79,95,176,.6); }
+body.is-studio.is-gift .btn--ink { box-shadow: 0 10px 24px -14px rgba(11,16,32,.6); }
+body.is-studio.is-gift .btn:hover { transform: translateY(-1px); }
+/* opções dos cartões e botão do carrinho */
+body.is-studio.is-gift .card__chip { border-radius: 999px; padding-inline: 14px; }
+body.is-studio.is-gift .card .card__form--opts .btn.card__add { border-radius: 50%; width: 38px; flex-basis: 38px; padding: 0; }
+body.is-studio.is-gift .qty-stepper, body.is-studio.is-gift .option__values label, body.is-studio.is-gift .kit-opt { border-radius: 14px; }
+/* campos */
+body.is-studio.is-gift input, body.is-studio.is-gift select { border-radius: 999px; padding-inline: 20px; }
+body.is-studio.is-gift textarea { border-radius: 16px; }
+body.is-studio.is-gift .header-search { border-radius: 999px; }
+/* imagens, banners e painéis */
+body.is-studio.is-gift .card__media, body.is-studio.is-gift .tile__media { border-radius: 18px; }
+body.is-studio.is-gift .promo__viewport, body.is-studio.is-gift .hero__panel, body.is-studio.is-gift .deal__panel, body.is-studio.is-gift .newsletter__panel { border-radius: 24px; }
+body.is-studio.is-gift .deal__media, body.is-studio.is-gift .hero__card, body.is-studio.is-gift .review, body.is-studio.is-gift .bundle { border-radius: 18px; }
+body.is-studio.is-gift .review { box-shadow: var(--shadow-sm); }
+body.is-studio.is-gift .promo__arrow { border-radius: 50%; border: 0; box-shadow: var(--shadow-sm); }
+body.is-studio.is-gift .trust__row { border: 1px solid var(--line); border-radius: 20px; background: #fff; box-shadow: var(--shadow-sm); overflow: hidden; }
+body.is-studio.is-gift .trust__icon { border-radius: 50%; background: #EEF0F8; }
+body.is-studio.is-gift .pill, body.is-studio.is-gift .badge { border-radius: 999px; padding-inline: 10px; }
+body.is-studio.is-gift .circle__media, body.is-studio.is-gift .circle:nth-child(n) .circle__media { border-radius: 22px; }
+body.is-studio.is-gift .xs, body.is-studio.is-gift .xs__add, body.is-studio.is-gift .drawer-item__img, body.is-studio.is-gift .drawer__ship, body.is-studio.is-gift .shipbar { border-radius: 14px; }
+body.is-studio.is-gift .drawer__panel { border-radius: 24px 0 0 24px; }
+body.is-studio.is-gift .footer { border-radius: 28px 28px 0 0; }
+body.is-studio.is-gift .mbar__item, body.is-studio.is-gift .msearch__form, body.is-studio.is-gift .msearch__res { border-radius: 14px; }
+body.is-studio.is-gift .card .card__form--opts .btn.card__add { width: 38px; height: 38px; min-height: 38px; flex: 0 0 38px; }
+body.is-studio.is-gift .card__chip { height: 38px; min-height: 0; }
+@media (max-width: 749px) { body.is-studio.is-gift .card .card__form--opts .btn.card__add, body.is-studio.is-gift .card__chip { height: 34px; min-height: 0; } body.is-studio.is-gift .card .card__form--opts .btn.card__add { width: 34px; flex-basis: 34px; } }
+/* títulos de seção: elegantes, sem gritar */
+body.is-studio.is-gift .section-title { text-transform: none; font-weight: 700; font-size: clamp(26px, 3.2vw, 38px); letter-spacing: -.03em; }
+body.is-studio.is-gift .section-head { border-bottom: 1px solid var(--line); padding-bottom: 14px; }
+body.is-studio.is-gift .site-header { border-bottom: 1px solid var(--line); }
+body.is-studio.is-gift .newsletter__title, body.is-studio.is-gift .drawer__title { text-transform: none; font-weight: 700; letter-spacing: -.02em; }
+body.is-studio.is-gift .link-strong { letter-spacing: .08em; }
