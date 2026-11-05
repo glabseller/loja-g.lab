@@ -2337,7 +2337,7 @@ body.is-studio.is-gift .logo__b { font-weight: 600; font-size: 10px; letter-spac
 body.is-studio.is-gift .logo::after { content: none !important; display: none !important; }
 body.is-studio.is-gift .header-search { background: transparent; border: 1px solid transparent; border-radius: 6px; box-shadow: none; }
 body.is-studio.is-gift .header-search.is-open, body.is-studio.is-gift .header-search:focus-within { background: #fff; border-color: #111; box-shadow: none; }
-body.is-studio.is-gift .header-search:focus-within { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(43, 75, 255, .16); }
+body.is-studio.is-gift .header-search:focus-within { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(74, 95, 208, .16); }
 body.is-studio.is-gift .header-search button { color: #111; border-radius: 4px; }
 body.is-studio.is-gift .header-search button:hover { background: transparent; color: var(--accent); }
 body.is-studio.is-gift .icon-btn { border-radius: 6px; color: #111; }
@@ -2438,7 +2438,7 @@ body.is-studio.is-gift .trust { margin-top: 20px; }
 
 /* ===== GNERAL STUDIO — categorias minimalistas + refinamento da paleta ===== */
 body.is-studio.is-gift {
-  --accent: #2B4BFF;
+  --accent: #4F5FB0;
   --ink: #F5F7FB;
   --soft: #E8ECF4;
   --line: #DCE1EC;
@@ -2468,7 +2468,7 @@ body.is-studio.is-gift .section { padding-bottom: 72px; }
 /* formulários e etiquetas: retos, sem pílulas */
 body.is-studio.is-gift input, body.is-studio.is-gift select, body.is-studio.is-gift textarea { border-radius: 4px; border: 1px solid var(--line); background: #fff; }
 body.is-studio.is-gift textarea { border-radius: 4px; }
-body.is-studio.is-gift input:focus, body.is-studio.is-gift select:focus, body.is-studio.is-gift textarea:focus { border-color: #0B1020; box-shadow: 0 0 0 3px rgba(43, 75, 255, .18); }
+body.is-studio.is-gift input:focus, body.is-studio.is-gift select:focus, body.is-studio.is-gift textarea:focus { border-color: #0B1020; box-shadow: 0 0 0 3px rgba(74, 95, 208, .18); }
 body.is-studio.is-gift .pill, body.is-studio.is-gift .badge { border-radius: 2px; text-transform: uppercase; letter-spacing: .08em; font-size: 10.5px; font-weight: 700; }
 body.is-studio.is-gift .btn { border-radius: 4px; letter-spacing: .08em; }
 body.is-studio.is-gift .btn:hover { transform: none; }
@@ -2531,3 +2531,13 @@ body.is-studio.is-gift .card__price, body.is-studio.is-gift .price-block__curren
 body.is-studio.is-gift .hero__panel { background: #fff; border: 1px solid var(--line); border-radius: 4px; box-shadow: none; }
 body.is-studio.is-gift .hero__card { border-radius: 4px; box-shadow: none; }
 body.is-studio.is-gift .tile__media { border-radius: 4px; border: 1px solid var(--line); background: #fff; box-shadow: none; }
+
+/* ===== GNERAL STUDIO — botões discretos nos cartões e azul mais suave ===== */
+body.is-studio.is-gift .card__chip { border-radius: 3px; border: 1px solid #D3D9E6; background: #fff; color: #4A5166; font-weight: 600; }
+body.is-studio.is-gift .card__chip:hover { background: #fff; border-color: #0B1020; color: #0B1020; }
+body.is-studio.is-gift .card__chip-in:checked + .card__chip,
+body.is-studio.is-gift .card__chip-in:checked + .card__chip.is-on { background: #fff; border: 1px solid #0B1020; box-shadow: inset 0 0 0 1px #0B1020; color: #0B1020; font-weight: 700; }
+body.is-studio.is-gift .card__chip-in:not(:checked) + .card__chip.is-on { background: #fff; border: 1px solid #D3D9E6; box-shadow: none; color: #4A5166; font-weight: 600; }
+body.is-studio.is-gift .card .card__form--opts .btn.card__add { border-radius: 3px; background: #fff; border: 1px solid #0B1020; color: #0B1020; box-shadow: none; }
+body.is-studio.is-gift .card .card__form--opts .btn.card__add:hover { background: #0B1020; border-color: #0B1020; color: #fff; }
+body.is-studio.is-gift .card .btn { border-radius: 3px; }
