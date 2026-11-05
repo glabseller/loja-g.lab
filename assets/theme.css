@@ -2435,3 +2435,27 @@ body.is-studio.is-gift .msearch__res { border-radius: 6px; }
 }
 
 body.is-studio.is-gift .trust { margin-top: 20px; }
+
+/* ===== GNERAL STUDIO — categorias minimalistas + refinamento da paleta ===== */
+body.is-studio.is-gift {
+  --accent: #F03C0B;
+  --ink: #F4F2ED;
+  --soft: #E9E6DF;
+  --line: #DEDAD0;
+  --text: #0E0E10;
+}
+body.is-studio.is-gift .circles { gap: 14px; }
+body.is-studio.is-gift .circle { position: relative; flex-direction: column; align-items: stretch; gap: 0; text-align: left; background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 14px 14px 12px; transition: background .2s, border-color .2s, transform .2s; }
+body.is-studio.is-gift .circle__media,
+body.is-studio.is-gift .circle:hover .circle__media,
+body.is-studio.is-gift .circle:nth-child(n) .circle__media { background: transparent; border: 0; box-shadow: none; transform: none; border-radius: 0; aspect-ratio: 1 / .78; color: #0E0E10; }
+body.is-studio.is-gift .circle__media--icon svg.cat-icon { width: 54%; height: 54%; margin: 0; transition: transform .25s, color .2s; }
+body.is-studio.is-gift .circle__media:not(.circle__media--icon) { border-radius: 8px; overflow: hidden; }
+body.is-studio.is-gift .circle__name { font-family: var(--font-head); font-weight: 700; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; display: flex; justify-content: space-between; align-items: center; margin-top: 4px; }
+body.is-studio.is-gift .circle__name::after { content: "→"; opacity: 1; transform: none; font-size: 15px; letter-spacing: 0; transition: transform .2s, color .2s; }
+body.is-studio.is-gift .circle:hover { background: #0E0E10; border-color: #0E0E10; transform: translateY(-3px); }
+body.is-studio.is-gift .circle:hover .circle__name { color: #fff; }
+body.is-studio.is-gift .circle:hover .circle__name::after { color: var(--accent); transform: translateX(3px); }
+body.is-studio.is-gift .circle:hover .circle__media--icon svg.cat-icon { color: #fff; transform: scale(1.06); }
+body.is-studio.is-gift .circle:hover .circle__media--icon { color: #fff; }
+@media (max-width: 720px) { body.is-studio.is-gift .circle { padding: 12px 12px 10px; } }
