@@ -133,6 +133,10 @@
         "label": "Estilo visual do site",
         "options": [
           {
+            "value": "studio",
+            "label": "Studio (GNERAL STUDIO: preto, off-white e laranja, tipografia forte)"
+          },
+          {
             "value": "gift",
             "label": "Presente (claro, fofo e limpo, coral e menta)"
           },
@@ -231,6 +235,13 @@
     "name": "Logo e ícone",
     "settings": [
       {
+        "type": "text",
+        "id": "brand_name",
+        "label": "Nome da marca no logo em texto",
+        "default": "GNERAL STUDIO",
+        "info": "A primeira palavra fica em negrito e as demais em letras espaçadas."
+      },
+      {
         "type": "image_picker",
         "id": "logo",
         "label": "Logo (se vazio, usa o nome da loja em texto)"
@@ -298,7 +309,7 @@
         "type": "text",
         "id": "whatsapp_greeting",
         "label": "Mensagem inicial do WhatsApp",
-        "default": "Olá! Vim pelo site da G LAB e gostaria de ajuda."
+        "default": "Olá! Vim pelo site da GNERAL STUDIO e gostaria de ajuda."
       },
       {
         "type": "checkbox",

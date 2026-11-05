@@ -965,11 +965,11 @@ document.addEventListener('change', function (e) {
     if (href.indexOf('mailto:') === 0) {
       e.preventDefault();
       var to = href.slice(7).split('?')[0];
-      window.location.href = 'mailto:' + to + '?subject=' + encodeURIComponent('Atendimento G LAB - Protocolo ' + code) +
+      window.location.href = 'mailto:' + to + '?subject=' + encodeURIComponent('Atendimento ' + ((window.themeConfig && window.themeConfig.brandName) || 'GNERAL STUDIO') + ' - Protocolo ' + code) +
         '&body=' + encodeURIComponent('Protocolo: ' + code + '\n\nOlá! Escreva aqui sua mensagem:\n');
     } else {
       e.preventDefault();
-      var u = new URL(href), base = u.searchParams.get('text') || 'Olá! Vim pelo site da G LAB.';
+      var u = new URL(href), base = u.searchParams.get('text') || ('Olá! Vim pelo site da ' + ((window.themeConfig && window.themeConfig.brandName) || 'GNERAL STUDIO') + '.');
       u.searchParams.set('text', 'Protocolo: ' + code + '\n' + base);
       window.open(u.toString(), '_blank', 'noopener');
     }
@@ -1280,7 +1280,7 @@ document.addEventListener('change', function (e) {
     var b = e.target.closest && e.target.closest('[data-share-btn]');
     if (!b) { return; }
     var box = b.closest('[data-share]'); var title = box.getAttribute('data-title'), url = box.getAttribute('data-url');
-    if (navigator.share) { navigator.share({ title: title, text: title + ' - G LAB', url: url }).catch(function () {}); return; }
+    if (navigator.share) { navigator.share({ title: title, text: title + ' - ' + ((window.themeConfig && window.themeConfig.brandName) || 'GNERAL STUDIO'), url: url }).catch(function () {}); return; }
     window.open('https://api.whatsapp.com/send?text=' + encodeURIComponent(title + ' ' + url), '_blank', 'noopener');
   });
 

@@ -1,0 +1,9 @@
+{%- comment -%} Nome da marca em duas partes (GNERAL / STUDIO) para o logo em texto. Configurável em "Logo e ícone". {%- endcomment -%}
+{%- assign brand_full = settings.brand_name | default: shop.name | strip -%}
+{%- assign brand_parts = brand_full | split: ' ' -%}
+{%- if brand_parts.size > 1 -%}
+  {%- assign brand_first = brand_parts[0] -%}
+  <span class="logo__a">{{ brand_first }}</span><span class="logo__b">{{ brand_full | remove_first: brand_first | strip }}</span>
+{%- else -%}
+  <span class="logo__a">{{ brand_full }}</span>
+{%- endif -%}

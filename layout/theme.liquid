@@ -55,6 +55,8 @@
   {%- assign is_gamer = false -%}
   {%- assign is_gift = false -%}
   {%- if visual == 'gift' -%}{%- assign is_gift = true -%}{%- endif -%}
+  {%- assign is_studio = false -%}
+  {%- if visual == 'studio' -%}{%- assign is_gift = true -%}{%- assign is_studio = true -%}{%- endif -%}
   {%- if visual == 'gamer' -%}{%- assign is_gamer = true -%}{%- endif -%}
   {%- if visual == 'toon' or visual == 'toon_night' -%}{%- assign is_toon = true -%}{%- endif -%}
   {%- if visual == 'toon_night' -%}{%- assign is_night = true -%}{%- endif -%}
@@ -83,6 +85,10 @@
   {%- elsif is_cartoon -%}
     {%- assign font_family = 'Nunito' -%}{%- assign font_head = 'Fredoka' -%}
     {%- assign font_query = 'Nunito:wght@500;600;700;800&family=Fredoka:wght@500;600;700' -%}
+  {%- endif -%}
+  {%- if is_studio -%}
+    {%- assign font_family = 'Inter' -%}{%- assign font_head = 'Archivo' -%}
+    {%- assign font_query = 'Inter:wght@400;500;600;700&family=Archivo:wght@500;600;700;800;900' -%}
   {%- endif -%}
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family={{ font_query }}&display=swap" onload="this.onload=null;this.rel='stylesheet'">
   <noscript><link href="https://fonts.googleapis.com/css2?family={{ font_query }}&display=swap" rel="stylesheet"></noscript>
@@ -133,6 +139,7 @@
 
   <script>
     window.themeConfig = {
+      brandName: {{ settings.brand_name | default: shop.name | json }},
       moneyFormat: {{ shop.money_format | json }},
       cartAddUrl: {{ routes.cart_add_url | append: '.js' | json }},
       cartUrl: {{ routes.cart_url | json }},
@@ -149,7 +156,7 @@
   </script>
 </head>
 
-<body class="template-{{ request.page_type | handleize }}{% if is_modern %} is-modern{% if is_toon %} is-toon{% endif %}{% if is_night %} is-night{% endif %}{% if is_gamer %} is-gamer{% endif %}{% if is_gift %} is-gift{% endif %}{% elsif is_cartoon %} is-cartoon{% else %}{% if settings.colorful != false %} is-colorful{% endif %}{% if settings.glass != false %} is-glass{% endif %}{% endif %}{% if settings.header_sticky %} has-sticky-header{% endif %}{% if settings.heading_uppercase %} heading-upper{% endif %}{% if settings.gallery_sticky %} sticky-gallery{% endif %}{% if settings.mobile_bar != false %} has-mobile-bar{% endif %}{% if settings.reveal != false %} has-reveal{% endif %}">
+<body class="template-{{ request.page_type | handleize }}{% if is_modern %} is-modern{% if is_toon %} is-toon{% endif %}{% if is_night %} is-night{% endif %}{% if is_gamer %} is-gamer{% endif %}{% if is_gift %} is-gift{% endif %}{% if is_studio %} is-studio{% endif %}{% elsif is_cartoon %} is-cartoon{% else %}{% if settings.colorful != false %} is-colorful{% endif %}{% if settings.glass != false %} is-glass{% endif %}{% endif %}{% if settings.header_sticky %} has-sticky-header{% endif %}{% if settings.heading_uppercase %} heading-upper{% endif %}{% if settings.gallery_sticky %} sticky-gallery{% endif %}{% if settings.mobile_bar != false %} has-mobile-bar{% endif %}{% if settings.reveal != false %} has-reveal{% endif %}">
   <a class="skip-link" href="#MainContent">{{ 'general.skip_to_content' | t }}</a>
 
   {% section 'top-bar' %}

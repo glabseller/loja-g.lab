@@ -3,7 +3,7 @@
 <footer class="footer">
   <div class="container footer__row">
     <div class="footer__col footer__col--wide">
-      <span class="footer__brand">{{ shop.name }}</span>
+      <span class="footer__brand">{% render 'brand' %}</span>
       {%- if section.settings.about != blank -%}<p class="footer__muted">{{ section.settings.about }}</p>{%- endif -%}
       <div class="footer__social">
         {%- if section.settings.instagram != blank -%}
@@ -76,7 +76,7 @@
   </div>
 
   <div class="container footer__bottom">
-    <span>© {{ 'now' | date: '%Y' }} {{ shop.name }}. Todos os direitos reservados.</span>
+    <span>© {{ 'now' | date: '%Y' }} {{ settings.brand_name | default: shop.name }}. Todos os direitos reservados.</span>
     <span>{{ section.settings.bottom_text }}</span>
   </div>
 </footer>

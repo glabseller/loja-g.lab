@@ -5,7 +5,7 @@
       {%- if logo_img != blank -%}
         {{ logo_img | image_url: width: 320 | image_tag: alt: shop.name, loading: 'eager' }}
       {%- else -%}
-        {{ shop.name }}
+        {% render 'brand' %}
       {%- endif -%}
     </a>
 
