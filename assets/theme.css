@@ -2604,3 +2604,5 @@ body.is-studio.is-gift .accordion details[open] > summary::after { content: "–
 body.is-studio.is-gift .thumb, body.is-studio.is-gift .gallery__thumbs button { border-radius: 14px; }
 body.is-studio.is-gift .price-block + .pfree { background: #fff; border-color: var(--line); border-radius: 14px; }
 body.is-studio.is-gift .drawer__ship.is-done, body.is-studio.is-gift .shipbar.is-done { background: #F1FAF5; border-color: #BFE3CE; }
+body.is-studio { --accent-3: #8E9BE0; }
+body.is-studio.is-gift .nav > .nav__item:hover > a, body.is-studio.is-gift .nav > .nav__item:focus-within > a, body.is-studio.is-gift .nav > .nav__item > a[aria-current], body.is-studio.is-gift .nav > .nav__item.is-active > a { color: var(--accent); border-bottom-color: var(--accent); }
