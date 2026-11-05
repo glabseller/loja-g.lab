@@ -2459,3 +2459,75 @@ body.is-studio.is-gift .circle:hover .circle__name::after { color: var(--accent)
 body.is-studio.is-gift .circle:hover .circle__media--icon svg.cat-icon { color: #fff; transform: scale(1.06); }
 body.is-studio.is-gift .circle:hover .circle__media--icon { color: #fff; }
 @media (max-width: 720px) { body.is-studio.is-gift .circle { padding: 12px 12px 10px; } }
+
+/* ===== GNERAL STUDIO — camada "chique": sem cara de desenho, linhas finas, cantos retos, tipografia editorial ===== */
+body.is-studio.is-gift { --radius: 4px; --shadow-sm: none; --shadow-md: 0 18px 40px -22px rgba(11, 16, 32, .35); --glow: none; --line-strong: #0B1020; }
+body.is-studio.is-gift ::selection { background: var(--accent); color: #fff; }
+body.is-studio.is-gift .section { padding-bottom: 72px; }
+
+/* formulários e etiquetas: retos, sem pílulas */
+body.is-studio.is-gift input, body.is-studio.is-gift select, body.is-studio.is-gift textarea { border-radius: 4px; border: 1px solid var(--line); background: #fff; }
+body.is-studio.is-gift textarea { border-radius: 4px; }
+body.is-studio.is-gift input:focus, body.is-studio.is-gift select:focus, body.is-studio.is-gift textarea:focus { border-color: #0B1020; box-shadow: 0 0 0 3px rgba(43, 75, 255, .18); }
+body.is-studio.is-gift .pill, body.is-studio.is-gift .badge { border-radius: 2px; text-transform: uppercase; letter-spacing: .08em; font-size: 10.5px; font-weight: 700; }
+body.is-studio.is-gift .btn { border-radius: 4px; letter-spacing: .08em; }
+body.is-studio.is-gift .btn:hover { transform: none; }
+body.is-studio.is-gift .btn--accent, body.is-studio.is-gift .hero .btn--accent { box-shadow: none; }
+body.is-studio.is-gift .btn--accent:hover { background: #0B1020; border-color: #0B1020; filter: none; }
+
+/* banners: faixa limpa, sem sombra nem cantos de desenho */
+body.is-studio.is-gift .promo__viewport { border-radius: 4px; box-shadow: none; }
+body.is-studio.is-gift .promo__arrow { border-radius: 0; width: 42px; height: 42px; background: #fff; color: #0B1020; border: 1px solid #0B1020; font-size: 20px; }
+body.is-studio.is-gift .promo__arrow:hover { background: #0B1020; color: #fff; }
+body.is-studio.is-gift .promo__dots { gap: 6px; }
+body.is-studio.is-gift .promo__dots button, body.is-studio.is-gift .promo__dots i, body.is-studio.is-gift .promo__dots span { border-radius: 0; }
+
+/* destaque do dia: painel preto com azul */
+body.is-studio.is-gift .deal__panel { background: #0B1020; color: #fff; border: 0; border-radius: 4px; box-shadow: none; }
+body.is-studio.is-gift .deal__panel::before, body.is-studio.is-gift .deal__panel::after { opacity: 0; }
+body.is-studio.is-gift .deal__media { background: #fff; border-radius: 4px; }
+body.is-studio.is-gift .deal .btn--accent { background: var(--accent); border-color: var(--accent); color: #fff; }
+body.is-studio.is-gift .deal .btn--accent:hover { background: #fff; border-color: #fff; color: #0B1020; }
+body.is-studio.is-gift .countdown__box { border-radius: 2px; }
+
+/* newsletter: painel preto, texto grande */
+body.is-studio.is-gift .newsletter__panel { background: #0B1020; color: #fff; border-radius: 4px; }
+body.is-studio.is-gift .newsletter__title { color: #fff; font-weight: 900; text-transform: uppercase; letter-spacing: -.02em; }
+body.is-studio.is-gift .newsletter__lead { color: #AEB5C7; }
+body.is-studio.is-gift .newsletter__fields input[type="email"] { background: transparent; color: #fff; border: 1px solid #3A4258; border-radius: 4px; }
+body.is-studio.is-gift .newsletter__fields input[type="email"]::placeholder { color: #8A91A3; }
+body.is-studio.is-gift .newsletter__fields input[type="email"]:focus { border-color: #fff; }
+
+/* avaliações e kits: papel branco com fio fino */
+body.is-studio.is-gift .review, body.is-studio.is-gift .bundle { background: #fff; border: 1px solid var(--line); border-radius: 4px; box-shadow: none; }
+body.is-studio.is-gift .review__photo { border-radius: 2px; }
+body.is-studio.is-gift .review__stars { color: #0B1020; }
+
+/* cartões de produto: foto limpa, zoom suave, sem salto */
+body.is-studio.is-gift .card__media { border-radius: 4px; border: 0; box-shadow: none; background: #ECEFF5; }
+body.is-studio.is-gift .card:hover .card__media { transform: none; box-shadow: none; }
+body.is-studio.is-gift .card__media img { transition: transform .6s cubic-bezier(.2, .7, .2, 1); }
+body.is-studio.is-gift .card:hover .card__media img { transform: scale(1.04); }
+body.is-studio.is-gift .card__title { font-weight: 500; letter-spacing: 0; }
+body.is-studio.is-gift .grid { gap: 40px 20px; }
+
+/* confiança: tira fina, sem caixa de desenho */
+body.is-studio.is-gift .trust__row { border-radius: 0; border: 0; border-top: 1px solid #0B1020; border-bottom: 1px solid var(--line); background: transparent; box-shadow: none; }
+body.is-studio.is-gift .trust__icon { background: transparent; border-radius: 0; color: #0B1020; }
+body.is-studio.is-gift .trust__item { padding: 18px 22px; }
+
+/* menu e cabeçalho: vidro leve, fio fino */
+body.is-studio.is-gift .site-header { background: color-mix(in srgb, #F5F7FB 90%, transparent); -webkit-backdrop-filter: saturate(1.4) blur(14px); backdrop-filter: saturate(1.4) blur(14px); }
+body.is-studio.is-gift .nav a { letter-spacing: .1em; }
+body.is-studio.is-gift .nav a:hover { color: var(--accent); }
+
+/* rodapé reto e sem cantos arredondados */
+body.is-studio.is-gift .footer { border-radius: 0; }
+body.is-studio.is-gift .drawer__panel { border-radius: 0; }
+
+/* destaque numérico: preços com mais presença */
+body.is-studio.is-gift .card__price, body.is-studio.is-gift .price-block__current { letter-spacing: -.02em; }
+@media (prefers-reduced-motion: reduce) { body.is-studio.is-gift .card__media img { transition: none; } body.is-studio.is-gift .card:hover .card__media img { transform: none; } }
+body.is-studio.is-gift .hero__panel { background: #fff; border: 1px solid var(--line); border-radius: 4px; box-shadow: none; }
+body.is-studio.is-gift .hero__card { border-radius: 4px; box-shadow: none; }
+body.is-studio.is-gift .tile__media { border-radius: 4px; border: 1px solid var(--line); background: #fff; box-shadow: none; }
