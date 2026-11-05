@@ -9,10 +9,10 @@
  */
 {
   "current": {
-    "color_accent": "#F03C0B",
-    "color_ink": "#F4F2ED",
+    "color_accent": "#2B4BFF",
+    "color_ink": "#F5F7FB",
     "color_positive": "#1E7B4F",
-    "color_soft": "#E9E6DF",
+    "color_soft": "#E8ECF4",
     "pix_discount": 5,
     "installments": 3,
     "free_shipping_threshold": 100,
@@ -221,7 +221,7 @@
     "content_for_index": [],
     "color_accent_2": "#111111",
     "color_accent_3": "#D7FF3F",
-    "color_text": "#0E0E10",
+    "color_text": "#0B1020",
     "visual_style": "studio",
     "dark_mode": "light",
     "corner_radius": 8
